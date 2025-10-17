@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Anti-Cloud Software Development Manifesto</title>
+  <style>
+    :root {
+      --bg: #f7f7f9;
+      --fg: #23272f;
+      --header-bg: #fff;
+      --header-fg: #23272f;
+      --accent: #2563eb;
+      --principle-bg: #f3f6fa;
+      --principle-border: #2563eb;
+      --recommendation-bg: #f4f4f4;
+      --recommendation-border: #bdbdbd;
+      --recommendation-accent: #6b7280;
+      --footer-bg: #f3f3f3;
+      --footer-fg: #555;
+      --code-bg: #e5e7eb;
+      --code-fg: #1e293b;
+    }
+    body.dark {
+      --bg: #181a1b;
+      --fg: #f3f4f6;
+      --header-bg: #23272f;
+      --header-fg: #f3f4f6;
+      --accent: #60a5fa;
+      --principle-bg: #23272f;
+      --principle-border: #60a5fa;
+      --recommendation-bg: #23272f;
+      --recommendation-border: #444;
+      --recommendation-accent: #bdbdbd;
+      --footer-bg: #23272f;
+      --footer-fg: #aaa;
+      --code-bg: #1e293b;
+      --code-fg: #e0e7ef;
+    }
+    body {
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      margin: 0;
+      padding: 0;
+      line-height: 1.5;
+      transition: background 0.2s, color 0.2s;
+      font-size: 0.97rem;
+    }
+    header {
+      background: var(--header-bg);
+      color: var(--header-fg);
+      padding: 1rem 1rem 0.7rem 1rem;
+      text-align: center;
+      border-bottom: 1px solid #e5e7eb;
+      position: relative;
+      transition: background 0.2s, color 0.2s;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    header p {
+      font-style: italic;
+      margin-top: 0.3rem;
+      font-size: 0.97rem;
+      color: var(--accent);
+    }
+    .toggle-theme-btn {
+      position: absolute;
+      top: 0.7rem;
+      right: 1.2rem;
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      background: var(--principle-bg);
+    }
+    section {
+      padding: 1rem 0.3rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    h2 {
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.2rem;
+      margin-top: 1.1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.01em;
+      margin-bottom: 0.5rem;
+    }
+    .principle {
+      margin: 0.7rem 0;
+      padding: 0.6rem 0.8rem;
+      border-left: 4px solid var(--principle-border);
+      background: var(--principle-bg);
+      border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(37,99,235,0.01);
+      transition: background 0.2s, color 0.2s;
+    }
+    .principle h3 {
+      margin: 0 0 0.2rem 0;
+      font-size: 0.97rem;
+      font-weight: 500;
+      color: var(--accent);
+    }
+    .principle p {
+      margin: 0;
+      color: var(--fg);
+      font-size: 0.95rem;
+    }
+    .recommendation {
+      margin: 0.5rem 0;
+      padding: 0.5rem 0.8rem;
+      background: var(--recommendation-bg);
+      border-left: 4px solid var(--recommendation-border);
+      border-radius: 4px;
+      font-size: 0.95rem;
+      color: var(--recommendation-accent);
+      transition: background 0.2s, color 0.2s;
+    }
+    .recommendation p {
+      margin: 0;
+      color: var(--recommendation-accent);
+      font-weight: 500;
+    }
+    code {
+      background: var(--code-bg);
+      color: var(--code-fg);
+      padding: 0.07em 0.25em;
+      border-radius: 3px;
+      font-size: 0.93em;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem 1rem 0.7rem 1rem;
+      font-size: 0.88rem;
+      color: var(--footer-fg);
+      background: var(--footer-bg);
+      border-top: 1px solid #e5e7eb;
+      margin-top: 1.5rem;
+      letter-spacing: 0.01em;
+      transition: background 0.2s, color 0.2s;
+    }
+    @media (max-width: 600px) {
+      section {
+        padding: 0.5rem 0.05rem;
+      }
+      header {
+        padding: 0.6rem 0.2rem 0.4rem 0.2rem;
+      }
+      .toggle-theme-btn {
+        top: 0.5rem;
+        right: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>The Anti-Cloud Software Development Manifesto</h1>
+  <p>Celebrating the purity of local, artisanal software development — unplugged and proud.</p>
+  <button class="toggle-theme-btn" id="themeToggle" title="Toggle light/dark mode">🌙</button>
+</header>
+
+<section>
+  <h2>Principles</h2>
+
+  <div class="principle">
+    <h3>1. Prioritize Simplicity Over Scalability</h3>
+    <p>Design software to meet actual user needs without unnecessary complexity or premature optimization for scale.</p>
+  </div>
+
+  <div class="principle">
+    <h3>2. Local Deployment as a Standard</h3>
+    <p>Ensure applications run reliably on local environments. Production quality is achieved when software performs consistently on user machines.</p>
+  </div>
+
+  <div class="principle">
+    <h3>3. Optimize with Efficient Hardware Usage</h3>
+    <p>Enhance performance through effective use of available hardware resources before considering distributed solutions.</p>
+  </div>
+
+  <div class="principle">
+    <h3>4. Maintain Direct Control of Backups</h3>
+    <p>Implement straightforward, transparent backup strategies using local or directly managed storage solutions.</p>
+  </div>
+
+  <div class="principle">
+    <h3>5. Ensure Offline Functionality</h3>
+    <p>Design applications to operate fully without reliance on continuous internet connectivity.</p>
+  </div>
+
+  <div class="principle">
+    <h3>6. Value Manual Processes for Critical Operations</h3>
+    <p>Retain manual steps for essential deployment and maintenance tasks to ensure understanding and accountability.</p>
+  </div>
+
+  <div class="principle">
+    <h3>7. Minimize External Dependencies</h3>
+    <p>Limit reliance on third-party APIs and services to reduce risk and maintain operational independence.</p>
+  </div>
+
+  <div class="principle">
+    <h3>8. Security Through Isolation</h3>
+    <p>Enhance security by minimizing network exposure and maintaining clear boundaries between systems.</p>
+  </div>
+
+  <div class="principle">
+    <h3>9. Data Ownership and Sovereignty</h3>
+    <p>Store and manage data locally to ensure privacy, compliance, and full control over information assets.</p>
+  </div>
+
+  <div class="principle">
+    <h3>10. Accessible, Offline Documentation</h3>
+    <p>Provide comprehensive documentation in formats that are accessible without internet access.</p>
+  </div>
+
+  <div class="principle">
+    <h3>11. Respect User Privacy</h3>
+    <p>Avoid unnecessary analytics and telemetry. Gather feedback directly and transparently from users.</p>
+  </div>
+
+  <div class="principle">
+    <h3>12. Embrace Resilience and Learning</h3>
+    <p>Accept occasional downtime as an opportunity for improvement and professional growth.</p>
+  </div>
+
+  <div class="principle">
+    <h3>13. Focus on Local Availability</h3>
+    <p>Prioritize reliability and performance for the primary user environment rather than global distribution.</p>
+  </div>
+
+  <div class="principle">
+    <h3>14. Serve the Core User Base</h3>
+    <p>Develop features and optimizations that benefit the primary users, not hypothetical global audiences.</p>
+  </div>
+
+  <div class="principle">
+    <h3>15. Transparent, One-Time Licensing</h3>
+    <p>Favor straightforward, perpetual licensing models over recurring subscriptions.</p>
+  </div>
+
+  <div class="principle">
+    <h3>16. Build Trust Through Reliability</h3>
+    <p>Establish trust by delivering consistent, dependable software experiences without unnecessary cloud dependencies.</p>
+  </div>
+
+  <div class="principle">
+    <h3>17. Simple, Direct Collaboration</h3>
+    <p>Facilitate collaboration using clear, direct methods such as local file sharing and versioning.</p>
+  </div>
+
+  <div class="principle">
+    <h3>18. Proactive Monitoring and Maintenance</h3>
+    <p>Encourage regular, hands-on monitoring and maintenance to ensure system health and performance.</p>
+  </div>
+
+  <div class="principle">
+    <h3>19. Offline-First Design Philosophy</h3>
+    <p>Adopt an offline-first approach to maximize reliability and user autonomy.</p>
+  </div>
+
+  <div class="principle">
+    <h3>20. Recognize the Value of Local Infrastructure</h3>
+    <p>Invest in robust local infrastructure, acknowledging its importance for long-term sustainability and control.</p>
+  </div>
+</section>
+
+<section>
+  <h2 style="color: var(--recommendation-accent); border-bottom: 2px solid var(--recommendation-border);">Recommendations</h2>
+  <div class="recommendation">
+    <p>Develop and test software in isolated, local environments to ensure independence from external services.</p>
+  </div>
+  <div class="recommendation">
+    <p>Implement regular, verifiable backup routines using trusted local or on-premises storage.</p>
+  </div>
+  <div class="recommendation">
+    <p>Minimize authentication barriers; prioritize user convenience and data privacy.</p>
+  </div>
+  <div class="recommendation">
+    <p>Document operational procedures and troubleshooting steps in accessible, offline formats.</p>
+  </div>
+  <div class="recommendation">
+    <p>Continuously review and improve local infrastructure to support evolving business needs.</p>
+  </div>
+</section>
+
+<footer>
+  &copy; 2025 The Anti-Cloud Software Development Manifesto
+</footer>
+<script>
+  // Theme toggle logic
+  const btn = document.getElementById('themeToggle');
+  const body = document.body;
+  function setTheme(dark) {
+    if (dark) {
+      body.classList.add('dark');
+      btn.textContent = '☀️';
+      btn.title = 'Switch to light mode';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      body.classList.remove('dark');
+      btn.textContent = '🌙';
+      btn.title = 'Switch to dark mode';
+      localStorage.setItem('theme', 'light');
+    }
+  }
+  btn.addEventListener('click', () => {
+    setTheme(!body.classList.contains('dark'));
+  });
+  // On load, set theme from localStorage or system preference
+  (function() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      setTheme(true);
+    } else {
+      setTheme(false);
+    }
+  })();
+</script>
+</body>
+</html>
