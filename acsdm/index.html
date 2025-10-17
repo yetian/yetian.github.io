@@ -152,6 +152,25 @@
       letter-spacing: 0.01em;
       transition: background 0.2s, color 0.2s;
     }
+    /* New styles for the quote section */
+    blockquote {
+      font-style: italic;
+      color: #fff;
+      background: linear-gradient(90deg, #2563eb 0%, #1e293b 100%);
+      border-left: 8px solid #fbbf24;
+      margin: 2rem 0;
+      padding: 1.2rem 1.5rem;
+      border-radius: 8px 2px 8px 2px;
+      box-shadow: 0 2px 12px rgba(37,99,235,0.10);
+      font-size: 1.08rem;
+      letter-spacing: 0.01em;
+      text-shadow: 0 1px 4px rgba(30,41,59,0.13);
+    }
+    blockquote span {
+      font-size: 1.5em;
+      vertical-align: -0.2em;
+      margin-right: 0.2em;
+    }
     @media (max-width: 600px) {
       section {
         padding: 0.5rem 0.05rem;
@@ -296,8 +315,38 @@
   </div>
 </section>
 
+<!-- Replace the quote section with a more visually distinct style -->
+<section style="max-width: 700px; margin: 2.2rem auto 0 auto; padding: 0;">
+  <blockquote style="
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
+    color: #fff;
+    background: linear-gradient(90deg, #2563eb 0%, #1e293b 100%);
+    border-left: 8px solid #fbbf24;
+    margin: 2.5rem 0;
+    padding: 2rem 2.2rem 1.7rem 2.2rem;
+    border-radius: 14px 4px 14px 4px;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.13);
+    font-size: 1.18rem;
+    letter-spacing: 0.01em;
+    text-shadow: 0 1px 6px rgba(30,41,59,0.18);
+    text-align: center;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    position: relative;
+  ">
+    <span style="font-size:2.2em; line-height: 1; margin-bottom: 0.2em; color: #fbbf24;">&#10077;</span>
+    <span style="display: block; max-width: 90%; margin: 0 auto; font-weight: 500; letter-spacing: 0.02em;">
+      Bring these rules to a cloud-first battlefield, and you’ll fight — and lose — gloriously.
+    </span>
+    <span style="font-size:2.2em; line-height: 1; margin-top: 0.2em; color: #fbbf24;">&#10078;</span>
+  </blockquote>
+</section>
+
 <footer>
-  &copy; 2025 The Anti-Cloud Software Development Manifesto
+  &copy; 2025 The Anti-Cloud Software Development Manifesto <br/>
 </footer>
 <script>
   // Theme toggle logic
