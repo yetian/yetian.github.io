@@ -34,8 +34,16 @@
       margin-bottom: 30px;
     }
     header h1 {
-      font-size: 2rem;
+      font-size: 2.5rem;
       color: var(--accent);
+      margin-bottom: 10px;
+    }
+    header .slogan {
+      font-size: 1.2rem;
+      color: var(--fg);
+      margin: 0;
+      font-style: italic;
+      opacity: 0.8;
     }
     .gallery {
       display: grid;
@@ -154,12 +162,30 @@
       font-size: 0.95rem;
       line-height: 1.4;
     }
+    .divider {
+      border: none;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), #e74c3c);
+      margin: 20px auto;
+      width: 100px;
+      border-radius: 2px;
+    }
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      padding: 20px;
+      color: var(--fg);
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>反云软件开发宣言</h1>
+    <h1>反云宣言</h1>
+    <p class="slogan">颂扬本地手工软件开发的纯洁性——脱离云端，自豪独立。</p>
   </header>
+  <hr class="divider">
   <button class="toggle-theme-btn" id="themeToggle" title="切换明暗模式">🌙</button>
   <div class="gallery">
     <!-- 原则 -->
@@ -394,6 +420,7 @@
       <li>持续审查和改进本地基础设施，以支持不断发展的业务需求。</li>
     </ul>
   </section>
+  <footer>&copy; 2025 Ye Tian - 用热情和代码打造。</footer>
   <script>
     function flipCard(card) {
       card.classList.toggle('flipped');
