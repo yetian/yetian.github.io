@@ -15,6 +15,7 @@ class SudokuGame {
         this.selectedNumber = null;
         this.successCount = 0;
         this.bestTime = null;
+        this.gameStarted = false;
         
         this.initializeElements();
         this.bindEvents();
@@ -27,7 +28,7 @@ class SudokuGame {
         this.startBtn = document.getElementById('startBtn');
         this.restartBtn = document.getElementById('restartBtn');
         this.submitBtn = document.getElementById('submitBtn');
-        this.gameModeSelect = document.getElementById('gameMode');
+
         this.showErrorsCheckbox = document.getElementById('showErrors');
         this.showHintsCheckbox = document.getElementById('showHints');
         this.difficultySelect = document.getElementById('difficulty');
@@ -41,10 +42,16 @@ class SudokuGame {
     }
     
     bindEvents() {
-        this.startBtn.addEventListener('click', () => this.startGame());
+        this.startBtn.addEventListener('click', () => {
+            if (this.gameStarted) {
+                this.resetGame();
+            } else {
+                this.startGame();
+            }
+        });
         this.restartBtn.addEventListener('click', () => this.restartGame());
         this.submitBtn.addEventListener('click', () => this.submitSolution());
-        this.gameModeSelect.addEventListener('change', (e) => this.changeMode(e.target.value));
+
         this.showErrorsCheckbox.addEventListener('change', (e) => this.showErrors = e.target.checked);
         this.showHintsCheckbox.addEventListener('change', (e) => this.showHints = e.target.checked);
         this.highlightSelectedCheckbox.addEventListener('change', (e) => {
@@ -53,28 +60,7 @@ class SudokuGame {
         });
     }
     
-    changeMode(mode) {
-        this.currentMode = mode;
-        switch(mode) {
-            case '2x2':
-                this.gridSize = 4;
-                this.subgridRows = 2;
-                this.subgridCols = 2;
-                break;
-            case '2x3':
-                this.gridSize = 6;
-                this.subgridRows = 2;
-                this.subgridCols = 3;
-                break;
-            case '3x3':
-                this.gridSize = 9;
-                this.subgridRows = 3;
-                this.subgridCols = 3;
-                break;
-        }
-        this.restartGame();
-    }
-    
+
     generatePuzzle() {
         // 生成完整的数独解
         this.solution = this.generateCompleteSudoku();
@@ -232,7 +218,7 @@ class SudokuGame {
             const btn = this.numberPanelElement.querySelector(`[data-num="${num}"]`);
             if (btn) {
                 if (count === this.gridSize) {
-                    btn.disabled = true;
+                    btn.disabled = false;
                     btn.classList.add('disabled');
                 } else {
                     btn.disabled = false;
@@ -243,6 +229,8 @@ class SudokuGame {
     }
 
     selectNumber(num) {
+        if (!this.gameStarted) return;
+
         if (this.selectedNumber === num) {
             this.selectedNumber = null;
         } else {
@@ -305,6 +293,12 @@ class SudokuGame {
                     input.value = this.grid[i][j] === 0 ? '' : this.grid[i][j];
                     
                     input.addEventListener('input', (e) => {
+                        // Prevent input if game hasn't started
+                        if (!this.gameStarted) {
+                            e.target.value = '';
+                            return;
+                        }
+
                         const value = e.target.value;
                         const cell = e.target.parentElement;
                         if (value && (value < '1' || value > this.gridSize.toString())) {
@@ -379,10 +373,29 @@ class SudokuGame {
     }
     
     startGame() {
-        this.generatePuzzle();
+        // Only generate puzzle if grid doesn't exist (first time or after restart)
+        if (this.grid.length === 0) {
+            this.generatePuzzle();
+            this.renderGrid();
+        }
+        this.resetTimer();
+        this.gameStarted = true;
+        this.startBtn.textContent = '重置';
+        this.startBtn.disabled = false;
+        this.restartBtn.style.display = 'inline-block';
+    }
+
+    resetGame() {
+        // Clear user input (non-fixed cells)
+        for (let i = 0; i < this.gridSize; i++) {
+            for (let j = 0; j < this.gridSize; j++) {
+                if (!this.fixedCells[i][j]) {
+                    this.grid[i][j] = 0;
+                }
+            }
+        }
         this.renderGrid();
         this.resetTimer();
-        this.startBtn.disabled = true;
     }
 
     resetTimer() {
@@ -393,9 +406,14 @@ class SudokuGame {
     }
     
     restartGame() {
-        this.resetTimer();
+        this.gameStarted = false;
+        this.startBtn.textContent = '开始';
+        this.restartBtn.style.display = 'none';
+        this.stopTimer();
+        this.seconds = 0;
+        this.updateTimeDisplay();
         this.startBtn.disabled = false;
-        
+
         if (this.grid.length > 0) {
             this.generatePuzzle();
             this.renderGrid();
@@ -425,6 +443,11 @@ class SudokuGame {
     }
     
     submitSolution() {
+        if (!this.gameStarted) {
+            this.showToast('请先开始游戏！');
+            return;
+        }
+
         if (!this.isGridComplete()) {
             this.showToast('请完成所有空格！');
             return;

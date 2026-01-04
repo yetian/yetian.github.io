@@ -292,10 +292,9 @@ select:focus {
     background: #d5dbdb;
 }
 
-.number-btn:disabled {
+.number-btn.disabled {
     background: #bdc3c7;
     color: #7f8c8d;
-    cursor: not-allowed;
     opacity: 0.6;
 }
 
