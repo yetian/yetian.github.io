@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数独游戏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>数独游戏</h1>
+        </header>
+        
+        <div class="game-wrapper">
+            <!-- 左侧选项面板 -->
+            <div class="left-panel">
+                <h3>游戏选项</h3>
+                <div class="mode-selection">
+                    <label>游戏模式：</label>
+                    <select id="gameMode">
+                        <option value="2x2">2x2 (4x4)</option>
+                        <option value="2x3">2x3 (6x6)</option>
+                        <option value="3x3" selected>3x3 (9x9)</option>
+                    </select>
+                </div>
+                <div class="difficulty">
+                    <label>难度：</label>
+                    <select id="difficulty">
+                        <option value="easy">简单</option>
+                        <option value="medium" selected>中等</option>
+                        <option value="hard">困难</option>
+                    </select>
+                </div>
+                <div class="options">
+                    <label>
+                        <input type="checkbox" id="showErrors" checked>
+                        显示错误
+                    </label>
+                    <label>
+                        <input type="checkbox" id="showHints" checked>
+                        显示提示
+                    </label>
+                    <label>
+                        <input type="checkbox" id="highlightSelected">
+                        高亮所选数字
+                    </label>
+                </div>                
+            </div>
+            
+            <!-- 中间游戏区域 -->
+            <div class="game-area">
+                <div class="timer-controls">
+                    <div class="timer">
+                        <span id="timeDisplay">00:00</span>
+                    </div>
+                    <div class="controls">
+                        <button id="startBtn">开始</button>
+                        <button id="restartBtn">重新开始</button>
+                        <button id="submitBtn">提交</button>
+                    </div>
+                </div>
+                
+                <div id="sudokuGrid" class="sudoku-grid"></div>
+            </div>
+            
+            <!-- 右侧统计面板 -->
+            <div class="right-panel">
+                <h3>游戏统计</h3>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span>成功提交：</span>
+                        <span id="successCount">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>最佳时间：</span>
+                        <span id="bestTime">--:--</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>当前时间：</span>
+                        <span id="currentTime">00:00</span>
+                    </div>
+                </div>
+                <div id="numberPanel" class="number-panel"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 胜利动画 -->
+    <div id="victoryModal" class="modal">
+        <div class="modal-content">
+            <div class="victory-animation">
+                <h2>🎉 恭喜你赢了！🎉</h2>
+                <p id="victoryTime"></p>
+                <button onclick="closeVictoryModal()">再来一局</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="sudoku.js"></script>
+</body>
+</html>
