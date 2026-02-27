@@ -57,6 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 事件监听
     document.getElementById('random-button').addEventListener('click', showRandomCharacter);
+    document.getElementById('replay-button').addEventListener('click', () => {
+        if (writer) {
+            writer.animateCharacter();
+        }
+    });
 
     document.getElementById('search-button').addEventListener('click', () => {
         const query = document.getElementById('search-input').value;
