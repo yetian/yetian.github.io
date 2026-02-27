@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汉字学习</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>汉字学习</h1>
+
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="输入汉字..." maxlength="1">
+        <button id="search-button">搜索</button>
+    </div>
+
+    <div class="character-container">
+        <div id="character-target"></div>
+        <div id="character-details">
+            <p id="pinyin"></p>
+            <p id="definition"></p>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="random-button">随机一个</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
