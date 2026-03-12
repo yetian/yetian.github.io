@@ -1,0 +1,102 @@
+{
+  "bloodTypes": {
+    "A": {
+      "name": "A型血",
+      "personality": "稳重踏实、追求完美、注重细节、善于忍耐",
+      "element": "土",
+      "recommendedColors": ["白色", "米色", "浅灰色", "淡蓝色", "淡绿色"],
+      "avoidColors": ["过于鲜艳的红色", "过于花哨的图案"],
+      "clothingStyle": [
+        "简洁大方的款式",
+        "注重剪裁和质感",
+        "适合商务休闲风格",
+        "材质以棉、麻、丝绸为佳"
+      ],
+      "accessories": [
+        "金属质感的首饰",
+        "简约的手表",
+        "皮质包袋"
+      ],
+      "luckyNumber": 7,
+      "advice": "A型血的人适合穿着整洁、有品质的衣服，避免过于张扬的款式。"
+    },
+    "B": {
+      "name": "B型血",
+      "personality": "热情开朗、灵活多变、追求自由、创意十足",
+      "element": "木",
+      "recommendedColors": ["绿色", "蓝色", "黄色", "橙色", "紫色"],
+      "avoidColors": ["过于沉闷的黑色", "过于严肃的深蓝"],
+      "clothingStyle": [
+        "舒适休闲的款式",
+        "适合有设计感的服装",
+        "可以尝试混搭风格",
+        "材质以棉、针织为佳"
+      ],
+      "accessories": [
+        "色彩鲜艳的配饰",
+        "独特的首饰",
+        "帆布包或休闲包"
+      ],
+      "luckyNumber": 3,
+      "advice": "B型血的人可以大胆尝试各种颜色和款式，展现自己的个性。"
+    },
+    "AB": {
+      "name": "AB型血",
+      "personality": "理性与感性并存、多重性格、善于思考、追求独特",
+      "element": "风",
+      "recommendedColors": ["紫色", "粉色", "浅蓝色", "银色", "白色"],
+      "avoidColors": ["过于传统的老气颜色", "过于单调的黑白"],
+      "clothingStyle": [
+        "时尚前卫的款式",
+        "适合有设计感的服装",
+        "可以尝试不对称设计",
+        "材质以混纺、丝绸为佳"
+      ],
+      "accessories": [
+        "独特的创意首饰",
+        "时尚的手袋",
+        "墨镜"
+      ],
+      "luckyNumber": 5,
+      "advice": "AB型血的人适合走在时尚前沿，可以尝试独特的搭配方式。"
+    },
+    "O": {
+      "name": "O型血",
+      "personality": "自信大方、领导力强、务实进取、活力充沛",
+      "element": "火",
+      "recommendedColors": ["红色", "橙色", "黄色", "金色", "黑色"],
+      "avoidColors": ["过于柔和的粉色", "过于暗淡的灰色"],
+      "clothingStyle": [
+        "大气自信的款式",
+        "适合高品质的服装",
+        "可以尝试亮色搭配",
+        "材质以羊毛、皮革为佳"
+      ],
+      "accessories": [
+        "大气的金属首饰",
+        "品牌手表",
+        "皮质皮带"
+      ],
+      "luckyNumber": 1,
+      "advice": "O型血的人适合穿着有气场、显气质的服装，展现自信魅力。"
+    }
+  },
+  "compatibility": {
+    "A": {
+      "bestWith": ["AB", "O"],
+      "colorPalette": "柔和色调"
+    },
+    "B": {
+      "bestWith": ["AB", "O"],
+      "colorPalette": "明亮色调"
+    },
+    "AB": {
+      "bestWith": ["A", "B", "O"],
+      "colorPalette": "现代色调"
+    },
+    "O": {
+      "bestWith": ["A", "B", "AB"],
+      "colorPalette": "对比色调"
+    }
+  }
+}

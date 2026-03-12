@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五行穿衣 - 根据八字五行、血型和天气推荐穿衣搭配</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 星星背景 -->
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <header>
+            <h1>五行穿衣</h1>
+            <p class="subtitle">根据您的八字五行、血型和当日天气为您推荐最适合的穿衣搭配</p>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <h2>请输入您的信息</h2>
+                <form id="wuxing-form">
+                    <div class="form-group">
+                        <label for="name">姓名 <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" required placeholder="请输入您的姓名" maxlength="10">
+                        <span class="hint">用于计算姓名五行</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthdate">阳历生日 <span class="required">*</span></label>
+                        <input type="date" id="birthdate" name="birthdate" required>
+                        <span class="hint">用于计算八字和星座</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthtime">出生时间 <span class="required">*</span></label>
+                        <select id="birthtime" name="birthtime" required>
+                            <option value="">请选择时辰</option>
+                            <option value="子时">子时 (23:00-01:00)</option>
+                            <option value="丑时">丑时 (01:00-03:00)</option>
+                            <option value="寅时">寅时 (03:00-05:00)</option>
+                            <option value="卯时">卯时 (05:00-07:00)</option>
+                            <option value="辰时">辰时 (07:00-09:00)</option>
+                            <option value="巳时">巳时 (09:00-11:00)</option>
+                            <option value="午时">午时 (11:00-13:00)</option>
+                            <option value="未时">未时 (13:00-15:00)</option>
+                            <option value="申时">申时 (15:00-17:00)</option>
+                            <option value="酉时">酉时 (17:00-19:00)</option>
+                            <option value="戌时">戌时 (19:00-21:00)</option>
+                            <option value="亥时">亥时 (21:00-23:00)</option>
+                        </select>
+                        <span class="hint">用于计算时柱</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">性别 <span class="required">*</span></label>
+                        <select id="gender" name="gender" required>
+                            <option value="">请选择性别</option>
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="blood-type">血型 <span class="required">*</span></label>
+                        <select id="blood-type" name="blood-type" required>
+                            <option value="">请选择血型</option>
+                            <option value="A">A型</option>
+                            <option value="B">B型</option>
+                            <option value="AB">AB型</option>
+                            <option value="O">O型</option>
+                        </select>
+                        <span class="hint">影响穿衣风格推荐</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">所在城市 <span class="required">*</span></label>
+                        <input type="text" id="city" name="city" required placeholder="请输入城市名称" maxlength="20">
+                        <span class="hint">如：北京、上海、广州</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="weather">今日天气 <span class="required">*</span></label>
+                        <select id="weather" name="weather" required>
+                            <option value="">请选择天气</option>
+                            <option value="晴">晴</option>
+                            <option value="多云">多云</option>
+                            <option value="阴">阴</option>
+                            <option value="雨">雨</option>
+                            <option value="雪">雪</option>
+                            <option value="雾">雾</option>
+                            <option value="风">大风</option>
+                            <option value="雷雨">雷雨</option>
+                        </select>
+                        <span class="hint">影响穿衣材质和颜色建议</span>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" class="submit-btn">开始分析</button>
+                        <button type="button" class="save-btn" id="save-btn">保存信息</button>
+                    </div>
+                </form>
+
+                <div class="privacy-notice">
+                    <span class="privacy-icon">🔒</span>
+                    <span>您的所有数据仅存储在本地浏览器中，不会被上传或分享</span>
+                </div>
+            </section>
+
+            <section class="result-section" id="result-section" style="display: none;">
+                <h2>分析结果</h2>
+
+                <div class="result-card">
+                    <h3>基本信息</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="label">姓名：</span>
+                            <span class="value" id="result-name"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">星座：</span>
+                            <span class="value" id="result-zodiac"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">血型：</span>
+                            <span class="value" id="result-blood"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">地点：</span>
+                            <span class="value" id="result-city"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">天气：</span>
+                            <span class="value" id="result-weather"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <h3>八字分析</h3>
+                    <div class="bazi-display">
+                        <div class="bazi-pillar">
+                            <span class="pillar-label">年柱</span>
+                            <span class="pillar-value" id="bazi-year"></span>
+                        </div>
+                        <div class="bazi-pillar">
+                            <span class="pillar-label">月柱</span>
+                            <span class="pillar-value" id="bazi-month"></span>
+                        </div>
+                        <div class="bazi-pillar">
+                            <span class="pillar-label">日柱</span>
+                            <span class="pillar-value" id="bazi-day"></span>
+                        </div>
+                        <div class="bazi-pillar">
+                            <span class="pillar-label">时柱</span>
+                            <span class="pillar-value" id="bazi-time"></span>
+                        </div>
+                    </div>
+                    <div class="bazi-elements">
+                        <div class="element-item">
+                            <span class="label">日主五行：</span>
+                            <span class="value" id="day-element"></span>
+                        </div>
+                        <div class="element-item">
+                            <span class="label">姓名五行：</span>
+                            <span class="value" id="name-element"></span>
+                        </div>
+                        <div class="element-item">
+                            <span class="label">喜用神：</span>
+                            <span class="value" id="favorable-element"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <h3>五行平衡分析</h3>
+                    <div class="element-balance" id="element-balance"></div>
+                    <div class="balance-description" id="balance-description"></div>
+                </div>
+
+                <div class="result-card">
+                    <h3>详细八字解读</h3>
+                    <div class="bazi-detail" id="bazi-detail"></div>
+                </div>
+
+                <div class="result-card">
+                    <h3>今日开运建议</h3>
+                    <div class="luck-advice" id="luck-advice"></div>
+                </div>
+
+                <div class="result-card dressing-recommendation">
+                    <h3>穿衣推荐</h3>
+                    <p class="intro" id="dressing-intro"></p>
+
+                    <div class="recommendation-section">
+                        <h4>推荐颜色</h4>
+                        <div class="color-blocks" id="recommended-colors"></div>
+                    </div>
+
+                    <div class="recommendation-section">
+                        <h4>款式建议</h4>
+                        <ul class="style-list" id="style-advice"></ul>
+                    </div>
+
+                    <div class="recommendation-section">
+                        <h4>材质建议</h4>
+                        <ul class="material-list" id="material-advice"></ul>
+                    </div>
+
+                    <div class="recommendation-section">
+                        <h4>配饰推荐</h4>
+                        <ul class="accessory-list" id="accessory-advice"></ul>
+                    </div>
+
+                    <div class="recommendation-section">
+                        <h4>穿衣禁忌</h4>
+                        <div class="avoid-list" id="avoid-advice"></div>
+                    </div>
+
+                    <div class="recommendation-section">
+                        <h4>今日运势</h4>
+                        <p id="daily-advice"></p>
+                    </div>
+                </div>
+
+                <button class="reset-btn" onclick="resetForm()">重新计算</button>
+            </section>
+        </main>
+
+        <footer>
+            <p>五行穿衣 | 根据中国传统命理学的穿衣建议</p>
+            <p class="disclaimer">本结果仅供参考娱乐</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+{
+  "weatherConditions": {
+    "晴": {
+      "description": "阳光明媚",
+      "element": "火",
+      "advice": "阳光充足的日子，适合穿明亮温暖的颜色",
+      "recommendedColors": ["红色", "橙色", "黄色", "白色"],
+      "clothingTips": [
+        "建议穿棉质或麻质衣服，透气吸汗",
+        "可以戴太阳镜保护眼睛",
+        "适合穿轻便的春夏季服装"
+      ],
+      "material": "透气吸汗"
+    },
+    "多云": {
+      "description": "天气阴沉",
+      "element": "土",
+      "advice": "多云天气，适合穿温暖舒适的颜色",
+      "recommendedColors": ["米色", "浅灰色", "淡粉色", "浅蓝色"],
+      "clothingTips": [
+        "建议穿针织衫或薄外套",
+        "可以搭配亮色配饰提亮整体",
+        "适合层次感搭配"
+      ],
+      "material": "舒适保暖"
+    },
+    "阴": {
+      "description": "天气阴沉",
+      "element": "水",
+      "advice": "阴天容易影响情绪，适合穿提亮心情的颜色",
+      "recommendedColors": ["黄色", "橙色", "粉色", "浅紫色"],
+      "clothingTips": [
+        "建议穿稍微保暖的服装",
+        "可以穿亮色衣服改善心情",
+        "适合穿有层次的衣服"
+      ],
+      "material": "适度保暖"
+    },
+    "雨": {
+      "description": "下雨天气",
+      "element": "水",
+      "advice": "雨天湿气重，适合穿防水保暖的服装",
+      "recommendedColors": ["深蓝色", "黑色", "灰色", "深绿色"],
+      "clothingTips": [
+        "建议穿防水外套或风衣",
+        "适合穿长裤或长裙",
+        "可以穿防水鞋"
+      ],
+      "material": "防水防潮"
+    },
+    "雪": {
+      "description": "下雪天气",
+      "element": "水",
+      "advice": "雪天寒冷，需要保暖",
+      "recommendedColors": ["白色", "浅蓝色", "红色", "亮黄色"],
+      "clothingTips": [
+        "建议穿羽绒服或棉服",
+        "需要戴帽子、围巾、手套",
+        "适合穿保暖内衣"
+      ],
+      "material": "保暖防寒"
+    },
+    "雾": {
+      "description": "雾天",
+      "element": "水",
+      "advice": "雾天能见度低，适合穿明亮的颜色",
+      "recommendedColors": ["亮黄色", "橙色", "白色", "浅粉色"],
+      "clothingTips": [
+        "建议穿有反光条或亮色的衣服",
+        "适合穿方便行动的服装",
+        "可以穿轻便的外套"
+      ],
+      "material": "轻便舒适"
+    },
+    "风": {
+      "description": "大风天气",
+      "element": "木",
+      "advice": "大风天气，注意防风",
+      "recommendedColors": ["深色系", "大地色系"],
+      "clothingTips": [
+        "建议穿防风外套",
+        "适合穿不容易被风吹起的服装",
+        "避免穿宽松飘逸的衣服"
+      ],
+      "material": "防风"
+    },
+    "雷雨": {
+      "description": "雷阵雨",
+      "element": "火",
+      "advice": "雷雨天气，注意防雨防雷",
+      "recommendedColors": ["深色系", "安全色"],
+      "clothingTips": [
+        "建议穿防水服装",
+        "避免在空旷地方行走",
+        "适合穿便于快速行动的服装"
+      ],
+      "material": "防水速干"
+    }
+  },
+  "fiveElementRules": {
+    "木": {
+      "favor": "青、绿、翠、墨绿",
+      "avoid": "白、银、金色",
+      "elementCycle": {
+        "favor": ["水", "火"],
+        "unfavor": ["金", "土"]
+      },
+      "colorAdvice": "木属性的你需要青绿色系的衣服来增强运势",
+      "styleAdvice": "适合自然舒适、田园风格的服装"
+    },
+    "火": {
+      "favor": "红、紫、橙、粉红",
+      "avoid": "黑、蓝、灰",
+      "elementCycle": {
+        "favor": ["木", "土"],
+        "unfavor": ["水", "金"]
+      },
+      "colorAdvice": "火属性的你需要红紫色系的衣服来增强运势",
+      "styleAdvice": "适合亮眼时尚、热情奔放的服装"
+    },
+    "土": {
+      "favor": "黄、棕、米、驼色",
+      "avoid": "绿、青色",
+      "elementCycle": {
+        "favor": ["火", "金"],
+        "unfavor": ["木", "水"]
+      },
+      "colorAdvice": "土属性的你需要黄棕色系的衣服来增强运势",
+      "styleAdvice": "适合稳重成熟、品质优良的服装"
+    },
+    "金": {
+      "favor": "白、银、金、灰色",
+      "avoid": "红、紫、橙",
+      "elementCycle": {
+        "favor": ["土", "水"],
+        "unfavor": ["火", "木"]
+      },
+      "colorAdvice": "金属性的你需要白银色系的衣服来增强运势",
+      "styleAdvice": "适合简洁干练、商务风格的服装"
+    },
+    "水": {
+      "favor": "蓝、黑、灰、白色",
+      "avoid": "黄、棕、橙",
+      "elementCycle": {
+        "favor": ["金", "木"],
+        "unfavor": ["土", "火"]
+      },
+      "colorAdvice": "水属性的你需要蓝黑色系的衣服来增强运势",
+      "styleAdvice": "适合深沉神秘、优雅柔和的服装"
+    }
+  },
+  "seasonRules": {
+    "spring": {
+      "name": "春季",
+      "element": "木",
+      "colors": ["绿色系", "粉色系", "浅蓝色"],
+      "advice": "春天万物复苏，适合穿清新明亮的颜色",
+      "materials": ["棉", "麻", "薄针织"]
+    },
+    "summer": {
+      "name": "夏季",
+      "element": "火",
+      "colors": ["红色系", "白色系", "浅黄色"],
+      "advice": "夏天炎热，适合穿轻薄透气的衣服",
+      "materials": ["棉", "麻", "丝绸", "雪纺"]
+    },
+    "autumn": {
+      "name": "秋季",
+      "element": "金",
+      "colors": ["橙色系", "棕色系", "驼色"],
+      "advice": "秋天收获季节，适合穿温暖有层次的衣服",
+      "materials": ["羊毛", "针织", "棉"]
+    },
+    "winter": {
+      "name": "冬季",
+      "element": "水",
+      "colors": ["深色系", "白色系", "红色系"],
+      "advice": "冬天寒冷，需要穿保暖的服装",
+      "materials": ["羽绒服", "羊毛", "皮草"]
+    }
+  },
+  "combinationRules": {
+    "fire_weather": {
+      "condition": "晴",
+      "advice": "火日主在晴天运气好，适合穿红色系",
+      "colorPriority": ["红", "橙", "黄"]
+    },
+    "water_weather": {
+      "condition": "雨",
+      "advice": "水日主在雨天运气好，适合穿蓝色系",
+      "colorPriority": ["蓝", "黑", "灰"]
+    },
+    "wood_weather": {
+      "condition": "风",
+      "advice": "木日主在大风天气运气好，适合穿绿色系",
+      "colorPriority": ["绿", "青", "翠"]
+    },
+    "metal_weather": {
+      "condition": "多云",
+      "advice": "金日主在多云天气运气好，适合穿白色系",
+      "colorPriority": ["白", "银", "灰"]
+    },
+    "earth_weather": {
+      "condition": "阴",
+      "advice": "土日主在阴天运气好，适合穿黄色系",
+      "colorPriority": ["黄", "棕", "米"]
+    }
+  },
+  "clothingStyles": {
+    "formal": {
+      "name": "正装",
+      "occasions": ["商务会议", "正式场合"],
+      "colors": ["黑色", "深蓝色", "灰色", "白色"],
+      "elements": ["金", "土"]
+    },
+    "casual": {
+      "name": "休闲装",
+      "occasions": ["日常出行", "朋友聚会"],
+      "colors": ["蓝色", "卡其色", "米色", "浅灰"],
+      "elements": ["木", "水"]
+    },
+    "sport": {
+      "name": "运动装",
+      "occasions": ["运动锻炼", "户外活动"],
+      "colors": ["亮色系", "运动品牌配色"],
+      "elements": ["火", "木"]
+    },
+    "romantic": {
+      "name": "浪漫装",
+      "occasions": ["约会", "聚会"],
+      "colors": ["粉色", "紫色", "红色", "白色"],
+      "elements": ["火", "水"]
+    }
+  }
+}
