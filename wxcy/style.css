@@ -256,6 +256,25 @@ h4 {
     color: #4caf50;
 }
 
+/* 清除按钮 */
+.clear-btn {
+    flex: 1;
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.1);
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.clear-btn:hover {
+    background: rgba(255, 107, 107, 0.2);
+    border-color: rgba(255, 107, 107, 0.5);
+}
+
 /* 隐私说明 */
 .privacy-notice {
     display: flex;
@@ -286,6 +305,23 @@ h4 {
 
 .result-card h3 {
     color: #ffd700;
+}
+
+/* 今日运势 - 置顶特别样式 */
+.result-card.daily-fortune {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 165, 0, 0.1) 100%);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.result-card.daily-fortune h3 {
+    font-size: 1.4rem;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.result-card.daily-fortune p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #e8e8e8;
 }
 
 /* 基本信息网格 */
@@ -627,6 +663,50 @@ h4 {
 .bazi-detail .highlight {
     color: #ffd700;
     font-weight: 500;
+}
+
+/* 性格特点、职业生涯、健康提示等新段落样式 */
+.bazi-detail .personality-section,
+.bazi-detail .strengths-section,
+.bazi-detail .career-section,
+.bazi-detail .health-section {
+    margin-top: 15px;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border-left: 3px solid;
+}
+
+.bazi-detail .personality-section {
+    border-color: #4caf50;
+}
+
+.bazi-detail .strengths-section {
+    border-color: #2196f3;
+}
+
+.bazi-detail .career-section {
+    border-color: #ff9800;
+}
+
+.bazi-detail .health-section {
+    border-color: #f44336;
+}
+
+.bazi-detail .personality-section::before,
+.bazi-detail .strengths-section::before,
+.bazi-detail .career-section::before,
+.bazi-detail .health-section::before {
+    content: none;
+}
+
+.bazi-detail .personality-section strong,
+.bazi-detail .strengths-section strong,
+.bazi-detail .career-section strong,
+.bazi-detail .health-section strong {
+    color: #e8e8e8;
+    display: block;
+    margin-bottom: 5px;
 }
 
 /* 开运建议 */

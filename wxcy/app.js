@@ -203,6 +203,171 @@ function getBaziElement(pillar) {
     return stemElement;
 }
 
+// 计算流年（当前年份的干支）
+function getCurrentYearPillar() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const yearStemIndex = (year - 4) % 10;
+    const yearBranchIndex = (year - 4) % 12;
+    return {
+        pillar: heavenlyStems[yearStemIndex] + earthlyBranches[yearBranchIndex],
+        element: fiveElementData.heavenlyStems?.[yearStemIndex]?.element || '火',
+        year: year
+    };
+}
+
+// 获取当前季节
+function getCurrentSeason() {
+    const now = new Date();
+    const month = now.getMonth() + 1; // 1-12
+
+    if (month >= 3 && month <= 5) return 'spring';
+    if (month >= 6 && month <= 8) return 'summer';
+    if (month >= 9 && month <= 11) return 'autumn';
+    return 'winter';
+}
+
+// 获取当前时辰
+function getCurrentTimeBranch() {
+    const now = new Date();
+    const hour = now.getHours();
+
+    if (hour >= 23 || hour < 1) return '子时';
+    if (hour >= 1 && hour < 3) return '丑时';
+    if (hour >= 3 && hour < 5) return '寅时';
+    if (hour >= 5 && hour < 7) return '卯时';
+    if (hour >= 7 && hour < 9) return '辰时';
+    if (hour >= 9 && hour < 11) return '巳时';
+    if (hour >= 11 && hour < 13) return '午时';
+    if (hour >= 13 && hour < 15) return '未时';
+    if (hour >= 15 && hour < 17) return '申时';
+    if (hour >= 17 && hour < 19) return '酉时';
+    if (hour >= 19 && hour < 21) return '戌时';
+    if (hour >= 21 && hour < 23) return '亥时';
+    return '子时';
+}
+
+// 获取当前时间的五行能量
+function getCurrentTimeElement() {
+    const now = new Date();
+    const hour = now.getHours();
+    const month = now.getMonth() + 1;
+
+    // 简化：早晨（木）、中午（火）、下午（土）、傍晚（金）、夜晚（水）
+    // 实际上有更复杂的对应关系，这里使用简化版
+    let timeElement;
+    if (hour >= 5 && hour < 9) {
+        timeElement = '木'; // 早晨
+    } else if (hour >= 9 && hour < 13) {
+        timeElement = '火'; // 中午
+    } else if (hour >= 13 && hour < 17) {
+        timeElement = '土'; // 下午
+    } else if (hour >= 17 && hour < 21) {
+        timeElement = '金'; // 傍晚
+    } else {
+        timeElement = '水'; // 夜晚
+    }
+
+    // 季节调整
+    const seasonElements = { 'spring': '木', 'summer': '火', 'autumn': '金', 'winter': '水' };
+    const season = getCurrentSeason();
+    const seasonElement = seasonElements[season] || '土';
+
+    return {
+        timeElement,
+        seasonElement,
+        season,
+        hour,
+        timeBranch: getCurrentTimeBranch()
+    };
+}
+
+// 计算五行相生相克对推荐的影响
+function calculateElementCycleInfluence(dayElement, currentTimeElement, seasonElement) {
+    const generating = {
+        '木': '火', '火': '土', '土': '金', '金': '水', '水': '木'
+    };
+    const overcoming = {
+        '木': '土', '土': '水', '水': '火', '火': '金', '金': '木'
+    };
+
+    let boosts = [];
+    let reduces = [];
+
+    // 时间元素对日主的影响
+    if (generating[dayElement] === currentTimeElement) {
+        boosts.push(`当前时段(${currentTimeElement})生助您的日主(${dayElement})，适合穿戴${currentTimeElement}色系`);
+    } else if (overcoming[dayElement] === currentTimeElement) {
+        reduces.push(`当前时段(${currentTimeElement})克制您的日主(${dayElement})，建议避免${currentTimeElement}色系`);
+    }
+
+    // 季节影响
+    if (seasonElement === dayElement) {
+        boosts.push(`当前季节正旺${seasonElement}，与您的日主${dayElement}相生，适合穿戴${seasonElement}色系`);
+    } else if (generating[seasonElement] === dayElement) {
+        boosts.push(`当前季节的${seasonElement}生助您的日主${dayElement}，运势较好`);
+    }
+
+    return { boosts, reduces };
+}
+
+// 计算每日幸运数字（根据日期变化）
+function calculateDailyLuckyNumbers(bazi, favorableElement) {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
+
+    // 获取基础幸运数字（从喜用神对应五行）
+    const elementData = fiveElementData.elements?.[favorableElement] || {};
+    const baseNumbers = elementData.luckyNumbers || [1, 2, 3];
+
+    // 获取流年天干
+    const currentYear = getCurrentYearPillar();
+    const yearStemIndex = (year - 4) % 10;
+
+    // 计算每日幸运数字
+    // 算法：结合基础数字 + 当天日期 + 流年天干
+    const dailyNumbers = [];
+
+    // 1. 当天的日期数字（月+日的一些组合）
+    const monthDaySum = (month + day) % 10;
+    const dayOfYear = Math.floor((now - new Date(year, 0, 0)) / (1000 * 60 * 60 * 24));
+
+    // 2. 结合流年计算
+    const yearFactor = (yearStemIndex + 1) % 10;
+
+    // 3. 生成3-5个幸运数字
+    const allPossibleNumbers = [
+        ...baseNumbers,
+        month,
+        day,
+        monthDaySum,
+        dayOfYear % 10,
+        yearFactor,
+        (month + yearFactor) % 10,
+        (day + yearFactor) % 10,
+        (month * 2 + day) % 10,
+        (year % 100) % 10  // 年份后两位
+    ];
+
+    // 去重并排序
+    const uniqueNumbers = [...new Set(allPossibleNumbers)].filter(n => n >= 0 && n <= 9);
+
+    // 如果不足5个，用1-9补齐
+    while (uniqueNumbers.length < 5) {
+        for (let i = 1; i <= 9; i++) {
+            if (!uniqueNumbers.includes(i)) {
+                uniqueNumbers.push(i);
+                if (uniqueNumbers.length >= 5) break;
+            }
+        }
+    }
+
+    // 返回排序后的数字
+    return uniqueNumbers.sort((a, b) => a - b).slice(0, 5);
+}
+
 // 计算姓名五行（两种方法结合）
 function calculateNameElement(name) {
     if (!name || name.length === 0) return '土';
@@ -324,18 +489,86 @@ function getDressingRecommendation(bazi, nameElement, bloodType, weather, zodiac
     const fiveElement = getBaziElement(bazi.day);
     const favorableElement = calculateFavorableElement(bazi);
 
-    // 获取各因素的颜色推荐
-    const elementColors = fiveElementData.elements?.[fiveElement]?.color || [];
-    const favorableColors = fiveElementData.elements?.[favorableElement]?.color || elementColors;
-    const bloodColors = bloodTypeData.bloodTypes?.[bloodType]?.recommendedColors || [];
+    // 获取当前时间信息
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
+
+    // 获取流年和季节信息
+    const currentYearPillar = getCurrentYearPillar();
+    const currentSeason = getCurrentSeason();
+    const currentTimeElement = getCurrentTimeElement();
+
+    // 获取五行详细数据
+    const elementData = fiveElementData.elements?.[fiveElement] || {};
+    const favorableElementData = fiveElementData.elements?.[favorableElement] || {};
+    const elementRules = dressingRules.fiveElementRules?.[favorableElement] || {};
+
+    // 获取天气数据
     const weatherData = dressingRules.weatherConditions?.[weather] || {};
     const weatherColors = weatherData.recommendedColors || [];
 
-    // 综合颜色推荐（去重并优先顺序）
-    const colorPriority = [...new Set([...favorableColors, ...weatherColors, ...bloodColors, ...elementColors])];
+    // ======== 根据日期动态调整颜色 ========
+    // 流年对应的颜色调整
+    const yearElementColors = fiveElementData.elements?.[currentYearPillar.element]?.color || [];
+    const seasonData = dressingRules.seasonRules?.[currentSeason] || {};
+    const seasonColors = seasonData.colors || [];
 
-    // 获取款式建议
+    // 动态计算：结合流年、季节、天气、八字喜用神
+    // 每天的日期数字也会影响颜色选择
+    const dateFactor = (year + month + day) % 5; // 0-4 循环
+
+    // 基于日期调整颜色优先级
+    const dateColors = {
+        0: ['红色', '橙色', '黄色'], // 能量较强
+        1: ['绿色', '青色', '翠色'], // 木旺
+        2: ['白色', '银色', '金色'], // 金旺
+        3: ['蓝色', '黑色', '灰色'], // 水旺
+        4: ['黄色', '棕色', '米色']  // 土旺
+    };
+
+    // 获取各因素的颜色推荐
+    const elementClothingColors = elementRules.clothingColors || elementData.color || [];
+    const favorableClothingColors = dressingRules.fiveElementRules?.[favorableElement]?.clothingColors || favorableElementData.color || elementClothingColors;
+    const elementColors = elementData.luckyColors || elementData.color || [];
+    const favorableColors = favorableElementData.luckyColors || favorableElementData.color || elementColors;
+    const bloodColors = bloodTypeData.bloodTypes?.[bloodType]?.recommendedColors || [];
+
+    // 综合颜色推荐（根据日期动态调整优先级）
+    let colorPriority;
+    if (weather === '晴' || weather === '多云') {
+        // 晴天优先：喜用神颜色 + 季节颜色 + 天气颜色
+        colorPriority = [...new Set([...favorableClothingColors, ...seasonColors, ...weatherColors, ...favorableColors, ...elementColors])];
+    } else if (weather === '雨' || weather === '雪') {
+        // 雨天优先：亮色 + 天气适合色 + 喜用神
+        colorPriority = [...new Set([...weatherColors, ...favorableClothingColors, ...favorableColors, ...dateColors[dateFactor]])];
+    } else if (weather === '风') {
+        // 大风天：深色 + 防风
+        colorPriority = [...new Set([...favorableClothingColors, ...yearElementColors, ...elementColors])];
+    } else {
+        // 其他天气
+        colorPriority = [...new Set([...favorableClothingColors, ...weatherColors, ...favorableColors, ...elementColors, ...yearElementColors])];
+    }
+
+    // ======== 根据日期和天气动态调整款式 ========
     const styles = [];
+
+    // 基础款式（五行 + 星座 + 血型）
+    if (elementRules.clothingStyles && elementRules.clothingStyles.length > 0) {
+        styles.push(...elementRules.clothingStyles);
+    }
+
+    // 根据天气添加款式建议
+    if (weather === '雨' || weather === '雪') {
+        styles.push('防水外套', '便于行动的服装');
+    } else if (weather === '风') {
+        styles.push('防风外套', '贴身的服装');
+    } else if (weather === '晴' && (month >= 6 && month <= 8)) {
+        styles.push('轻薄透气', '防晒款式');
+    } else if (weather === '晴' && (month >= 12 || month <= 2)) {
+        styles.push('保暖款式', '防寒外套');
+    }
 
     // 星座风格
     if (zodiac?.clothingStyle) {
@@ -347,45 +580,117 @@ function getDressingRecommendation(bazi, nameElement, bloodType, weather, zodiac
         styles.push(...bloodTypeData.bloodTypes[bloodType].clothingStyle);
     }
 
-    // 五行风格
-    const elementRules = dressingRules.fiveElementRules?.[favorableElement];
-    if (elementRules?.styleAdvice) {
+    // 五行风格建议
+    if (elementRules.styleAdvice) {
         styles.push(elementRules.styleAdvice);
     }
 
-    // 天气建议
-    if (weatherData.clothingTips) {
-        // 已经包含在下面的clothingTips中
-    }
-
-    // 材质建议
+    // ======== 根据日期和天气动态调整材质 ========
     const materials = [];
+
+    // 天气材质优先
     if (weatherData.material) {
         materials.push(weatherData.material);
     }
-    if (elementRules) {
-        materials.push('高品质材质');
+
+    // 根据季节调整材质
+    if (seasonData.materials) {
+        materials.push(...seasonData.materials);
     }
 
-    // 配饰建议
-    const accessories = bloodTypeData.bloodTypes?.[bloodType]?.accessories || [];
+    // 五行推荐材质
+    if (elementRules.clothingMaterials && elementRules.clothingMaterials.length > 0) {
+        materials.push(...elementRules.clothingMaterials);
+    }
+
+    // ======== 根据日期和天气动态调整配饰 ========
+    const accessories = [];
+
+    // 天气相关配饰
+    if (weather === '晴') {
+        accessories.push('太阳镜', '遮阳帽');
+    } else if (weather === '雨' || weather === '雪') {
+        accessories.push('防水包', '保暖围巾');
+    } else if (weather === '风') {
+        accessories.push('防风帽', '口罩');
+    }
+
+    // 五行推荐配饰
+    if (elementRules.accessories && elementRules.accessories.length > 0) {
+        accessories.push(...elementRules.accessories);
+    }
+
+    // 血型配饰
+    if (bloodTypeData.bloodTypes?.[bloodType]?.accessories) {
+        accessories.push(...bloodTypeData.bloodTypes[bloodType].accessories);
+    }
+
+    // ======== 动态计算避免的颜色 ========
+    const avoidColors = [...new Set([
+        ...(elementRules.avoidColors || []),
+        ...(weather === '晴' && fiveElement === '火' ? ['红色', '橙色'] : []),
+        ...(weather === '雨' && fiveElement === '水' ? ['黑色', '深蓝色'] : [])
+    ])];
+
+    // 幸运数字（动态计算）
+    const luckyNumbers = calculateDailyLuckyNumbers(bazi, favorableElement);
+
+    // 幸运方位（根据流年调整）
+    const luckyDirections = elementData.luckyDirections || [];
 
     // 生成运势建议
     const dailyAdvice = generateDailyAdvice(fiveElement, favorableElement, weather, zodiac);
 
+    // 限制每项不超过3条
+    const uniqueStyles = [...new Set(styles)].slice(0, 3);
+    const uniqueMaterials = [...new Set(materials)].slice(0, 3);
+    const uniqueAccessories = [...new Set(accessories)].slice(0, 3);
+    const uniqueAvoidColors = [...new Set(avoidColors)].slice(0, 3);
+
+    // 动态intro
+    const seasonNames = { 'spring': '春季', 'summer': '夏季', 'autumn': '秋季', 'winter': '冬季' };
+    const intro = `根据您的八字五行${fiveElement}、喜用神${favorableElement}，结合${seasonNames[currentSeason] || ''}${weatherData.description || '当前天气'}和${currentYearPillar.pillar}流年，为您推荐今日穿衣搭配（每日随日期变化）。`;
+
     return {
-        colors: colorPriority.slice(0, 6), // 最多6个颜色
-        styles: [...new Set(styles)],
-        materials: [...new Set(materials)],
-        accessories: [...new Set(accessories)],
+        colors: colorPriority.slice(0, 3), // 最多3个颜色
+        styles: uniqueStyles,
+        materials: uniqueMaterials,
+        accessories: uniqueAccessories,
+        avoidColors: uniqueAvoidColors,
+        luckyNumbers: luckyNumbers,
+        luckyDirections: luckyDirections,
+        elementData: elementData,
         dailyAdvice: dailyAdvice,
-        intro: `根据您的八字五行${fiveElement}、喜用神${favorableElement}，结合${weatherData.description || '当前天气'}和您的${bloodType}型血特点，为您推荐今日穿衣搭配。`
+        intro: intro
     };
 }
 
 // 生成每日运势建议
 function generateDailyAdvice(fiveElement, favorableElement, weather, zodiac) {
     let advice = [];
+
+    // 获取当前日期信息
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
+
+    // 获取阴历日期（简化版）
+    const lunarDate = solarToLunar(year, month, day);
+
+    // 添加日期信息
+    advice.push(`今天是${year}年${month}月${day}日（阴历${lunarDate.month}月${lunarDate.day}日）`);
+
+    // 添加流年信息
+    const currentYearPillar = getCurrentYearPillar();
+    advice.push(`流年为${currentYearPillar.pillar}年，五行属${currentYearPillar.element}`);
+
+    // 添加时间段能量
+    const currentTime = getCurrentTimeElement();
+    const cycleInfluence = calculateElementCycleInfluence(fiveElement, currentTime.timeElement, currentTime.seasonElement);
+    if (cycleInfluence.boosts.length > 0) {
+        advice.push(cycleInfluence.boosts[0]);
+    }
 
     // 五行建议
     const elementRule = dressingRules.fiveElementRules?.[favorableElement];
@@ -399,12 +704,7 @@ function generateDailyAdvice(fiveElement, favorableElement, weather, zodiac) {
         advice.push(weatherRule.advice);
     }
 
-    // 星座幸运
-    if (zodiac?.luckyNumber) {
-        advice.push(`今天的幸运数字是${zodiac.luckyNumber.join('、')}，可以佩戴相关数字的饰品。`);
-    }
-
-    return advice.join(' ');
+    return advice.join('。') + '。';
 }
 
 // 保存信息到localStorage
@@ -434,6 +734,9 @@ function saveUserInfo() {
         saveBtn.textContent = '✓ 已保存';
         saveBtn.classList.add('saved');
 
+        // 显示清除按钮
+        updateClearButtonVisibility(true);
+
         setTimeout(() => {
             saveBtn.textContent = '保存信息';
             saveBtn.classList.remove('saved');
@@ -462,12 +765,60 @@ function loadUserInfo() {
             document.getElementById('city').value = formData.city || '';
             document.getElementById('weather').value = formData.weather || '';
 
+            // 显示清除按钮
+            updateClearButtonVisibility(true);
+
             return true;
         }
     } catch (e) {
         console.error('加载失败:', e);
     }
     return false;
+}
+
+// 更新清除按钮显示状态
+function updateClearButtonVisibility(hasData) {
+    const clearBtn = document.getElementById('clear-btn');
+    if (hasData) {
+        clearBtn.style.display = 'block';
+    } else {
+        clearBtn.style.display = 'none';
+    }
+}
+
+// 检查是否有保存的信息
+function hasSavedInfo() {
+    return localStorage.getItem('wuxing_user_info') !== null;
+}
+
+// 清除保存的信息
+function clearUserInfo() {
+    if (confirm('确定要清除已保存的信息吗？')) {
+        try {
+            localStorage.removeItem('wuxing_user_info');
+
+            // 隐藏清除按钮
+            updateClearButtonVisibility(false);
+
+            // 显示清除成功
+            const clearBtn = document.getElementById('clear-btn');
+            clearBtn.textContent = '✓ 已清除';
+            clearBtn.style.background = 'rgba(76, 175, 80, 0.2)';
+            clearBtn.style.borderColor = '#4caf50';
+            clearBtn.style.color = '#4caf50';
+
+            setTimeout(() => {
+                clearBtn.textContent = '清除保存';
+                clearBtn.style.background = 'rgba(255, 107, 107, 0.1)';
+                clearBtn.style.borderColor = 'rgba(255, 107, 107, 0.3)';
+                clearBtn.style.color = '#ff6b6b';
+            }, 2000);
+
+        } catch (e) {
+            console.error('清除失败:', e);
+            alert('清除失败，请检查浏览器设置');
+        }
+    }
 }
 
 // 计算八字元素的详细统计
@@ -552,6 +903,12 @@ function generateElementBalance(bazi) {
 function generateBaziDetail(bazi, zodiac, nameElement) {
     const dayElement = getBaziElement(bazi.day);
     const favorableElement = calculateFavorableElement(bazi);
+    const elementData = fiveElementData.elements?.[dayElement] || {};
+
+    // 使用扩展数据中的性格描述
+    const personality = elementData.personality || [];
+    const characterStrengths = elementData.characterStrengths || [];
+    const suitableCareers = elementData.suitableCareers || [];
 
     const elementDescriptions = {
         '木': '木代表生发、成长，您可能具有创新思维和领导潜质',
@@ -568,6 +925,27 @@ function generateBaziDetail(bazi, zodiac, nameElement) {
         <p>您的星座是<span class="highlight">${zodiac?.name || '未知'}</span>（${zodiac?.element}座），${zodiac?.characteristics || ''}</p>
     `;
 
+    // 添加性格特点
+    if (personality.length > 0) {
+        detailHtml += `<p class="personality-section"><strong>性格特点：</strong>${personality.join('、')}</p>`;
+    }
+
+    // 添加性格优势
+    if (characterStrengths.length > 0) {
+        detailHtml += `<p class="strengths-section"><strong>性格优势：</strong>${characterStrengths.join('，')}</p>`;
+    }
+
+    // 添加适合职业
+    if (suitableCareers.length > 0) {
+        detailHtml += `<p class="career-section"><strong>适合职业：</strong>${suitableCareers.join('、')}</p>`;
+    }
+
+    // 添加健康提示
+    const healthTips = elementData.healthTips;
+    if (healthTips) {
+        detailHtml += `<p class="health-section"><strong>健康提示：</strong>${healthTips}</p>`;
+    }
+
     return detailHtml;
 }
 
@@ -575,6 +953,7 @@ function generateBaziDetail(bazi, zodiac, nameElement) {
 function generateLuckAdvice(bazi, weather, bloodType, zodiac) {
     const favorableElement = calculateFavorableElement(bazi);
     const dayElement = getBaziElement(bazi.day);
+    const elementData = fiveElementData.elements?.[dayElement] || {};
 
     const advices = [];
 
@@ -588,13 +967,47 @@ function generateLuckAdvice(bazi, weather, bloodType, zodiac) {
         });
     }
 
-    // 幸运方位
+    // 幸运数字（根据日期动态计算）
+    const dailyLuckyNumbers = calculateDailyLuckyNumbers(bazi, favorableElement);
+    if (dailyLuckyNumbers.length > 0) {
+        advices.push({
+            icon: '🔢',
+            title: '今日幸运数字',
+            desc: `今天的幸运数字是 ${dailyLuckyNumbers.join('、')}（结合八字喜用神与当日气场）`
+        });
+    }
+
+    // 幸运方位（使用扩展数据）
+    const luckyDirections = elementData.luckyDirections || [];
     const directions = { '木': '东方', '火': '南方', '土': '中央', '金': '西方', '水': '北方' };
+    if (luckyDirections.length > 0) {
+        advices.push({
+            icon: '🧭',
+            title: '幸运方位',
+            desc: `今天${luckyDirections.join('、')}是您的幸运方位，有时间可以往这些方向走走。`
+        });
+    }
+
+    // 流年信息
+    const currentYear = getCurrentYearPillar();
     advices.push({
-        icon: '🧭',
-        title: '幸运方位',
-        desc: `今天${directions[favorableElement] || '中央'}是您的幸运方位，有时间可以往这个方向走走。`
+        icon: '📅',
+        title: '流年运势',
+        desc: `今年${currentYear.year}年是${currentYear.pillar}年，五行属${currentYear.element}，注意平衡。`
     });
+
+    // 时间段建议
+    const currentTime = getCurrentTimeElement();
+    const cycleInfluence = calculateElementCycleInfluence(dayElement, currentTime.timeElement, currentTime.seasonElement);
+
+    // 添加时间增强信息
+    if (cycleInfluence.boosts.length > 0) {
+        advices.push({
+            icon: '⏰',
+            title: '时段能量',
+            desc: cycleInfluence.boosts.join('；')
+        });
+    }
 
     // 血型建议
     const bloodAdvice = bloodTypeData.bloodTypes?.[bloodType]?.advice;
@@ -616,12 +1029,23 @@ function generateLuckAdvice(bazi, weather, bloodType, zodiac) {
         });
     }
 
-    // 星座幸运
-    if (zodiac?.luckyNumber) {
+    // 幸运宝石/配饰
+    const luckyGems = elementData.luckyGems || [];
+    if (luckyGems.length > 0) {
         advices.push({
-            icon: '🔢',
-            title: '幸运数字',
-            desc: `今天的幸运数字是 ${zodiac.luckyNumber.join('、')}，可以关注这些数字。`
+            icon: '💎',
+            title: '幸运配饰',
+            desc: `佩戴${luckyGems.join('、')}可以增强运势`
+        });
+    }
+
+    // 幸运花卉
+    const luckyFlowers = elementData.luckyFlowers || [];
+    if (luckyFlowers.length > 0) {
+        advices.push({
+            icon: '🌸',
+            title: '幸运植物',
+            desc: `摆放${luckyFlowers.join('、')}可以提升气场`
         });
     }
 
@@ -642,16 +1066,21 @@ function generateLuckAdvice(bazi, weather, bloodType, zodiac) {
 }
 
 // 获取穿衣禁忌
-function getAvoidAdvice(bazi, weather, bloodType) {
+function getAvoidAdvice(bazi, weather, bloodType, recommendation) {
     const dayElement = getBaziElement(bazi.day);
     const favorableElement = calculateFavorableElement(bazi);
 
     const avoids = [];
 
-    // 五行禁忌
+    // 五行禁忌（使用扩展数据）
     const elementRules = dressingRules.fiveElementRules?.[favorableElement];
     if (elementRules?.avoid) {
         avoids.push(`避免穿戴${elementRules.avoid}色系的衣物`);
+    }
+
+    // 使用新的avoidColors数据
+    if (recommendation?.avoidColors && recommendation.avoidColors.length > 0) {
+        avoids.push(`今日需避免：${recommendation.avoidColors.join('、')}色系`);
     }
 
     // 天气禁忌
@@ -667,6 +1096,13 @@ function getAvoidAdvice(bazi, weather, bloodType) {
     const bloodAvoid = bloodTypeData.bloodTypes?.[bloodType]?.avoidColors;
     if (bloodAvoid && bloodAvoid.length > 0) {
         avoids.push(`避免${bloodAvoid.join('、')}的颜色`);
+    }
+
+    // 时间段禁忌
+    const currentTime = getCurrentTimeElement();
+    const cycleInfluence = calculateElementCycleInfluence(dayElement, currentTime.timeElement, currentTime.seasonElement);
+    if (cycleInfluence.reduces.length > 0) {
+        avoids.push(cycleInfluence.reduces.join('；'));
     }
 
     // 一般禁忌
@@ -768,7 +1204,7 @@ function displayResults(data) {
     });
 
     // 穿衣禁忌
-    document.getElementById('avoid-advice').innerHTML = getAvoidAdvice(bazi, weather, bloodType);
+    document.getElementById('avoid-advice').innerHTML = getAvoidAdvice(bazi, weather, bloodType, recommendation);
 
     // 每日建议
     document.getElementById('daily-advice').textContent = recommendation.dailyAdvice;
@@ -889,6 +1325,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // 保存按钮点击事件
     document.getElementById('save-btn').addEventListener('click', saveUserInfo);
+
+    // 清除按钮点击事件
+    document.getElementById('clear-btn').addEventListener('click', clearUserInfo);
+
+    // 检查并更新清除按钮显示状态
+    updateClearButtonVisibility(hasSavedInfo());
 
     // 设置默认日期为今天
     const today = new Date().toISOString().split('T')[0];

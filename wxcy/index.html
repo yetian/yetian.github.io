@@ -98,6 +98,7 @@
                     <div class="button-group">
                         <button type="submit" class="submit-btn">开始分析</button>
                         <button type="button" class="save-btn" id="save-btn">保存信息</button>
+                        <button type="button" class="clear-btn" id="clear-btn" style="display: none;">清除保存</button>
                     </div>
                 </form>
 
@@ -109,6 +110,11 @@
 
             <section class="result-section" id="result-section" style="display: none;">
                 <h2>分析结果</h2>
+
+                <div class="result-card daily-fortune">
+                    <h3>今日运势</h3>
+                    <p id="daily-advice"></p>
+                </div>
 
                 <div class="result-card">
                     <h3>基本信息</h3>
@@ -215,11 +221,6 @@
                     <div class="recommendation-section">
                         <h4>穿衣禁忌</h4>
                         <div class="avoid-list" id="avoid-advice"></div>
-                    </div>
-
-                    <div class="recommendation-section">
-                        <h4>今日运势</h4>
-                        <p id="daily-advice"></p>
                     </div>
                 </div>
 
