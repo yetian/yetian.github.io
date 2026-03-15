@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent Installation Decision & Security Guide</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <h1>AI Agent Installation Decision & Security Guide</h1>
+            </div>
+            <div class="header-center">
+                <div class="subtitle">Security Assessment Tool</div>
+                <div class="language-switch">
+                    <a href="index.html" class="lang-link">中文</a>
+                    <span class="lang-divider">|</span>
+                    <a href="index-en.html" class="lang-link active">English</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Progress Indicator -->
+            <div class="progress-bar">
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-steps">
+                    <span class="step active" data-step="0">Start</span>
+                    <span class="step" data-step="1">Q1</span>
+                    <span class="step" data-step="2">Q2</span>
+                    <span class="step" data-step="3">Q3</span>
+                    <span class="step" data-step="4">Q4</span>
+                    <span class="step" data-step="5">Q5</span>
+                    <span class="step" data-step="6">Result</span>
+                </div>
+            </div>
+
+            <!-- Decision Tree Content -->
+            <div class="decision-area" id="decisionArea">
+                <!-- Welcome Page -->
+                <div class="card welcome-card" id="welcomeCard">
+                    <div class="card-icon">🤖</div>
+                    <h2>Welcome to AI Agent Installation Decision Guide</h2>
+                    <p>Answer a few simple questions to help you choose the right AI Agent and assess security risks</p>
+                    <div class="features">
+                        <div class="feature">
+                            <span class="feature-icon">🌲</span>
+                            <span>Smart Decision Tree</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">🛡️</span>
+                            <span>Security Score</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">📋</span>
+                            <span>One-Click Export</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="startQuiz()">
+                        Start Assessment →
+                    </button>
+                </div>
+
+                <!-- Q1: Goal -->
+                <div class="card question-card hidden" id="q1Card">
+                    <div class="question-number">Q1 / 2</div>
+                    <h2>What is your use goal?</h2>
+                    <p class="question-desc">What task do you want to complete with an AI Agent?</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectOption(1, 'code')">
+                            <span class="option-icon">💻</span>
+                            <span class="option-text">
+                                <strong>Develop App / Write Code</strong>
+                                <small>Write, debug, and refactor code</small>
+                            </span>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(1, 'automation')">
+                            <span class="option-icon">🔄</span>
+                            <span class="option-text">
+                                <strong>Automate Web Tasks</strong>
+                                <small>Fill forms, click buttons, data scraping</small>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Q2: Implementation Method -->
+                <div class="card question-card hidden" id="q2Card">
+                    <div class="question-number">Q2 / 2</div>
+                    <h2>How do you want to achieve this goal?</h2>
+                    <p class="question-desc">Different implementation methods have different security requirements</p>
+                    <div class="options options-3">
+                        <button class="option-btn" onclick="selectOption(2, 'agent')">
+                            <span class="option-icon">🤖</span>
+                            <span class="option-text">
+                                <strong>Use AI Agent</strong>
+                                <small>Claude Code / OpenClaw</small>
+                            </span>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(2, 'expert')">
+                            <span class="option-icon">👨‍💼</span>
+                            <span class="option-text">
+                                <strong>Seek Expert Help</strong>
+                                <small>Hire developer or consultant</small>
+                            </span>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(2, 'tools')">
+                            <span class="option-icon">🛠️</span>
+                            <span class="option-text">
+                                <strong>Use Existing Tools</strong>
+                                <small>Zapier / Low-code platforms</small>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Q3: Environment (for agent path) -->
+                <div class="card question-card hidden" id="q3Card">
+                    <div class="question-number">Q3 / 5</div>
+                    <h2>What environment will you run it in?</h2>
+                    <p class="question-desc">Environment choice directly affects security assessment results</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectOption(3, 'main')">
+                            <span class="option-icon">🖥️</span>
+                            <span class="option-text">
+                                <strong>Main Work Computer</strong>
+                                <small>High risk, requires careful assessment</small>
+                            </span>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(3, 'isolated')">
+                            <span class="option-icon">📦</span>
+                            <span class="option-text">
+                                <strong>Isolated Environment</strong>
+                                <small>Docker / VM, more secure</small>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Q4: Audit Capability (for agent path) -->
+                <div class="card question-card hidden" id="q4Card">
+                    <div class="question-number">Q4 / 5</div>
+                    <h2>Do you have code audit capabilities?</h2>
+                    <p class="question-desc">Understanding script behavior is the foundation of secure usage</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectOption(4, 'yes')">
+                            <span class="option-icon">✓</span>
+                            <span class="option-text">
+                                <strong>Yes</strong>
+                                <small>Can understand code logic and risks</small>
+                            </span>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(4, 'no')">
+                            <span class="option-icon">✗</span>
+                            <span class="option-text">
+                                <strong>Not familiar</strong>
+                                <small>Need more security measures</small>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Q5: Cost Control (for agent path) -->
+                <div class="card question-card hidden" id="q5Card">
+                    <div class="question-number">Q5 / 5</div>
+                    <h2>Have you set a daily API limit?</h2>
+                    <p class="question-desc">Prevent unexpected billing from overuse</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectOption(5, 'yes')">
+                            <span class="option-icon">✓</span>
+                            <span class="option-text">
+                                <strong>Yes</strong>
+                                <small>Has daily spending limit protection</small>
+                            </span>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(5, 'no')">
+                            <span class="option-icon">✗</span>
+                            <span class="option-text">
+                                <strong>No</strong>
+                                <small>Need to configure</small>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Q6: Budget/Complexity (for expert/tools path) -->
+                <div class="card question-card hidden" id="q6Card">
+                    <div class="question-number">Q3 / 3</div>
+                    <h2 id="q6Title">What is your project budget?</h2>
+                    <p class="question-desc" id="q6Desc">This helps recommend suitable expert services</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectOption(6, 'low')">
+                            <span class="option-icon">💰</span>
+                            <span class="option-text">
+                                <strong>Low Budget</strong>
+                                <small>Prefer free or low-cost solutions</small>
+                            </span>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(6, 'medium')">
+                            <span class="option-icon">💵</span>
+                            <span class="option-text">
+                                <strong>Medium Budget</strong>
+                                <small>Willing to pay for professional services</small>
+                            </span>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(6, 'high')">
+                            <span class="option-icon">💎</span>
+                            <span class="option-text">
+                                <strong>High Budget</strong>
+                                <small>Quality and security first</small>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Result Page -->
+                <div class="card result-card hidden" id="resultCard">
+                    <div class="result-header">
+                        <div class="result-icon" id="resultIcon">🤖</div>
+                        <h2>Installation Recommendation</h2>
+                    </div>
+
+                    <!-- Recommendation Content -->
+                    <div class="recommendation" id="recommendation">
+                        <!-- Dynamic Content -->
+                    </div>
+
+                    <!-- Security Score -->
+                    <div class="security-section" id="securitySection">
+                        <h3>🛡️ Security Score</h3>
+                        <div class="security-score">
+                            <div class="score-circle" id="scoreCircle">
+                                <span class="score-value" id="scoreValue">0</span>
+                                <span class="score-label">pts</span>
+                            </div>
+                            <div class="score-details" id="scoreDetails">
+                                <!-- Dynamic Content -->
+                            </div>
+                        </div>
+                        <div class="security-warnings" id="securityWarnings">
+                            <!-- Warnings -->
+                        </div>
+                    </div>
+
+                    <!-- Action Items -->
+                    <div class="action-items" id="actionItems">
+                        <!-- Dynamic Content -->
+                    </div>
+
+                    <!-- Export Button -->
+                    <div class="export-section">
+                        <button class="btn btn-secondary" onclick="exportToPDF()">
+                            <span>📥</span> Export PDF Report
+                        </button>
+                    </div>
+
+                    <!-- Restart -->
+                    <div class="restart-section">
+                        <button class="btn btn-ghost" onclick="restartQuiz()">
+                            ← Restart Assessment
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Alert Board -->
+            <section class="security-alert-section">
+                <h2 class="alert-title">
+                    <span class="alert-icon">⚠️</span>
+                    Security Alert Board
+                </h2>
+
+                <!-- Misconfiguration Issues -->
+                <div class="alert-category">
+                    <h3 class="category-title">🔧 Security Issues from Misconfiguration</h3>
+                    <div class="alerts-grid">
+                        <div class="alert-card alert-warning">
+                            <div class="alert-header">
+                                <span class="alert-badge warning">Config</span>
+                                <h4>Network Interface Exposure</h4>
+                            </div>
+                            <p>AI Agent's WebSocket or API not bound to local address (127.0.0.1) may lead to remote code execution.</p>
+                            <div class="alert-action">
+                                <strong>Mitigation:</strong> Bind to 127.0.0.1, use firewall rules
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-warning">
+                            <div class="alert-header">
+                                <span class="alert-badge warning">Config</span>
+                                <h4>Sensitive Credential Leak</h4>
+                            </div>
+                            <p>API keys, tokens hardcoded or exposed via environment variables.</p>
+                            <div class="alert-action">
+                                <strong>Mitigation:</strong> Use secret management services
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-warning">
+                            <div class="alert-header">
+                                <span class="alert-badge warning">Config</span>
+                                <h4>Excessive Permissions</h4>
+                            </div>
+                            <p>AI Agent has more system permissions than needed.</p>
+                            <div class="alert-action">
+                                <strong>Mitigation:</strong> Follow least privilege principle
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Supply Chain Issues -->
+                <div class="alert-category">
+                    <h3 class="category-title">📦 Supply Chain Security Issues</h3>
+                    <div class="alerts-grid">
+                        <div class="alert-card alert-danger">
+                            <div class="alert-header">
+                                <span class="alert-badge danger">Supply</span>
+                                <h4>Malicious Packages</h4>
+                            </div>
+                            <p>Fake GitHub releases or npm packages may contain malicious code.</p>
+                            <div class="alert-action">
+                                <strong>Mitigation:</strong> Download from official repos, verify signatures
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-danger">
+                            <div class="alert-header">
+                                <span class="alert-badge danger">Supply</span>
+                                <h4>Dependency Chain Attack</h4>
+                            </div>
+                            <p>Compromised open-source packages or outdated dependencies.</p>
+                            <div class="alert-action">
+                                <strong>Mitigation:</strong> Update dependencies, use security scanners
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-info">
+                            <div class="alert-header">
+                                <span class="alert-badge info">Supply</span>
+                                <h4>Prompt Injection</h4>
+                            </div>
+                            <p>Malicious websites can steal cookies via iframe or CSS spoofing.</p>
+                            <div class="alert-action">
+                                <strong>Mitigation:</strong> Use separate browser profile
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cognitive Issues -->
+                <div class="alert-category">
+                    <h3 class="category-title">🧠 Issues from Misconceptions</h3>
+                    <div class="alerts-grid">
+                        <div class="alert-card alert-info">
+                            <div class="alert-header">
+                                <span class="alert-badge info">Cognitive</span>
+                                <h4>Underestimating Technical Risk</h4>
+                            </div>
+                            <p>Non-technical users may underestimate AI Agent risks.</p>
+                            <div class="alert-action">
+                                <strong>Mitigation:</strong> Understand capabilities, seek guidance
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-info">
+                            <div class="alert-header">
+                                <span class="alert-badge info">Cognitive</span>
+                                <h4>Over-trusting Automation</h4>
+                            </div>
+                            <p>Blindly trusting AI output without verification.</p>
+                            <div class="alert-action">
+                                <strong>Mitigation:</strong> Always review AI-generated content
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-info">
+                            <div class="alert-header">
+                                <span class="alert-badge info">Cognitive</span>
+                                <h4>Ignoring Data Privacy</h4>
+                            </div>
+                            <p>Entering sensitive data without considering risks.</p>
+                            <div class="alert-action">
+                                <strong>Mitigation:</strong> Avoid sensitive data, use local deployment
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cost Issues -->
+                <div class="alert-category">
+                    <h3 class="category-title">💰 Cost-Related Issues</h3>
+                    <div class="alerts-grid">
+                        <div class="alert-card alert-warning">
+                            <div class="alert-header">
+                                <span class="alert-badge warning">Cost</span>
+                                <h4>API Cost Overrun</h4>
+                            </div>
+                            <p>No API limit may lead to unexpected high bills.</p>
+                            <div class="alert-action">
+                                <strong>Mitigation:</strong> Set daily/monthly spending limits
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-warning">
+                            <div class="alert-header">
+                                <span class="alert-badge warning">Cost</span>
+                                <h4>Ignoring Hidden Costs</h4>
+                            </div>
+                            <p>Overlooking learning curve and maintenance costs.</p>
+                            <div class="alert-action">
+                                <strong>Mitigation:</strong> Evaluate total cost of ownership
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-warning">
+                            <div class="alert-header">
+                                <span class="alert-badge warning">Cost</span>
+                                <h4>Security Incident Costs</h4>
+                            </div>
+                            <p>Incidents may cause data leaks and reputation damage.</p>
+                            <div class="alert-action">
+                                <strong>Mitigation:</strong> Include security in budget planning
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OWASP Reference -->
+                <div class="alert-category">
+                    <h3 class="category-title">📖 OWASP Top 10 2025 Reference</h3>
+                    <div class="alerts-grid">
+                        <div class="alert-card alert-info">
+                            <div class="alert-header">
+                                <span class="alert-badge info">API</span>
+                                <h4>API Security Risks</h4>
+                            </div>
+                            <p>OWASP API Security Top 10 covers common API security issues.</p>
+                            <div class="alert-action">
+                                <strong>Reference:</strong><a href="https://owasp.org/www-project-api-security/" target="_blank" class="alert-link">OWASP API Security</a>
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-danger">
+                            <div class="alert-header">
+                                <span class="alert-badge danger">A01</span>
+                                <h4>Access Control Failure</h4>
+                            </div>
+                            <p>Authenticated users can perform unauthorized actions.</p>
+                            <div class="alert-action">
+                                <strong>Reference:</strong><a href="https://owasp.org/Top10/2025/" target="_blank" class="alert-link">OWASP Top 10 2025</a>
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-danger">
+                            <div class="alert-header">
+                                <span class="alert-badge danger">A02</span>
+                                <h4>Cryptographic Failures</h4>
+                            </div>
+                            <p>Sensitive data not encrypted or using weak algorithms.</p>
+                            <div class="alert-action">
+                                <strong>Reference:</strong><a href="https://owasp.org/Top10/2025/" target="_blank" class="alert-link">OWASP Top 10 2025</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OWASP Reference Links -->
+                <div class="owasp-ref">
+                    <p>More references: <a href="https://owasp.org/Top10/2025/" target="_blank">OWASP Top 10 2025</a> | <a href="https://owasp.org/www-project-api-security/" target="_blank">OWASP API Security</a></p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>🔒 All data processed locally, never uploaded to any server</p>
+            <p>AI Agent Installation Decision & Security Guide</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

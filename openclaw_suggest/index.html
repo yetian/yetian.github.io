@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent 安装决策与安全指南</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <h1>AI Agent 安装决策与安全指南</h1>
+            </div>
+            <div class="header-center">
+                <div class="subtitle">安全评估工具</div>
+                <div class="language-switch">
+                    <a href="index.html" class="lang-link active">中文</a>
+                    <span class="lang-divider">|</span>
+                    <a href="index-en.html" class="lang-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- 进度指示器 -->
+            <div class="progress-bar">
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-steps">
+                    <span class="step active" data-step="0">开始</span>
+                    <span class="step" data-step="1">Q1</span>
+                    <span class="step" data-step="2">Q2</span>
+                    <span class="step" data-step="3">Q3</span>
+                    <span class="step" data-step="4">Q4</span>
+                    <span class="step" data-step="5">Q5</span>
+                    <span class="step" data-step="6">结果</span>
+                </div>
+            </div>
+
+            <!-- 决策树内容区 -->
+            <div class="decision-area" id="decisionArea">
+                <!-- 欢迎页面 -->
+                <div class="card welcome-card" id="welcomeCard">
+                    <div class="card-icon">🤖</div>
+                    <h2>欢迎使用 AI Agent 安装决策向导</h2>
+                    <p>回答几个简单问题，帮助您选择合适的 AI Agent 并评估安全风险</p>
+                    <div class="features">
+                        <div class="feature">
+                            <span class="feature-icon">🌲</span>
+                            <span>智能决策树</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">🛡️</span>
+                            <span>安全评分</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">📋</span>
+                            <span>一键导出</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="startQuiz()">
+                        开始评估 →
+                    </button>
+                </div>
+
+                <!-- Q1: 目标 -->
+                <div class="card question-card hidden" id="q1Card">
+                    <div class="question-number">Q1 / 2</div>
+                    <h2>你的使用目标是什么？</h2>
+                    <p class="question-desc">你希望通过 AI Agent 完成什么任务？</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectOption(1, 'code')">
+                            <span class="option-icon">💻</span>
+                            <span class="option-text">
+                                <strong>开发 App / 写代码</strong>
+                                <small>编写、调试、重构代码</small>
+                            </span>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(1, 'automation')">
+                            <span class="option-icon">🔄</span>
+                            <span class="option-text">
+                                <strong>自动化操作网页/任务</strong>
+                                <small>填写表单、点击按钮、数据抓取</small>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Q2: 实现方式 -->
+                <div class="card question-card hidden" id="q2Card">
+                    <div class="question-number">Q2 / 2</div>
+                    <h2>你想如何实现这个目标？</h2>
+                    <p class="question-desc">不同的实现方式有不同的安全要求</p>
+                    <div class="options options-3">
+                        <button class="option-btn" onclick="selectOption(2, 'agent')">
+                            <span class="option-icon">🤖</span>
+                            <span class="option-text">
+                                <strong>使用 AI Agent</strong>
+                                <small>Claude Code / OpenClaw</small>
+                            </span>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(2, 'expert')">
+                            <span class="option-icon">👨‍💼</span>
+                            <span class="option-text">
+                                <strong>寻求专家帮助</strong>
+                                <small>聘请开发者或顾问</small>
+                            </span>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(2, 'tools')">
+                            <span class="option-icon">🛠️</span>
+                            <span class="option-text">
+                                <strong>使用现有工具</strong>
+                                <small>Zapier / 低代码平台</small>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Q3: 环境 (for agent path) -->
+                <div class="card question-card hidden" id="q3Card">
+                    <div class="question-number">Q3 / 5</div>
+                    <h2>你打算运行在什么环境？</h2>
+                    <p class="question-desc">环境选择直接影响安全评估结果</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectOption(3, 'main')">
+                            <span class="option-icon">🖥️</span>
+                            <span class="option-text">
+                                <strong>主力办公电脑</strong>
+                                <small>高风险，需谨慎评估</small>
+                            </span>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(3, 'isolated')">
+                            <span class="option-icon">📦</span>
+                            <span class="option-text">
+                                <strong>隔离环境</strong>
+                                <small>Docker / 虚拟机，更安全</small>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Q4: 审计能力 (for agent path) -->
+                <div class="card question-card hidden" id="q4Card">
+                    <div class="question-number">Q4 / 5</div>
+                    <h2>你是否具备代码审计能力？</h2>
+                    <p class="question-desc">能够理解脚本行为是安全使用的基础</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectOption(4, 'yes')">
+                            <span class="option-icon">✓</span>
+                            <span class="option-text">
+                                <strong>可以</strong>
+                                <small>能看懂代码逻辑和潜在风险</small>
+                            </span>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(4, 'no')">
+                            <span class="option-icon">✗</span>
+                            <span class="option-text">
+                                <strong>不太熟悉</strong>
+                                <small>需要更多安全防护措施</small>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Q5: 成本控制 (for agent path) -->
+                <div class="card question-card hidden" id="q5Card">
+                    <div class="question-number">Q5 / 5</div>
+                    <h2>你是否设置了 API 单日限额？</h2>
+                    <p class="question-desc">防止意外超额导致财务风险</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectOption(5, 'yes')">
+                            <span class="option-icon">✓</span>
+                            <span class="option-text">
+                                <strong>已设置</strong>
+                                <small>有每日消费上限保护</small>
+                            </span>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(5, 'no')">
+                            <span class="option-icon">✗</span>
+                            <span class="option-text">
+                                <strong>未设置</strong>
+                                <small>需要提醒配置</small>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Q6: 预算/复杂度 (for expert/tools path) -->
+                <div class="card question-card hidden" id="q6Card">
+                    <div class="question-number">Q3 / 3</div>
+                    <h2 id="q6Title">你的项目预算范围？</h2>
+                    <p class="question-desc" id="q6Desc">这有助于推荐合适的方案</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectOption(6, 'low')">
+                            <span class="option-icon">💰</span>
+                            <span class="option-text">
+                                <strong>预算有限</strong>
+                                <small>希望使用免费或低成本方案</small>
+                            </span>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(6, 'medium')">
+                            <span class="option-icon">💵</span>
+                            <span class="option-text">
+                                <strong>预算适中</strong>
+                                <small>愿意为专业服务付费</small>
+                            </span>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(6, 'high')">
+                            <span class="option-icon">💎</span>
+                            <span class="option-text">
+                                <strong>预算充足</strong>
+                                <small>质量和安全性优先</small>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 结果页面 -->
+                <div class="card result-card hidden" id="resultCard">
+                    <div class="result-header">
+                        <div class="result-icon" id="resultIcon">🤖</div>
+                        <h2>安装建议</h2>
+                    </div>
+
+                    <!-- 建议内容 -->
+                    <div class="recommendation" id="recommendation">
+                        <!-- 动态生成 -->
+                    </div>
+
+                    <!-- 安全评分 -->
+                    <div class="security-section" id="securitySection">
+                        <h3>🛡️ 安全评分</h3>
+                        <div class="security-score">
+                            <div class="score-circle" id="scoreCircle">
+                                <span class="score-value" id="scoreValue">0</span>
+                                <span class="score-label">分</span>
+                            </div>
+                            <div class="score-details" id="scoreDetails">
+                                <!-- 动态生成 -->
+                            </div>
+                        </div>
+                        <div class="security-warnings" id="securityWarnings">
+                            <!-- 高危警告 -->
+                        </div>
+                    </div>
+
+                    <!-- 行动建议 -->
+                    <div class="action-items" id="actionItems">
+                        <!-- 动态生成 -->
+                    </div>
+
+                    <!-- 导出按钮 -->
+                    <div class="export-section">
+                        <button class="btn btn-secondary" onclick="exportToPDF()">
+                            <span>📥</span> 导出 PDF 报告
+                        </button>
+                    </div>
+
+                    <!-- 重新开始 -->
+                    <div class="restart-section">
+                        <button class="btn btn-ghost" onclick="restartQuiz()">
+                            ← 重新评估
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 安全警示板 -->
+            <section class="security-alert-section">
+                <h2 class="alert-title">
+                    <span class="alert-icon">⚠️</span>
+                    安全警示板
+                </h2>
+
+                <!-- 错误配置类安全问题 -->
+                <div class="alert-category">
+                    <h3 class="category-title">🔧 错误配置导致的安全问题</h3>
+                    <div class="alerts-grid">
+                        <div class="alert-card alert-warning">
+                            <div class="alert-header">
+                                <span class="alert-badge warning">配置</span>
+                                <h4>网络接口暴露</h4>
+                            </div>
+                            <p>AI Agent 的 WebSocket 或 API 接口未绑定到本地地址（如 127.0.0.1），可能导致远程代码执行。</p>
+                            <div class="alert-action">
+                                <strong>防范：</strong>强制绑定到 127.0.0.1，使用防火墙规则限制访问
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-warning">
+                            <div class="alert-header">
+                                <span class="alert-badge warning">配置</span>
+                                <h4>敏感凭证泄露</h4>
+                            </div>
+                            <p>API 密钥、Token 等敏感信息硬编码在代码中或通过环境变量意外暴露。</p>
+                            <div class="alert-action">
+                                <strong>防范：</strong>使用密钥管理服务，避免在代码中存储凭证
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-warning">
+                            <div class="alert-header">
+                                <span class="alert-badge warning">配置</span>
+                                <h4>权限过度开放</h4>
+                            </div>
+                            <p>AI Agent 拥有超出任务需求的系统权限，恶意指令可能造成更大损害。</p>
+                            <div class="alert-action">
+                                <strong>防范：</strong>遵循最小权限原则，限制文件系统和网络访问
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 供应链安全类问题 -->
+                <div class="alert-category">
+                    <h3 class="category-title">📦 供应链安全问题</h3>
+                    <div class="alerts-grid">
+                        <div class="alert-card alert-danger">
+                            <div class="alert-header">
+                                <span class="alert-badge danger">供应链</span>
+                                <h4>恶意安装包</h4>
+                            </div>
+                            <p>伪造的 GitHub 发布页或 npm 包可能包含恶意代码，已有多起开发者密钥被盗事件。</p>
+                            <div class="alert-action">
+                                <strong>防范：</strong>仅从官方仓库下载，验证 GPG 签名，检查包完整性
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-danger">
+                            <div class="alert-header">
+                                <span class="alert-badge danger">供应链</span>
+                                <h4>依赖链攻击</h4>
+                            </div>
+                            <p>通过入侵开源依赖包或使用过时、带漏洞的依赖来渗透您的系统。</p>
+                            <div class="alert-action">
+                                <strong>防范：</strong>定期更新依赖，使用依赖安全扫描工具
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-info">
+                            <div class="alert-header">
+                                <span class="alert-badge info">供应链</span>
+                                <h4>提示词注入</h4>
+                            </div>
+                            <p>恶意网页可通过 iframe 嵌入或 CSS 伪装窃取浏览器 Cookie，诱导执行未授权操作。</p>
+                            <div class="alert-action">
+                                <strong>防范：</strong>使用独立浏览器配置，定期审查会话，限制敏感操作
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 错误认知导致的问题 -->
+                <div class="alert-category">
+                    <h3 class="category-title">🧠 错误认知导致的问题</h3>
+                    <div class="alerts-grid">
+                        <div class="alert-card alert-info">
+                            <div class="alert-header">
+                                <span class="alert-badge info">认知</span>
+                                <h4>低估技术风险</h4>
+                            </div>
+                            <p>非技术背景用户可能低估 AI Agent 的潜在风险，误以为工具"无风险"或"绝对安全"。</p>
+                            <div class="alert-action">
+                                <strong>防范：</strong>充分了解 AI Agent 的能力边界，在专业人士指导下使用
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-info">
+                            <div class="alert-header">
+                                <span class="alert-badge info">认知</span>
+                                <h4>过度信任自动化</h4>
+                            </div>
+                            <p>盲目信任 AI Agent 的输出，未验证代码安全性或操作后果。</p>
+                            <div class="alert-action">
+                                <strong>防范：</strong>始终审查 AI 生成的代码和操作，保留人工审核环节
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-info">
+                            <div class="alert-header">
+                                <span class="alert-badge info">认知</span>
+                                <h4>忽视数据隐私</h4>
+                            </div>
+                            <p>向 AI Agent 输入敏感业务数据或个人信息，未考虑数据泄露风险。</p>
+                            <div class="alert-action">
+                                <strong>防范：</strong>避免输入敏感数据，使用本地部署版本或可信云服务
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 成本认知导致的问题 -->
+                <div class="alert-category">
+                    <h3 class="category-title">💰 成本认知导致的问题</h3>
+                    <div class="alerts-grid">
+                        <div class="alert-card alert-warning">
+                            <div class="alert-header">
+                                <span class="alert-badge warning">成本</span>
+                                <h4>API 费用失控</h4>
+                            </div>
+                            <p>未设置 API 调用限额，可能因 Prompt 过长、循环调用或恶意使用导致意外高额账单。</p>
+                            <div class="alert-action">
+                                <strong>防范：</strong>在 API 提供商后台设置每日/每月消费上限
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-warning">
+                            <div class="alert-header">
+                                <span class="alert-badge warning">成本</span>
+                                <h4>隐性成本忽视</h4>
+                            </div>
+                            <p>忽视学习曲线、调试时间、系统维护等隐性成本。</p>
+                            <div class="alert-action">
+                                <strong>防范：</strong>评估总拥有成本（TCO），包括培训和维护费用
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-warning">
+                            <div class="alert-header">
+                                <span class="alert-badge warning">成本</span>
+                                <h4>安全事故成本</h4>
+                            </div>
+                            <p>安全事故可能导致数据泄露、业务中断、声誉损失等远超技术本身成本的损失。</p>
+                            <div class="alert-action">
+                                <strong>防范：</strong>将安全投入纳入预算规划，购买适当的安全保险
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OWASP Top 10 参考 -->
+                <div class="alert-category">
+                    <h3 class="category-title">📖 OWASP Top 10 2025 参考</h3>
+                    <div class="alerts-grid">
+                        <div class="alert-card alert-info">
+                            <div class="alert-header">
+                                <span class="alert-badge info">API</span>
+                                <h4>API 安全风险</h4>
+                            </div>
+                            <p>OWASP API Security Top 10 涵盖认证失效、授权失效、过度数据暴露等常见 API 安全问题。</p>
+                            <div class="alert-action">
+                                <strong>参考：</strong><a href="https://owasp.org/www-project-api-security/" target="_blank" class="alert-link">OWASP API Security</a>
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-danger">
+                            <div class="alert-header">
+                                <span class="alert-badge danger">A01</span>
+                                <h4>访问控制失效</h4>
+                            </div>
+                            <p>已认证用户可执行未经授权的操作，或已认证管理员可访问普通用户功能。</p>
+                            <div class="alert-action">
+                                <strong>参考：</strong><a href="https://owasp.org/Top10/2025/" target="_blank" class="alert-link">OWASP Top 10 2025</a>
+                            </div>
+                        </div>
+
+                        <div class="alert-card alert-danger">
+                            <div class="alert-header">
+                                <span class="alert-badge danger">A02</span>
+                                <h4>加密失败</h4>
+                            </div>
+                            <p>敏感数据未加密或使用不安全的加密算法，导致数据泄露风险。</p>
+                            <div class="alert-action">
+                                <strong>参考：</strong><a href="https://owasp.org/Top10/2025/" target="_blank" class="alert-link">OWASP Top 10 2025</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OWASP 参考链接 -->
+                <div class="owasp-ref">
+                    <p>更多安全参考：<a href="https://owasp.org/Top10/2025/" target="_blank">OWASP Top 10 2025</a> | <a href="https://owasp.org/www-project-api-security/" target="_blank">OWASP API Security</a></p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>🔒 所有数据仅在本地处理，不会上传任何服务器</p>
+            <p>AI Agent 安装决策与安全指南</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

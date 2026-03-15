@@ -1,0 +1,250 @@
+{
+    "app": {
+        "title": "AI Agent 安装决策与安全指南",
+        "subtitle": "安全评估工具"
+    },
+    "progress": {
+        "start": "开始",
+        "result": "结果"
+    },
+    "welcome": {
+        "title": "欢迎使用 AI Agent 安装决策向导",
+        "description": "回答几个简单问题，帮助您选择合适的 AI Agent 并评估安全风险",
+        "features": {
+            "decisionTree": "智能决策树",
+            "securityScore": "安全评分",
+            "export": "一键导出"
+        },
+        "startBtn": "开始评估 →"
+    },
+    "questions": {
+        "q1": {
+            "number": "Q1 / 2",
+            "title": "你的使用目标是什么？",
+            "description": "你希望通过 AI Agent 完成什么任务？",
+            "options": {
+                "code": {
+                    "title": "开发 App / 写代码",
+                    "desc": "编写、调试、重构代码"
+                },
+                "automation": {
+                    "title": "自动化操作网页/任务",
+                    "desc": "填写表单、点击按钮、数据抓取"
+                }
+            }
+        },
+        "q2": {
+            "number": "Q2 / 2",
+            "title": "你想如何实现这个目标？",
+            "description": "不同的实现方式有不同的安全要求",
+            "options": {
+                "agent": {
+                    "title": "使用 AI Agent",
+                    "desc": "Claude Code / OpenClaw"
+                },
+                "expert": {
+                    "title": "寻求专家帮助",
+                    "desc": "聘请开发者或顾问"
+                },
+                "tools": {
+                    "title": "使用现有工具",
+                    "desc": "Zapier / 低代码平台"
+                }
+            }
+        },
+        "q3": {
+            "number": "Q3 / 5",
+            "title": "你打算运行在什么环境？",
+            "description": "环境选择直接影响安全评估结果",
+            "options": {
+                "main": {
+                    "title": "主力办公电脑",
+                    "desc": "高风险，需谨慎评估"
+                },
+                "isolated": {
+                    "title": "隔离环境",
+                    "desc": "Docker / 虚拟机，更安全"
+                }
+            }
+        },
+        "q4": {
+            "number": "Q4 / 5",
+            "title": "你是否具备代码审计能力？",
+            "description": "能够理解脚本行为是安全使用的基础",
+            "options": {
+                "yes": {
+                    "title": "可以",
+                    "desc": "能看懂代码逻辑和潜在风险"
+                },
+                "no": {
+                    "title": "不太熟悉",
+                    "desc": "需要更多安全防护措施"
+                }
+            }
+        },
+        "q5": {
+            "number": "Q5 / 5",
+            "title": "你是否设置了 API 单日限额？",
+            "description": "防止意外超额导致财务风险",
+            "options": {
+                "yes": {
+                    "title": "已设置",
+                    "desc": "有每日消费上限保护"
+                },
+                "no": {
+                    "title": "未设置",
+                    "desc": "需要提醒配置"
+                }
+            }
+        },
+        "q6": {
+            "number": "Q3 / 3",
+            "budget": {
+                "title": "你的项目预算范围？",
+                "desc": "这有助于推荐合适的专家服务"
+            },
+            "complexity": {
+                "title": "你的任务复杂度？",
+                "desc": "这有助于推荐合适的工具"
+            },
+            "options": {
+                "low": {
+                    "title": "预算有限",
+                    "desc": "希望使用免费或低成本方案"
+                },
+                "medium": {
+                    "title": "预算适中",
+                    "desc": "愿意为专业服务付费"
+                },
+                "high": {
+                    "title": "预算充足",
+                    "desc": "质量和安全性优先"
+                }
+            }
+        }
+    },
+    "result": {
+        "title": "安装建议",
+        "securityScore": "安全评分",
+        "score": "分",
+        "actionItems": "建议行动项",
+        "exportBtn": "导出 PDF 报告",
+        "restartBtn": "← 重新评估"
+    },
+    "recommendation": {
+        "claudeCode": "Claude Code - 专注于代码开发、调试和重构",
+        "openclow": "OpenClaw - 专注于网页自动化和任务执行",
+        "expertHelp": "寻求专家帮助",
+        "existingTools": "使用现有工具",
+        "lowBudget": "预算有限",
+        "mediumBudget": "预算适中",
+        "highBudget": "预算充足",
+        "simpleTask": "简单任务",
+        "mediumTask": "中等复杂度",
+        "complexTask": "较复杂任务",
+        "notRecommended": {
+            "title": "不建议使用 - 安全风险过高",
+            "score": "您的安全评分为",
+            "issues": "您的环境配置存在以下问题：",
+            "suggestions": "建议方案：",
+            "option1": "寻求专业安全专家帮助，由专家协助配置安全环境",
+            "option2": "使用网页版 AI 服务（如 Claude Web、ChatGPT 等），避免本地安装",
+            "option3": "先解决上述安全问题后，再考虑使用本地 AI Agent"
+        },
+        "environmentWarning": "警告: 在主力电脑上运行 AI Agent 存在安全风险，请务必按照以下安全建议操作。"
+    },
+    "securityAlerts": {
+        "title": "安全警示板",
+        "config": {
+            "title": "错误配置导致的安全问题",
+            "networkExposure": {
+                "title": "网络接口暴露",
+                "desc": "AI Agent 的 WebSocket 或 API 接口未绑定到本地地址（如 127.0.0.1），可能导致远程代码执行。",
+                "mitigation": "强制绑定到 127.0.0.1，使用防火墙规则限制访问"
+            },
+            "credentialLeak": {
+                "title": "敏感凭证泄露",
+                "desc": "API 密钥、Token 等敏感信息硬编码在代码中或通过环境变量意外暴露。",
+                "mitigation": "使用密钥管理服务，避免在代码中存储凭证"
+            },
+            "excessivePermissions": {
+                "title": "权限过度开放",
+                "desc": "AI Agent 拥有超出任务需求的系统权限，恶意指令可能造成更大损害。",
+                "mitigation": "遵循最小权限原则，限制文件系统和网络访问"
+            }
+        },
+        "supplyChain": {
+            "title": "供应链安全问题",
+            "maliciousPackage": {
+                "title": "恶意安装包",
+                "desc": "伪造的 GitHub 发布页或 npm 包可能包含恶意代码，已有多起开发者密钥被盗事件。",
+                "mitigation": "仅从官方仓库下载，验证 GPG 签名，检查包完整性"
+            },
+            "dependencyAttack": {
+                "title": "依赖链攻击",
+                "desc": "通过入侵开源依赖包或使用过时、带漏洞的依赖来渗透您的系统。",
+                "mitigation": "定期更新依赖，使用依赖安全扫描工具"
+            },
+            "promptInjection": {
+                "title": "提示词注入",
+                "desc": "恶意网页可通过 iframe 嵌入或 CSS 伪装窃取浏览器 Cookie，诱导执行未授权操作。",
+                "mitigation": "使用独立浏览器配置，定期审查会话，限制敏感操作"
+            }
+        },
+        "cognitive": {
+            "title": "错误认知导致的问题",
+            "underestimateRisk": {
+                "title": "低估技术风险",
+                "desc": "非技术背景用户可能低估 AI Agent 的潜在风险，误以为工具\"无风险\"或\"绝对安全\"。",
+                "mitigation": "充分了解 AI Agent 的能力边界，在专业人士指导下使用"
+            },
+            "overtrust": {
+                "title": "过度信任自动化",
+                "desc": "盲目信任 AI Agent 的输出，未验证代码安全性或操作后果。",
+                "mitigation": "始终审查 AI 生成的代码和操作，保留人工审核环节"
+            },
+            "ignorePrivacy": {
+                "title": "忽视数据隐私",
+                "desc": "向 AI Agent 输入敏感业务数据或个人信息，未考虑数据泄露风险。",
+                "mitigation": "避免输入敏感数据，使用本地部署版本或可信云服务"
+            }
+        },
+        "cost": {
+            "title": "成本认知导致的问题",
+            "apiOverrun": {
+                "title": "API 费用失控",
+                "desc": "未设置 API 调用限额，可能因 Prompt 过长、循环调用或恶意使用导致意外高额账单。",
+                "mitigation": "在 API 提供商后台设置每日/每月消费上限"
+            },
+            "hiddenCosts": {
+                "title": "隐性成本忽视",
+                "desc": "忽视学习曲线、调试时间、系统维护等隐性成本。",
+                "mitigation": "评估总拥有成本（TCO），包括培训和维护费用"
+            },
+            "securityIncidents": {
+                "title": "安全事故成本",
+                "desc": "安全事故可能导致数据泄露、业务中断、声誉损失等远超技术本身成本的损失。",
+                "mitigation": "将安全投入纳入预算规划，购买适当的安全保险"
+            }
+        },
+        "owasp": {
+            "title": "OWASP Top 10 2025 参考",
+            "apiSecurity": {
+                "title": "API 安全风险",
+                "desc": "OWASP API Security Top 10 涵盖认证失效、授权失效、过度数据暴露等常见 API 安全问题。"
+            },
+            "accessControl": {
+                "title": "访问控制失效 (A01)",
+                "desc": "已认证用户可执行未经授权的操作，或已认证管理员可访问普通用户功能。"
+            },
+            "cryptoFail": {
+                "title": "加密失败 (A02)",
+                "desc": "敏感数据未加密或使用不安全的加密算法，导致数据泄露风险。"
+            }
+        },
+        "ref": "更多安全参考："
+    },
+    "footer": {
+        "privacy": "🔒 所有数据仅在本地处理，不会上传任何服务器"
+    }
+}

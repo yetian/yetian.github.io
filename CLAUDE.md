@@ -22,16 +22,21 @@ yetian.github.io/
 │   ├── style.css
 │   └── data/
 │       └── dictionary.json       # 汉字字典数据
-└── wxcy/                         # 五行穿衣
-    ├── index.html
+├── wxcy/                         # 五行穿衣
+│   ├── index.html
+│   ├── style.css
+│   ├── app.js
+│   └── data/
+│       ├── lunar-calendar.json   # 阴历数据
+│       ├── five-element.json     # 五行数据
+│       ├── zodiac.json           # 星座数据
+│       ├── blood-type.json       # 血型数据
+│       └── dressing-rules.json   # 穿衣规则
+└── openclaw_suggest/             # AI Agent 安装决策与安全指南
+    ├── index.html                # 中文版
+    ├── index-en.html             # 英文版
     ├── style.css
-    ├── app.js
-    └── data/
-        ├── lunar-calendar.json   # 阴历数据
-        ├── five-element.json     # 五行数据
-        ├── zodiac.json           # 星座数据
-        ├── blood-type.json       # 血型数据
-        └── dressing-rules.json   # 穿衣规则
+    └── script.js                 # 包含 i18n 翻译对象
 ```
 
 ---
@@ -164,6 +169,48 @@ yetian.github.io/
 - `app.js` - 核心逻辑（约950行）
 - `style.css` - 样式（约700行）
 - `data/` - JSON 数据文件
+
+---
+
+### 5. openclaw_suggest - AI Agent 安装决策与安全指南
+
+**功能**：交互式决策树，帮助用户选择合适的 AI Agent 并评估安全风险
+
+**决策树问题**：
+1. Q1 目标：开发 App/写代码 | 自动化操作网页/任务
+2. Q2 实现方式：使用 AI Agent | 寻求专家帮助 | 使用现有工具
+3. 环境（仅 Agent）：主力办公电脑 | 隔离环境
+4. 审计能力（仅 Agent）：具备 | 不具备
+5. 成本（仅 Agent）：已设置 API 限额 | 未设置
+
+**核心功能**：
+- 动态结果生成：根据回答给出安装建议
+- 安全评分系统：0-100 分，根据环境、审计能力、成本控制综合评分
+- 低分警告：评分 < 40 分时建议不使用 AI Agent，改用其他方案
+- 安全警示板：四大分类（错误配置、供应链、错误认知、成本认知）
+- 一键导出 PDF 报告
+
+**UI 设计**：
+- 终端美学深色模式
+- 语言切换支持（中文/英文）
+- 响应式设计，支持移动端
+- 语言切换器位于页面顶部
+
+**文件**：
+- `index.html` - 中文版主页面
+- `index-en.html` - 英文版主页面
+- `style.css` - 终端风格样式
+- `script.js` - 决策树逻辑、导出功能和 i18n 翻译
+
+**i18n 实现**：
+- 翻译对象 `i18n` 定义在 `script.js` 顶部
+- 通过检测 `document.documentElement.lang` 自动判断语言
+- 所有用户可见文本都通过 `i18n` 对象获取，支持中英文切换
+
+**安全评分等级**（2026年更新）：
+- High (高): 80-100 分
+- Medium (中): 40-79 分
+- Low (低): 0-39 分
 
 ---
 

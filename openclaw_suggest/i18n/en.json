@@ -1,0 +1,250 @@
+{
+    "app": {
+        "title": "AI Agent Installation Decision & Security Guide",
+        "subtitle": "Security Assessment Tool"
+    },
+    "progress": {
+        "start": "Start",
+        "result": "Result"
+    },
+    "welcome": {
+        "title": "Welcome to AI Agent Installation Decision Guide",
+        "description": "Answer a few simple questions to help you choose the right AI Agent and assess security risks",
+        "features": {
+            "decisionTree": "Smart Decision Tree",
+            "securityScore": "Security Score",
+            "export": "One-Click Export"
+        },
+        "startBtn": "Start Assessment →"
+    },
+    "questions": {
+        "q1": {
+            "number": "Q1 / 2",
+            "title": "What is your use goal?",
+            "description": "What task do you want to complete with an AI Agent?",
+            "options": {
+                "code": {
+                    "title": "Develop App / Write Code",
+                    "desc": "Write, debug, and refactor code"
+                },
+                "automation": {
+                    "title": "Automate Web Tasks",
+                    "desc": "Fill forms, click buttons, data scraping"
+                }
+            }
+        },
+        "q2": {
+            "number": "Q2 / 2",
+            "title": "How do you want to achieve this goal?",
+            "description": "Different implementation methods have different security requirements",
+            "options": {
+                "agent": {
+                    "title": "Use AI Agent",
+                    "desc": "Claude Code / OpenClaw"
+                },
+                "expert": {
+                    "title": "Seek Expert Help",
+                    "desc": "Hire developer or consultant"
+                },
+                "tools": {
+                    "title": "Use Existing Tools",
+                    "desc": "Zapier / Low-code platforms"
+                }
+            }
+        },
+        "q3": {
+            "number": "Q3 / 5",
+            "title": "What environment will you run it in?",
+            "description": "Environment choice directly affects security assessment results",
+            "options": {
+                "main": {
+                    "title": "Main Work Computer",
+                    "desc": "High risk, requires careful assessment"
+                },
+                "isolated": {
+                    "title": "Isolated Environment",
+                    "desc": "Docker / VM, more secure"
+                }
+            }
+        },
+        "q4": {
+            "number": "Q4 / 5",
+            "title": "Do you have code audit capabilities?",
+            "description": "Understanding script behavior is the foundation of secure usage",
+            "options": {
+                "yes": {
+                    "title": "Yes",
+                    "desc": "Can understand code logic and potential risks"
+                },
+                "no": {
+                    "title": "Not familiar",
+                    "desc": "Need more security measures"
+                }
+            }
+        },
+        "q5": {
+            "number": "Q5 / 5",
+            "title": "Have you set a daily API limit?",
+            "description": "Prevent unexpected billing from overuse",
+            "options": {
+                "yes": {
+                    "title": "Yes",
+                    "desc": "Has daily spending limit protection"
+                },
+                "no": {
+                    "title": "No",
+                    "desc": "Need to configure"
+                }
+            }
+        },
+        "q6": {
+            "number": "Q3 / 3",
+            "budget": {
+                "title": "What is your project budget?",
+                "desc": "This helps recommend suitable expert services"
+            },
+            "complexity": {
+                "title": "What is your task complexity?",
+                "desc": "This helps recommend suitable tools"
+            },
+            "options": {
+                "low": {
+                    "title": "Low Budget",
+                    "desc": "Prefer free or low-cost solutions"
+                },
+                "medium": {
+                    "title": "Medium Budget",
+                    "desc": "Willing to pay for professional services"
+                },
+                "high": {
+                    "title": "High Budget",
+                    "desc": "Quality and security first"
+                }
+            }
+        }
+    },
+    "result": {
+        "title": "Installation Recommendation",
+        "securityScore": "Security Score",
+        "score": "points",
+        "actionItems": "Recommended Actions",
+        "exportBtn": "Export PDF Report",
+        "restartBtn": "← Restart Assessment"
+    },
+    "recommendation": {
+        "claudeCode": "Claude Code - Focus on code development, debugging, and refactoring",
+        "openclow": "OpenClaw - Focus on web automation and task execution",
+        "expertHelp": "Seeking Expert Help",
+        "existingTools": "Using Existing Tools",
+        "lowBudget": "Limited Budget",
+        "mediumBudget": "Medium Budget",
+        "highBudget": "High Budget",
+        "simpleTask": "Simple Task",
+        "mediumTask": "Medium Complexity",
+        "complexTask": "Complex Task",
+        "notRecommended": {
+            "title": "Not Recommended - Security Risk Too High",
+            "score": "Your security score",
+            "issues": "Your configuration has the following issues:",
+            "suggestions": "Recommended approaches:",
+            "option1": "Seek professional security expert help to configure a secure environment",
+            "option2": "Use web-based AI services (like Claude Web, ChatGPT) to avoid local installation",
+            "option3": "Resolve the above security issues before considering local AI Agent"
+        },
+        "environmentWarning": "Warning: Running AI Agent on main work computer poses security risks. Please follow the security recommendations below."
+    },
+    "securityAlerts": {
+        "title": "Security Alert Board",
+        "config": {
+            "title": "Security Issues from Misconfiguration",
+            "networkExposure": {
+                "title": "Network Interface Exposure",
+                "desc": "AI Agent's WebSocket or API not bound to local address (127.0.0.1) may lead to RCE.",
+                "mitigation": "Bind to 127.0.0.1, use firewall rules"
+            },
+            "credentialLeak": {
+                "title": "Sensitive Credential Leak",
+                "desc": "API keys, tokens hardcoded or exposed via environment variables.",
+                "mitigation": "Use secret management services, avoid storing credentials in code"
+            },
+            "excessivePermissions": {
+                "title": "Excessive Permissions",
+                "desc": "AI Agent has more system permissions than needed.",
+                "mitigation": "Follow least privilege principle, limit file system and network access"
+            }
+        },
+        "supplyChain": {
+            "title": "Supply Chain Security Issues",
+            "maliciousPackage": {
+                "title": "Malicious Packages",
+                "desc": "Fake GitHub releases or npm packages may contain malicious code.",
+                "mitigation": "Download only from official repos, verify GPG signatures"
+            },
+            "dependencyAttack": {
+                "title": "Dependency Chain Attack",
+                "desc": "Compromised open-source packages or outdated dependencies.",
+                "mitigation": "Update dependencies regularly, use security scanning tools"
+            },
+            "promptInjection": {
+                "title": "Prompt Injection",
+                "desc": "Malicious websites can steal cookies via iframe or CSS spoofing.",
+                "mitigation": "Use separate browser profile, review sessions regularly"
+            }
+        },
+        "cognitive": {
+            "title": "Issues from Misconceptions",
+            "underestimateRisk": {
+                "title": "Underestimating Technical Risk",
+                "desc": "Non-technical users may underestimate AI Agent risks.",
+                "mitigation": "Understand AI Agent capabilities, use under professional guidance"
+            },
+            "overtrust": {
+                "title": "Over-trusting Automation",
+                "desc": "Blindly trusting AI output without verifying security.",
+                "mitigation": "Always review AI-generated code and operations"
+            },
+            "ignorePrivacy": {
+                "title": "Ignoring Data Privacy",
+                "desc": "Entering sensitive business data without considering risks.",
+                "mitigation": "Avoid entering sensitive data, use local deployment"
+            }
+        },
+        "cost": {
+            "title": "Cost-Related Issues",
+            "apiOverrun": {
+                "title": "API Cost Overrun",
+                "desc": "No API limit set may lead to unexpected high bills.",
+                "mitigation": "Set daily/monthly spending limits in API provider console"
+            },
+            "hiddenCosts": {
+                "title": "Ignoring Hidden Costs",
+                "desc": "Overlooking learning curve, debugging time, maintenance costs.",
+                "mitigation": "Evaluate total cost of ownership (TCO)"
+            },
+            "securityIncidents": {
+                "title": "Security Incident Costs",
+                "desc": "Incidents may cause data leaks, business interruption, reputation damage.",
+                "mitigation": "Include security in budget planning, buy insurance"
+            }
+        },
+        "owasp": {
+            "title": "OWASP Top 10 2025 Reference",
+            "apiSecurity": {
+                "title": "API Security Risks",
+                "desc": "OWASP API Security Top 10 covers broken authentication, authorization, data exposure."
+            },
+            "accessControl": {
+                "title": "Access Control Failure (A01)",
+                "desc": "Authenticated users can perform unauthorized actions."
+            },
+            "cryptoFail": {
+                "title": "Cryptographic Failures (A02)",
+                "desc": "Sensitive data not encrypted or using weak algorithms."
+            }
+        },
+        "ref": "More references: "
+    },
+    "footer": {
+        "privacy": "🔒 All data processed locally, never uploaded to any server"
+    }
+}
