@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoDrive - 地图赛车</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Mobile warning -->
+    <div class="mobile-warning" id="mobile-warning">
+        <h2>请使用电脑体验</h2>
+        <p>GeoDrive 在电脑上体验更佳</p>
+    </div>
+
+    <div id="map"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>位置导航</h3>
+            <button class="sidebar-close" id="sidebar-close">&times;</button>
+        </div>
+
+        <div class="sidebar-section">
+            <label>定位到</label>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="搜索地点...">
+                <button class="btn-search" id="btn-search">搜索</button>
+            </div>
+            <div class="search-results" id="search-results"></div>
+        </div>
+
+        <div class="sidebar-section">
+            <label>导航</label>
+            <div class="nav-inputs">
+                <input type="text" id="nav-from" placeholder="起点（可选，当前位置）">
+                <input type="text" id="nav-to" placeholder="终点">
+            </div>
+            <button class="btn-nav" id="btn-navigate">开始导航</button>
+            <button class="btn-cancel" id="btn-cancel-nav" style="display:none;">取消导航</button>
+            <div class="nav-info" id="nav-info"></div>
+        </div>
+
+        <div class="sidebar-section">
+            <button class="btn-locate" id="btn-gps">使用GPS定位</button>
+        </div>
+    </div>
+
+    <!-- Sidebar toggle button -->
+    <button class="sidebar-toggle" id="sidebar-toggle">&#9776;</button>
+
+    <!-- Right Sidebar - Settings -->
+    <div class="sidebar right" id="settings-sidebar">
+        <div class="sidebar-header">
+            <h3>车辆配置</h3>
+            <button class="sidebar-close" id="settings-close">&times;</button>
+        </div>
+
+        <div class="sidebar-section">
+            <label>最大速度 (km/h)</label>
+            <input type="range" id="config-maxSpeed" min="50" max="500" value="300">
+            <span class="config-value" id="val-maxSpeed">300</span>
+        </div>
+
+        <div class="sidebar-section">
+            <label>倒车速度 (km/h)</label>
+            <input type="range" id="config-maxReverse" min="10" max="50" value="20">
+            <span class="config-value" id="val-maxReverse">20</span>
+        </div>
+
+        <div class="sidebar-section">
+            <label>加速度</label>
+            <input type="range" id="config-acceleration" min="10" max="200" value="30">
+            <span class="config-value" id="val-acceleration">30</span>
+        </div>
+
+        <div class="sidebar-section">
+            <label>转向速度</label>
+            <input type="range" id="config-turnSpeed" min="0.5" max="5" step="0.1" value="1.5">
+            <span class="config-value" id="val-turnSpeed">1.5</span>
+        </div>
+
+        <div class="sidebar-section">
+            <label>摩擦力</label>
+            <input type="range" id="config-friction" min="0.9" max="0.99" step="0.01" value="0.98">
+            <span class="config-value" id="val-friction">0.98</span>
+        </div>
+
+        <div class="sidebar-section">
+            <label>视觉缩放</label>
+            <input type="range" id="config-visualScale" min="0.5" max="10" step="0.1" value="3">
+            <span class="config-value" id="val-visualScale">3</span>
+        </div>
+
+        <div class="sidebar-section">
+            <label>缩放级别</label>
+            <input type="range" id="config-zoom" min="15" max="22" step="0.5" value="20">
+            <span class="config-value" id="val-zoom">20</span>
+        </div>
+
+        <div class="sidebar-section">
+            <label>视角倾斜</label>
+            <input type="range" id="config-pitch" min="0" max="120" value="100">
+            <span class="config-value" id="val-pitch">100</span>
+        </div>
+
+        <div class="sidebar-buttons">
+            <button class="btn-save" id="btn-save-config">保存配置</button>
+            <button class="btn-restore" id="btn-restore-config">恢复默认</button>
+            <button class="btn-delete" id="btn-delete-config">删除配置</button>
+        </div>
+
+        <div class="config-status" id="config-status"></div>
+    </div>
+
+    <!-- Settings toggle button -->
+    <button class="sidebar-toggle right" id="settings-toggle">&#9881;</button>
+
+    <!-- Car marker at center -->
+    <div class="car-marker" id="car-marker">
+        <div class="car-body">
+            <div class="car-windshield"></div>
+            <div class="car-headlight left"></div>
+            <div class="car-headlight right"></div>
+        </div>
+    </div>
+
+    <div id="ui">
+        <div class="speed-display">
+            <span id="speed">0</span>
+        </div>
+
+        <div class="hint">
+            W/↑ 加速 | S/↓ 倒车 | A/← 左转 | D/→ 右转 | +/- 缩放
+        </div>
+
+
+        <!-- Mobile touch controls (visible on touch devices) -->
+        <div class="controls" id="mobile-controls">
+            <button class="btn left" id="btn-left">⬅</button>
+            <button class="btn accel" id="btn-accel">⬆</button>
+            <button class="btn right" id="btn-right">➡</button>
+            <button class="btn brake" id="btn-brake">⬇</button>
+            <button class="btn" id="btn-zoom-in">+</button>
+            <button class="btn" id="btn-zoom-out">-</button>
+        </div>
+    </div>
+
+    <div id="loading">加载中...</div>
+
+    <!-- Load MapLibre and main.js -->
+    <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

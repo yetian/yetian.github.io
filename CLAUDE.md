@@ -3,6 +3,14 @@
 ## 项目概述
 这是一个个人 GitHub Pages 网站（yetian.github.io），包含多个小项目。网站支持中英文双语切换。
 
+### 主页设计
+- 现代化炫酷 UI 设计
+- 动态渐变背景 + 浮动粒子动画
+- 玻璃态效果卡片
+- 悬停彩色边框动画
+- 交错入场动画
+- 响应式设计
+
 ## 完整项目结构
 ```
 yetian.github.io/
@@ -32,11 +40,15 @@ yetian.github.io/
 │       ├── zodiac.json           # 星座数据
 │       ├── blood-type.json       # 血型数据
 │       └── dressing-rules.json   # 穿衣规则
-└── openclaw_suggest/             # AI Agent 安装决策与安全指南
-    ├── index.html                # 中文版
-    ├── index-en.html             # 英文版
-    ├── style.css
-    └── script.js                 # 包含 i18n 翻译对象
+├── openclaw_suggest/             # AI Agent 安装决策与安全指南
+│   ├── index.html                # 中文版
+│   ├── index-en.html             # 英文版
+│   ├── style.css
+│   └── script.js                 # 包含 i18n 翻译对象
+└── geodrive/                     # 3D 地图赛车游戏
+    ├── index.html
+    ├── main.js
+    └── style.css
 ```
 
 ---
@@ -214,6 +226,39 @@ yetian.github.io/
 
 ---
 
+### 6. geodrive - 3D 地图赛车游戏
+
+**功能**：在真实世界地图上驾驶赛车的 3D 游戏
+
+**功能特点**：
+- 真实地图驾驶体验（使用 MapLibre GL JS）
+- 浏览器 GPS 定位支持
+- 地点搜索（Nominatim API）
+- 道路导航（OSRM API）
+- 左右两侧浮动侧栏（搜索导航 + 车辆配置）
+- 车辆参数可配置并保存到 localStorage
+- 输入时自动禁用 WASD 控制
+
+**配置项**：
+- 最大速度、倒车速度
+- 加速度、转向速度、摩擦力
+- 视觉缩放比例
+- 缩放级别、视角倾斜
+
+**文件**：
+- `index.html` - 游戏页面
+- `main.js` - 核心逻辑
+- `style.css` - 样式
+
+**技术栈**：
+- Vanilla JS（原生脚本）
+- MapLibre GL JS（地图引擎）
+- Nominatim（地点搜索）
+- OSRM（道路规划）
+- OpenFreeMap（免费地图源）
+
+---
+
 ## 技术栈
 
 - 纯 HTML + CSS + JavaScript（无框架）
@@ -221,6 +266,11 @@ yetian.github.io/
 - 无后端服务
 - CDN 库：
   - HanziWriter（汉字学习）
+  - MapLibre GL JS（地图引擎）
+- 免费 API：
+  - Nominatim（地点搜索）
+  - OSRM（道路规划）
+  - OpenFreeMap（地图瓦片）
   - 无需 token 的开源库
 
 ## 用户偏好
@@ -229,6 +279,8 @@ yetian.github.io/
 - 不使用 API，所有计算本地完成
 - 喜欢详细的 UI 反馈和动效
 - 注重隐私，数据存储在本地浏览器
+- 喜欢现代化、炫酷的 UI 设计
+- 标签：全栈开发、产品安全与合规、UI/UX、开源爱好者
 
 ## 常用命令
 
