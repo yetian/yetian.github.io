@@ -49,6 +49,18 @@ yetian.github.io/
     ├── index.html
     ├── main.js
     └── style.css
+└── calcgen/                      # 算术题目生成器
+    ├── index.html
+    ├── style.css
+    └── script.js
+└── transformer/                  # Transformer 可视化
+    ├── index.html
+    ├── style.css
+    └── script.js
+└── mdeditor/                     # Markdown 编辑器
+    ├── index.html
+    ├── style.css
+    └── script.js
 ```
 
 ---
@@ -259,6 +271,107 @@ yetian.github.io/
 
 ---
 
+### 7. calcgen - 算术题目生成器
+
+**功能**：生成可打印的小学生数学练习题
+
+**输入设置**：
+- 数字范围（起始数字和终止数字）
+- 计算方法（加法、减法、乘法、除法，可多选）
+- 题目数量（1-100）
+- 每行题目数（1-10）
+- 计算方式（行计算 / 竖式计算）
+
+**核心功能**：
+- 随机生成加减乘除题目
+- 减法确保结果非负
+- 乘法限制范围（1-12，乘法口诀）
+- 除法确保整除
+- 实时预览
+- A4 打印支持
+
+**UI 设计**：
+- 液态玻璃效果（Glassmorphism）
+- 动态渐变背景 + 浮动 orb 动画
+- 响应式设计
+- 打印样式优化
+
+**文件**：
+- `index.html` - 主页面
+- `style.css` - 液态玻璃样式
+- `script.js` - 生成逻辑和打印功能
+
+---
+
+### 8. transformer - Transformer 可视化
+
+**功能**：交互式可视化展示Transformer架构原理
+
+**输入**：文本（最多100字）
+
+**可视化视图**：
+- 神经元视图：展示 Q/K 向量如何计算注意力
+- 注意力矩阵：热力图展示权重分布
+- 连接图：可视化 Token 间注意力关系
+- 全局视图：所有层和头的鸟瞰图
+
+**技术特点**：
+- Three.js 3D粒子背景
+- 多头注意力可视化（8种不同模式）
+- 详细解释每个计算步骤
+- 液态玻璃效果 UI
+
+**文件**：
+- `index.html` - 主页面
+- `style.css` - 样式
+- `script.js` - 可视化逻辑
+
+---
+
+### 9. mdeditor - Markdown 编辑器
+
+**功能**：简洁优雅的 Markdown 编辑器
+
+**功能特点**：
+- 实时预览（分屏/仅编辑/仅预览）
+- 工具栏快捷操作（标题、加粗、斜体、链接等）
+- 代码语法高亮（highlight.js）
+- 数学公式支持（KaTeX，支持 $...$ 和 $$...$$ 语法）
+- 自动保存到 localStorage
+- 多格式导出（.md / .html / .txt）
+- 行号显示
+- 字符/词/行统计
+- 可拖动分割线
+
+**UI 设计**：
+- **Liquid Glass 风格**：Apple 液态玻璃设计语言
+  - 半透明背景 + 模糊效果（backdrop-filter: blur）
+  - 渐变边框和内部阴影
+  - 浮动光球背景动画
+- **视图切换动画**：
+  - 滑动指示器效果，点击时平滑滑动到目标按钮
+  - 面板展开/收缩动画（scale + opacity）
+- **紧凑工具栏**：紧凑的按钮设计，视图切换位于主工具栏
+- **面板头部统一高度**：编辑器和预览面板头部均为 46px
+- **响应式布局**：适配移动端
+
+**快捷键**：
+- Ctrl+S：保存
+- Ctrl+B：加粗
+- Ctrl+I：斜体
+
+**文件**：
+- `index.html` - 主页面
+- `style.css` - Liquid Glass 样式
+- `script.js` - 编辑器逻辑
+
+**CDN 依赖**：
+- marked.js - Markdown 解析
+- highlight.js - 代码高亮
+- KaTeX - 数学公式渲染
+
+---
+
 ## 技术栈
 
 - 纯 HTML + CSS + JavaScript（无框架）
@@ -267,6 +380,10 @@ yetian.github.io/
 - CDN 库：
   - HanziWriter（汉字学习）
   - MapLibre GL JS（地图引擎）
+  - marked.js（Markdown 解析）
+  - highlight.js（代码高亮）
+  - KaTeX（数学公式渲染）
+  - Three.js（3D 动画）
 - 免费 API：
   - Nominatim（地点搜索）
   - OSRM（道路规划）

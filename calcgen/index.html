@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>算术题目生成器 - CalcGen</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 动态背景 -->
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <!-- 标题 -->
+        <header class="header">
+            <h1>算术题目生成器</h1>
+            <p class="subtitle">生成可打印的数学练习题</p>
+        </header>
+
+        <!-- 设置面板 -->
+        <div class="glass-panel settings-panel">
+            <h2>题目设置</h2>
+
+            <div class="form-grid">
+                <!-- 数字范围 -->
+                <div class="form-group">
+                    <label>数字范围</label>
+                    <div class="range-inputs">
+                        <input type="number" id="minNum" value="1" min="0" max="9999">
+                        <span>至</span>
+                        <input type="number" id="maxNum" value="1000" min="1" max="9999">
+                    </div>
+                </div>
+
+                <!-- 计算方法 -->
+                <div class="form-group">
+                    <label>计算方法</label>
+                    <div class="checkbox-row">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="opAdd" checked>
+                            <span class="checkmark"></span>
+                            加法 (+)
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="opSub" checked>
+                            <span class="checkmark"></span>
+                            减法 (-)
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="opMul">
+                            <span class="checkmark"></span>
+                            乘法 (×)
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 题目数量 -->
+                <div class="form-group">
+                    <label for="questionCount">题目数量</label>
+                    <input type="number" id="questionCount" value="20" min="1" max="100">
+                </div>
+
+                <!-- 每行题目数 -->
+                <div class="form-group">
+                    <label for="perRow">每行题目数</label>
+                    <input type="number" id="perRow" value="4" min="1" max="6">
+                </div>
+
+                <!-- 计算方式 -->
+                <div class="form-group full-width">
+                    <label>计算方式</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="calcType" value="inline" checked>
+                            <span class="radio-mark"></span>
+                            行式计算
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="calcType" value="vertical">
+                            <span class="radio-mark"></span>
+                            竖式计算
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 生成按钮 -->
+            <div class="button-group">
+                <button class="btn btn-primary" id="generateBtn">
+                    <span class="btn-icon">✨</span>
+                    生成题目
+                </button>
+                <button class="btn btn-secondary" id="printBtn">
+                    <span class="btn-icon">🖨️</span>
+                    打印题目
+                </button>
+            </div>
+        </div>
+
+        <!-- 预览面板 -->
+        <div class="glass-panel preview-panel">
+            <h2>题目预览</h2>
+            <div id="previewArea" class="preview-area">
+                <p class="placeholder">点击"生成题目"查看预览</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 打印样式 -->
+    <div id="printArea" class="print-area"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

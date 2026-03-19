@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformer 可视化</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- 3D Canvas背景 -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 标题 -->
+        <header class="header">
+            <h1>Transformer 可视化</h1>
+            <p class="subtitle">The Illustrated Transformer - 交互式学习</p>
+        </header>
+
+        <!-- 输入区域 -->
+        <div class="glass-panel input-panel" id="inputPanel">
+            <div class="input-header">
+                <div class="input-icon">🧠</div>
+                <div class="input-header-text">
+                    <h3>输入文本</h3>
+                    <p class="input-hint">观察 Transformer 如何处理每个词</p>
+                </div>
+            </div>
+            <div class="input-wrapper">
+                <textarea
+                    id="textInput"
+                    placeholder="输入任意文本，开始探索 Transformer 的工作原理..."
+                    maxlength="100"
+                    rows="2"
+                ></textarea>
+                <div class="char-count">
+                    <span id="charCount">0</span>/100
+                </div>
+            </div>
+            <div class="input-footer">
+                <div class="example-texts">
+                    <button class="example-btn" data-text="The animal didn't cross the street because it was too tired">示例1: 动物句子</button>
+                    <button class="example-btn" data-text="I love transformers">示例2: 简单句</button>
+                    <button class="example-btn" data-text="注意力机制是深度学习的核心">示例3: 中文</button>
+                </div>
+                <button class="btn btn-start" id="startBtn">
+                    <span class="btn-icon">▶</span>
+                    开始可视化
+                </button>
+            </div>
+        </div>
+
+        <!-- 可视化区域 -->
+        <div class="visualization-area" id="visualizationArea">
+            <!-- 步骤进度指示器 -->
+            <div class="progress-steps glass-panel" id="progressSteps">
+                <div class="step active" data-step="0"><div class="step-dot"></div><span>输入</span></div>
+                <div class="step" data-step="1"><div class="step-dot"></div><span>Embedding</span></div>
+                <div class="step" data-step="2"><div class="step-dot"></div><span>位置编码</span></div>
+                <div class="step" data-step="3"><div class="step-dot"></div><span>自注意力</span></div>
+                <div class="step" data-step="4"><div class="step-dot"></div><span>多头注意力</span></div>
+                <div class="step" data-step="5"><div class="step-dot"></div><span>前馈网络</span></div>
+                <div class="step" data-step="6"><div class="step-dot"></div><span>输出</span></div>
+            </div>
+
+            <!-- 阶段解释面板 -->
+            <div class="stage-explanation glass-panel" id="stageExplanation">
+                <div class="explanation-header">
+                    <h3 id="stageTitle">输入编码</h3>
+                    <span class="stage-badge" id="stageBadge">Step 1/7</span>
+                </div>
+                <p id="stageDesc">等待输入文本...</p>
+                <div class="explanation-details" id="stageDetails"></div>
+                <div class="formula-display" id="formulaDisplay"></div>
+            </div>
+
+            <!-- 主可视化区域 -->
+            <div class="viz-main">
+                <!-- 左侧：Token 处理流程 -->
+                <div class="left-panel">
+                    <div class="token-flow glass-panel" id="tokenFlow">
+                        <div class="panel-header">
+                            <div class="flow-title">Token 表示</div>
+                        </div>
+                        <div class="flow-container" id="flowContainer"></div>
+                    </div>
+                    <div class="vector-viz glass-panel" id="vectorViz">
+                        <div class="panel-header">
+                            <div class="viz-title">向量表示</div>
+                        </div>
+                        <div class="vector-display" id="vectorDisplay">
+                            <div class="vector-placeholder">悬停 Token 查看向量</div>
+                        </div>
+                        <div class="vector-legend">
+                            <div class="vector-legend-item">
+                                <span class="vector-legend-color" style="background: hsl(240, 80%, 50%);"></span>
+                                <span>蓝色 = 负值 (-1)</span>
+                            </div>
+                            <div class="vector-legend-item">
+                                <span class="vector-legend-color" style="background: hsl(120, 80%, 50%);"></span>
+                                <span>绿色 = 接近零 (0)</span>
+                            </div>
+                            <div class="vector-legend-item">
+                                <span class="vector-legend-color" style="background: hsl(0, 80%, 50%);"></span>
+                                <span>红色 = 正值 (+1)</span>
+                            </div>
+                        </div>
+                        <div class="vector-explanation">
+                            <p><strong>每个小方块</strong>代表向量的一维。颜色表示该维度的数值大小。悬停方块可查看精确值。</p>
+                            <p>这些数值决定了词语在语义空间中的"位置"，相似的词有相似的向量。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右侧：注意力可视化 -->
+                <div class="right-panel">
+                    <div class="attention-viz glass-panel" id="attentionViz">
+                        <div class="panel-header">
+                            <div class="viz-title">自注意力可视化</div>
+                        </div>
+                        <div class="viz-tabs">
+                            <button class="tab-btn active" data-view="neuron">神经元视图</button>
+                            <button class="tab-btn" data-view="matrix">注意力矩阵</button>
+                            <button class="tab-btn" data-view="graph">连接图</button>
+                            <button class="tab-btn" data-view="model">全局视图</button>
+                        </div>
+                        <div class="viz-content">
+                            <!-- 神经元视图 -->
+                            <div class="view-panel active" id="neuronView">
+                                <div class="neuron-container">
+                                    <div class="neuron-header">
+                                        <span>展示 Query/Key 向量如何计算注意力分数</span>
+                                    </div>
+                                    <div class="neuron-explanation">
+                                        <div class="explanation-block">
+                                            <h4>什么是 Query、Key、Value？</h4>
+                                            <p>类比：在图书馆找书</p>
+                                            <ul>
+                                                <li><strong>Query (Q)</strong>：你的需求 - "我想找关于XX的书"</li>
+                                                <li><strong>Key (K)</strong>：书架标签 - 每本书的分类标签</li>
+                                                <li><strong>Value (V)</strong>：书的内容 - 你最终获取的信息</li>
+                                            </ul>
+                                            <p>当 Query 和 Key 匹配度高时，对应的 Value 就更重要。</p>
+                                        </div>
+                                    </div>
+                                    <div class="neuron-selectors">
+                                        <div class="selector-group">
+                                            <label>Query Token (查询)</label>
+                                            <select id="queryTokenSelect"></select>
+                                        </div>
+                                        <div class="selector-group">
+                                            <label>Key Token (键)</label>
+                                            <select id="keyTokenSelect"></select>
+                                        </div>
+                                        <div class="selector-group">
+                                            <label>Head</label>
+                                            <select id="headSelect"></select>
+                                        </div>
+                                    </div>
+                                    <div class="neuron-viz">
+                                        <div class="neuron-column">
+                                            <div class="neuron-title q-title">Query (Q)</div>
+                                            <div class="neuron-bars-wrap">
+                                                <div class="neuron-bars" id="queryBars"></div>
+                                                <div class="neuron-axis">
+                                                    <span>-1</span><span>0</span><span>+1</span>
+                                                </div>
+                                            </div>
+                                            <div class="neuron-desc">当前词的"查询向量"</div>
+                                        </div>
+                                        <div class="neuron-column">
+                                            <div class="neuron-title k-title">Key (K)</div>
+                                            <div class="neuron-bars-wrap">
+                                                <div class="neuron-bars" id="keyBars"></div>
+                                                <div class="neuron-axis">
+                                                    <span>-1</span><span>0</span><span>+1</span>
+                                                </div>
+                                            </div>
+                                            <div class="neuron-desc">目标词的"键向量"</div>
+                                        </div>
+                                        <div class="neuron-column product-column">
+                                            <div class="neuron-title">Q×K</div>
+                                            <div class="neuron-bars-wrap">
+                                                <div class="neuron-bars" id="productBars"></div>
+                                                <div class="neuron-axis">
+                                                    <span>负</span><span>0</span><span>正</span>
+                                                </div>
+                                            </div>
+                                            <div class="neuron-desc">逐元素相乘</div>
+                                        </div>
+                                    </div>
+                                    <div class="calculation-steps">
+                                        <div class="calc-step">
+                                            <span class="step-num">1</span>
+                                            <div class="step-content">
+                                                <strong>点积计算</strong>
+                                                <code>score = Σ(Q[i] × K[i])</code>
+                                                <span class="step-result" id="dotProductValue">0.00</span>
+                                            </div>
+                                        </div>
+                                        <div class="calc-step">
+                                            <span class="step-num">2</span>
+                                            <div class="step-content">
+                                                <strong>缩放</strong>
+                                                <code>score / √d<sub>k</sub> = score / 8</code>
+                                                <span class="step-result" id="scaledValue">0.00</span>
+                                            </div>
+                                        </div>
+                                        <div class="calc-step">
+                                            <span class="step-num">3</span>
+                                            <div class="step-content">
+                                                <strong>Softmax 归一化</strong>
+                                                <code>exp(score) / Σ exp(所有)</code>
+                                                <span class="step-result highlight" id="attentionScore">0.000</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 矩阵视图 -->
+                            <div class="view-panel" id="matrixView">
+                                <div class="matrix-explanation">
+                                    <h4>注意力矩阵解读</h4>
+                                    <ul>
+                                        <li><strong>行 (i)</strong>：第 i 个词"看向"其他词的程度</li>
+                                        <li><strong>列 (j)</strong>：第 j 个词被其他词关注的程度</li>
+                                        <li><strong>颜色亮度</strong>：注意力权重越高，颜色越亮</li>
+                                        <li><strong>对角线</strong>：词对自身的注意力（通常较高）</li>
+                                    </ul>
+                                    <p class="matrix-tip">💡 点击左侧 Token 高亮它在矩阵中的行和列</p>
+                                </div>
+                                <div class="viz-legend">
+                                    <span class="legend-item"><span class="legend-color low"></span>低 (0.0)</span>
+                                    <span class="legend-item"><span class="legend-color high"></span>高 (1.0)</span>
+                                </div>
+                                <canvas id="attentionCanvas"></canvas>
+                                <div class="matrix-labels" id="matrixLabels"></div>
+                            </div>
+                            <!-- 图视图 -->
+                            <div class="view-panel" id="graphView">
+                                <div class="graph-explanation">
+                                    <h4>注意力连接图</h4>
+                                    <p>圆圈代表 Token，连线代表注意力关系。</p>
+                                    <ul>
+                                        <li><strong>线条粗细</strong>：注意力权重越大，线越粗</li>
+                                        <li><strong>颜色</strong>：高亮当前关注的连接</li>
+                                        <li><strong>方向</strong>：从 Query 指向 Key</li>
+                                    </ul>
+                                </div>
+                                <svg id="attentionGraph"></svg>
+                            </div>
+                            <!-- 全局视图 -->
+                            <div class="view-panel" id="modelView">
+                                <div class="model-container">
+                                    <div class="model-explanation">
+                                        <h4>为什么需要多层多头？</h4>
+                                        <div class="explanation-grid">
+                                            <div class="exp-item">
+                                                <strong>多层 (Layer)</strong>
+                                                <p>每层学习不同层次的抽象。底层学习语法，高层学习语义。</p>
+                                            </div>
+                                            <div class="exp-item">
+                                                <strong>多头 (Head)</strong>
+                                                <p>每个头关注不同类型的关系：语法、指代、位置等。</p>
+                                            </div>
+                                        </div>
+                                        <p class="model-tip">💡 点击任意小方块查看该层该头的详细注意力</p>
+                                    </div>
+                                    <div class="model-header">所有层和注意力头的鸟瞰图</div>
+                                    <div class="model-grid" id="modelGrid"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 多头注意力可视化 -->
+            <div class="multihead-viz glass-panel" id="multiheadViz">
+                <h3>多头注意力 (8 heads)</h3>
+                <div class="multihead-explanation">
+                    <p><strong>为什么要"多头"？</strong> 就像用多只眼睛看世界，每只眼睛关注不同方面。</p>
+                    <div class="head-examples">
+                        <div class="head-example">
+                            <span class="head-tag" style="background: rgba(255, 107, 107, 0.3);">局部注意力</span>
+                            <p>关注相邻词语，捕获短语结构</p>
+                        </div>
+                        <div class="head-example">
+                            <span class="head-tag" style="background: rgba(78, 205, 196, 0.3);">全局注意力</span>
+                            <p>均匀关注所有词，理解整体语义</p>
+                        </div>
+                        <div class="head-example">
+                            <span class="head-tag" style="background: rgba(168, 85, 247, 0.3);">前向注意力</span>
+                            <p>关注前面的词，适合因果推理</p>
+                        </div>
+                    </div>
+                    <p class="multihead-tip">💡 点击下方的头查看该头的注意力模式</p>
+                </div>
+                <div class="heads-container" id="headsContainer"></div>
+            </div>
+
+            <!-- 底部信息面板 -->
+            <div class="info-bar glass-panel">
+                <div class="info-item">
+                    <span class="info-label">Tokens</span>
+                    <span class="info-value" id="tokenCount">0</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">d<sub>model</sub></span>
+                    <span class="info-value">512</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Heads</span>
+                    <span class="info-value">8</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Layers</span>
+                    <span class="info-value">6</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">阶段</span>
+                    <span class="info-value" id="currentStage">准备就绪</span>
+                </div>
+                <button class="btn btn-reset" id="resetBtn">重新开始</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
