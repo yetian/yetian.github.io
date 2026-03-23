@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>威胁建模工具 | Threat Modeling Workshop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="grid-pattern"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="M12 8v4M12 16h.01"/>
+                </svg>
+            </div>
+            <h1>威胁建模工作坊</h1>
+            <p class="subtitle">4-Question Framework for Security</p>
+            <div class="lang-toggle">
+                <button class="lang-btn active" data-lang="zh">中文</button>
+                <button class="lang-btn" data-lang="en">English</button>
+            </div>
+        </header>
+
+        <main>
+            <!-- Progress Steps -->
+            <div class="steps">
+                <div class="step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <span class="step-title">我们在构建什么？</span>
+                        <span class="step-subtitle">What are we building?</span>
+                    </div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <span class="step-title">什么地方会出错？</span>
+                        <span class="step-subtitle">What can go wrong?</span>
+                    </div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <span class="step-title">我们要怎么做？</span>
+                        <span class="step-subtitle">What are we going to do?</span>
+                    </div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step" data-step="4">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <span class="step-title">我们做得怎么样？</span>
+                        <span class="step-subtitle">Did we do a good job?</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 1: What are we building? -->
+            <div class="panel active" id="step1">
+                <div class="panel-header">
+                    <h2>📦 系统概述</h2>
+                    <p>描述你要构建的系统、组件和数据流</p>
+                </div>
+
+                <div class="form-section">
+                    <label>项目/系统名称</label>
+                    <input type="text" id="projectName" placeholder="例如：用户认证系统">
+                </div>
+
+                <div class="form-section">
+                    <label>系统描述</label>
+                    <textarea id="systemDescription" placeholder="简要描述系统的功能、用途和目标用户..."></textarea>
+                </div>
+
+                <div class="form-section">
+                    <label>核心组件（每行一个）</label>
+                    <textarea id="components" placeholder="例如：
+- Web前端（React）
+- API网关
+- 用户服务
+- 数据库（PostgreSQL）
+- 缓存（Redis）"></textarea>
+                </div>
+
+                <div class="form-section">
+                    <label>数据流描述</label>
+                    <textarea id="dataFlow" placeholder="描述数据如何在系统中流动，例如：用户 -> 前端 -> API -> 数据库"></textarea>
+                </div>
+
+                <div class="form-section">
+                    <label>信任边界</label>
+                    <textarea id="trustBoundaries" placeholder="列出系统的信任边界，例如：
+- 互联网与内网之间
+- 用户设备与服务器之间
+- 不同服务之间"></textarea>
+                </div>
+
+                <div class="diagram-tip">
+                    <p>💡 提示：可以使用 <a href="https://app.diagrams.net/" target="_blank">draw.io</a> 或 <a href="https://www.lucidchart.com/" target="_blank">Lucid Chart</a> 等工具绘制数据流图</p>
+                </div>
+
+                <div class="actions">
+                    <button class="btn primary" id="step1Next">下一步 →</button>
+                </div>
+            </div>
+
+            <!-- Step 2: What can go wrong? -->
+            <div class="panel" id="step2">
+                <div class="panel-header">
+                    <h2>🔍 威胁识别</h2>
+                    <p>使用 STRIDE 模型识别潜在威胁</p>
+                </div>
+
+                <div class="stride-guide">
+                    <div class="stride-card" data-type="spoofing">
+                        <span class="stride-icon">🎭</span>
+                        <h4>Spoofing</h4>
+                        <p>欺骗 - 伪装成他人</p>
+                    </div>
+                    <div class="stride-card" data-type="tampering">
+                        <span class="stride-icon">🔧</span>
+                        <h4>Tampering</h4>
+                        <p>篡改 - 修改数据</p>
+                    </div>
+                    <div class="stride-card" data-type="repudiation">
+                        <span class="stride-icon">📝</span>
+                        <h4>Repudiation</h4>
+                        <p>抵赖 - 否认行为</p>
+                    </div>
+                    <div class="stride-card" data-type="informationDisclosure">
+                        <span class="stride-icon">👁️</span>
+                        <h4>Info Disclosure</h4>
+                        <p>信息泄露</p>
+                    </div>
+                    <div class="stride-card" data-type="denialOfService">
+                        <span class="stride-icon">🛑</span>
+                        <h4>DoS</h4>
+                        <p>拒绝服务</p>
+                    </div>
+                    <div class="stride-card" data-type="elevationOfPrivilege">
+                        <span class="stride-icon">⬆️</span>
+                        <h4>Elevation</h4>
+                        <p>权限提升</p>
+                    </div>
+                </div>
+
+                <div class="threat-list" id="threatList">
+                    <!-- Threats will be added here -->
+                </div>
+
+                <div class="add-threat-form">
+                    <h3>➕ 添加新威胁</h3>
+                    <div class="threat-form-row">
+                        <select id="threatType">
+                            <option value="spoofing">Spoofing (欺骗)</option>
+                            <option value="tampering">Tampering (篡改)</option>
+                            <option value="repudiation">Repudiation (抵赖)</option>
+                            <option value="informationDisclosure">Info Disclosure (信息泄露)</option>
+                            <option value="denialOfService">DoS (拒绝服务)</option>
+                            <option value="elevationOfPrivilege">Elevation (权限提升)</option>
+                        </select>
+                        <input type="text" id="threatTitle" placeholder="威胁标题">
+                    </div>
+                    <textarea id="threatDescription" placeholder="详细描述这个威胁..."></textarea>
+                    <input type="text" id="threatAffectedComponent" placeholder="受影响的组件">
+                    <button class="btn secondary" id="addThreat">添加威胁</button>
+                </div>
+
+                <div class="actions">
+                    <button class="btn secondary" id="step2Prev">← 上一步</button>
+                    <button class="btn primary" id="step2Next">下一步 →</button>
+                </div>
+            </div>
+
+            <!-- Step 3: What are we going to do? -->
+            <div class="panel" id="step3">
+                <div class="panel-header">
+                    <h2>🛡️ 缓解措施</h2>
+                    <p>为每个威胁制定缓解策略</p>
+                </div>
+
+                <div class="mitigation-stats">
+                    <div class="stat">
+                        <span class="stat-value" id="totalThreats">0</span>
+                        <span class="stat-label">总威胁数</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="mitigatedThreats">0</span>
+                        <span class="stat-label">已缓解</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="riskLevel">-</span>
+                        <span class="stat-label">风险等级</span>
+                    </div>
+                </div>
+
+                <div class="mitigation-list" id="mitigationList">
+                    <div class="empty-state">
+                        <p>暂无威胁数据，请先完成第二步</p>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button class="btn secondary" id="step3Prev">← 上一步</button>
+                    <button class="btn primary" id="step3Next">下一步 →</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Did we do a good job? -->
+            <div class="panel" id="step4">
+                <div class="panel-header">
+                    <h2>✅ 评审与验证</h2>
+                    <p>检查威胁建模的完整性和有效性</p>
+                </div>
+
+                <div class="review-section">
+                    <h3>📋 检查清单</h3>
+                    <div class="checklist" id="checklist">
+                        <label class="checklist-item">
+                            <input type="checkbox" id="check1">
+                            <span>系统组件已完整列出</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" id="check2">
+                            <span>数据流已清晰描述</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" id="check3">
+                            <span>信任边界已识别</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" id="check4">
+                            <span>所有 STRIDE 类别都有威胁</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" id="check5">
+                            <span>每个威胁都有缓解措施</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" id="check6">
+                            <span>缓解措施已分配责任人</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" id="check7">
+                            <span>缓解措施有明确的截止日期</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="review-section">
+                    <h3>📊 威胁摘要</h3>
+                    <div class="summary-grid">
+                        <div class="summary-card">
+                            <h4>按严重程度</h4>
+                            <div class="severity-bars" id="severityBars">
+                                <div class="severity-row">
+                                    <span class="severity-label critical">严重</span>
+                                    <div class="severity-bar"><div class="bar-fill" id="criticalBar" style="width: 0%"></div></div>
+                                    <span class="severity-count" id="criticalCount">0</span>
+                                </div>
+                                <div class="severity-row">
+                                    <span class="severity-label high">高</span>
+                                    <div class="severity-bar"><div class="bar-fill" id="highBar" style="width: 0%"></div></div>
+                                    <span class="severity-count" id="highCount">0</span>
+                                </div>
+                                <div class="severity-row">
+                                    <span class="severity-label medium">中</span>
+                                    <div class="severity-bar"><div class="bar-fill" id="mediumBar" style="width: 0%"></div></div>
+                                    <span class="severity-count" id="mediumCount">0</span>
+                                </div>
+                                <div class="severity-row">
+                                    <span class="severity-label low">低</span>
+                                    <div class="severity-bar"><div class="bar-fill" id="lowBar" style="width: 0%"></div></div>
+                                    <span class="severity-count" id="lowCount">0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <h4>按 STRIDE 分类</h4>
+                            <div class="stride-chart" id="strideChart">
+                                <!-- Chart will be generated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-section">
+                    <h3>📝 评审结论</h3>
+                    <textarea id="reviewNotes" placeholder="记录评审过程中的发现、遗留问题和后续行动项..."></textarea>
+                </div>
+
+                <div class="export-section">
+                    <button class="btn secondary" id="exportJson">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7,10 12,15 17,10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        导出 JSON
+                    </button>
+                    <button class="btn secondary" id="exportMarkdown">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7,10 12,15 17,10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        导出 Markdown
+                    </button>
+                </div>
+
+                <div class="actions">
+                    <button class="btn secondary" id="step4Prev">← 上一步</button>
+                    <button class="btn primary" id="startOver">🔄 重新开始</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>威胁建模工作坊 · 4-Question Framework</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
