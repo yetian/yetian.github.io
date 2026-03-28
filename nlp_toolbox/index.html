@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NLP Toolbox - NLP工具箱</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>NLP工具箱</h1>
+            <p class="subtitle">Natural Language Processing Toolbox</p>
+        </header>
+
+        <main>
+            <!-- Tabs -->
+            <div class="tabs" id="toolTabs">
+                <button class="tab active" data-tool="readability">可读性</button>
+                <button class="tab" data-tool="similarity">相似度</button>
+                <button class="tab" data-tool="sentiment">情感分析</button>
+                <button class="tab" data-tool="stats">文本统计</button>
+            </div>
+
+            <!-- Readability Panel -->
+            <div class="panel active" id="readabilityPanel">
+                <div class="input-section">
+                    <label>输入文本</label>
+                    <textarea id="readabilityInput" placeholder="粘贴或输入文本进行分析..."></textarea>
+                </div>
+                <div class="result-section">
+                    <h3>分析结果</h3>
+                    <div class="result-grid">
+                        <div class="result-card">
+                            <span class="result-value" id="readabilityScore">-</span>
+                            <span class="result-label">可读性得分</span>
+                            <span class="result-desc" id="readabilityDesc">Flesch Reading Ease</span>
+                        </div>
+                        <div class="result-card">
+                            <span class="result-value" id="gradeLevel">-</span>
+                            <span class="result-label">年级水平</span>
+                            <span class="result-desc">Flesch-Kincaid Grade</span>
+                        </div>
+                    </div>
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <span class="stat-value" id="charCount">0</span>
+                            <span class="stat-label">字符数</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="wordCount">0</span>
+                            <span class="stat-label">词数</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="sentenceCount">0</span>
+                            <span class="stat-label">句子数</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="syllableCount">0</span>
+                            <span class="stat-label">音节数</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Similarity Panel -->
+            <div class="panel" id="similarityPanel">
+                <div class="dual-input">
+                    <div class="input-section">
+                        <label>文本 A</label>
+                        <textarea id="simTextA" placeholder="输入第一段文本..."></textarea>
+                    </div>
+                    <div class="input-section">
+                        <label>文本 B</label>
+                        <textarea id="simTextB" placeholder="输入第二段文本..."></textarea>
+                    </div>
+                </div>
+                <div class="result-section">
+                    <h3>相似度分析</h3>
+                    <div class="similarity-results">
+                        <div class="sim-item">
+                            <div class="sim-header">
+                                <span>Levenshtein距离</span>
+                                <span class="sim-value" id="levDistance">-</span>
+                            </div>
+                            <div class="sim-bar"><div class="sim-fill" id="levBar"></div></div>
+                        </div>
+                        <div class="sim-item">
+                            <div class="sim-header">
+                                <span>Jaccard相似度</span>
+                                <span class="sim-value" id="jaccardScore">-</span>
+                            </div>
+                            <div class="sim-bar"><div class="sim-fill" id="jaccardBar"></div></div>
+                        </div>
+                        <div class="sim-item">
+                            <div class="sim-header">
+                                <span>余弦相似度</span>
+                                <span class="sim-value" id="cosineScore">-</span>
+                            </div>
+                            <div class="sim-bar"><div class="sim-fill" id="cosineBar"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sentiment Panel -->
+            <div class="panel" id="sentimentPanel">
+                <div class="input-section">
+                    <label>输入文本</label>
+                    <textarea id="sentimentInput" placeholder="输入文本进行情感分析..."></textarea>
+                </div>
+                <div class="result-section">
+                    <h3>情感分析结果</h3>
+                    <div class="sentiment-display">
+                        <div class="sentiment-meter">
+                            <div class="meter-track">
+                                <div class="meter-needle" id="sentimentNeedle"></div>
+                            </div>
+                            <div class="meter-labels">
+                                <span>负面</span>
+                                <span>中性</span>
+                                <span>正面</span>
+                            </div>
+                        </div>
+                        <div class="sentiment-info">
+                            <div class="sentiment-score">
+                                <span class="score-value" id="sentimentScoreValue">0.00</span>
+                                <span class="score-label">极性得分</span>
+                            </div>
+                            <div class="sentiment-class" id="sentimentClass">中性</div>
+                        </div>
+                        <div class="sentiment-details">
+                            <div class="detail-item">
+                                <span class="detail-value positive" id="positiveWords">0</span>
+                                <span class="detail-label">正面词</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-value negative" id="negativeWords">0</span>
+                                <span class="detail-label">负面词</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Panel -->
+            <div class="panel" id="statsPanel">
+                <div class="input-section">
+                    <label>输入文本</label>
+                    <textarea id="statsInput" placeholder="输入文本进行统计分析..."></textarea>
+                </div>
+                <div class="result-section">
+                    <h3>文本统计</h3>
+                    <div class="basic-stats">
+                        <div class="stat-item">
+                            <span class="stat-value" id="statsChars">0</span>
+                            <span class="stat-label">字符</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="statsWords">0</span>
+                            <span class="stat-label">词</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="statsSentences">0</span>
+                            <span class="stat-label">句子</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="statsParagraphs">0</span>
+                            <span class="stat-label">段落</span>
+                        </div>
+                    </div>
+                    <div class="advanced-stats">
+                        <h4>词频统计 (Top 20)</h4>
+                        <div class="word-freq-list" id="wordFreqList">
+                            <p class="empty-hint">输入文本后显示词频统计</p>
+                        </div>
+                    </div>
+                    <div class="advanced-stats">
+                        <h4>文本特征</h4>
+                        <div class="feature-grid">
+                            <div class="feature-item">
+                                <span class="feature-label">平均句长</span>
+                                <span class="feature-value" id="avgSentenceLen">-</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-label">独特词比例</span>
+                                <span class="feature-value" id="uniqueRatio">-</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-label">词汇密度</span>
+                                <span class="feature-value" id="lexicalDensity">-</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-label">最长句</span>
+                                <span class="feature-value" id="longestSentence">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>本地分析 · 无需上传</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

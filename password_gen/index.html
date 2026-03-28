@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator - 密码生成器</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>密码生成器</h1>
+            <p class="subtitle">Password Generator</p>
+        </header>
+
+        <main>
+            <!-- Password Display -->
+            <div class="password-card">
+                <div class="password-display" id="passwordDisplay">
+                    点击生成密码
+                </div>
+                <div class="password-actions">
+                    <button class="action-btn" id="copyBtn" title="复制">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                    <button class="action-btn" id="regenerateBtn" title="重新生成">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M23 4v6h-6"></path>
+                            <path d="M1 20v-6h6"></path>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Strength Indicator -->
+            <div class="strength-card">
+                <div class="strength-header">
+                    <span>密码强度</span>
+                    <span class="strength-label" id="strengthLabel">-</span>
+                </div>
+                <div class="strength-bar">
+                    <div class="strength-fill" id="strengthFill"></div>
+                </div>
+            </div>
+
+            <!-- Options -->
+            <div class="options-card">
+                <div class="option-row">
+                    <label for="lengthSlider">密码长度</label>
+                    <div class="slider-container">
+                        <input type="range" id="lengthSlider" min="8" max="64" value="16">
+                        <span class="slider-value" id="lengthValue">16</span>
+                    </div>
+                </div>
+
+                <div class="option-row">
+                    <label>字符类型</label>
+                    <div class="toggle-group">
+                        <label class="toggle">
+                            <input type="checkbox" id="uppercase" checked>
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">大写字母 (A-Z)</span>
+                        </label>
+                        <label class="toggle">
+                            <input type="checkbox" id="lowercase" checked>
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">小写字母 (a-z)</span>
+                        </label>
+                        <label class="toggle">
+                            <input type="checkbox" id="numbers" checked>
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">数字 (0-9)</span>
+                        </label>
+                        <label class="toggle">
+                            <input type="checkbox" id="symbols" checked>
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">符号 (!@#$%...)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="option-row">
+                    <label>高级选项</label>
+                    <div class="toggle-group">
+                        <label class="toggle">
+                            <input type="checkbox" id="excludeSimilar" checked>
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">排除相似字符 (0, O, l, 1, I)</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generate Button -->
+            <button class="generate-btn" id="generateBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                </svg>
+                生成密码
+            </button>
+
+            <!-- History -->
+            <div class="history-card" id="historyCard">
+                <div class="history-header">
+                    <h3>历史记录</h3>
+                    <button class="clear-history" id="clearHistory">清空</button>
+                </div>
+                <div class="history-list" id="historyList">
+                    <p class="history-empty">暂无历史记录</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>本地生成 · 安全可靠</p>
+        </footer>
+    </div>
+
+    <div class="notification" id="notification">
+        <span class="notification-text" id="notificationText">已复制到剪贴板</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

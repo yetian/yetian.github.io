@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Palette - 配色工具</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>配色工具</h1>
+            <p class="subtitle">Color Palette Generator</p>
+        </header>
+
+        <main>
+            <!-- Color Picker -->
+            <div class="picker-card">
+                <div class="color-preview" id="colorPreview">
+                    <input type="color" id="colorPicker" value="#6366f1">
+                </div>
+                <div class="color-inputs">
+                    <div class="color-input-group">
+                        <label>HEX</label>
+                        <input type="text" id="hexInput" value="#6366f1" placeholder="#000000">
+                    </div>
+                    <div class="color-input-group">
+                        <label>RGB</label>
+                        <input type="text" id="rgbInput" value="99, 102, 241" placeholder="0, 0, 0">
+                    </div>
+                    <div class="color-input-group">
+                        <label>HSL</label>
+                        <input type="text" id="hslInput" value="239, 84%, 67%" placeholder="0, 0%, 0%">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Harmony Type -->
+            <div class="harmony-card">
+                <h3>配色规则</h3>
+                <div class="harmony-tabs" id="harmonyTabs">
+                    <button class="harmony-tab active" data-harmony="monochromatic">单色</button>
+                    <button class="harmony-tab" data-harmony="complementary">互补</button>
+                    <button class="harmony-tab" data-harmony="triadic">三色</button>
+                    <button class="harmony-tab" data-harmony="split">分裂互补</button>
+                    <button class="harmony-tab" data-harmony="analogous">模拟</button>
+                    <button class="harmony-tab" data-harmony="gradient">渐变</button>
+                </div>
+            </div>
+
+            <!-- Gradient Options -->
+            <div class="gradient-card hidden" id="gradientCard">
+                <div class="gradient-inputs">
+                    <div class="gradient-input-group">
+                        <label>起始颜色</label>
+                        <div class="color-preview-small" id="gradientStartPreview">
+                            <input type="color" id="gradientStart" value="#6366f1">
+                        </div>
+                    </div>
+                    <div class="gradient-arrow">→</div>
+                    <div class="gradient-input-group">
+                        <label>结束颜色</label>
+                        <div class="color-preview-small" id="gradientEndPreview">
+                            <input type="color" id="gradientEnd" value="#ec4899">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color Count -->
+            <div class="count-card">
+                <h3>颜色数量</h3>
+                <div class="count-slider">
+                    <input type="range" id="colorCount" min="5" max="9" value="5">
+                    <span class="count-value" id="colorCountValue">5</span>
+                </div>
+            </div>
+
+            <!-- Palette Display -->
+            <div class="palette-card">
+                <div class="palette-colors" id="paletteColors">
+                    <!-- Generated colors -->
+                </div>
+                <button class="save-palette-btn" id="savePalette">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                    收藏此配色
+                </button>
+            </div>
+
+            <!-- Saved Palettes -->
+            <div class="saved-card" id="savedCard">
+                <div class="saved-header">
+                    <h3>已收藏配色</h3>
+                    <button class="clear-saved" id="clearSaved">清空</button>
+                </div>
+                <div class="saved-list" id="savedList">
+                    <p class="saved-empty">暂无收藏</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>在线生成 · 实时预览</p>
+        </footer>
+    </div>
+
+    <div class="notification" id="notification">
+        <span class="notification-text" id="notificationText">已收藏</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

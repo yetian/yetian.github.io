@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup Generator - UI原型生成器</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Sidebar - Components -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>组件库</h2>
+                <button class="toggle-sidebar" id="toggleSidebar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="components-list" id="componentsList">
+                <div class="component-item" draggable="true" data-type="button">
+                    <div class="component-preview button-preview">Button</div>
+                    <span>按钮</span>
+                </div>
+                <div class="component-item" draggable="true" data-type="input">
+                    <div class="component-preview input-preview">Input</div>
+                    <span>输入框</span>
+                </div>
+                <div class="component-item" draggable="true" data-type="card">
+                    <div class="component-preview card-preview"></div>
+                    <span>卡片</span>
+                </div>
+                <div class="component-item" draggable="true" data-type="navbar">
+                    <div class="component-preview navbar-preview"></div>
+                    <span>导航栏</span>
+                </div>
+                <div class="component-item" draggable="true" data-type="list">
+                    <div class="component-preview list-preview"></div>
+                    <span>列表</span>
+                </div>
+                <div class="component-item" draggable="true" data-type="image">
+                    <div class="component-preview image-preview"></div>
+                    <span>图片</span>
+                </div>
+                <div class="component-item" draggable="true" data-type="text">
+                    <div class="component-preview text-preview">Text</div>
+                    <span>文本</span>
+                </div>
+                <div class="component-item" draggable="true" data-type="divider">
+                    <div class="component-preview divider-preview"></div>
+                    <span>分割线</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Area -->
+        <main class="main-area">
+            <!-- Toolbar -->
+            <div class="toolbar">
+                <div class="toolbar-left">
+                    <h1>UI原型生成器</h1>
+                </div>
+                <div class="toolbar-center">
+                    <select id="templateSelect" class="template-select">
+                        <option value="blank">空白画布</option>
+                        <option value="login">登录页面</option>
+                        <option value="profile">个人资料</option>
+                        <option value="list">列表页面</option>
+                    </select>
+                </div>
+                <div class="toolbar-right">
+                    <button class="toolbar-btn" id="undoBtn" title="撤销">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 7v6h6"></path>
+                            <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path>
+                        </svg>
+                    </button>
+                    <button class="toolbar-btn" id="redoBtn" title="重做">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 7v6h-6"></path>
+                            <path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"></path>
+                        </svg>
+                    </button>
+                    <button class="toolbar-btn" id="clearBtn" title="清空">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                    </button>
+                    <button class="toolbar-btn primary" id="exportBtn" title="导出PNG">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        导出
+                    </button>
+                </div>
+            </div>
+
+            <!-- Canvas Area -->
+            <div class="canvas-wrapper">
+                <div class="canvas" id="canvas">
+                    <div class="canvas-placeholder" id="canvasPlaceholder">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="12" y1="8" x2="12" y2="16"></line>
+                            <line x1="8" y1="12" x2="16" y2="12"></line>
+                        </svg>
+                        <p>拖拽组件到此处</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Properties Panel -->
+        <aside class="properties-panel" id="propertiesPanel">
+            <div class="panel-header">
+                <h3>属性</h3>
+            </div>
+            <div class="panel-content" id="panelContent">
+                <p class="no-selection">选择组件以编辑属性</p>
+            </div>
+        </aside>
+    </div>
+
+    <div class="notification" id="notification">
+        <span class="notification-text" id="notificationText">已导出</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

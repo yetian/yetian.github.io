@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter - 单位转换器</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>单位转换器</h1>
+            <p class="subtitle">Unit Converter</p>
+        </header>
+
+        <main>
+            <!-- Category Tabs -->
+            <div class="tabs" id="categoryTabs">
+                <button class="tab active" data-category="length">长度</button>
+                <button class="tab" data-category="weight">重量</button>
+                <button class="tab" data-category="temperature">温度</button>
+                <button class="tab" data-category="area">面积</button>
+            </div>
+
+            <!-- Converter Card -->
+            <div class="converter-card">
+                <div class="converter-row">
+                    <div class="converter-input-group">
+                        <label>从</label>
+                        <input type="number" id="inputValue" placeholder="输入数值" value="1">
+                        <select id="inputUnit"></select>
+                    </div>
+
+                    <button class="swap-btn" id="swapBtn" title="交换单位">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 16V4M7 4L3 8M7 4l4 4M17 8v12M17 20l4-4M17 20l-4-4"></path>
+                        </svg>
+                    </button>
+
+                    <div class="converter-input-group">
+                        <label>到</label>
+                        <input type="number" id="outputValue" placeholder="结果" readonly>
+                        <select id="outputUnit"></select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Common Conversions -->
+            <div class="quick-card">
+                <h3>快速转换</h3>
+                <div class="quick-list" id="quickList">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Favorites -->
+            <div class="favorites-card" id="favoritesCard">
+                <div class="favorites-header">
+                    <h3>收藏</h3>
+                    <button class="add-favorite" id="addFavorite">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        添加当前
+                    </button>
+                </div>
+                <div class="favorites-list" id="favoritesList">
+                    <p class="favorites-empty">暂无收藏</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>实时转换 · 精确计算</p>
+        </footer>
+    </div>
+
+    <div class="notification" id="notification">
+        <span class="notification-text" id="notificationText">已添加收藏</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
