@@ -91,16 +91,40 @@
             75% { transform: translateY(-40px) translateX(5px); opacity: 0.5; }
         }
 
-        /* Header / Hero */
-        .hero {
-            min-height: 50vh;
+        /* Split Layout */
+        .split-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Left Panel - Fixed */
+        .left-panel {
+            width: 40%;
+            max-width: 500px;
+            min-width: 320px;
+            height: 100vh;
+            position: sticky;
+            top: 0;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 4rem 1rem 2rem;
-            position: relative;
+            padding: 2rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Right Panel - Scrollable */
+        .right-panel {
+            flex: 1;
+            overflow-y: auto;
+            height: 100vh;
+        }
+
+        /* Header / Hero */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
         }
 
         .avatar {
@@ -135,7 +159,7 @@
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
             font-weight: 700;
             background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
             -webkit-background-clip: text;
@@ -153,9 +177,8 @@
         }
 
         .hero p {
-            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            font-size: clamp(1rem, 2vw, 1.25rem);
             color: rgba(255, 255, 255, 0.6);
-            max-width: 500px;
             margin-bottom: 1.5rem;
             line-height: 1.6;
         }
@@ -164,7 +187,6 @@
             display: flex;
             gap: 0.75rem;
             flex-wrap: wrap;
-            justify-content: center;
             margin-bottom: 2rem;
         }
 
@@ -210,22 +232,19 @@
 
         /* Main Content */
         .main {
-            padding: 2rem 1rem 4rem;
-            max-width: 1400px;
-            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
         }
 
         .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .section-title h2 {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 500;
             color: rgba(255, 255, 255, 0.5);
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.15em;
         }
 
         .section-title h2::before {
@@ -233,184 +252,104 @@
             color: var(--primary);
         }
 
-        /* Cards Grid */
+        /* Cards Grid - Compact */
+        .category {
+            margin-bottom: 2.5rem;
+        }
+
+        .category-title {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.35);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            padding-left: 0.25rem;
+        }
+
         .cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-            padding: 0 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
         }
 
         .card {
             position: relative;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
+            border-radius: 14px;
             overflow: hidden;
             text-decoration: none;
             color: inherit;
             display: flex;
-            flex-direction: column;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
+            align-items: center;
+            padding: 1rem;
+            gap: 1rem;
+            transition: all 0.3s ease;
         }
 
         .card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-4px);
             background: rgba(255, 255, 255, 0.06);
             border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .card:hover::before {
-            transform: scaleX(1);
+            box-shadow: 0 15px 40px -12px rgba(0, 0, 0, 0.4);
         }
 
         .card-icon {
-            height: 180px;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card-icon::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.3) 100%);
+            font-size: 1.5rem;
+            flex-shrink: 0;
         }
 
         .card-content {
-            padding: 1.5rem;
             flex: 1;
-            display: flex;
-            flex-direction: column;
+            min-width: 0;
         }
 
         .card h3 {
-            font-size: 1.25rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.25rem;
             color: white;
         }
 
         .card p {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.5);
-            line-height: 1.6;
-            flex: 1;
-            margin-bottom: 1rem;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        .card-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
+        .card:hover h3 {
             color: var(--primary);
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
         }
 
-        .card-btn::after {
-            content: '→';
-            transition: transform 0.3s ease;
-        }
+        /* Card icon backgrounds by category */
+        .category-tools .card:nth-child(1) .card-icon { background: linear-gradient(135deg, #f97316 0%, #fb923c 100%); }
+        .category-tools .card:nth-child(2) .card-icon { background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%); }
+        .category-tools .card:nth-child(3) .card-icon { background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%); }
+        .category-tools .card:nth-child(4) .card-icon { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); }
+        .category-tools .card:nth-child(5) .card-icon { background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%); }
+        .category-tools .card:nth-child(6) .card-icon { background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); }
 
-        .card:hover .card-btn::after {
-            transform: translateX(4px);
-        }
+        .category-games .card:nth-child(1) .card-icon { background: linear-gradient(135deg, #14b8a6 0%, #2dd4bf 100%); }
+        .category-games .card:nth-child(2) .card-icon { background: linear-gradient(135deg, #10b981 0%, #34d399 100%); }
+        .category-games .card:nth-child(3) .card-icon { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); }
 
-        /* Different gradient backgrounds for cards */
-        .card:nth-child(1) .card-icon { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); }
-        .card:nth-child(2) .card-icon { background: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%); }
-        .card:nth-child(3) .card-icon { background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%); }
-        .card:nth-child(4) .card-icon { background: linear-gradient(135deg, #dc2626 0%, #f97316 100%); }
-        .card:nth-child(5) .card-icon { background: linear-gradient(135deg, #0891b2 0%, #22d3ee 100%); }
-        .card:nth-child(6) .card-icon { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
-        .card:nth-child(7) .card-icon { background: linear-gradient(135deg, #be185d 0%, #f472b6 100%); }
-        .card:nth-child(8) .card-icon { background: linear-gradient(135deg, #047857 0%, #34d399 100%); }
-        .card:nth-child(9) .card-icon { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); }
+        .category-articles .card:nth-child(1) .card-icon { background: linear-gradient(135deg, #64748b 0%, #94a3b8 100%); }
+        .category-articles .card:nth-child(2) .card-icon { background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); }
+        .category-articles .card:nth-child(3) .card-icon { background: linear-gradient(135deg, #0891b2 0%, #22d3ee 100%); }
 
-        /* Card glow effect on hover */
-        .card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 20px;
-            padding: 2px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .card:hover::after {
-            opacity: 1;
-            animation: borderGlow 2s linear infinite;
-        }
-
-        @keyframes borderGlow {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
-        }
-
-        /* Card icon animation */
-        .card-icon {
-            transition: transform 0.4s ease;
-        }
-
-        .card:hover .card-icon {
-            transform: scale(1.05);
-        }
-
-        .card-icon span {
-            transition: transform 0.4s ease, filter 0.4s ease;
-        }
-
-        .card:hover .card-icon span {
-            transform: scale(1.2) rotate(5deg);
-            filter: drop-shadow(0 0 20px currentColor);
-        }
-
-        /* Floating animation for card icons */
-        .card-icon span {
-            animation: iconFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes iconFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Stagger animation delays for icons */
-        .card:nth-child(1) .card-icon span { animation-delay: 0s; }
-        .card:nth-child(2) .card-icon span { animation-delay: 0.2s; }
-        .card:nth-child(3) .card-icon span { animation-delay: 0.4s; }
-        .card:nth-child(4) .card-icon span { animation-delay: 0.6s; }
-        .card:nth-child(5) .card-icon span { animation-delay: 0.8s; }
-        .card:nth-child(6) .card-icon span { animation-delay: 1s; }
-        .card:nth-child(7) .card-icon span { animation-delay: 1.2s; }
-        .card:nth-child(8) .card-icon span { animation-delay: 1.4s; }
-        .card:nth-child(9) .card-icon span { animation-delay: 1.6s; }
+        .category-learning .card:nth-child(1) .card-icon { background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%); }
+        .category-learning .card:nth-child(2) .card-icon { background: linear-gradient(135deg, #dc2626 0%, #f97316 100%); }
 
         /* Footer */
         footer {
@@ -431,21 +370,69 @@
             color: var(--accent);
         }
 
+        /* Scrollbar */
+        .right-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .right-panel::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .right-panel::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .right-panel::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
+            .split-container {
+                flex-direction: column;
+            }
+
+            .left-panel {
+                width: 100%;
+                max-width: none;
+                min-width: auto;
+                height: auto;
+                position: relative;
+                padding: 1.5rem;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            .right-panel {
+                height: auto;
+                overflow: visible;
+            }
+
             .hero {
-                min-height: 40vh;
-                padding-top: 5rem;
+                align-items: center;
+                text-align: center;
+            }
+
+            .tagline {
+                justify-content: center;
+            }
+
+            .cards {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cards {
+                grid-template-columns: 1fr;
             }
 
             .avatar {
                 width: 100px;
                 height: 100px;
                 font-size: 2.5rem;
-            }
-
-            .cards {
-                grid-template-columns: 1fr;
             }
 
             .lang-switch {
@@ -459,23 +446,13 @@
         /* Staggered animation for cards */
         .card {
             opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
+            animation: fadeInUp 0.4s ease forwards;
         }
-
-        .card:nth-child(1) { animation-delay: 0.1s; }
-        .card:nth-child(2) { animation-delay: 0.15s; }
-        .card:nth-child(3) { animation-delay: 0.2s; }
-        .card:nth-child(4) { animation-delay: 0.25s; }
-        .card:nth-child(5) { animation-delay: 0.3s; }
-        .card:nth-child(6) { animation-delay: 0.35s; }
-        .card:nth-child(7) { animation-delay: 0.4s; }
-        .card:nth-child(8) { animation-delay: 0.45s; }
-        .card:nth-child(9) { animation-delay: 0.5s; }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -500,190 +477,188 @@
 
     <a href="index.html" class="lang-switch">English</a>
 
-    <header class="hero">
-        <div class="avatar">👨‍💻</div>
-        <h1>田<span>野</span></h1>
-        <p>创意开发者 & 设计师</p>
-        <div class="tagline">
-            <span class="tag">全栈开发</span>
-            <span class="tag">产品安全与合规</span>
-            <span class="tag">UI/UX 设计</span>
-            <span class="tag">开源爱好者</span>
-        </div>
-    </header>
-
-    <main class="main">
-        <div class="section-title">
-            <h2>项目作品</h2>
-        </div>
-
-        <div class="cards">
-            <a href="acsdm/index-zh.html" class="card">
-                <div class="card-icon">📜</div>
-                <div class="card-content">
-                    <h3>反云软件开发宣言</h3>
-                    <p>探讨本地优先软件开发的哲学理念，分享关于构建以用户自主权和简洁性为中心的工具的原则。</p>
-                    <span class="card-btn">了解更多</span>
+    <div class="split-container">
+        <!-- Left Panel - Fixed -->
+        <aside class="left-panel">
+            <header class="hero">
+                <div class="avatar">👨‍💻</div>
+                <h1>田<span>野</span></h1>
+                <p>创意开发者 & 设计师</p>
+                <div class="tagline">
+                    <span class="tag">全栈开发</span>
+                    <span class="tag">产品安全</span>
+                    <span class="tag">UI/UX</span>
+                    <span class="tag">开源</span>
                 </div>
-            </a>
+            </header>
+        </aside>
 
-            <a href="sudoku/index.html" class="card">
-                <div class="card-icon">🧩</div>
-                <div class="card-content">
-                    <h3>数独游戏</h3>
-                    <p>具有多种难度等级的交互式益智游戏，包含提示系统和进度追踪。挑战你的思维极限！</p>
-                    <span class="card-btn">开始游戏</span>
+        <!-- Right Panel - Scrollable -->
+        <main class="right-panel">
+            <div class="main">
+                <div class="section-title">
+                    <h2>项目作品</h2>
                 </div>
-            </a>
 
-            <a href="hanz/index.html" class="card">
-                <div class="card-icon">🈯</div>
-                <div class="card-content">
-                    <h3>汉字学习</h3>
-                    <p>通过交互式笔画动画、拼音发音和释义来学习汉字。语言学习者的完美工具。</p>
-                    <span class="card-btn">开始学习</span>
+                <!-- 实用工具 -->
+                <div class="category category-tools">
+                    <div class="category-title">实用工具</div>
+                    <div class="cards">
+                        <a href="password_gen/index.html" class="card">
+                            <div class="card-icon">🔐</div>
+                            <div class="card-content">
+                                <h3>密码生成器</h3>
+                                <p>安全密码生成，强度指示，历史记录</p>
+                            </div>
+                        </a>
+                        <a href="unit_converter/index.html" class="card">
+                            <div class="card-icon">📐</div>
+                            <div class="card-content">
+                                <h3>单位转换器</h3>
+                                <p>长度/重量/温度/面积实时转换</p>
+                            </div>
+                        </a>
+                        <a href="color_palette/index.html" class="card">
+                            <div class="card-icon">🎨</div>
+                            <div class="card-content">
+                                <h3>配色工具</h3>
+                                <p>和谐配色方案，渐变生成</p>
+                            </div>
+                        </a>
+                        <a href="mdeditor/index.html" class="card">
+                            <div class="card-icon">📝</div>
+                            <div class="card-content">
+                                <h3>Markdown 编辑器</h3>
+                                <p>实时预览，数学公式，代码高亮</p>
+                            </div>
+                        </a>
+                        <a href="tomato_clock/index.html" class="card">
+                            <div class="card-icon">🍅</div>
+                            <div class="card-content">
+                                <h3>番茄时钟</h3>
+                                <p>专注计时器，每日统计</p>
+                            </div>
+                        </a>
+                        <a href="calcgen/index.html" class="card">
+                            <div class="card-icon">🔢</div>
+                            <div class="card-content">
+                                <h3>算术题目生成器</h3>
+                                <p>小学生数学练习题，一键打印</p>
+                            </div>
+                        </a>
+                        <a href="companalysis/index.html" class="card">
+                            <div class="card-icon">⚖️</div>
+                            <div class="card-content">
+                                <h3>决策分析</h3>
+                                <p>SWOT分析，选项对比</p>
+                            </div>
+                        </a>
+                        <a href="nlp_toolbox/index.html" class="card">
+                            <div class="card-icon">📊</div>
+                            <div class="card-content">
+                                <h3>NLP工具箱</h3>
+                                <p>文本分析，情感分析，词频统计</p>
+                            </div>
+                        </a>
+                        <a href="mockup_generator/index.html" class="card">
+                            <div class="card-icon">📱</div>
+                            <div class="card-content">
+                                <h3>UI原型生成器</h3>
+                                <p>拖拽式构建，PNG导出</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </a>
 
-            <a href="wxcy/index.html" class="card">
-                <div class="card-icon">👔</div>
-                <div class="card-content">
-                    <h3>五行穿衣</h3>
-                    <p>基于中国八字五行、血型和当前天气条件的个性化穿衣建议。输入信息获取专属搭配！</p>
-                    <span class="card-btn">获取推荐</span>
+                <!-- 游戏 -->
+                <div class="category category-games">
+                    <div class="category-title">游戏</div>
+                    <div class="cards">
+                        <a href="sudoku/index.html" class="card">
+                            <div class="card-icon">🧩</div>
+                            <div class="card-content">
+                                <h3>数独游戏</h3>
+                                <p>多难度等级，提示系统，进度追踪</p>
+                            </div>
+                        </a>
+                        <a href="geodrive/index.html" class="card">
+                            <div class="card-icon">🚗</div>
+                            <div class="card-content">
+                                <h3>GeoDrive 地图赛车</h3>
+                                <p>3D地图赛车，真实世界地图</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </a>
 
-            <a href="openclaw_suggest/index.html" class="card">
-                <div class="card-icon">⚡</div>
-                <div class="card-content">
-                    <h3>AI Agent 安装指南</h3>
-                    <p>交互式决策树，帮助你选择合适的 AI 代理并评估安全风险。包含 2026 安全警示和可导出报告。</p>
-                    <span class="card-btn">开始使用</span>
+                <!-- 学习 -->
+                <div class="category category-learning">
+                    <div class="category-title">学习</div>
+                    <div class="cards">
+                        <a href="hanz/index.html" class="card">
+                            <div class="card-icon">🈯</div>
+                            <div class="card-content">
+                                <h3>汉字学习</h3>
+                                <p>笔画动画，拼音发音，释义</p>
+                            </div>
+                        </a>
+                        <a href="periodictable/index.html" class="card">
+                            <div class="card-icon">⚛️</div>
+                            <div class="card-content">
+                                <h3>元素周期表</h3>
+                                <p>118种元素，详情查看，搜索</p>
+                            </div>
+                        </a>
+                        <a href="transformer/index.html" class="card">
+                            <div class="card-icon">🧠</div>
+                            <div class="card-content">
+                                <h3>Transformer 可视化</h3>
+                                <p>注意力机制交互式可视化</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </a>
 
-            <a href="geodrive/index.html" class="card">
-                <div class="card-icon">🚗</div>
-                <div class="card-content">
-                    <h3>GeoDrive 地图赛车</h3>
-                    <p>3D 地图赛车游戏，真实世界地图，GPS 定位，路线导航和可自定义的车辆设置。</p>
-                    <span class="card-btn">开始游戏</span>
+                <!-- 文章与安全 -->
+                <div class="category category-articles">
+                    <div class="category-title">文章与安全</div>
+                    <div class="cards">
+                        <a href="acsdm/index-zh.html" class="card">
+                            <div class="card-icon">📜</div>
+                            <div class="card-content">
+                                <h3>反云软件开发宣言</h3>
+                                <p>本地优先软件开发哲学</p>
+                            </div>
+                        </a>
+                        <a href="openclaw_suggest/index.html" class="card">
+                            <div class="card-icon">⚡</div>
+                            <div class="card-content">
+                                <h3>AI Agent 安全指南</h3>
+                                <p>决策树，安全评估，PDF报告</p>
+                            </div>
+                        </a>
+                        <a href="threat_modeling/index.html" class="card">
+                            <div class="card-icon">🔒</div>
+                            <div class="card-content">
+                                <h3>威胁建模工作坊</h3>
+                                <p>STRIDE模型，威胁识别</p>
+                            </div>
+                        </a>
+                        <a href="wxcy/index.html" class="card">
+                            <div class="card-icon">👔</div>
+                            <div class="card-content">
+                                <h3>五行穿衣</h3>
+                                <p>八字五行个性化穿衣建议</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </a>
+            </div>
 
-            <a href="calcgen/index.html" class="card">
-                <div class="card-icon">🔢</div>
-                <div class="card-content">
-                    <h3>算术题目生成器</h3>
-                    <p>为小学生生成数学练习题，可自定义数字范围、运算类型和题目数量，支持行计算和竖式计算，一键打印。</p>
-                    <span class="card-btn">开始使用</span>
-                </div>
-            </a>
-
-            <a href="transformer/index.html" class="card">
-                <div class="card-icon">🧠</div>
-                <div class="card-content">
-                    <h3>Transformer 可视化</h3>
-                    <p>交互式可视化展示Transformer架构原理，通过神经元视图、注意力矩阵等方式理解注意力机制。</p>
-                    <span class="card-btn">探索</span>
-                </div>
-            </a>
-
-            <a href="mdeditor/index.html" class="card">
-                <div class="card-icon">📝</div>
-                <div class="card-content">
-                    <h3>Markdown 编辑器</h3>
-                    <p>液态玻璃风格的 Markdown 编辑器，实时预览，支持数学公式、代码高亮、自动保存。</p>
-                    <span class="card-btn">开始写作</span>
-                </div>
-            </a>
-
-            <a href="tomato_clock/index.html" class="card">
-                <div class="card-icon">🍅</div>
-                <div class="card-content">
-                    <h3>番茄时钟</h3>
-                    <p>专注计时器，可自定义时长（5-45分钟），支持开始/暂停/重置，每日统计功能。</p>
-                    <span class="card-btn">开始专注</span>
-                </div>
-            </a>
-
-            <a href="companalysis/index.html" class="card">
-                <div class="card-icon">⚖️</div>
-                <div class="card-content">
-                    <h3>决策分析</h3>
-                    <p>通过 SWOT 分析和选项对比做出更好的决策，购物选择或任何重大决定的得力助手。</p>
-                    <span class="card-btn">开始分析</span>
-                </div>
-            </a>
-
-            <a href="threat_modeling/index.html" class="card">
-                <div class="card-icon">🔒</div>
-                <div class="card-content">
-                    <h3>威胁建模工作坊</h3>
-                    <p>4-Question Framework 安全工作坊。使用 STRIDE 模型识别威胁并制定缓解策略。</p>
-                    <span class="card-btn">开始工作坊</span>
-                </div>
-            </a>
-
-            <a href="password_gen/index.html" class="card">
-                <div class="card-icon">🔐</div>
-                <div class="card-content">
-                    <h3>密码生成器</h3>
-                    <p>安全密码生成工具，可自定义长度、字符类型，显示密码强度指示，支持历史记录。</p>
-                    <span class="card-btn">生成密码</span>
-                </div>
-            </a>
-
-            <a href="unit_converter/index.html" class="card">
-                <div class="card-icon">📐</div>
-                <div class="card-content">
-                    <h3>单位转换器</h3>
-                    <p>长度、重量、温度、面积单位实时转换，支持常用单位收藏。</p>
-                    <span class="card-btn">开始转换</span>
-                </div>
-            </a>
-
-            <a href="color_palette/index.html" class="card">
-                <div class="card-icon">🎨</div>
-                <div class="card-content">
-                    <h3>配色工具</h3>
-                    <p>生成和谐配色方案，支持单色、互补、三色、分裂互补、模拟等5种配色规则。</p>
-                    <span class="card-btn">创建配色</span>
-                </div>
-            </a>
-
-            <a href="periodictable/index.html" class="card">
-                <div class="card-icon">⚛️</div>
-                <div class="card-content">
-                    <h3>元素周期表</h3>
-                    <p>交互式元素周期表，包含118种元素，点击查看详情，支持按名称或符号搜索。</p>
-                    <span class="card-btn">探索元素</span>
-                </div>
-            </a>
-
-            <a href="nlp_toolbox/index.html" class="card">
-                <div class="card-icon">📊</div>
-                <div class="card-content">
-                    <h3>NLP工具箱</h3>
-                    <p>文本分析工具集：可读性检查、相似度比较、情感分析、词频统计。</p>
-                    <span class="card-btn">开始分析</span>
-                </div>
-            </a>
-
-            <a href="mockup_generator/index.html" class="card">
-                <div class="card-icon">📱</div>
-                <div class="card-content">
-                    <h3>UI原型生成器</h3>
-                    <p>拖拽式UI原型构建工具，包含组件库、属性编辑、预设模板和PNG导出功能。</p>
-                    <span class="card-btn">开始设计</span>
-                </div>
-            </a>
-        </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 <a href="#">Ye Tian</a> — 用 <span style="color: #f43f5e;">♥</span> 和代码打造</p>
-    </footer>
+            <footer>
+                <p>&copy; 2025 <a href="#">Ye Tian</a> — 用 <span style="color: #f43f5e;">♥</span> 和代码打造</p>
+            </footer>
+        </main>
+    </div>
 </body>
 </html>
