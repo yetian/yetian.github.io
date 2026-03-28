@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>随机数生成器 - Random Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>随机数生成器</h1>
+            <p class="subtitle">Random Generator</p>
+        </header>
+
+        <main>
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" data-tab="integer">整数</button>
+                <button class="tab" data-tab="float">小数</button>
+                <button class="tab" data-tab="hex">十六进制</button>
+                <button class="tab" data-tab="uuid">UUID</button>
+                <button class="tab" data-tab="password">密码</button>
+            </div>
+
+            <!-- Results Display -->
+            <div class="results-card">
+                <div class="results-header">
+                    <span>生成结果</span>
+                    <button class="copy-all-btn" id="copyAllBtn" title="复制全部">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        复制全部
+                    </button>
+                </div>
+                <div class="results-list" id="resultsList">
+                    <p class="results-empty">点击生成按钮开始</p>
+                </div>
+            </div>
+
+            <!-- Integer Options -->
+            <div class="options-card" id="integerOptions">
+                <div class="option-row">
+                    <label>最小值</label>
+                    <input type="number" id="intMin" value="1" class="number-input">
+                </div>
+                <div class="option-row">
+                    <label>最大值</label>
+                    <input type="number" id="intMax" value="100" class="number-input">
+                </div>
+                <div class="option-row">
+                    <label>允许重复</label>
+                    <label class="toggle">
+                        <input type="checkbox" id="intAllowDup" checked>
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-label">允许生成重复数字</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Float Options -->
+            <div class="options-card" id="floatOptions" style="display: none;">
+                <div class="option-row">
+                    <label>最小值</label>
+                    <input type="number" id="floatMin" value="0" step="0.01" class="number-input">
+                </div>
+                <div class="option-row">
+                    <label>最大值</label>
+                    <input type="number" id="floatMax" value="1" step="0.01" class="number-input">
+                </div>
+                <div class="option-row">
+                    <label for="decimalSlider">小数位数</label>
+                    <div class="slider-container">
+                        <input type="range" id="decimalSlider" min="1" max="10" value="4">
+                        <span class="slider-value" id="decimalValue">4</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hex Options -->
+            <div class="options-card" id="hexOptions" style="display: none;">
+                <div class="option-row">
+                    <label for="hexLengthSlider">长度 (字节)</label>
+                    <div class="slider-container">
+                        <input type="range" id="hexLengthSlider" min="1" max="32" value="8">
+                        <span class="slider-value" id="hexLengthValue">8</span>
+                    </div>
+                </div>
+                <div class="option-row">
+                    <label>格式</label>
+                    <div class="format-group">
+                        <label class="format-option">
+                            <input type="radio" name="hexFormat" value="lower" checked>
+                            <span class="format-label">小写 (a-f)</span>
+                        </label>
+                        <label class="format-option">
+                            <input type="radio" name="hexFormat" value="upper">
+                            <span class="format-label">大写 (A-F)</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="option-row">
+                    <label>前缀</label>
+                    <label class="toggle">
+                        <input type="checkbox" id="hexPrefix">
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-label">添加 0x 前缀</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- UUID Options -->
+            <div class="options-card" id="uuidOptions" style="display: none;">
+                <div class="option-row">
+                    <label>UUID 版本</label>
+                    <div class="format-group">
+                        <label class="format-option">
+                            <input type="radio" name="uuidVersion" value="v4" checked>
+                            <span class="format-label">v4 (随机)</span>
+                        </label>
+                        <label class="format-option">
+                            <input type="radio" name="uuidVersion" value="v4nodash">
+                            <span class="format-label">v4 (无横线)</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Password Options -->
+            <div class="options-card" id="passwordOptions" style="display: none;">
+                <div class="option-row">
+                    <label for="pwdLengthSlider">密码长度</label>
+                    <div class="slider-container">
+                        <input type="range" id="pwdLengthSlider" min="8" max="64" value="16">
+                        <span class="slider-value" id="pwdLengthValue">16</span>
+                    </div>
+                </div>
+                <div class="option-row">
+                    <label>字符类型</label>
+                    <div class="toggle-group">
+                        <label class="toggle">
+                            <input type="checkbox" id="pwdUppercase" checked>
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">大写字母 (A-Z)</span>
+                        </label>
+                        <label class="toggle">
+                            <input type="checkbox" id="pwdLowercase" checked>
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">小写字母 (a-z)</span>
+                        </label>
+                        <label class="toggle">
+                            <input type="checkbox" id="pwdNumbers" checked>
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">数字 (0-9)</span>
+                        </label>
+                        <label class="toggle">
+                            <input type="checkbox" id="pwdSymbols">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">符号 (!@#$%...)</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="option-row">
+                    <label>高级选项</label>
+                    <label class="toggle">
+                        <input type="checkbox" id="pwdExcludeSimilar" checked>
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-label">排除相似字符 (0, O, l, 1, I)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Quantity and Generate -->
+            <div class="generate-section">
+                <div class="quantity-row">
+                    <label for="quantitySlider">生成数量</label>
+                    <div class="slider-container">
+                        <input type="range" id="quantitySlider" min="1" max="50" value="5">
+                        <span class="slider-value" id="quantityValue">5</span>
+                    </div>
+                </div>
+                <button class="generate-btn" id="generateBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                    </svg>
+                    生成
+                </button>
+            </div>
+        </main>
+
+        <footer>
+            <p>使用 crypto.getRandomValues 安全生成</p>
+        </footer>
+    </div>
+
+    <div class="notification" id="notification">
+        <span class="notification-text" id="notificationText">已复制到剪贴板</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

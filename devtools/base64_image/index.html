@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片 Base64 转换器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景动画 -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- 顶部工具栏 -->
+        <header class="toolbar">
+            <div class="toolbar-left">
+                <h1 class="app-title">
+                    <span class="title-icon">🖼</span>
+                    图片 Base64 转换器
+                </h1>
+                <p class="app-subtitle">图片与Base64编码互转，支持拖拽上传</p>
+            </div>
+            <div class="toolbar-right">
+                <div class="mode-switch">
+                    <div class="mode-switch-indicator"></div>
+                    <button class="mode-btn active" data-mode="imageToBase64">图片转Base64</button>
+                    <button class="mode-btn" data-mode="base64ToImage">Base64转图片</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 图片转Base64面板 -->
+            <div class="panel active" id="imageToBase64Panel">
+                <div class="panel-row">
+                    <!-- 左侧：上传区域 -->
+                    <div class="upload-section">
+                        <div class="panel-header">
+                            <span class="panel-title">上传图片</span>
+                            <div class="panel-actions">
+                                <button class="panel-btn" id="clearImageBtn" title="清除">🗑</button>
+                            </div>
+                        </div>
+                        <div class="upload-area" id="uploadArea">
+                            <div class="upload-content">
+                                <div class="upload-icon">📁</div>
+                                <div class="upload-text">拖放图片到此处</div>
+                                <div class="upload-hint">或点击选择文件</div>
+                                <div class="upload-formats">支持 PNG, JPG, GIF, WEBP, SVG, BMP</div>
+                            </div>
+                            <input type="file" id="fileInput" accept="image/*" hidden>
+                        </div>
+                        <!-- 图片预览 -->
+                        <div class="preview-area" id="previewArea">
+                            <img id="imagePreview" src="" alt="预览">
+                        </div>
+                        <!-- 图片信息 -->
+                        <div class="image-info" id="imageInfo">
+                            <div class="info-item">
+                                <span class="info-label">文件名</span>
+                                <span class="info-value" id="infoName">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">类型</span>
+                                <span class="info-value" id="infoType">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">尺寸</span>
+                                <span class="info-value" id="infoDimensions">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">大小</span>
+                                <span class="info-value" id="infoSize">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 右侧：输出区域 -->
+                    <div class="output-section">
+                        <div class="panel-header">
+                            <span class="panel-title">Base64 输出</span>
+                            <div class="panel-actions">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="includePrefix" checked>
+                                    <span>包含 Data URI 前缀</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="textarea-wrapper">
+                            <textarea id="base64Output" readonly placeholder="Base64 编码结果将显示在这里..."></textarea>
+                            <div class="output-info">
+                                <span id="base64Length">0 字符</span>
+                                <span id="base64Size">≈ 0 KB</span>
+                            </div>
+                        </div>
+                        <div class="output-actions">
+                            <button class="action-btn" id="copyBase64Btn">
+                                <span>📋</span> 复制 Base64
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Base64转图片面板 -->
+            <div class="panel" id="base64ToImagePanel">
+                <div class="panel-row">
+                    <!-- 左侧：输入区域 -->
+                    <div class="input-section">
+                        <div class="panel-header">
+                            <span class="panel-title">Base64 输入</span>
+                            <div class="panel-actions">
+                                <button class="panel-btn" id="clearBase64InputBtn" title="清除">🗑</button>
+                                <button class="panel-btn" id="pasteBtn" title="粘贴">📋</button>
+                            </div>
+                        </div>
+                        <div class="textarea-wrapper">
+                            <textarea id="base64Input" placeholder="粘贴 Base64 字符串（可含或不含 Data URI 前缀）..."></textarea>
+                        </div>
+                        <div class="input-actions">
+                            <button class="action-btn primary" id="convertBtn">
+                                <span>🔄</span> 转换为图片
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 右侧：预览区域 -->
+                    <div class="result-section">
+                        <div class="panel-header">
+                            <span class="panel-title">图片预览</span>
+                            <div class="panel-actions">
+                                <button class="panel-btn" id="clearResultBtn" title="清除">🗑</button>
+                            </div>
+                        </div>
+                        <div class="result-area" id="resultArea">
+                            <div class="result-placeholder">
+                                <div class="placeholder-icon">🖼</div>
+                                <div class="placeholder-text">转换后的图片将显示在这里</div>
+                            </div>
+                            <img id="resultImage" src="" alt="结果" style="display: none;">
+                        </div>
+                        <!-- 转换后的图片信息 -->
+                        <div class="image-info" id="resultInfo" style="display: none;">
+                            <div class="info-item">
+                                <span class="info-label">类型</span>
+                                <span class="info-value" id="resultType">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">尺寸</span>
+                                <span class="info-value" id="resultDimensions">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">大小</span>
+                                <span class="info-value" id="resultSize">-</span>
+                            </div>
+                        </div>
+                        <div class="result-actions" id="resultActions" style="display: none;">
+                            <button class="action-btn" id="downloadBtn">
+                                <span>📥</span> 下载图片
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 状态栏 -->
+        <footer class="status-bar">
+            <div class="status-left">
+                <span class="status-item" id="statusText">支持拖放文件或点击上传</span>
+            </div>
+            <div class="status-right">
+                <span class="status-item">最大文件: 10MB</span>
+                <span class="status-item">|</span>
+                <span class="status-item">拖放文件快速上传</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 拖放提示 -->
+    <div class="drop-overlay" id="dropOverlay">
+        <div class="drop-content">
+            <div class="drop-icon">📁</div>
+            <div class="drop-text">释放以加载图片</div>
+        </div>
+    </div>
+
+    <!-- 通知 -->
+    <div class="notification" id="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

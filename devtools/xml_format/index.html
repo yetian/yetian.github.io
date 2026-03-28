@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML 格式化工具</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景动画 -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- 顶部工具栏 -->
+        <header class="toolbar">
+            <div class="toolbar-left">
+                <h1 class="app-title">
+                    <span class="title-icon">📋</span>
+                    XML 格式化工具
+                </h1>
+                <p class="app-subtitle">美化压缩XML代码，语法高亮显示</p>
+            </div>
+            <div class="toolbar-center">
+                <div class="tool-group">
+                    <label class="indent-label">缩进：</label>
+                    <select id="indentSelect" class="indent-select">
+                        <option value="2">2 空格</option>
+                        <option value="4" selected>4 空格</option>
+                        <option value="tab">Tab</option>
+                    </select>
+                </div>
+                <div class="tool-divider"></div>
+                <div class="tool-group">
+                    <button class="tool-btn primary" id="formatBtn" title="格式化">
+                        <span>✨</span> 格式化
+                    </button>
+                    <button class="tool-btn" id="minifyBtn" title="压缩">
+                        <span>🗜️</span> 压缩
+                    </button>
+                </div>
+                <div class="tool-divider"></div>
+                <div class="tool-group">
+                    <button class="tool-btn" id="validateBtn" title="验证">
+                        <span>✅</span> 验证
+                    </button>
+                    <button class="tool-btn" id="copyBtn" title="复制">
+                        <span>📋</span> 复制
+                    </button>
+                    <button class="tool-btn" id="clearBtn" title="清空">
+                        <span>🗑️</span> 清空
+                    </button>
+                </div>
+            </div>
+            <div class="toolbar-right">
+                <button class="action-btn" id="loadSampleBtn" title="加载示例">
+                    <span>📄</span> 示例
+                </button>
+            </div>
+        </header>
+
+        <!-- 主编辑区 -->
+        <main class="editor-main">
+            <!-- 输入面板 -->
+            <div class="editor-panel" id="inputPanel">
+                <div class="panel-header">
+                    <span class="panel-title">输入 XML</span>
+                    <div class="panel-actions">
+                        <span class="char-count" id="inputCount">0 字符</span>
+                    </div>
+                </div>
+                <div class="editor-wrapper">
+                    <textarea id="xmlInput" placeholder="在此粘贴 XML 内容..." spellcheck="false"></textarea>
+                </div>
+            </div>
+
+            <!-- 输出面板 -->
+            <div class="editor-panel" id="outputPanel">
+                <div class="panel-header">
+                    <span class="panel-title">输出结果</span>
+                    <div class="panel-actions">
+                        <span class="char-count" id="outputCount">0 字符</span>
+                    </div>
+                </div>
+                <div class="editor-wrapper">
+                    <textarea id="xmlOutput" placeholder="格式化结果将显示在这里..." readonly></textarea>
+                </div>
+            </div>
+        </main>
+
+        <!-- XPath 查询区域 -->
+        <div class="xpath-section">
+            <div class="xpath-bar">
+                <label class="xpath-label">XPath 查询：</label>
+                <input type="text" id="xpathInput" class="xpath-input" placeholder="输入 XPath 表达式，如：/root/item[@id='1']">
+                <button class="xpath-btn" id="xpathBtn" title="执行查询">
+                    <span>🔍</span> 查询
+                </button>
+            </div>
+            <div class="xpath-results" id="xpathResults">
+                <div class="xpath-placeholder">执行 XPath 查询后结果将显示在这里</div>
+            </div>
+        </div>
+
+        <!-- 错误/验证区域 -->
+        <div class="validation-section" id="validationSection">
+            <div class="validation-header" id="validationHeader">
+                <span class="validation-icon" id="validationIcon">✅</span>
+                <span class="validation-text" id="validationText">XML 格式正确</span>
+            </div>
+            <div class="validation-details" id="validationDetails"></div>
+        </div>
+
+        <!-- 状态栏 -->
+        <footer class="status-bar">
+            <div class="status-left">
+                <span class="status-item" id="statusMsg">就绪</span>
+            </div>
+            <div class="status-right">
+                <span class="status-item">支持格式化、压缩、验证、XPath 查询</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

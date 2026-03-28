@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP 子网计算器</title>
+    <link rel="preconnect" href="fonts.googleapis.com">
+    <link rel="preconnect" href="fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>IP 子网计算器</h1>
+            <p class="subtitle">IPv4 地址分析与子网划分工具</p>
+        </header>
+
+        <main>
+            <!-- 输入区域 -->
+            <div class="input-card">
+                <div class="card-header">
+                    <h3>网络配置</h3>
+                </div>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label for="ipAddress">IP 地址</label>
+                        <input type="text" id="ipAddress" placeholder="例如: 192.168.1.100" autocomplete="off">
+                    </div>
+                    <div class="input-group">
+                        <label for="subnetInput">子网掩码 / CIDR</label>
+                        <input type="text" id="subnetInput" placeholder="例如: 255.255.255.0 或 /24" autocomplete="off">
+                    </div>
+                </div>
+                <div class="input-actions">
+                    <button class="calc-btn primary" id="calculateBtn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        计 算
+                    </button>
+                    <button class="calc-btn" id="clearBtn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                        </svg>
+                        清 空
+                    </button>
+                </div>
+            </div>
+
+            <!-- 常用子网预设 -->
+            <div class="presets-card">
+                <div class="card-header">
+                    <h3>常用子网预设</h3>
+                </div>
+                <div class="presets-grid" id="presetsGrid">
+                    <!-- 动态生成 -->
+                </div>
+            </div>
+
+            <!-- 计算结果 -->
+            <div class="result-card" id="resultCard">
+                <div class="card-header">
+                    <h3>计算结果</h3>
+                    <button class="action-btn" id="copyAllBtn" title="复制所有结果">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                            <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="result-grid">
+                    <div class="result-item">
+                        <span class="result-label">网络地址</span>
+                        <span class="result-value" id="networkAddr">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">广播地址</span>
+                        <span class="result-value" id="broadcastAddr">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">首个可用 IP</span>
+                        <span class="result-value" id="firstIP">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">最后可用 IP</span>
+                        <span class="result-value" id="lastIP">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">可用主机数</span>
+                        <span class="result-value highlight" id="totalHosts">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">CIDR 表示</span>
+                        <span class="result-value" id="cidrNotation">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">IP 类型</span>
+                        <span class="result-value" id="ipClass">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">子网掩码</span>
+                        <span class="result-value" id="subnetMask">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 二进制表示 -->
+            <div class="binary-card" id="binaryCard">
+                <div class="card-header">
+                    <h3>二进制表示</h3>
+                    <button class="action-btn" id="copyBinaryBtn" title="复制二进制">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                            <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="binary-grid">
+                    <div class="binary-row">
+                        <span class="binary-label">IP 地址</span>
+                        <div class="binary-value" id="ipBinary">
+                            <span class="octet">00000000</span>
+                            <span class="dot">.</span>
+                            <span class="octet">00000000</span>
+                            <span class="dot">.</span>
+                            <span class="octet">00000000</span>
+                            <span class="dot">.</span>
+                            <span class="octet">00000000</span>
+                        </div>
+                    </div>
+                    <div class="binary-row">
+                        <span class="binary-label">子网掩码</span>
+                        <div class="binary-value" id="maskBinary">
+                            <span class="octet">00000000</span>
+                            <span class="dot">.</span>
+                            <span class="octet">00000000</span>
+                            <span class="dot">.</span>
+                            <span class="octet">00000000</span>
+                            <span class="dot">.</span>
+                            <span class="octet">00000000</span>
+                        </div>
+                    </div>
+                    <div class="binary-row">
+                        <span class="binary-label">网络地址</span>
+                        <div class="binary-value" id="networkBinary">
+                            <span class="octet">00000000</span>
+                            <span class="dot">.</span>
+                            <span class="octet">00000000</span>
+                            <span class="dot">.</span>
+                            <span class="octet">00000000</span>
+                            <span class="dot">.</span>
+                            <span class="octet">00000000</span>
+                        </div>
+                    </div>
+                    <div class="binary-row">
+                        <span class="binary-label">广播地址</span>
+                        <div class="binary-value" id="broadcastBinary">
+                            <span class="octet">00000000</span>
+                            <span class="dot">.</span>
+                            <span class="octet">00000000</span>
+                            <span class="dot">.</span>
+                            <span class="octet">00000000</span>
+                            <span class="dot">.</span>
+                            <span class="octet">00000000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CIDR 转换器 -->
+            <div class="converter-card">
+                <div class="card-header">
+                    <h3>CIDR 转换器</h3>
+                </div>
+                <div class="converter-grid">
+                    <div class="converter-group">
+                        <label for="cidrInput">CIDR 前缀长度 (0-32)</label>
+                        <div class="range-wrapper">
+                            <input type="range" id="cidrInput" min="0" max="32" value="24">
+                            <span class="range-value" id="cidrValue">/24</span>
+                        </div>
+                    </div>
+                    <div class="converter-result">
+                        <div class="conv-item">
+                            <span class="conv-label">子网掩码</span>
+                            <span class="conv-value" id="cidrToMask">255.255.255.0</span>
+                        </div>
+                        <div class="conv-item">
+                            <span class="conv-label">通配符掩码</span>
+                            <span class="conv-value" id="wildcardMask">0.0.0.255</span>
+                        </div>
+                        <div class="conv-item">
+                            <span class="conv-label">可用主机</span>
+                            <span class="conv-value" id="cidrHosts">254</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>支持 IPv4 地址计算 | 所有计算本地完成</p>
+        </footer>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

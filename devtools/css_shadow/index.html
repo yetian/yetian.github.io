@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 阴影生成器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景动画 -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- 顶部工具栏 -->
+        <header class="toolbar">
+            <div class="toolbar-left">
+                <h1 class="app-title">
+                    <span class="title-icon">🌑</span>
+                    CSS 阴影生成器
+                </h1>
+                <p class="app-subtitle">可视化生成box-shadow阴影效果代码</p>
+            </div>
+            <div class="toolbar-right">
+                <button class="action-btn" id="resetBtn" title="重置">
+                    <span>🔄</span> 重置
+                </button>
+                <button class="action-btn primary" id="copyAllBtn" title="复制 CSS">
+                    <span>📋</span> 复制 CSS
+                </button>
+            </div>
+        </header>
+
+        <!-- 主编辑区 -->
+        <main class="main-content">
+            <!-- 左侧：预览区域 -->
+            <div class="preview-section">
+                <div class="panel-header">
+                    <span class="panel-title">预览</span>
+                </div>
+                <div class="preview-area">
+                    <div class="preview-box" id="previewBox">
+                        阴影效果预览
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧：控制面板 -->
+            <div class="controls-section">
+                <div class="panel-header">
+                    <span class="panel-title">阴影控制</span>
+                    <button class="panel-btn" id="addShadowBtn" title="添加阴影">+ 添加</button>
+                </div>
+                <div class="controls-area">
+                    <!-- 阴影列表 -->
+                    <div class="shadows-list" id="shadowsList">
+                        <!-- 阴影项会动态生成 -->
+                    </div>
+
+                    <!-- 预设样式 -->
+                    <div class="presets-section">
+                        <h3 class="section-title">预设样式</h3>
+                        <div class="presets-grid" id="presetsGrid">
+                            <!-- 预设会动态生成 -->
+                        </div>
+                    </div>
+
+                    <!-- 生成的 CSS -->
+                    <div class="css-output">
+                        <div class="css-header">
+                            <h3 class="section-title">生成的 CSS</h3>
+                            <button class="copy-btn" id="copyCodeBtn" title="复制代码">
+                                📋 复制
+                            </button>
+                        </div>
+                        <pre class="css-code" id="cssCode"></pre>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 通知 -->
+    <div class="notification" id="notification">
+        <span id="notificationText"></span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

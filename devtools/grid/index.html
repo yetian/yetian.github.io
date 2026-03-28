@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid 布局助手</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #06b6d4;
+            --primary-light: #22d3ee;
+            --primary-dark: #0891b2;
+            --secondary: #8b5cf6;
+            --accent: #10b981;
+            --dark: #0a0a0f;
+            --dark-light: #13131a;
+            --surface: #18181f;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--dark);
+            min-height: 100vh;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 { width: 400px; height: 400px; background: var(--primary); top: -100px; right: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: var(--secondary); bottom: -50px; left: -50px; animation-delay: -5s; }
+        .orb-3 { width: 250px; height: 250px; background: var(--accent); top: 50%; left: 50%; margin-top: -125px; margin-left: -125px; animation-delay: -10s; opacity: 0.2; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(30px, -30px); }
+            50% { transform: translate(-20px, 20px); }
+            75% { transform: translate(20px, 30px); }
+        }
+
+        .container { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 2rem; }
+
+        header { text-align: center; margin-bottom: 2rem; }
+        header h1 { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
+        .subtitle { color: var(--text-muted); }
+
+        .main-grid { display: grid; grid-template-columns: 280px 1fr; gap: 1.25rem; }
+        @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } .container { padding: 1rem; } header h1 { font-size: 1.5rem; } }
+
+        .panel { background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 1.25rem; }
+
+        .panel-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--glass-border); }
+
+        .control-group { margin-bottom: 1rem; }
+        .control-group label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.35rem; }
+        input[type="number"], input[type="text"], select { width: 100%; background: rgba(0, 0, 0, 0.3); border: 1px solid var(--glass-border); border-radius: 10px; padding: 0.6rem; color: var(--text); font-family: inherit; transition: border-color 0.2s; }
+        input:focus, select:focus { outline: none; border-color: var(--primary); }
+
+        .row-inputs { display: flex; gap: 0.5rem; }
+        .row-inputs input { flex: 1; }
+
+        .btn-group { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+        .btn-group button { flex: 1; min-width: 40px; padding: 0.5rem; background: transparent; border: 1px solid var(--glass-border); color: var(--text-muted); border-radius: 8px; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; }
+        .btn-group button.active, .btn-group button:hover { background: var(--primary); border-color: var(--primary); color: white; }
+
+        .preview { min-height: 350px; display: grid; gap: 0.5rem; padding: 1rem; background: rgba(0, 0, 0, 0.3); border-radius: 12px; }
+        .preview-item { background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 600; min-height: 50px; transition: all 0.3s; }
+        .preview-item:hover { transform: scale(1.02); }
+
+        .code-output { margin-top: 1rem; }
+        .code-output pre { background: rgba(0, 0, 0, 0.3); border-radius: 12px; padding: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; overflow-x: auto; }
+
+        button { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; border-radius: 12px; padding: 0.65rem 1.25rem; font-family: inherit; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4); }
+
+        .btn-secondary { background: var(--glass); border: 1px solid var(--glass-border); }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); box-shadow: none; transform: none; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>🔲 CSS Grid 布局助手</h1>
+            <p class="subtitle">可视化配置 CSS Grid 布局，生成代码</p>
+        </header>
+
+        <div class="main-grid">
+            <div class="panel">
+                <div class="panel-title">配置</div>
+
+                <div class="control-group">
+                    <label>列数</label>
+                    <input type="number" id="columns" value="3" min="1" max="12">
+                </div>
+
+                <div class="control-group">
+                    <label>行数</label>
+                    <input type="number" id="rows" value="3" min="1" max="12">
+                </div>
+
+                <div class="control-group">
+                    <label>列宽</label>
+                    <div class="btn-group">
+                        <button class="active" onclick="setColUnit('fr', this)">1fr</button>
+                        <button onclick="setColUnit('auto', this)">auto</button>
+                        <button onclick="setColUnit('px', this)">px</button>
+                        <button onclick="setColUnit('%', this)">%</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>行高</label>
+                    <div class="btn-group">
+                        <button class="active" onclick="setRowUnit('auto', this)">auto</button>
+                        <button onclick="setRowUnit('fr', this)">1fr</button>
+                        <button onclick="setRowUnit('px', this)">px</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>间距 (Gap)</label>
+                    <div class="row-inputs">
+                        <input type="number" id="gap" value="16" min="0" max="100">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>对齐 (Justify Items)</label>
+                    <div class="btn-group">
+                        <button class="active" onclick="setJustify('stretch', this)">拉伸</button>
+                        <button onclick="setJustify('start', this)">起点</button>
+                        <button onclick="setJustify('center', this)">居中</button>
+                        <button onclick="setJustify('end', this)">终点</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>垂直对齐 (Align Items)</label>
+                    <div class="btn-group">
+                        <button class="active" onclick="setAlign('stretch', this)">拉伸</button>
+                        <button onclick="setAlign('start', this)">起点</button>
+                        <button onclick="setAlign('center', this)">居中</button>
+                        <button onclick="setAlign('end', this)">终点</button>
+                    </div>
+                </div>
+
+                <button onclick="copyCode()" style="width: 100%; margin-top: 0.5rem;">复制 CSS 代码</button>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title">预览</div>
+                <div class="preview" id="preview"></div>
+
+                <div class="code-output">
+                    <div class="panel-title">CSS 代码</div>
+                    <pre id="codeOutput"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        const state = { columns: 3, rows: 3, colUnit: 'fr', rowUnit: 'auto', gap: 16, justify: 'stretch', align: 'stretch' };
+
+        window.setColUnit = function(unit, btn) { state.colUnit = unit; updateBtnGroup(btn.parentElement); render(); };
+        window.setRowUnit = function(unit, btn) { state.rowUnit = unit; updateBtnGroup(btn.parentElement); render(); };
+        window.setJustify = function(value, btn) { state.justify = value; updateBtnGroup(btn.parentElement); render(); };
+        window.setAlign = function(value, btn) { state.align = value; updateBtnGroup(btn.parentElement); render(); };
+
+        function updateBtnGroup(container) {
+            container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function render() {
+            const preview = document.getElementById('preview');
+            const colValue = state.colUnit === 'fr' ? '1fr' : state.colUnit === 'auto' ? 'auto' : state.colUnit === 'px' ? '100px' : '20%';
+            const rowValue = state.rowUnit === 'fr' ? '1fr' : state.rowUnit === 'auto' ? 'auto' : '100px';
+
+            preview.style.gridTemplateColumns = `repeat(${state.columns}, ${colValue})`;
+            preview.style.gridTemplateRows = `repeat(${state.rows}, ${rowValue})`;
+            preview.style.gap = `${state.gap}px`;
+            preview.style.justifyItems = state.justify;
+            preview.style.alignItems = state.align;
+
+            const total = state.columns * state.rows;
+            preview.innerHTML = Array.from({length: total}, (_, i) => `<div class="preview-item">${i + 1}</div>`).join('');
+
+            const code = `.container {
+    display: grid;
+    grid-template-columns: repeat(${state.columns}, ${colValue});
+    grid-template-rows: repeat(${state.rows}, ${rowValue});
+    gap: ${state.gap}px;
+    justify-items: ${state.justify};
+    align-items: ${state.align};
+}`;
+            document.getElementById('codeOutput').textContent = code;
+        }
+
+        window.copyCode = function() {
+            navigator.clipboard.writeText(document.getElementById('codeOutput').textContent);
+        };
+
+        document.getElementById('columns').addEventListener('input', (e) => { state.columns = parseInt(e.target.value) || 1; render(); });
+        document.getElementById('rows').addEventListener('input', (e) => { state.rows = parseInt(e.target.value) || 1; render(); });
+        document.getElementById('gap').addEventListener('input', (e) => { state.gap = parseInt(e.target.value) || 0; render(); });
+
+        render();
+    })();
+    </script>
+</body>
+</html>

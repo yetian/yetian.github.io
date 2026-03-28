@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bcrypt 哈希生成器</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --primary-light: #a78bfa;
+            --primary-dark: #7c3aed;
+            --secondary: #ec4899;
+            --accent: #10b981;
+            --dark: #0a0a0f;
+            --dark-light: #13131a;
+            --surface: #18181f;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body { font-family: 'Outfit', sans-serif; background: var(--dark); min-height: 100vh; color: var(--text); overflow-x: hidden; }
+
+        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; pointer-events: none; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: float 20s ease-in-out infinite; }
+        .orb-1 { width: 400px; height: 400px; background: var(--primary); top: -100px; right: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: var(--secondary); bottom: -50px; left: -50px; animation-delay: -5s; }
+        .orb-3 { width: 250px; height: 250px; background: var(--accent); top: 50%; left: 50%; margin-top: -125px; margin-left: -125px; animation-delay: -10s; opacity: 0.2; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(30px, -30px); }
+            50% { transform: translate(-20px, 20px); }
+            75% { transform: translate(20px, 30px); }
+        }
+
+        .container { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; padding: 2rem; }
+
+        header { text-align: center; margin-bottom: 2rem; }
+        header h1 { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
+        .subtitle { color: var(--text-muted); }
+
+        .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.25rem; }
+        .tabs button { flex: 1; background: transparent; border: 1px solid var(--glass-border); color: var(--text); padding: 0.75rem; border-radius: 12px; cursor: pointer; font-family: inherit; font-weight: 500; transition: all 0.2s; }
+        .tabs button.active { background: var(--primary); border-color: var(--primary); }
+
+        .panel { background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 1.25rem; margin-bottom: 1rem; }
+
+        label { display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+
+        input[type="text"], input[type="password"] { width: 100%; background: rgba(0, 0, 0, 0.3); border: 1px solid var(--glass-border); border-radius: 12px; padding: 0.85rem; color: var(--text); font-family: inherit; font-size: 0.95rem; transition: border-color 0.2s; }
+        input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2); }
+
+        select { background: rgba(0, 0, 0, 0.3); border: 1px solid var(--glass-border); border-radius: 10px; padding: 0.6rem; color: var(--text); font-family: inherit; cursor: pointer; }
+
+        .row { display: flex; gap: 0.75rem; align-items: flex-end; margin-bottom: 1rem; }
+
+        button { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; border-radius: 12px; padding: 0.65rem 1.25rem; font-family: inherit; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4); }
+
+        .btn-secondary { background: var(--glass); border: 1px solid var(--glass-border); }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); box-shadow: none; transform: none; }
+
+        pre { background: rgba(0, 0, 0, 0.3); border-radius: 12px; padding: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; word-break: break-all; }
+
+        .verify-result { padding: 0.75rem 1rem; border-radius: 10px; font-weight: 500; text-align: center; }
+        .verify-success { background: rgba(16, 185, 129, 0.2); color: var(--success); }
+        .verify-fail { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+
+        @media (max-width: 768px) { .container { padding: 1rem; } header h1 { font-size: 1.5rem; } }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>🛡️ Bcrypt 哈希生成器</h1>
+            <p class="subtitle">生成和验证 Bcrypt 密码哈希</p>
+        </header>
+
+        <div class="tabs">
+            <button class="active" onclick="switchTab('generate', this)">生成哈希</button>
+            <button onclick="switchTab('verify', this)">验证密码</button>
+        </div>
+
+        <div id="generatePanel">
+            <div class="panel">
+                <label>密码</label>
+                <input type="password" id="password" placeholder="输入密码...">
+            </div>
+
+            <div class="panel">
+                <div class="row">
+                    <label style="flex-shrink: 0;">
+                        轮数 (Cost)
+                        <select id="rounds">
+                            <option value="10" selected>10 (推荐)</option>
+                            <option value="8">8 (快速)</option>
+                            <option value="12">12 (安全)</option>
+                            <option value="14">14 (高安全)</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 0.75rem; margin-bottom: 1rem;">
+                <button onclick="generateHash()" style="flex: 1;">生成哈希</button>
+                <button class="btn-secondary" onclick="copyHash()">复制</button>
+            </div>
+
+            <div class="panel">
+                <div style="font-weight: 600; margin-bottom: 0.75rem;">Bcrypt 哈希</div>
+                <pre id="hashOutput">-</pre>
+            </div>
+        </div>
+
+        <div id="verifyPanel" style="display: none;">
+            <div class="panel">
+                <label>密码</label>
+                <input type="password" id="verifyPassword" placeholder="输入密码...">
+            </div>
+
+            <div class="panel">
+                <label>Bcrypt 哈希</label>
+                <input type="text" id="verifyHash" placeholder="$2b$10$..." style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
+            </div>
+
+            <div style="display: flex; gap: 0.75rem; margin-bottom: 1rem;">
+                <button onclick="verifyPassword()" style="flex: 1;">验证密码</button>
+            </div>
+
+            <div class="panel">
+                <div style="font-weight: 600; margin-bottom: 0.75rem;">验证结果</div>
+                <div id="verifyResult">-</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js"></script>
+    <script>
+    (function() {
+        'use strict';
+
+        window.switchTab = function(tab, btn) {
+            document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('generatePanel').style.display = tab === 'generate' ? 'block' : 'none';
+            document.getElementById('verifyPanel').style.display = tab === 'verify' ? 'block' : 'none';
+        };
+
+        window.generateHash = function() {
+            const password = document.getElementById('password').value;
+            const rounds = parseInt(document.getElementById('rounds').value);
+
+            if (!password) { document.getElementById('hashOutput').textContent = '请输入密码'; return; }
+
+            try {
+                const salt = bcrypt.genSaltSync(rounds);
+                const hash = bcrypt.hashSync(password, salt);
+                document.getElementById('hashOutput').textContent = hash;
+            } catch (e) {
+                document.getElementById('hashOutput').textContent = '错误: ' + e.message;
+            }
+        };
+
+        window.copyHash = function() {
+            const hash = document.getElementById('hashOutput').textContent;
+            if (hash && hash !== '-') navigator.clipboard.writeText(hash);
+        };
+
+        window.verifyPassword = function() {
+            const password = document.getElementById('verifyPassword').value;
+            const hash = document.getElementById('verifyHash').value;
+
+            if (!password || !hash) {
+                document.getElementById('verifyResult').innerHTML = '<div class="verify-result verify-fail">请输入密码和哈希</div>';
+                return;
+            }
+
+            try {
+                const result = bcrypt.compareSync(password, hash);
+                document.getElementById('verifyResult').innerHTML = result
+                    ? '<div class="verify-result verify-success">✓ 密码匹配</div>'
+                    : '<div class="verify-result verify-fail">✗ 密码不匹配</div>';
+            } catch (e) {
+                document.getElementById('verifyResult').innerHTML = '<div class="verify-result verify-fail">错误: ' + e.message + '</div>';
+            }
+        };
+
+        document.getElementById('password').addEventListener('input', () => { if (document.getElementById('password').value) generateHash(); });
+    })();
+    </script>
+</body>
+</html>

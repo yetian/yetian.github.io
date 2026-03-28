@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON-YAML 转换器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景动画 -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- 顶部工具栏 -->
+        <header class="toolbar">
+            <div class="toolbar-left">
+                <h1 class="app-title">
+                    <span class="title-icon">⟷</span>
+                    JSON-YAML 转换器
+                </h1>
+                <p class="app-subtitle">JSON与YAML格式互相转换</p>
+            </div>
+            <div class="toolbar-center">
+                <div class="tool-group mode-switch">
+                    <button class="mode-btn active" id="jsonToYamlBtn" title="JSON 转 YAML">JSON → YAML</button>
+                    <button class="mode-btn" id="yamlToJsonBtn" title="YAML 转 JSON">YAML → JSON</button>
+                </div>
+                <div class="tool-group">
+                    <label class="indent-label">缩进:</label>
+                    <select id="indentSelect" class="indent-select">
+                        <option value="2">2 空格</option>
+                        <option value="4" selected>4 空格</option>
+                    </select>
+                </div>
+            </div>
+            <div class="toolbar-right">
+                <button class="action-btn" id="clearBtn" title="清空">
+                    <span>🗑</span> 清空
+                </button>
+                <button class="action-btn" id="swapBtn" title="交换">
+                    <span>🔄</span> 交换
+                </button>
+                <button class="action-btn primary" id="convertBtn" title="转换">
+                    <span>✨</span> 转换
+                </button>
+            </div>
+        </header>
+
+        <!-- 主编辑区 -->
+        <main class="editor-main">
+            <!-- 输入面板 -->
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <span class="panel-title" id="inputLabel">输入 JSON</span>
+                    <div class="panel-actions">
+                        <button class="panel-btn" id="pasteBtn" title="粘贴">📋</button>
+                    </div>
+                </div>
+                <div class="editor-wrapper">
+                    <div class="line-numbers" id="inputLineNumbers"></div>
+                    <textarea id="inputArea" placeholder="在此粘贴 JSON 数据..."></textarea>
+                </div>
+                <div class="editor-footer">
+                    <span id="inputStats">0 字符 | 0 行</span>
+                </div>
+            </div>
+
+            <!-- 分割线 -->
+            <div class="resizer">
+                <div class="resizer-handle"></div>
+            </div>
+
+            <!-- 输出面板 -->
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <span class="panel-title" id="outputLabel">YAML 输出</span>
+                    <div class="panel-actions">
+                        <button class="panel-btn" id="copyBtn" title="复制">📋</button>
+                    </div>
+                </div>
+                <div class="editor-wrapper">
+                    <div class="line-numbers" id="outputLineNumbers"></div>
+                    <pre id="outputArea"><code id="outputCode"></code></pre>
+                </div>
+                <div class="editor-footer">
+                    <span id="outputStats">0 字符 | 0 行</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- 错误提示栏 -->
+        <div class="error-bar" id="errorBar">
+            <span class="error-icon">⚠</span>
+            <span class="error-message" id="errorMessage"></span>
+            <button class="error-close" id="errorClose">×</button>
+        </div>
+
+        <!-- 状态栏 -->
+        <footer class="status-bar">
+            <div class="status-left">
+                <span class="status-item" id="statusMsg">就绪</span>
+            </div>
+            <div class="status-right">
+                <span class="status-item">实时转换已开启</span>
+                <span class="status-item">|</span>
+                <span class="status-item">Ctrl+Enter 快速转换</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

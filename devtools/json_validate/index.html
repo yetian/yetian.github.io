@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON 验证器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景动画 -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- 顶部标题栏 -->
+        <header class="header">
+            <h1 class="app-title">
+                <span class="title-icon">{ }</span>
+                JSON 验证器
+            </h1>
+            <p class="app-subtitle">验证JSON语法正确性，定位错误位置</p>
+            <div class="header-actions">
+                <button class="action-btn" id="clearBtn" title="清空">
+                    <span>🗑</span> 清空
+                </button>
+                <button class="action-btn" id="formatBtn" title="格式化">
+                    <span>✨</span> 格式化
+                </button>
+                <button class="action-btn primary" id="validateBtn" title="验证">
+                    <span>✓</span> 验证
+                </button>
+            </div>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 输入面板 -->
+            <div class="input-panel">
+                <div class="panel-header">
+                    <span class="panel-title">输入 JSON</span>
+                    <span class="panel-hint">支持粘贴或拖拽文件</span>
+                </div>
+                <div class="editor-wrapper">
+                    <div class="line-numbers" id="lineNumbers"></div>
+                    <textarea id="jsonInput" placeholder='在此输入 JSON 数据，例如：&#10;{&#10;    "name": "示例",&#10;    "value": 123&#10;}' spellcheck="false"></textarea>
+                </div>
+            </div>
+
+            <!-- 结果面板 -->
+            <div class="result-panel">
+                <div class="panel-header">
+                    <span class="panel-title">验证结果</span>
+                    <div class="status-badge" id="statusBadge">
+                        <span class="status-icon">●</span>
+                        <span class="status-text">等待验证</span>
+                    </div>
+                </div>
+                <div class="result-content" id="resultContent">
+                    <div class="result-placeholder">
+                        <div class="placeholder-icon">📋</div>
+                        <p>点击"验证"按钮检查 JSON 格式</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 结构摘要面板 -->
+        <section class="summary-panel" id="summaryPanel">
+            <div class="panel-header">
+                <span class="panel-title">结构摘要</span>
+            </div>
+            <div class="summary-content" id="summaryContent">
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="summary-label">类型</span>
+                        <span class="summary-value" id="summaryType">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">键数量</span>
+                        <span class="summary-value" id="summaryKeys">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">嵌套深度</span>
+                        <span class="summary-value" id="summaryDepth">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">数组元素</span>
+                        <span class="summary-value" id="summaryArrayItems">-</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 底部状态栏 -->
+        <footer class="status-bar">
+            <div class="status-left">
+                <span class="status-item" id="charCount">0 字符</span>
+                <span class="status-item" id="lineCount">0 行</span>
+            </div>
+            <div class="status-right">
+                <span class="status-item">支持标准 JSON 格式</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

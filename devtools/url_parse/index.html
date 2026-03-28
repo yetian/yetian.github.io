@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL 解析器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景动画 -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- 顶部工具栏 -->
+        <header class="toolbar">
+            <div class="toolbar-left">
+                <h1 class="app-title">
+                    <span class="title-icon">🔗</span>
+                    URL 解析器
+                </h1>
+                <p class="app-subtitle">解析URL组成部分：协议、域名、路径、参数</p>
+            </div>
+            <div class="toolbar-right">
+                <button class="action-btn" id="clearBtn" title="清空">
+                    <span>🗑</span> 清空
+                </button>
+            </div>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- URL 输入区 -->
+            <div class="input-section">
+                <div class="input-wrapper">
+                    <input type="text" id="urlInput" class="url-input" placeholder="在此输入 URL 进行解析...">
+                    <button class="parse-btn" id="parseBtn">解析</button>
+                </div>
+                <div class="validation-message" id="validationMessage"></div>
+            </div>
+
+            <!-- 解析结果区 -->
+            <div class="result-section" id="resultSection">
+                <div class="result-header">
+                    <span class="result-title">解析结果</span>
+                </div>
+
+                <!-- 基础组件 -->
+                <div class="components-grid" id="componentsGrid">
+                    <!-- 动态生成 -->
+                </div>
+
+                <!-- 查询参数 -->
+                <div class="query-section" id="querySection">
+                    <div class="section-header">
+                        <span class="section-title">查询参数 (Query Parameters)</span>
+                        <span class="param-count" id="paramCount"></span>
+                    </div>
+                    <div class="params-list" id="paramsList">
+                        <!-- 动态生成 -->
+                    </div>
+                </div>
+
+                <!-- URL 编码/解码 -->
+                <div class="encode-section">
+                    <div class="section-header">
+                        <span class="section-title">编码工具</span>
+                    </div>
+                    <div class="encode-grid">
+                        <div class="encode-card">
+                            <div class="encode-label">URL 编码</div>
+                            <div class="encode-value" id="encodedUrl">-</div>
+                            <button class="copy-btn small" data-target="encodedUrl" title="复制">📋</button>
+                        </div>
+                        <div class="encode-card">
+                            <div class="encode-label">完整 URL</div>
+                            <div class="encode-value" id="fullUrl">-</div>
+                            <button class="copy-btn small" data-target="fullUrl" title="复制">📋</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 状态栏 -->
+        <footer class="status-bar">
+            <div class="status-left">
+                <span class="status-item" id="statusText">就绪</span>
+            </div>
+            <div class="status-right">
+                <span class="status-item">支持 HTTP/HTTPS/FTP 等协议</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

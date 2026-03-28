@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UUID 生成器 - 开发工具</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>UUID 生成器</h1>
+            <p class="subtitle">通用唯一标识符生成工具</p>
+        </header>
+
+        <main class="main-content">
+            <section class="control-panel glass-card">
+                <h2>生成设置</h2>
+
+                <div class="options-row">
+                    <div class="option-group">
+                        <label class="toggle-label">
+                            <span>大写字母</span>
+                            <label class="switch">
+                                <input type="checkbox" id="uppercaseToggle">
+                                <span class="slider"></span>
+                            </label>
+                        </label>
+                    </div>
+
+                    <div class="option-group">
+                        <label class="toggle-label">
+                            <span>包含连字符</span>
+                            <label class="switch">
+                                <input type="checkbox" id="hyphensToggle" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="batch-options">
+                    <label for="batchCount">批量生成数量</label>
+                    <div class="batch-input-group">
+                        <input type="number" id="batchCount" min="1" max="100" value="1">
+                        <span class="hint">1-100</span>
+                    </div>
+                </div>
+
+                <div class="generate-buttons">
+                    <button class="btn btn-primary" id="generateV1">
+                        <span class="btn-icon">🕐</span>
+                        生成 UUID v1
+                    </button>
+                    <button class="btn btn-primary" id="generateV4">
+                        <span class="btn-icon">🎲</span>
+                        生成 UUID v4
+                    </button>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" id="copyAllBtn">
+                        <span class="btn-icon">📋</span>
+                        复制全部
+                    </button>
+                    <button class="btn btn-danger" id="clearBtn">
+                        <span class="btn-icon">🗑️</span>
+                        清空列表
+                    </button>
+                </div>
+            </section>
+
+            <section class="result-panel glass-card">
+                <div class="result-header">
+                    <h2>生成结果</h2>
+                    <span class="count-badge" id="resultCount">0 条</span>
+                </div>
+
+                <div class="result-list" id="resultList">
+                    <div class="empty-state">
+                        <div class="empty-icon">🔗</div>
+                        <p>点击上方按钮生成 UUID</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>UUID v1: 基于时间戳 | UUID v4: 随机生成</p>
+        </footer>
+    </div>
+
+    <div class="toast" id="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message" id="toastMessage">已复制到剪贴板</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时区转换</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #06b6d4;
+            --primary-light: #22d3ee;
+            --primary-dark: #0891b2;
+            --secondary: #8b5cf6;
+            --accent: #10b981;
+            --dark: #0a0a0f;
+            --dark-light: #13131a;
+            --surface: #18181f;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body { font-family: 'Outfit', sans-serif; background: var(--dark); min-height: 100vh; color: var(--text); overflow-x: hidden; }
+
+        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; pointer-events: none; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: float 20s ease-in-out infinite; }
+        .orb-1 { width: 400px; height: 400px; background: var(--primary); top: -100px; right: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: var(--secondary); bottom: -50px; left: -50px; animation-delay: -5s; }
+        .orb-3 { width: 250px; height: 250px; background: var(--accent); top: 50%; left: 50%; margin-top: -125px; margin-left: -125px; animation-delay: -10s; opacity: 0.2; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(30px, -30px); }
+            50% { transform: translate(-20px, 20px); }
+            75% { transform: translate(20px, 30px); }
+        }
+
+        .container { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 2rem; }
+
+        header { text-align: center; margin-bottom: 2rem; }
+        header h1 { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
+        .subtitle { color: var(--text-muted); }
+
+        .panel { background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 1.25rem; margin-bottom: 1.25rem; }
+
+        .panel-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 1rem; }
+
+        label { display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+
+        select, input[type="time"], input[type="date"] { width: 100%; background: rgba(0, 0, 0, 0.3); border: 1px solid var(--glass-border); border-radius: 10px; padding: 0.75rem; color: var(--text); font-family: inherit; font-size: 0.95rem; transition: border-color 0.2s; }
+        select:focus, input:focus { outline: none; border-color: var(--primary); }
+
+        .convert-row { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: flex-end; }
+        .convert-row > div { display: flex; flex-direction: column; }
+        .swap-btn { width: 48px; height: 48px; background: var(--primary); border: none; border-radius: 50%; color: white; font-size: 1.25rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0; }
+        .swap-btn:hover { transform: rotate(180deg); }
+
+        .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+        .result-card { background: rgba(0, 0, 0, 0.3); border-radius: 12px; padding: 1rem; text-align: center; }
+        .result-city { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+        .result-time { font-size: 1.5rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; color: var(--text); }
+        .result-date { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; }
+        .result-card.current { border: 1px solid var(--primary); }
+        .result-card.current .result-time { color: var(--primary-light); }
+
+        @media (max-width: 768px) { .container { padding: 1rem; } header h1 { font-size: 1.5rem; } .convert-row { grid-template-columns: 1fr; } .swap-btn { margin: 0 auto; } }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>🌍 时区转换</h1>
+            <p class="subtitle">查看世界各地当前时间，快速转换时区</p>
+        </header>
+
+        <div class="panel">
+            <div class="panel-title">时区转换</div>
+            <div class="convert-row">
+                <div>
+                    <label>源时区</label>
+                    <select id="fromZone"></select>
+                    <label style="margin-top: 0.75rem;">时间</label>
+                    <input type="time" id="fromTime" value="12:00">
+                </div>
+                <button class="swap-btn" onclick="swapZones()" title="交换">⇄</button>
+                <div>
+                    <label>目标时区</label>
+                    <select id="toZone"></select>
+                    <label style="margin-top: 0.75rem;">转换结果</label>
+                    <div style="background: rgba(0,0,0,0.3); border-radius: 10px; padding: 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; text-align: center;" id="toTime">--:--</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-title">世界时钟</div>
+            <div class="result-grid" id="worldClocks"></div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        const timezones = [
+            { id: 'Asia/Shanghai', name: '北京', offset: 8 },
+            { id: 'Asia/Tokyo', name: '东京', offset: 9 },
+            { id: 'Asia/Singapore', name: '新加坡', offset: 8 },
+            { id: 'Asia/Dubai', name: '迪拜', offset: 4 },
+            { id: 'Europe/London', name: '伦敦', offset: 0 },
+            { id: 'Europe/Paris', name: '巴黎', offset: 1 },
+            { id: 'Europe/Berlin', name: '柏林', offset: 1 },
+            { id: 'Europe/Moscow', name: '莫斯科', offset: 3 },
+            { id: 'America/New_York', name: '纽约', offset: -5 },
+            { id: 'America/Chicago', name: '芝加哥', offset: -6 },
+            { id: 'America/Denver', name: '丹佛', offset: -7 },
+            { id: 'America/Los_Angeles', name: '洛杉矶', offset: -8 },
+            { id: 'America/Sao_Paulo', name: '圣保罗', offset: -3 },
+            { id: 'Australia/Sydney', name: '悉尼', offset: 11 },
+            { id: 'Pacific/Auckland', name: '奥克兰', offset: 13 }
+        ];
+
+        const fromSelect = document.getElementById('fromZone');
+        const toSelect = document.getElementById('toZone');
+
+        // Populate dropdowns
+        timezones.forEach(tz => {
+            const opt1 = document.createElement('option');
+            opt1.value = tz.id;
+            opt1.textContent = `${tz.name} (UTC${tz.offset >= 0 ? '+' : ''}${tz.offset})`;
+            fromSelect.appendChild(opt1);
+
+            const opt2 = document.createElement('option');
+            opt2.value = tz.id;
+            opt2.textContent = `${tz.name} (UTC${tz.offset >= 0 ? '+' : ''}${tz.offset})`;
+            toSelect.appendChild(opt2);
+        });
+
+        fromSelect.value = 'Asia/Shanghai';
+        toSelect.value = 'America/New_York';
+
+        function getTimezoneOffset(id) {
+            return timezones.find(tz => tz.id === id)?.offset || 0;
+        }
+
+        window.convertTime = function() {
+            const fromOffset = getTimezoneOffset(fromSelect.value);
+            const toOffset = getTimezoneOffset(toSelect.value);
+            const timeStr = document.getElementById('fromTime').value;
+
+            if (!timeStr) return;
+
+            const [hours, minutes] = timeStr.split(':').map(Number);
+            const fromTotal = hours * 60 + minutes;
+            const diff = (toOffset - fromOffset) * 60;
+            let toTotal = fromTotal + diff;
+
+            if (toTotal < 0) toTotal += 24 * 60;
+            if (toTotal >= 24 * 60) toTotal -= 24 * 60;
+
+            const toHours = Math.floor(toTotal / 60);
+            const toMins = toTotal % 60;
+
+            document.getElementById('toTime').textContent =
+                `${String(toHours).padStart(2, '0')}:${String(toMins).padStart(2, '0')}`;
+        };
+
+        window.swapZones = function() {
+            const temp = fromSelect.value;
+            fromSelect.value = toSelect.value;
+            toSelect.value = temp;
+            convertTime();
+        };
+
+        function updateWorldClocks() {
+            const container = document.getElementById('worldClocks');
+            const now = new Date();
+
+            container.innerHTML = timezones.map(tz => {
+                const options = { timeZone: tz.id, hour: '2-digit', minute: '2-digit', hour12: false };
+                const dateOptions = { timeZone: tz.id, month: 'short', day: 'numeric' };
+                const time = now.toLocaleTimeString('zh-CN', options);
+                const date = now.toLocaleDateString('zh-CN', dateOptions);
+                const isCurrent = tz.id === fromSelect.value;
+
+                return `
+                    <div class="result-card ${isCurrent ? 'current' : ''}">
+                        <div class="result-city">${tz.name}</div>
+                        <div class="result-time">${time}</div>
+                        <div class="result-date">${date}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Event listeners
+        fromSelect.addEventListener('change', convertTime);
+        toSelect.addEventListener('change', convertTime);
+        document.getElementById('fromTime').addEventListener('input', convertTime);
+
+        // Initial
+        convertTime();
+        updateWorldClocks();
+        setInterval(updateWorldClocks, 1000);
+    })();
+    </script>
+</body>
+</html>

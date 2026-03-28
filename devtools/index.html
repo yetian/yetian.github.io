@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevTools - 开发者工具箱</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-light: #34d399;
+            --primary-dark: #059669;
+            --secondary: #6366f1;
+            --accent: #f59e0b;
+            --dark: #0a0a0f;
+            --dark-light: #13131a;
+            --surface: #18181f;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark);
+            min-height: 100vh;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Background Animation */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            top: -100px;
+            right: -100px;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--secondary);
+            bottom: -50px;
+            left: -50px;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--accent);
+            top: 50%;
+            left: 50%;
+            margin-top: -125px;
+            margin-left: -125px;
+            animation-delay: -10s;
+            opacity: 0.2;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(30px, -30px); }
+            50% { transform: translate(-20px, 20px); }
+            75% { transform: translate(20px, 30px); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 1rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .search-box {
+            max-width: 500px;
+            margin: 1.5rem auto 0;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 0.85rem 1rem 0.85rem 2.75rem;
+            font-size: 1rem;
+            color: var(--text);
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-box svg {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .category {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.5rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .category-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .category-count {
+            margin-left: auto;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: var(--surface);
+            padding: 0.25rem 0.6rem;
+            border-radius: 20px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .tool-card {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .tool-card:hover {
+            background: rgba(16, 185, 129, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .tool-card:hover .tool-name {
+            color: var(--primary);
+        }
+
+        .tool-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .tool-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .tool-name {
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .tool-desc {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 0.15rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Category Colors */
+        .category-encode .category-icon { background: linear-gradient(135deg, #f97316, #fb923c); }
+        .category-format .category-icon { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+        .category-text .category-icon { background: linear-gradient(135deg, #06b6d4, #22d3ee); }
+        .category-generate .category-icon { background: linear-gradient(135deg, #ec4899, #f472b6); }
+        .category-time .category-icon { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+        .category-number .category-icon { background: linear-gradient(135deg, #10b981, #34d399); }
+        .category-network .category-icon { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+        .category-dev .category-icon { background: linear-gradient(135deg, #6366f1, #818cf8); }
+        .category-security .category-icon { background: linear-gradient(135deg, #ef4444, #f87171); }
+        .category-image .category-icon { background: linear-gradient(135deg, #14b8a6, #2dd4bf); }
+
+        .category-encode .tool-icon { background: rgba(249, 115, 22, 0.2); }
+        .category-format .tool-icon { background: rgba(139, 92, 246, 0.2); }
+        .category-text .tool-icon { background: rgba(6, 182, 212, 0.2); }
+        .category-generate .tool-icon { background: rgba(236, 72, 153, 0.2); }
+        .category-time .tool-icon { background: rgba(245, 158, 11, 0.2); }
+        .category-number .tool-icon { background: rgba(16, 185, 129, 0.2); }
+        .category-network .tool-icon { background: rgba(59, 130, 246, 0.2); }
+        .category-dev .tool-icon { background: rgba(99, 102, 241, 0.2); }
+        .category-security .tool-icon { background: rgba(239, 68, 68, 0.2); }
+        .category-image .tool-icon { background: rgba(20, 184, 166, 0.2); }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            header h1 {
+                font-size: 1.75rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>DevTools</h1>
+            <p class="subtitle">开发者工具箱 - 54 个实用工具</p>
+            <div class="search-box">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="searchInput" placeholder="搜索工具...">
+            </div>
+        </header>
+
+        <main id="toolsContainer">
+            <!-- Tools will be rendered by JavaScript -->
+        </main>
+
+        <footer>
+            <p>纯前端实现 · 数据不上传 · 本地处理</p>
+        </footer>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        const tools = [
+            // 编码/解码
+            { category: 'encode', name: 'Base64 编码', desc: '文本和文件Base64转换', icon: '🔤', url: 'base64/index.html' },
+            { category: 'encode', name: 'URL 编码', desc: 'URL组件编码解码', icon: '🔗', url: 'url_encode/index.html' },
+            { category: 'encode', name: 'HTML 实体', desc: 'HTML特殊字符转义', icon: '📄', url: 'html_encode/index.html' },
+            { category: 'encode', name: 'Unicode 转换', desc: '文本与Unicode互转', icon: '🌐', url: 'unicode/index.html' },
+            { category: 'encode', name: 'JWT 解码', desc: '解析JWT令牌内容', icon: '🎫', url: 'jwt/index.html' },
+            { category: 'encode', name: '图片Base64', desc: '图片与Base64互转', icon: '🖼️', url: 'base64_image/index.html' },
+
+            // 格式转换
+            { category: 'format', name: 'JSON 格式化', desc: '美化压缩JSON', icon: '📋', url: 'json_format/index.html' },
+            { category: 'format', name: 'JSON 校验', desc: 'JSON语法检查', icon: '✅', url: 'json_validate/index.html' },
+            { category: 'format', name: 'JSON-YAML', desc: 'JSON与YAML互转', icon: '🔄', url: 'json_yaml/index.html' },
+            { category: 'format', name: 'JSON-XML', desc: 'JSON与XML互转', icon: '🔀', url: 'json_xml/index.html' },
+            { category: 'format', name: 'YAML 格式化', desc: 'YAML美化校验', icon: '📝', url: 'yaml_format/index.html' },
+            { category: 'format', name: 'XML 格式化', desc: 'XML美化压缩', icon: '📰', url: 'xml_format/index.html' },
+            { category: 'format', name: 'Markdown', desc: 'Markdown实时预览', icon: '📖', url: '../mdeditor/index.html' },
+
+            // 文本工具
+            { category: 'text', name: '正则测试', desc: '正则表达式测试器', icon: '🔍', url: 'regex/index.html' },
+            { category: 'text', name: '文本对比', desc: '差异高亮对比', icon: '⚖️', url: 'diff/index.html' },
+            { category: 'text', name: '文本统计', desc: '字符单词统计', icon: '📊', url: 'text_stats/index.html' },
+            { category: 'text', name: '文本转换', desc: '大小写格式转换', icon: '🔄', url: 'text_transform/index.html' },
+            { category: 'text', name: '文本排序', desc: '行排序去重', icon: '📈', url: 'text_sort/index.html' },
+            { category: 'text', name: '假文生成', desc: 'Lorem中文假文', icon: '💬', url: 'lorem/index.html' },
+
+            // 生成器
+            { category: 'generate', name: 'UUID 生成', desc: '批量生成UUID', icon: '🔑', url: 'uuid/index.html' },
+            { category: 'generate', name: 'Hash 生成', desc: 'MD5/SHA哈希', icon: '🔐', url: 'hash/index.html' },
+            { category: 'generate', name: '二维码生成', desc: '自定义二维码', icon: '📱', url: 'qrcode/index.html' },
+            { category: 'generate', name: '二维码解析', desc: '图片识别二维码', icon: '📷', url: 'qrreader/index.html' },
+            { category: 'generate', name: '颜色选择器', desc: 'HEX/RGB/HSL转换', icon: '🎨', url: 'color/index.html' },
+            { category: 'generate', name: '渐变生成', desc: 'CSS渐变代码', icon: '🌈', url: 'gradient/index.html' },
+            { category: 'generate', name: '随机数', desc: '随机数生成器', icon: '🎲', url: 'random/index.html' },
+            { category: 'generate', name: '密码生成', desc: '安全密码生成', icon: '🗝️', url: '../password_gen/index.html' },
+
+            // 时间工具
+            { category: 'time', name: '时间戳转换', desc: 'Unix时间戳转换', icon: '⏰', url: 'timestamp/index.html' },
+            { category: 'time', name: 'Cron 解析', desc: 'Cron表达式生成', icon: '📅', url: 'cron/index.html' },
+            { category: 'time', name: '日期计算', desc: '日期间隔计算', icon: '📆', url: 'date_calc/index.html' },
+            { category: 'time', name: '时区转换', desc: '世界时钟对照', icon: '🌍', url: 'timezone/index.html' },
+
+            // 数字与进制
+            { category: 'number', name: '进制转换', desc: '二八十六进制', icon: '🔢', url: 'base/index.html' },
+            { category: 'number', name: '位运算', desc: 'AND/OR/XOR运算', icon: '💯', url: 'bitwise/index.html' },
+            { category: 'number', name: 'IEEE 754', desc: '浮点数解析', icon: '🔬', url: 'ieee754/index.html' },
+            { category: 'number', name: '单位转换', desc: '长度重量温度', icon: '📐', url: '../unit_converter/index.html' },
+
+            // 网络工具
+            { category: 'network', name: 'URL 解析', desc: 'URL组件拆分', icon: '🔗', url: 'url_parse/index.html' },
+            { category: 'network', name: 'IP 计算', desc: '子网掩码CIDR', icon: '🌐', url: 'ip_calc/index.html' },
+            { category: 'network', name: 'HTTP状态码', desc: '状态码速查表', icon: '📡', url: 'http_status/index.html' },
+            { category: 'network', name: 'UserAgent', desc: 'UA解析器', icon: '🖥️', url: 'useragent/index.html' },
+
+            // 开发辅助
+            { category: 'dev', name: 'Git 速查', desc: 'Git命令速查表', icon: '📚', url: 'git_cheat/index.html' },
+            { category: 'dev', name: 'JSONPath', desc: 'JSONPath查询', icon: '🔎', url: 'jsonpath/index.html' },
+            { category: 'dev', name: 'SQL 格式化', desc: 'SQL美化压缩', icon: '💾', url: 'sql_format/index.html' },
+            { category: 'dev', name: '代码美化', desc: 'JS/CSS/HTML格式化', icon: '✨', url: 'code_format/index.html' },
+            { category: 'dev', name: 'CSS 阴影', desc: '阴影效果生成', icon: '🌑', url: 'css_shadow/index.html' },
+            { category: 'dev', name: 'CSS 圆角', desc: '圆角代码生成', icon: '⭕', url: 'css_radius/index.html' },
+            { category: 'dev', name: 'Flexbox', desc: 'Flex布局助手', icon: '📦', url: 'flexbox/index.html' },
+            { category: 'dev', name: 'CSS Grid', desc: 'Grid布局助手', icon: '🔲', url: 'grid/index.html' },
+
+            // 安全工具
+            { category: 'security', name: '证书解析', desc: 'X.509证书查看', icon: '📜', url: 'certificate/index.html' },
+            { category: 'security', name: 'HMAC 生成', desc: 'HMAC哈希计算', icon: '🔒', url: 'hmac/index.html' },
+            { category: 'security', name: 'Bcrypt', desc: 'Bcrypt哈希生成', icon: '🛡️', url: 'bcrypt/index.html' },
+
+            // 图形工具
+            { category: 'image', name: '图片压缩', desc: 'PNG/JPG压缩', icon: '🗜️', url: 'image_compress/index.html' },
+            { category: 'image', name: '图片缩放', desc: '调整图片尺寸', icon: '📐', url: 'image_resize/index.html' },
+            { category: 'image', name: '图片裁剪', desc: '在线裁剪图片', icon: '✂️', url: 'image_crop/index.html' },
+            { category: 'image', name: 'SVG 查看', desc: 'SVG代码预览', icon: '🖼️', url: 'svg_viewer/index.html' }
+        ];
+
+        const categories = {
+            encode: { name: '编码/解码', class: 'category-encode' },
+            format: { name: '格式转换', class: 'category-format' },
+            text: { name: '文本工具', class: 'category-text' },
+            generate: { name: '生成器', class: 'category-generate' },
+            time: { name: '时间工具', class: 'category-time' },
+            number: { name: '数字与进制', class: 'category-number' },
+            network: { name: '网络工具', class: 'category-network' },
+            dev: { name: '开发辅助', class: 'category-dev' },
+            security: { name: '安全工具', class: 'category-security' },
+            image: { name: '图形工具', class: 'category-image' }
+        };
+
+        function renderTools(filter = '') {
+            const container = document.getElementById('toolsContainer');
+            container.innerHTML = '';
+
+            const groupedTools = {};
+            tools.forEach(tool => {
+                if (!groupedTools[tool.category]) {
+                    groupedTools[tool.category] = [];
+                }
+
+                if (!filter ||
+                    tool.name.toLowerCase().includes(filter.toLowerCase()) ||
+                    tool.desc.toLowerCase().includes(filter.toLowerCase())) {
+                    groupedTools[tool.category].push(tool);
+                }
+            });
+
+            Object.entries(groupedTools).forEach(([cat, catTools]) => {
+                if (catTools.length === 0) return;
+
+                const catInfo = categories[cat];
+                const section = document.createElement('div');
+                section.className = `category ${catInfo.class}`;
+
+                const toolCount = tools.filter(t => t.category === cat).length;
+
+                section.innerHTML = `
+                    <div class="category-header">
+                        <div class="category-icon">${catTools[0].icon}</div>
+                        <h2 class="category-title">${catInfo.name}</h2>
+                        <span class="category-count">${catTools.length} / ${toolCount}</span>
+                    </div>
+                    <div class="tools-grid">
+                        ${catTools.map(tool => `
+                            <a href="${tool.url}" class="tool-card">
+                                <div class="tool-icon">${tool.icon}</div>
+                                <div class="tool-info">
+                                    <div class="tool-name">${tool.name}</div>
+                                    <div class="tool-desc">${tool.desc}</div>
+                                </div>
+                            </a>
+                        `).join('')}
+                    </div>
+                `;
+
+                container.appendChild(section);
+            });
+        }
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            renderTools(e.target.value);
+        });
+
+        // Initial render
+        renderTools();
+    })();
+    </script>
+</body>
+</html>

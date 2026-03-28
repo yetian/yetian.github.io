@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JWT 解码器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景动画 -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- 顶部标题栏 -->
+        <header class="header">
+            <h1 class="app-title">
+                <span class="title-icon">🔐</span>
+                JWT 解码器
+            </h1>
+            <p class="app-desc">粘贴 JWT Token 进行解码分析</p>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 输入区域 -->
+            <div class="input-section">
+                <div class="section-header">
+                    <span class="section-title">输入 Token</span>
+                    <div class="section-actions">
+                        <button class="btn btn-secondary" id="pasteBtn" title="粘贴">
+                            <span>📋</span> 粘贴
+                        </button>
+                        <button class="btn btn-secondary" id="clearBtn" title="清空">
+                            <span>🗑</span> 清空
+                        </button>
+                    </div>
+                </div>
+                <textarea id="jwtInput" class="jwt-input" placeholder="在此粘贴 JWT Token..."></textarea>
+                <div class="input-footer">
+                    <span id="formatStatus" class="format-status"></span>
+                </div>
+            </div>
+
+            <!-- 解码结果区域 -->
+            <div class="result-section" id="resultSection">
+                <!-- Header -->
+                <div class="result-card">
+                    <div class="card-header">
+                        <span class="card-title">Header (头部)</span>
+                        <button class="btn-copy" data-target="headerContent" title="复制">
+                            📋 复制
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <pre id="headerContent" class="json-content"></pre>
+                    </div>
+                    <div class="part-desc">
+                        <span class="desc-icon">💡</span>
+                        <span>头部声明令牌类型(typ)和签名算法(alg)，如 HS256、RS256 等</span>
+                    </div>
+                </div>
+
+                <!-- Payload -->
+                <div class="result-card">
+                    <div class="card-header">
+                        <span class="card-title">Payload (载荷)</span>
+                        <button class="btn-copy" data-target="payloadContent" title="复制">
+                            📋 复制
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <pre id="payloadContent" class="json-content"></pre>
+                    </div>
+                    <!-- 时间信息 -->
+                    <div class="time-info" id="timeInfo">
+                        <div class="time-item" id="iatInfo">
+                            <span class="time-label">签发时间 (iat):</span>
+                            <span class="time-value" id="iatValue">-</span>
+                        </div>
+                        <div class="time-item" id="expInfo">
+                            <span class="time-label">过期时间 (exp):</span>
+                            <span class="time-value" id="expValue">-</span>
+                            <span class="exp-status" id="expStatus"></span>
+                        </div>
+                    </div>
+                    <div class="part-desc">
+                        <span class="desc-icon">💡</span>
+                        <span>载荷包含用户信息(iss/sub/aud)、时间戳(iat/exp)和自定义数据</span>
+                    </div>
+                </div>
+
+                <!-- Signature -->
+                <div class="result-card">
+                    <div class="card-header">
+                        <span class="card-title">Signature (签名)</span>
+                        <button class="btn-copy" data-target="signatureContent" title="复制">
+                            📋 复制
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <div id="signatureContent" class="signature-display"></div>
+                    </div>
+                    <div class="part-desc">
+                        <span class="desc-icon">💡</span>
+                        <span>签名是 Header+Payload 经密钥加密后的结果，用于验证消息完整性和发送者身份</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 空状态 -->
+            <div class="empty-state" id="emptyState">
+                <div class="empty-icon">🔓</div>
+                <p class="empty-text">输入 JWT Token 查看解码结果</p>
+            </div>
+        </main>
+
+        <!-- 底部状态栏 -->
+        <footer class="footer">
+            <span class="footer-item">JWT 由三部分组成：Header.Payload.Signature</span>
+            <span class="footer-item">|</span>
+            <span class="footer-item">仅支持解析，不验证签名</span>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

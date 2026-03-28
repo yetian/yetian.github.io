@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 渐变生成器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>CSS 渐变生成器</h1>
+            <p class="subtitle">创建精美的 CSS 渐变背景</p>
+        </header>
+
+        <main>
+            <!-- 渐变类型选择 -->
+            <div class="glass-card">
+                <h3>渐变类型</h3>
+                <div class="type-tabs">
+                    <button class="type-tab active" data-type="linear">线性渐变</button>
+                    <button class="type-tab" data-type="radial">径向渐变</button>
+                </div>
+            </div>
+
+            <!-- 方向选择 (线性渐变) -->
+            <div class="glass-card" id="directionCard">
+                <h3>渐变方向</h3>
+                <div class="direction-grid">
+                    <button class="direction-btn" data-direction="to top left" title="左上 (315°)">
+                        <span class="arrow">↖</span>
+                    </button>
+                    <button class="direction-btn" data-direction="to top" title="上 (0°)">
+                        <span class="arrow">↑</span>
+                    </button>
+                    <button class="direction-btn" data-direction="to top right" title="右上 (45°)">
+                        <span class="arrow">↗</span>
+                    </button>
+                    <button class="direction-btn" data-direction="to left" title="左 (270°)">
+                        <span class="arrow">←</span>
+                    </button>
+                    <button class="direction-btn center-btn" title="自定义角度">
+                        <span class="arrow">⊙</span>
+                    </button>
+                    <button class="direction-btn active" data-direction="to right" title="右 (90°)">
+                        <span class="arrow">→</span>
+                    </button>
+                    <button class="direction-btn" data-direction="to bottom left" title="左下 (225°)">
+                        <span class="arrow">↙</span>
+                    </button>
+                    <button class="direction-btn" data-direction="to bottom" title="下 (180°)">
+                        <span class="arrow">↓</span>
+                    </button>
+                    <button class="direction-btn" data-direction="to bottom right" title="右下 (135°)">
+                        <span class="arrow">↘</span>
+                    </button>
+                </div>
+                <div class="angle-control">
+                    <label>角度</label>
+                    <input type="range" id="angleSlider" min="0" max="360" value="90">
+                    <input type="number" id="angleInput" min="0" max="360" value="90">
+                    <span>deg</span>
+                </div>
+            </div>
+
+            <!-- 径向渐变设置 -->
+            <div class="glass-card hidden" id="radialCard">
+                <h3>径向渐变设置</h3>
+                <div class="radial-options">
+                    <div class="option-group">
+                        <label>形状</label>
+                        <select id="radialShape">
+                            <option value="circle">圆形</option>
+                            <option value="ellipse">椭圆</option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label>大小</label>
+                        <select id="radialSize">
+                            <option value="closest-side">最近边</option>
+                            <option value="closest-corner">最近角</option>
+                            <option value="farthest-side" selected>最远边</option>
+                            <option value="farthest-corner">最远角</option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label>中心位置</label>
+                        <select id="radialPosition">
+                            <option value="center" selected>中心</option>
+                            <option value="top">顶部</option>
+                            <option value="bottom">底部</option>
+                            <option value="left">左侧</option>
+                            <option value="right">右侧</option>
+                            <option value="top left">左上</option>
+                            <option value="top right">右上</option>
+                            <option value="bottom left">左下</option>
+                            <option value="bottom right">右下</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 颜色停止点 -->
+            <div class="glass-card">
+                <div class="card-header">
+                    <h3>颜色停止点</h3>
+                    <button class="add-color-btn" id="addColorBtn">+ 添加颜色</button>
+                </div>
+                <div class="color-stops" id="colorStops">
+                    <!-- 颜色停止点将动态生成 -->
+                </div>
+            </div>
+
+            <!-- 预览区域 -->
+            <div class="glass-card preview-card">
+                <h3>预览</h3>
+                <div class="preview-area" id="previewArea"></div>
+            </div>
+
+            <!-- 生成的CSS代码 -->
+            <div class="glass-card">
+                <div class="card-header">
+                    <h3>CSS 代码</h3>
+                    <button class="copy-btn" id="copyBtn">复制代码</button>
+                </div>
+                <div class="code-block">
+                    <code id="cssCode"></code>
+                </div>
+            </div>
+
+            <!-- 预设渐变 -->
+            <div class="glass-card">
+                <h3>预设渐变</h3>
+                <div class="preset-grid" id="presetGrid">
+                    <!-- 预设渐变将动态生成 -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="notification" id="notification">已复制到剪贴板</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON-XML 转换器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景动画 -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- 顶部工具栏 -->
+        <header class="toolbar">
+            <div class="toolbar-left">
+                <h1 class="app-title">
+                    <span class="title-icon">{ }</span>
+                    JSON-XML 转换器
+                </h1>
+                <p class="app-subtitle">JSON与XML格式互相转换</p>
+            </div>
+            <div class="toolbar-center">
+                <div class="mode-switch">
+                    <div class="mode-switch-indicator"></div>
+                    <button class="mode-btn active" data-mode="json2xml">JSON to XML</button>
+                    <button class="mode-btn" data-mode="xml2json">XML to JSON</button>
+                </div>
+            </div>
+            <div class="toolbar-right">
+                <button class="action-btn" id="swapBtn" title="交换内容">
+                    <span>⇄</span> 交换
+                </button>
+                <button class="action-btn" id="clearBtn" title="清空">
+                    <span>🗑</span> 清空
+                </button>
+            </div>
+        </header>
+
+        <!-- 主编辑区 -->
+        <main class="editor-main">
+            <!-- 输入面板 -->
+            <div class="editor-panel" id="inputPanel">
+                <div class="panel-header">
+                    <span class="panel-title" id="inputTitle">JSON 输入</span>
+                    <div class="panel-actions">
+                        <button class="panel-btn" id="formatBtn" title="格式化">✨</button>
+                        <button class="panel-btn" id="pasteBtn" title="粘贴">📋</button>
+                    </div>
+                </div>
+                <div class="editor-wrapper">
+                    <div class="line-numbers" id="inputLineNumbers"></div>
+                    <textarea id="inputArea" placeholder="在此输入 JSON 或 XML..." spellcheck="false"></textarea>
+                </div>
+                <div class="editor-footer">
+                    <span id="inputCharCount">0 字符</span>
+                    <span id="inputLineCount">0 行</span>
+                </div>
+            </div>
+
+            <!-- 中间操作区 -->
+            <div class="center-actions">
+                <button class="convert-btn" id="convertBtn" title="转换">
+                    <span class="convert-icon">→</span>
+                </button>
+            </div>
+
+            <!-- 输出面板 -->
+            <div class="editor-panel" id="outputPanel">
+                <div class="panel-header">
+                    <span class="panel-title" id="outputTitle">XML 输出</span>
+                    <div class="panel-actions">
+                        <button class="panel-btn" id="copyBtn" title="复制">📋</button>
+                        <button class="panel-btn" id="downloadBtn" title="下载">📥</button>
+                    </div>
+                </div>
+                <div class="editor-wrapper">
+                    <div class="line-numbers" id="outputLineNumbers"></div>
+                    <textarea id="outputArea" placeholder="转换结果将显示在这里..." readonly spellcheck="false"></textarea>
+                </div>
+                <div class="editor-footer">
+                    <span id="outputCharCount">0 字符</span>
+                    <span id="outputLineCount">0 行</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- 设置面板 -->
+        <div class="settings-bar">
+            <div class="settings-left">
+                <div class="setting-item">
+                    <label class="setting-label">根元素名称</label>
+                    <input type="text" class="setting-input" id="rootElement" value="root" placeholder="root">
+                </div>
+                <div class="setting-item">
+                    <label class="setting-label">缩进空格</label>
+                    <select class="setting-select" id="indentSize">
+                        <option value="2">2</option>
+                        <option value="4" selected>4</option>
+                        <option value="8">8</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label class="setting-checkbox">
+                        <input type="checkbox" id="autoConvert" checked>
+                        <span class="checkbox-label">实时转换</span>
+                    </label>
+                </div>
+            </div>
+            <div class="settings-right">
+                <span class="status-item" id="statusMsg">就绪</span>
+            </div>
+        </div>
+
+        <!-- 状态栏 -->
+        <footer class="status-bar">
+            <div class="status-left">
+                <span class="status-item">支持标准 JSON 和 XML 格式</span>
+            </div>
+            <div class="status-right">
+                <span class="status-item">快捷键: Ctrl+Enter 转换</span>
+                <span class="status-item">|</span>
+                <span class="status-item">Ctrl+Shift+F 格式化</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 错误提示 -->
+    <div class="toast" id="toast">
+        <span class="toast-icon" id="toastIcon">⚠</span>
+        <span class="toast-message" id="toastMessage"></span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

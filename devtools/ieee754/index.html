@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IEEE 754 浮点数可视化</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景动画 -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- 顶部标题栏 -->
+        <header class="toolbar">
+            <div class="toolbar-left">
+                <h1 class="app-title">
+                    <span class="title-icon">🔢</span>
+                    IEEE 754 浮点数可视化
+                </h1>
+                <p class="app-subtitle">解析浮点数二进制表示，理解符号位、指数、尾数</p>
+            </div>
+            <div class="toolbar-right">
+                <a href="https://zh.wikipedia.org/wiki/IEEE_754" target="_blank" class="action-btn" title="了解更多">
+                    <span>📚</span> Wikipedia
+                </a>
+            </div>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 输入区域 -->
+            <section class="input-section glass-panel">
+                <h2 class="section-title">输入设置</h2>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="decimalInput">十进制数值</label>
+                        <input type="text" id="decimalInput" placeholder="例如: 3.14159, -0.5, 1.0e-10" autocomplete="off">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="precisionSelect">精度</label>
+                        <select id="precisionSelect">
+                            <option value="single">单精度 (32-bit)</option>
+                            <option value="double" selected>双精度 (64-bit)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="binaryInput">二进制解析</label>
+                        <input type="text" id="binaryInput" placeholder="输入二进制 (0/1)" autocomplete="off">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="hexInput">十六进制解析</label>
+                        <input type="text" id="hexInput" placeholder="例如: 3F800000, 40000000" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="button-row">
+                    <button class="action-btn primary" id="convertBtn">
+                        <span>⚡</span> 转换
+                    </button>
+                    <button class="action-btn" id="clearBtn">
+                        <span>🗑</span> 清空
+                    </button>
+                </div>
+            </section>
+
+            <!-- 二进制表示 -->
+            <section class="binary-section glass-panel">
+                <h2 class="section-title">二进制表示</h2>
+
+                <div class="binary-display" id="binaryDisplay">
+                    <div class="bit-group sign-group">
+                        <span class="bit-label">符号位 (S)</span>
+                        <div class="bits" id="signBits">-</div>
+                    </div>
+                    <div class="bit-group exponent-group">
+                        <span class="bit-label">指数位 (E)</span>
+                        <div class="bits" id="exponentBits">-</div>
+                    </div>
+                    <div class="bit-group mantissa-group">
+                        <span class="bit-label">尾数位 (M)</span>
+                        <div class="bits" id="mantissaBits">-</div>
+                    </div>
+                </div>
+
+                <div class="hex-display">
+                    <span class="hex-label">十六进制:</span>
+                    <span class="hex-value" id="hexValue">-</span>
+                    <button class="copy-btn" id="copyHex" title="复制">📋</button>
+                </div>
+            </section>
+
+            <!-- 组件详情 -->
+            <section class="details-section glass-panel">
+                <h2 class="section-title">组件详情</h2>
+
+                <div class="details-grid" id="detailsGrid">
+                    <div class="detail-card">
+                        <span class="detail-label">符号位 (Sign)</span>
+                        <div class="detail-content">
+                            <span class="detail-value" id="signValue">-</span>
+                            <span class="detail-desc" id="signDesc">-</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <span class="detail-label">指数 (Exponent)</span>
+                        <div class="detail-content">
+                            <span class="detail-value" id="exponentValue">-</span>
+                            <span class="detail-desc" id="exponentDesc">-</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <span class="detail-label">偏移量 (Bias)</span>
+                        <div class="detail-content">
+                            <span class="detail-value" id="biasValue">-</span>
+                            <span class="detail-desc" id="biasDesc">-</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <span class="detail-label">实际指数</span>
+                        <div class="detail-content">
+                            <span class="detail-value" id="actualExponent">-</span>
+                            <span class="detail-desc" id="exponentFormula">-</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <span class="detail-label">尾数 (Mantissa)</span>
+                        <div class="detail-content">
+                            <span class="detail-value" id="mantissaValue">-</span>
+                            <span class="detail-desc" id="mantissaDesc">-</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <span class="detail-label">有效数字</span>
+                        <div class="detail-content">
+                            <span class="detail-value" id="significantValue">-</span>
+                            <span class="detail-desc" id="significantDesc">-</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 计算过程 -->
+            <section class="formula-section glass-panel">
+                <h2 class="section-title">计算公式</h2>
+
+                <div class="formula-display" id="formulaDisplay">
+                    <div class="formula-main">
+                        <span class="formula-label">数值 = </span>
+                        <span class="formula" id="formulaText">(-1)<sup>S</sup> × 2<sup>E-Bias</sup> × 1.M</span>
+                    </div>
+                    <div class="formula-expanded" id="formulaExpanded">
+                        输入数值后显示计算过程
+                    </div>
+                </div>
+
+                <!-- 特殊值说明 -->
+                <div class="special-values">
+                    <h3 class="subsection-title">特殊值</h3>
+                    <div class="special-grid">
+                        <div class="special-item">
+                            <span class="special-name">+0 / -0</span>
+                            <span class="special-desc">指数=0, 尾数=0</span>
+                        </div>
+                        <div class="special-item">
+                            <span class="special-name">无穷大 (∞)</span>
+                            <span class="special-desc">指数=全1, 尾数=0</span>
+                        </div>
+                        <div class="special-item">
+                            <span class="special-name">NaN</span>
+                            <span class="special-desc">指数=全1, 尾数≠0</span>
+                        </div>
+                        <div class="special-item">
+                            <span class="special-name">非规格化数</span>
+                            <span class="special-desc">指数=0, 尾数≠0</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 状态栏 -->
+        <footer class="status-bar">
+            <div class="status-left">
+                <span class="status-item" id="statusMessage">准备就绪</span>
+            </div>
+            <div class="status-right">
+                <span class="status-item" id="precisionInfo">双精度: 1位符号 + 11位指数 + 52位尾数</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

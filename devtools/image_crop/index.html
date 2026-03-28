@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片裁剪</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f59e0b;
+            --primary-light: #fbbf24;
+            --primary-dark: #d97706;
+            --secondary: #ef4444;
+            --accent: #10b981;
+            --dark: #0a0a0f;
+            --dark-light: #13131a;
+            --surface: #18181f;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body { font-family: 'Outfit', sans-serif; background: var(--dark); min-height: 100vh; color: var(--text); overflow-x: hidden; }
+
+        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; pointer-events: none; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: float 20s ease-in-out infinite; }
+        .orb-1 { width: 400px; height: 400px; background: var(--primary); top: -100px; right: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: var(--secondary); bottom: -50px; left: -50px; animation-delay: -5s; }
+        .orb-3 { width: 250px; height: 250px; background: var(--accent); top: 50%; left: 50%; margin-top: -125px; margin-left: -125px; animation-delay: -10s; opacity: 0.2; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(30px, -30px); }
+            50% { transform: translate(-20px, 20px); }
+            75% { transform: translate(20px, 30px); }
+        }
+
+        .container { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 2rem; }
+
+        header { text-align: center; margin-bottom: 2rem; }
+        header h1 { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
+        .subtitle { color: var(--text-muted); }
+
+        .panel { background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 1.25rem; margin-bottom: 1.25rem; }
+
+        .drop-zone { border: 2px dashed var(--glass-border); border-radius: 12px; padding: 3rem; text-align: center; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+        .drop-zone:hover, .drop-zone.dragover { border-color: var(--primary); background: rgba(245, 158, 11, 0.1); }
+
+        .editor-container { display: flex; gap: 1.25rem; }
+        @media (max-width: 768px) { .editor-container { flex-direction: column; } .container { padding: 1rem; } header h1 { font-size: 1.5rem; } }
+
+        .canvas-wrapper { flex: 1; position: relative; background: rgba(0, 0, 0, 0.3); border-radius: 12px; overflow: hidden; min-height: 400px; display: flex; align-items: center; justify-content: center; }
+        #editCanvas { max-width: 100%; max-height: 500px; cursor: crosshair; }
+
+        .sidebar { width: 200px; flex-shrink: 0; }
+        .sidebar label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.35rem; }
+        .sidebar input[type="number"] { width: 100%; background: rgba(0, 0, 0, 0.3); border: 1px solid var(--glass-border); border-radius: 8px; padding: 0.5rem; color: var(--text); font-family: inherit; margin-bottom: 0.75rem; }
+        .sidebar input:focus { outline: none; border-color: var(--primary); }
+
+        .ratio-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem; margin-bottom: 1rem; }
+        .ratio-btns button { background: transparent; border: 1px solid var(--glass-border); color: var(--text); padding: 0.5rem; border-radius: 8px; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; }
+        .ratio-btns button:hover, .ratio-btns button.active { background: var(--primary); border-color: var(--primary); }
+
+        button { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; border-radius: 12px; padding: 0.65rem 1.25rem; font-family: inherit; font-weight: 500; cursor: pointer; transition: all 0.2s; width: 100%; margin-bottom: 0.5rem; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); }
+
+        .btn-secondary { background: var(--glass); border: 1px solid var(--glass-border); }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); box-shadow: none; transform: none; }
+
+        .info { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; font-family: 'JetBrains Mono', monospace; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>✂️ 图片裁剪</h1>
+            <p class="subtitle">在线裁剪图片，支持固定比例</p>
+        </header>
+
+        <div class="panel">
+            <div class="drop-zone" id="dropZone">
+                拖放图片到此处或点击选择<br>支持 JPG, PNG, WebP
+                <input type="file" id="fileInput" accept="image/*" style="display: none">
+            </div>
+        </div>
+
+        <div class="panel" id="editorPanel" style="display: none;">
+            <div class="editor-container">
+                <div class="canvas-wrapper">
+                    <canvas id="editCanvas"></canvas>
+                </div>
+                <div class="sidebar">
+                    <label>X 起点</label>
+                    <input type="number" id="cropX" value="0" min="0">
+                    <label>Y 起点</label>
+                    <input type="number" id="cropY" value="0" min="0">
+                    <label>宽度</label>
+                    <input type="number" id="cropW" value="100" min="1">
+                    <label>高度</label>
+                    <input type="number" id="cropH" value="100" min="1">
+
+                    <label style="margin-top: 1rem;">预设比例</label>
+                    <div class="ratio-btns">
+                        <button onclick="setRatio(1, 1)">1:1</button>
+                        <button onclick="setRatio(4, 3)">4:3</button>
+                        <button onclick="setRatio(16, 9)">16:9</button>
+                        <button onclick="setRatio(3, 2)">3:2</button>
+                        <button onclick="setRatio(9, 16)">9:16</button>
+                        <button onclick="setRatio(0, 0)">自由</button>
+                    </div>
+
+                    <button onclick="applyCrop()">裁剪</button>
+                    <button onclick="downloadCropped()">下载</button>
+                    <button class="btn-secondary" onclick="resetAll()">重置</button>
+
+                    <div class="info" id="sizeInfo"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        let originalImage = null;
+        let canvas = null;
+        let ctx = null;
+        let cropBox = { x: 0, y: 0, w: 100, h: 100 };
+        let isDragging = false;
+        let isResizing = false;
+        let dragStart = { x: 0, y: 0 };
+        let fixedRatio = null;
+
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('dragover'); if (e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]); });
+        fileInput.addEventListener('change', (e) => { if (e.target.files[0]) loadImage(e.target.files[0]); });
+
+        function loadImage(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    originalImage = img;
+                    initCanvas();
+                    document.getElementById('editorPanel').style.display = 'block';
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function initCanvas() {
+            canvas = document.getElementById('editCanvas');
+            ctx = canvas.getContext('2d');
+
+            const maxWidth = 600;
+            const scale = Math.min(1, maxWidth / originalImage.width);
+            canvas.width = originalImage.width * scale;
+            canvas.height = originalImage.height * scale;
+
+            cropBox = { x: 0, y: 0, w: canvas.width, h: canvas.height };
+            updateCropInputs();
+            drawCanvas();
+        }
+
+        function drawCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(originalImage, 0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.clearRect(cropBox.x, cropBox.y, cropBox.w, cropBox.h);
+            ctx.drawImage(originalImage,
+                cropBox.x / (canvas.width / originalImage.width),
+                cropBox.y / (canvas.height / originalImage.height),
+                cropBox.w / (canvas.width / originalImage.width),
+                cropBox.h / (canvas.height / originalImage.height),
+                cropBox.x, cropBox.y, cropBox.w, cropBox.h
+            );
+
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(cropBox.x, cropBox.y, cropBox.w, cropBox.h);
+
+            const handleSize = 10;
+            ctx.fillStyle = '#f59e0b';
+            [[cropBox.x, cropBox.y], [cropBox.x + cropBox.w, cropBox.y],
+             [cropBox.x, cropBox.y + cropBox.h], [cropBox.x + cropBox.w, cropBox.y + cropBox.h]]
+            .forEach(([x, y]) => { ctx.fillRect(x - handleSize/2, y - handleSize/2, handleSize, handleSize); });
+
+            document.getElementById('sizeInfo').textContent = `裁剪区: ${Math.round(cropBox.w)} × ${Math.round(cropBox.h)}`;
+        }
+
+        canvas = document.getElementById('editCanvas');
+        canvas.addEventListener('mousedown', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const corners = [[cropBox.x, cropBox.y], [cropBox.x + cropBox.w, cropBox.y], [cropBox.x, cropBox.y + cropBox.h], [cropBox.x + cropBox.w, cropBox.y + cropBox.h]];
+
+            for (let [cx, cy] of corners) {
+                if (Math.abs(x - cx) < 15 && Math.abs(y - cy) < 15) {
+                    isResizing = true;
+                    dragStart = { x, y, corner: [cx, cy] };
+                    return;
+                }
+            }
+
+            if (x >= cropBox.x && x <= cropBox.x + cropBox.w && y >= cropBox.y && y <= cropBox.y + cropBox.h) {
+                isDragging = true;
+                dragStart = { x: x - cropBox.x, y: y - cropBox.y };
+            }
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (!isDragging && !isResizing) return;
+
+            const rect = canvas.getBoundingClientRect();
+            const x = Math.max(0, Math.min(canvas.width, e.clientX - rect.left));
+            const y = Math.max(0, Math.min(canvas.height, e.clientY - rect.top));
+
+            if (isDragging) {
+                cropBox.x = Math.max(0, Math.min(canvas.width - cropBox.w, x - dragStart.x));
+                cropBox.y = Math.max(0, Math.min(canvas.height - cropBox.h, y - dragStart.y));
+            } else if (isResizing) {
+                let newW = x - cropBox.x;
+                let newH = y - cropBox.y;
+                if (fixedRatio) newH = newW * fixedRatio;
+                cropBox.w = Math.max(20, newW);
+                cropBox.h = Math.max(20, newH);
+            }
+
+            updateCropInputs();
+            drawCanvas();
+        });
+
+        canvas.addEventListener('mouseup', () => { isDragging = false; isResizing = false; });
+        canvas.addEventListener('mouseleave', () => { isDragging = false; isResizing = false; });
+
+        function updateCropInputs() {
+            document.getElementById('cropX').value = Math.round(cropBox.x);
+            document.getElementById('cropY').value = Math.round(cropBox.y);
+            document.getElementById('cropW').value = Math.round(cropBox.w);
+            document.getElementById('cropH').value = Math.round(cropBox.h);
+        }
+
+        window.setRatio = function(w, h) {
+            document.querySelectorAll('.ratio-btns button').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            if (w === 0) { fixedRatio = null; }
+            else { fixedRatio = h / w; cropBox.h = cropBox.w * fixedRatio; drawCanvas(); updateCropInputs(); }
+        };
+
+        document.getElementById('cropX').addEventListener('input', (e) => { cropBox.x = parseInt(e.target.value) || 0; drawCanvas(); });
+        document.getElementById('cropY').addEventListener('input', (e) => { cropBox.y = parseInt(e.target.value) || 0; drawCanvas(); });
+        document.getElementById('cropW').addEventListener('input', (e) => { cropBox.w = parseInt(e.target.value) || 20; if (fixedRatio) cropBox.h = cropBox.w * fixedRatio; drawCanvas(); });
+        document.getElementById('cropH').addEventListener('input', (e) => { cropBox.h = parseInt(e.target.value) || 20; drawCanvas(); });
+
+        window.applyCrop = function() {
+            const scale = originalImage.width / canvas.width;
+            const outputCanvas = document.createElement('canvas');
+            outputCanvas.width = cropBox.w * scale;
+            outputCanvas.height = cropBox.h * scale;
+            const outputCtx = outputCanvas.getContext('2d');
+            outputCtx.drawImage(originalImage, cropBox.x * scale, cropBox.y * scale, cropBox.w * scale, cropBox.h * scale, 0, 0, outputCanvas.width, outputCanvas.height);
+            return outputCanvas;
+        };
+
+        window.downloadCropped = function() {
+            const output = applyCrop();
+            const link = document.createElement('a');
+            link.download = 'cropped_image.png';
+            link.href = output.toDataURL('image/png');
+            link.click();
+        };
+
+        window.resetAll = function() {
+            originalImage = null;
+            document.getElementById('editorPanel').style.display = 'none';
+            document.getElementById('fileInput').value = '';
+        };
+    })();
+    </script>
+</body>
+</html>

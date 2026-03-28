@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color 取色器</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Color 取色器</h1>
+            <p class="subtitle">颜色格式转换 / 对比度检测 / 色彩方案生成</p>
+        </header>
+
+        <main>
+            <!-- Color Picker Section -->
+            <div class="input-card">
+                <div class="card-header">
+                    <h3>选择颜色</h3>
+                </div>
+                <div class="picker-wrapper">
+                    <div class="color-preview-large" id="colorPreviewLarge">
+                        <input type="color" id="colorPicker" value="#10b981">
+                    </div>
+                    <div class="hex-input-wrapper">
+                        <label>HEX</label>
+                        <input type="text" id="hexInput" value="#10b981" maxlength="7" placeholder="#000000">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color Formats Section -->
+            <div class="formats-card">
+                <div class="card-header">
+                    <h3>颜色格式</h3>
+                </div>
+                <div class="formats-grid">
+                    <div class="format-item">
+                        <div class="format-header">
+                            <span class="format-name">HEX</span>
+                            <button class="copy-btn" data-format="hex" title="复制">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="format-value" id="hexValue">#10b981</div>
+                    </div>
+
+                    <div class="format-item">
+                        <div class="format-header">
+                            <span class="format-name">RGB</span>
+                            <button class="copy-btn" data-format="rgb" title="复制">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="format-value" id="rgbValue">rgb(16, 185, 129)</div>
+                    </div>
+
+                    <div class="format-item">
+                        <div class="format-header">
+                            <span class="format-name">HSL</span>
+                            <button class="copy-btn" data-format="hsl" title="复制">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="format-value" id="hslValue">hsl(160, 84%, 40%)</div>
+                    </div>
+
+                    <div class="format-item">
+                        <div class="format-header">
+                            <span class="format-name">CMYK</span>
+                            <button class="copy-btn" data-format="cmyk" title="复制">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="format-value" id="cmykValue">cmyk(91%, 0%, 30%, 28%)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WCAG Contrast Section -->
+            <div class="contrast-card">
+                <div class="card-header">
+                    <h3>WCAG 对比度检测</h3>
+                </div>
+                <div class="contrast-grid">
+                    <div class="contrast-item">
+                        <div class="contrast-preview black" id="contrastBlackPreview">
+                            <span>Aa</span>
+                        </div>
+                        <div class="contrast-info">
+                            <div class="contrast-ratio">
+                                <span class="ratio-value" id="contrastBlackRatio">--:1</span>
+                            </div>
+                            <div class="contrast-levels">
+                                <span class="level-badge" id="contrastBlackAA">AA</span>
+                                <span class="level-badge" id="contrastBlackAAA">AAA</span>
+                                <span class="level-badge small" id="contrastBlackAALarge">AA Large</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contrast-item">
+                        <div class="contrast-preview white" id="contrastWhitePreview">
+                            <span>Aa</span>
+                        </div>
+                        <div class="contrast-info">
+                            <div class="contrast-ratio">
+                                <span class="ratio-value" id="contrastWhiteRatio">--:1</span>
+                            </div>
+                            <div class="contrast-levels">
+                                <span class="level-badge" id="contrastWhiteAA">AA</span>
+                                <span class="level-badge" id="contrastWhiteAAA">AAA</span>
+                                <span class="level-badge small" id="contrastWhiteAALarge">AA Large</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color Palette Section -->
+            <div class="palette-card">
+                <div class="card-header">
+                    <h3>配色方案</h3>
+                    <div class="header-actions">
+                        <button class="action-btn" id="randomColorBtn" title="随机颜色">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                                <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="palette-section">
+                    <h4 class="palette-title">互补色</h4>
+                    <div class="palette-row" id="complementaryPalette"></div>
+                </div>
+                <div class="palette-section">
+                    <h4 class="palette-title">三角色</h4>
+                    <div class="palette-row" id="triadicPalette"></div>
+                </div>
+                <div class="palette-section">
+                    <h4 class="palette-title">类似色</h4>
+                    <div class="palette-row" id="analogousPalette"></div>
+                </div>
+                <div class="palette-section">
+                    <h4 class="palette-title">分裂互补色</h4>
+                    <div class="palette-row" id="splitComplementaryPalette"></div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>所有计算在本地完成，数据不上传服务器</p>
+        </footer>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

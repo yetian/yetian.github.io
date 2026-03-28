@@ -17,6 +17,59 @@ yetian.github.io/
 ├── index.html / index-zh.html    # 中英文主页
 ├── CLAUDE.md                     # 项目记忆文件
 ├── LICENSE                       # 许可证
+├── devtools/                     # 开发者工具箱 (51个工具)
+│   ├── index.html                # 工具箱主页
+│   ├── base64/                   # Base64编码
+│   ├── url_encode/               # URL编码
+│   ├── html_encode/              # HTML实体
+│   ├── unicode/                  # Unicode转换
+│   ├── jwt/                      # JWT解码
+│   ├── base64_image/             # 图片Base64
+│   ├── json_format/              # JSON格式化
+│   ├── json_validate/            # JSON校验
+│   ├── json_yaml/                # JSON-YAML转换
+│   ├── json_xml/                 # JSON-XML转换
+│   ├── yaml_format/              # YAML格式化
+│   ├── xml_format/               # XML格式化
+│   ├── regex/                    # 正则测试
+│   ├── diff/                     # 文本对比
+│   ├── text_stats/               # 文本统计
+│   ├── text_transform/           # 文本转换
+│   ├── text_sort/                # 文本排序
+│   ├── lorem/                    # 假文生成
+│   ├── uuid/                     # UUID生成
+│   ├── hash/                     # Hash生成
+│   ├── qrcode/                   # 二维码生成
+│   ├── qrreader/                 # 二维码解析
+│   ├── color/                    # 颜色选择器
+│   ├── gradient/                 # 渐变生成
+│   ├── random/                   # 随机数生成
+│   ├── timestamp/                # 时间戳转换
+│   ├── cron/                     # Cron解析
+│   ├── date_calc/                # 日期计算
+│   ├── timezone/                 # 时区转换
+│   ├── base/                     # 进制转换
+│   ├── bitwise/                  # 位运算
+│   ├── ieee754/                  # IEEE 754浮点数
+│   ├── url_parse/                # URL解析
+│   ├── ip_calc/                  # IP计算
+│   ├── http_status/              # HTTP状态码
+│   ├── useragent/                # UserAgent解析
+│   ├── git_cheat/                # Git速查
+│   ├── jsonpath/                 # JSONPath查询
+│   ├── sql_format/               # SQL格式化
+│   ├── code_format/              # 代码美化
+│   ├── css_shadow/               # CSS阴影
+│   ├── css_radius/               # CSS圆角
+│   ├── flexbox/                  # Flexbox布局
+│   ├── grid/                     # CSS Grid布局
+│   ├── certificate/              # 证书解析
+│   ├── hmac/                     # HMAC生成
+│   ├── bcrypt/                   # Bcrypt哈希
+│   ├── image_compress/           # 图片压缩
+│   ├── image_resize/             # 图片缩放
+│   ├── image_crop/               # 图片裁剪
+│   └── svg_viewer/               # SVG查看器
 ├── acsdm/                        # 反云软件开发宣言
 │   ├── index.html (英文)
 │   └── index-zh.html (中文)

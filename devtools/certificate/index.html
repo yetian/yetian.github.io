@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>证书解析</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ef4444;
+            --primary-light: #f87171;
+            --primary-dark: #dc2626;
+            --secondary: #f59e0b;
+            --accent: #10b981;
+            --dark: #0a0a0f;
+            --dark-light: #13131a;
+            --surface: #18181f;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--dark);
+            min-height: 100vh;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: float 20s ease-in-out infinite; }
+        .orb-1 { width: 400px; height: 400px; background: var(--primary); top: -100px; right: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: var(--secondary); bottom: -50px; left: -50px; animation-delay: -5s; }
+        .orb-3 { width: 250px; height: 250px; background: var(--accent); top: 50%; left: 50%; margin-top: -125px; margin-left: -125px; animation-delay: -10s; opacity: 0.2; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(30px, -30px); }
+            50% { transform: translate(-20px, 20px); }
+            75% { transform: translate(20px, 30px); }
+        }
+
+        .container { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 2rem; }
+
+        header { text-align: center; margin-bottom: 2rem; }
+        header h1 { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
+        .subtitle { color: var(--text-muted); }
+
+        .panel { background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 1.25rem; margin-bottom: 1.25rem; }
+
+        .panel-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--glass-border); }
+
+        .drop-zone { border: 2px dashed var(--glass-border); border-radius: 12px; padding: 2.5rem; text-align: center; color: var(--text-muted); cursor: pointer; transition: all 0.2s; margin-bottom: 1rem; }
+        .drop-zone:hover, .drop-zone.dragover { border-color: var(--primary); background: rgba(239, 68, 68, 0.1); }
+
+        textarea { width: 100%; background: rgba(0, 0, 0, 0.3); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1rem; color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; resize: vertical; min-height: 150px; transition: border-color 0.2s; }
+        textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2); }
+
+        button { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; border-radius: 12px; padding: 0.65rem 1.25rem; font-family: inherit; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); }
+
+        .btn-secondary { background: var(--glass); border: 1px solid var(--glass-border); }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); box-shadow: none; transform: none; }
+
+        .toolbar { display: flex; gap: 0.75rem; }
+
+        .result { background: rgba(0, 0, 0, 0.3); border-radius: 12px; padding: 1rem; }
+        .result-section { margin-bottom: 1rem; }
+        .result-section:last-child { margin-bottom: 0; }
+        .result-title { font-weight: 600; color: var(--primary-light); margin-bottom: 0.5rem; font-size: 0.95rem; }
+        .result-row { display: flex; padding: 0.4rem 0; border-bottom: 1px solid var(--glass-border); }
+        .result-row:last-child { border-bottom: none; }
+        .result-label { color: var(--text-muted); width: 140px; flex-shrink: 0; font-size: 0.9rem; }
+        .result-value { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; word-break: break-all; }
+
+        pre { background: rgba(0, 0, 0, 0.3); border-radius: 12px; padding: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; overflow-x: auto; max-height: 200px; }
+
+        @media (max-width: 768px) { .container { padding: 1rem; } header h1 { font-size: 1.5rem; } }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>📜 证书解析</h1>
+            <p class="subtitle">解析 X.509 证书，查看详细信息</p>
+        </header>
+
+        <div class="panel">
+            <div class="panel-title">输入证书</div>
+            <div class="drop-zone" id="dropZone">
+                拖放 .crt / .pem / .cer 文件到此处<br>或点击选择文件
+                <input type="file" id="fileInput" accept=".crt,.pem,.cer,.der" style="display: none">
+            </div>
+            <textarea id="certInput" placeholder="或粘贴 PEM 格式证书内容 (-----BEGIN CERTIFICATE-----)"></textarea>
+            <div class="toolbar">
+                <button onclick="parseCertificate()">解析证书</button>
+                <button class="btn-secondary" onclick="clearAll()">清空</button>
+            </div>
+        </div>
+
+        <div class="panel" id="resultPanel" style="display: none;">
+            <div class="panel-title">解析结果</div>
+            <div class="result" id="resultContent"></div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('dragover'); if (e.dataTransfer.files[0]) readFile(e.dataTransfer.files[0]); });
+        fileInput.addEventListener('change', (e) => { if (e.target.files[0]) readFile(e.target.files[0]); });
+
+        function readFile(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => { document.getElementById('certInput').value = e.target.result; parseCertificate(); };
+            reader.readAsText(file);
+        }
+
+        window.parseCertificate = function() {
+            const pem = document.getElementById('certInput').value.trim();
+            if (!pem) { alert('请输入证书内容'); return; }
+
+            try {
+                const cert = parsePEM(pem);
+                displayResult(cert);
+            } catch (e) {
+                document.getElementById('resultPanel').style.display = 'block';
+                document.getElementById('resultContent').innerHTML = `<span style="color: var(--primary)">解析失败: ${e.message}</span>`;
+            }
+        };
+
+        function parsePEM(pem) {
+            const b64 = pem.replace(/-----BEGIN CERTIFICATE-----/g, '').replace(/-----END CERTIFICATE-----/g, '').replace(/\s/g, '');
+            const binary = atob(b64);
+            const bytes = new Uint8Array(binary.length);
+            for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+
+            const result = { raw: pem, rawBytes: bytes, base64: b64 };
+            const notBeforeMatch = pem.match(/Not Before:\s*(.+)/i);
+            const notAfterMatch = pem.match(/Not After:\s*(.+)/i);
+            if (notBeforeMatch) result.validFrom = notBeforeMatch[1].trim();
+            if (notAfterMatch) result.validTo = notAfterMatch[1].trim();
+            return result;
+        }
+
+        function displayResult(cert) {
+            const resultPanel = document.getElementById('resultPanel');
+            const resultContent = document.getElementById('resultContent');
+
+            resultContent.innerHTML = `
+                <div class="result-section">
+                    <div class="result-title">证书信息</div>
+                    <div class="result-row"><span class="result-label">格式</span><span class="result-value">X.509 PEM</span></div>
+                    <div class="result-row"><span class="result-label">大小</span><span class="result-value">${cert.rawBytes.length} 字节</span></div>
+                    <div class="result-row"><span class="result-label">Base64 长度</span><span class="result-value">${cert.base64.length} 字符</span></div>
+                </div>
+                <div class="result-section">
+                    <div class="result-title">原始数据 (Base64)</div>
+                    <pre>${cert.base64.substring(0, 200)}...</pre>
+                </div>
+            `;
+            resultPanel.style.display = 'block';
+        }
+
+        window.clearAll = function() {
+            document.getElementById('certInput').value = '';
+            document.getElementById('resultPanel').style.display = 'none';
+        };
+    })();
+    </script>
+</body>
+</html>

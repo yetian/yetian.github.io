@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>进制转换器 - Number Base Converter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>进制转换器</h1>
+            <p class="subtitle">Number Base Converter</p>
+        </header>
+
+        <main>
+            <!-- Input Section -->
+            <div class="input-card">
+                <div class="input-header">
+                    <label for="numberInput">输入数值</label>
+                    <select id="inputBase" class="base-select">
+                        <option value="2">二进制 (Base 2)</option>
+                        <option value="8">八进制 (Base 8)</option>
+                        <option value="10" selected>十进制 (Base 10)</option>
+                        <option value="16">十六进制 (Base 16)</option>
+                        <option value="custom">自定义...</option>
+                    </select>
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" id="numberInput" placeholder="请输入数值" autocomplete="off" spellcheck="false">
+                    <button class="clear-btn" id="clearBtn" title="清空">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="custom-base-row" id="customBaseRow">
+                    <label for="customInputBase">自定义进制 (2-36)</label>
+                    <input type="number" id="customInputBase" min="2" max="36" value="2" class="custom-base-input">
+                </div>
+                <div class="error-message" id="errorMessage"></div>
+            </div>
+
+            <!-- Quick Presets -->
+            <div class="presets-card">
+                <label>快速预设</label>
+                <div class="preset-buttons">
+                    <button class="preset-btn" data-preset="binary">二进制</button>
+                    <button class="preset-btn" data-preset="octal">八进制</button>
+                    <button class="preset-btn active" data-preset="decimal">十进制</button>
+                    <button class="preset-btn" data-preset="hex">十六进制</button>
+                </div>
+            </div>
+
+            <!-- Conversion Results -->
+            <div class="results-card">
+                <h3>转换结果</h3>
+                <div class="result-list">
+                    <!-- Binary -->
+                    <div class="result-item">
+                        <div class="result-info">
+                            <span class="result-label">二进制 (Base 2)</span>
+                            <span class="result-value" id="binaryResult">-</span>
+                        </div>
+                        <div class="result-actions">
+                            <button class="copy-btn" data-target="binaryResult" title="复制">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Octal -->
+                    <div class="result-item">
+                        <div class="result-info">
+                            <span class="result-label">八进制 (Base 8)</span>
+                            <span class="result-value" id="octalResult">-</span>
+                        </div>
+                        <div class="result-actions">
+                            <button class="copy-btn" data-target="octalResult" title="复制">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Decimal -->
+                    <div class="result-item">
+                        <div class="result-info">
+                            <span class="result-label">十进制 (Base 10)</span>
+                            <span class="result-value" id="decimalResult">-</span>
+                        </div>
+                        <div class="result-actions">
+                            <button class="copy-btn" data-target="decimalResult" title="复制">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Hexadecimal -->
+                    <div class="result-item">
+                        <div class="result-info">
+                            <span class="result-label">十六进制 (Base 16)</span>
+                            <span class="result-value" id="hexResult">-</span>
+                        </div>
+                        <div class="result-actions">
+                            <button class="copy-btn" data-target="hexResult" title="复制">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom Base Output -->
+            <div class="custom-output-card">
+                <div class="custom-output-header">
+                    <label for="outputBase">输出进制</label>
+                    <select id="outputBase" class="base-select small">
+                        <option value="2">Base 2</option>
+                        <option value="8">Base 8</option>
+                        <option value="10">Base 10</option>
+                        <option value="16">Base 16</option>
+                        <option value="custom">自定义</option>
+                    </select>
+                    <input type="number" id="customOutputBase" min="2" max="36" value="36" class="custom-base-input small" style="display: none;">
+                </div>
+                <div class="custom-result">
+                    <span class="result-value" id="customResult">-</span>
+                    <button class="copy-btn" data-target="customResult" title="复制">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bit Representation -->
+            <div class="bits-card">
+                <div class="bits-header">
+                    <h3>位表示</h3>
+                    <div class="bits-controls">
+                        <label class="bits-toggle">
+                            <input type="checkbox" id="showBits" checked>
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">显示位</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="bits-info">
+                    <span class="bits-count" id="bitsCount">0 位</span>
+                </div>
+                <div class="bits-display" id="bitsDisplay">
+                    <span class="bits-placeholder">输入数值后显示位表示</span>
+                </div>
+                <div class="byte-separator">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="byteSeparator" checked>
+                        <span>字节分隔</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Info Card -->
+            <div class="info-card">
+                <h3>进制说明</h3>
+                <div class="info-list">
+                    <div class="info-item">
+                        <span class="info-base">二进制</span>
+                        <span class="info-desc">仅包含 0 和 1，计算机基础</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-base">八进制</span>
+                        <span class="info-desc">包含 0-7，Unix 文件权限常用</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-base">十进制</span>
+                        <span class="info-desc">包含 0-9，日常计数使用</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-base">十六进制</span>
+                        <span class="info-desc">包含 0-9 和 A-F，编程常用</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>实时转换 · 支持任意进制</p>
+        </footer>
+    </div>
+
+    <div class="notification" id="notification">
+        <span id="notificationText">已复制到剪贴板</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

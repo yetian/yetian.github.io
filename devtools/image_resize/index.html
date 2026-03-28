@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片缩放</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #14b8a6;
+            --primary-light: #2dd4bf;
+            --primary-dark: #0d9488;
+            --secondary: #06b6d4;
+            --accent: #8b5cf6;
+            --dark: #0a0a0f;
+            --dark-light: #13131a;
+            --surface: #18181f;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body { font-family: 'Outfit', sans-serif; background: var(--dark); min-height: 100vh; color: var(--text); overflow-x: hidden; }
+
+        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; pointer-events: none; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: float 20s ease-in-out infinite; }
+        .orb-1 { width: 400px; height: 400px; background: var(--primary); top: -100px; right: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: var(--secondary); bottom: -50px; left: -50px; animation-delay: -5s; }
+        .orb-3 { width: 250px; height: 250px; background: var(--accent); top: 50%; left: 50%; margin-top: -125px; margin-left: -125px; animation-delay: -10s; opacity: 0.2; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(30px, -30px); }
+            50% { transform: translate(-20px, 20px); }
+            75% { transform: translate(20px, 30px); }
+        }
+
+        .container { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 2rem; }
+
+        header { text-align: center; margin-bottom: 2rem; }
+        header h1 { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
+        .subtitle { color: var(--text-muted); }
+
+        .panel { background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 1.25rem; margin-bottom: 1.25rem; }
+
+        .drop-zone { border: 2px dashed var(--glass-border); border-radius: 12px; padding: 3rem; text-align: center; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+        .drop-zone:hover, .drop-zone.dragover { border-color: var(--primary); background: rgba(20, 184, 166, 0.1); }
+
+        .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+
+        .control-group label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.35rem; }
+        input[type="number"], select { width: 100%; background: rgba(0, 0, 0, 0.3); border: 1px solid var(--glass-border); border-radius: 10px; padding: 0.6rem; color: var(--text); font-family: inherit; transition: border-color 0.2s; }
+        input:focus, select:focus { outline: none; border-color: var(--primary); }
+
+        .checkbox-row { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; }
+        input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--primary); }
+
+        button { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; border-radius: 12px; padding: 0.65rem 1.25rem; font-family: inherit; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(20, 184, 166, 0.4); }
+
+        .btn-secondary { background: var(--glass); border: 1px solid var(--glass-border); }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); box-shadow: none; transform: none; }
+
+        .preview-container { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+        .preview-box { flex: 1; min-width: 200px; }
+        .preview-title { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .preview-box img, .preview-box canvas { max-width: 100%; border-radius: 12px; background: rgba(0, 0, 0, 0.3); }
+        .info-row { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; font-family: 'JetBrains Mono', monospace; }
+
+        .actions { display: flex; gap: 0.75rem; margin-top: 1rem; }
+
+        @media (max-width: 768px) { .container { padding: 1rem; } header h1 { font-size: 1.5rem; } .preview-container { flex-direction: column; } }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>📐 图片缩放</h1>
+            <p class="subtitle">调整图片尺寸，支持批量导出</p>
+        </header>
+
+        <div class="panel">
+            <div class="drop-zone" id="dropZone">
+                拖放图片到此处或点击选择<br>支持 JPG, PNG, WebP, GIF
+                <input type="file" id="fileInput" accept="image/*" style="display: none">
+            </div>
+        </div>
+
+        <div class="panel" id="controlsPanel" style="display: none;">
+            <div class="controls">
+                <div class="control-group">
+                    <label>宽度 (px)</label>
+                    <input type="number" id="width" min="1">
+                </div>
+                <div class="control-group">
+                    <label>高度 (px)</label>
+                    <input type="number" id="height" min="1">
+                </div>
+                <div class="control-group">
+                    <label>缩放比例</label>
+                    <select id="scale">
+                        <option value="custom">自定义</option>
+                        <option value="0.25">25%</option>
+                        <option value="0.5">50%</option>
+                        <option value="0.75">75%</option>
+                        <option value="1">100%</option>
+                        <option value="1.5">150%</option>
+                        <option value="2">200%</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>输出格式</label>
+                    <select id="format">
+                        <option value="image/png">PNG</option>
+                        <option value="image/jpeg">JPG</option>
+                        <option value="image/webp">WebP</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>质量 (JPG/WebP)</label>
+                    <input type="number" id="quality" min="0.1" max="1" step="0.1" value="0.9">
+                </div>
+            </div>
+            <div class="checkbox-row">
+                <input type="checkbox" id="keepRatio" checked>
+                <label for="keepRatio">保持宽高比</label>
+            </div>
+        </div>
+
+        <div class="panel" id="previewPanel" style="display: none;">
+            <div class="preview-container">
+                <div class="preview-box">
+                    <div class="preview-title">原图</div>
+                    <img id="originalImg" style="display: none;">
+                    <div class="info-row" id="originalInfo"></div>
+                </div>
+                <div class="preview-box">
+                    <div class="preview-title">预览</div>
+                    <canvas id="previewCanvas"></canvas>
+                    <div class="info-row" id="previewInfo"></div>
+                </div>
+            </div>
+            <div class="actions">
+                <button onclick="downloadImage()">下载图片</button>
+                <button class="btn-secondary" onclick="resetAll()">清空</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        let originalImage = null;
+        let originalWidth = 0;
+        let originalHeight = 0;
+
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('dragover'); if (e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]); });
+        fileInput.addEventListener('change', (e) => { if (e.target.files[0]) loadImage(e.target.files[0]); });
+
+        function loadImage(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    originalImage = img;
+                    originalWidth = img.width;
+                    originalHeight = img.height;
+
+                    document.getElementById('originalImg').src = e.target.result;
+                    document.getElementById('originalImg').style.display = 'block';
+                    document.getElementById('originalInfo').textContent = `${originalWidth} × ${originalHeight} px`;
+
+                    document.getElementById('width').value = originalWidth;
+                    document.getElementById('height').value = originalHeight;
+
+                    document.getElementById('controlsPanel').style.display = 'block';
+                    document.getElementById('previewPanel').style.display = 'block';
+
+                    resizeImage();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function resizeImage() {
+            if (!originalImage) return;
+
+            const canvas = document.getElementById('previewCanvas');
+            const ctx = canvas.getContext('2d');
+            const newWidth = parseInt(document.getElementById('width').value);
+            const newHeight = parseInt(document.getElementById('height').value);
+
+            canvas.width = newWidth;
+            canvas.height = newHeight;
+            ctx.drawImage(originalImage, 0, 0, newWidth, newHeight);
+
+            document.getElementById('previewInfo').textContent = `${newWidth} × ${newHeight} px`;
+        }
+
+        document.getElementById('width').addEventListener('input', () => {
+            if (document.getElementById('keepRatio').checked && originalImage) {
+                const ratio = originalHeight / originalWidth;
+                document.getElementById('height').value = Math.round(parseInt(document.getElementById('width').value) * ratio);
+            }
+            resizeImage();
+        });
+
+        document.getElementById('height').addEventListener('input', () => {
+            if (document.getElementById('keepRatio').checked && originalImage) {
+                const ratio = originalWidth / originalHeight;
+                document.getElementById('width').value = Math.round(parseInt(document.getElementById('height').value) * ratio);
+            }
+            resizeImage();
+        });
+
+        document.getElementById('scale').addEventListener('change', (e) => {
+            if (e.target.value !== 'custom' && originalImage) {
+                const scale = parseFloat(e.target.value);
+                document.getElementById('width').value = Math.round(originalWidth * scale);
+                document.getElementById('height').value = Math.round(originalHeight * scale);
+                resizeImage();
+            }
+        });
+
+        window.downloadImage = function() {
+            const canvas = document.getElementById('previewCanvas');
+            const format = document.getElementById('format').value;
+            const quality = parseFloat(document.getElementById('quality').value);
+
+            const link = document.createElement('a');
+            link.download = `resized_image.${format.split('/')[1]}`;
+            link.href = canvas.toDataURL(format, quality);
+            link.click();
+        };
+
+        window.resetAll = function() {
+            originalImage = null;
+            document.getElementById('originalImg').style.display = 'none';
+            document.getElementById('controlsPanel').style.display = 'none';
+            document.getElementById('previewPanel').style.display = 'none';
+            document.getElementById('fileInput').value = '';
+        };
+    })();
+    </script>
+</body>
+</html>

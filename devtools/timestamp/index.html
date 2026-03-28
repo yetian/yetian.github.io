@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unix 时间戳转换器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <header class="header">
+            <div class="header-left">
+                <span class="app-icon">⏱️</span>
+                <h1 class="app-title">Unix 时间戳转换器</h1>
+                <p class="app-subtitle">时间戳与日期时间互相转换</p>
+            </div>
+            <div class="header-right">
+                <div class="timezone-info">
+                    <span class="timezone-label">当前时区:</span>
+                    <span id="timezone" class="timezone-value"></span>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- 当前时间戳 -->
+            <section class="card current-section">
+                <div class="card-header">
+                    <h2 class="card-title">📍 当前时间戳</h2>
+                    <button id="refreshBtn" class="refresh-btn" title="刷新">
+                        <span>🔄</span>
+                    </button>
+                </div>
+                <div class="current-timestamp">
+                    <div class="timestamp-display">
+                        <span id="currentTimestamp" class="timestamp-value">--</span>
+                        <span class="timestamp-unit">秒</span>
+                    </div>
+                    <div class="timestamp-ms">
+                        <span id="currentTimestampMs" class="timestamp-ms-value">--</span>
+                        <span class="timestamp-unit">毫秒</span>
+                    </div>
+                </div>
+                <div class="current-datetime">
+                    <span id="currentDatetime" class="datetime-value">--</span>
+                </div>
+                <div class="relative-time">
+                    <span class="relative-label">相对时间:</span>
+                    <span id="relativeTime" class="relative-value">刚刚</span>
+                </div>
+            </section>
+
+            <!-- 时间戳转日期 -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">📥 时间戳转日期</h2>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="timestampInput" class="input-field" placeholder="输入 Unix 时间戳...">
+                    <div class="toggle-group">
+                        <button id="unitSeconds" class="toggle-btn active" data-unit="seconds">秒</button>
+                        <button id="unitMs" class="toggle-btn" data-unit="milliseconds">毫秒</button>
+                    </div>
+                </div>
+                <button id="convertBtn" class="primary-btn">转换</button>
+
+                <div id="convertResult" class="result-section hidden">
+                    <h3 class="result-title">转换结果</h3>
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <span class="result-label">本地时间</span>
+                            <div class="result-value-group">
+                                <span id="localTime" class="result-value">--</span>
+                                <button class="copy-btn" data-target="localTime">📋</button>
+                            </div>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">ISO 8601</span>
+                            <div class="result-value-group">
+                                <span id="isoTime" class="result-value">--</span>
+                                <button class="copy-btn" data-target="isoTime">📋</button>
+                            </div>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">UTC 时间</span>
+                            <div class="result-value-group">
+                                <span id="utcTime" class="result-value">--</span>
+                                <button class="copy-btn" data-target="utcTime">📋</button>
+                            </div>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">相对时间</span>
+                            <div class="result-value-group">
+                                <span id="inputRelativeTime" class="result-value">--</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="format-list">
+                        <h4 class="format-title">其他格式</h4>
+                        <div class="format-item">
+                            <span class="format-label">RFC 2822:</span>
+                            <span id="rfc2822" class="format-value">--</span>
+                            <button class="copy-btn small" data-target="rfc2822">📋</button>
+                        </div>
+                        <div class="format-item">
+                            <span class="format-label">Unix 时间戳 (秒):</span>
+                            <span id="resultTimestampSec" class="format-value">--</span>
+                            <button class="copy-btn small" data-target="resultTimestampSec">📋</button>
+                        </div>
+                        <div class="format-item">
+                            <span class="format-label">Unix 时间戳 (毫秒):</span>
+                            <span id="resultTimestampMs" class="format-value">--</span>
+                            <button class="copy-btn small" data-target="resultTimestampMs">📋</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 日期转时间戳 -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">📤 日期转时间戳</h2>
+                </div>
+                <div class="datetime-picker">
+                    <div class="picker-row">
+                        <div class="picker-group">
+                            <label class="picker-label">日期</label>
+                            <input type="date" id="dateInput" class="picker-input">
+                        </div>
+                        <div class="picker-group">
+                            <label class="picker-label">时间</label>
+                            <input type="time" id="timeInput" class="picker-input" step="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="quick-btns">
+                    <button class="quick-btn" data-offset="0">现在</button>
+                    <button class="quick-btn" data-offset="-86400">昨天</button>
+                    <button class="quick-btn" data-offset="86400">明天</button>
+                    <button class="quick-btn" data-offset="-604800">一周前</button>
+                    <button class="quick-btn" data-offset="604800">一周后</button>
+                </div>
+                <button id="convertDateBtn" class="primary-btn">转换</button>
+
+                <div id="dateConvertResult" class="result-section hidden">
+                    <h3 class="result-title">转换结果</h3>
+                    <div class="timestamp-results">
+                        <div class="timestamp-result-item">
+                            <span class="result-label">Unix 时间戳 (秒)</span>
+                            <div class="result-value-group">
+                                <span id="convertedTimestampSec" class="result-value large">--</span>
+                                <button class="copy-btn" data-target="convertedTimestampSec">📋</button>
+                            </div>
+                        </div>
+                        <div class="timestamp-result-item">
+                            <span class="result-label">Unix 时间戳 (毫秒)</span>
+                            <div class="result-value-group">
+                                <span id="convertedTimestampMs" class="result-value large">--</span>
+                                <button class="copy-btn" data-target="convertedTimestampMs">📋</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <span class="footer-text">按 Enter 键快速转换 | 点击 📋 复制结果</span>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

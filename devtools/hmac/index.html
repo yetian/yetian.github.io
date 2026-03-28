@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMAC 生成器</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f97316;
+            --primary-light: #fb923c;
+            --primary-dark: #ea580c;
+            --secondary: #22c55e;
+            --accent: #3b82f6;
+            --dark: #0a0a0f;
+            --dark-light: #13131a;
+            --surface: #18181f;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body { font-family: 'Outfit', sans-serif; background: var(--dark); min-height: 100vh; color: var(--text); overflow-x: hidden; }
+
+        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; pointer-events: none; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: float 20s ease-in-out infinite; }
+        .orb-1 { width: 400px; height: 400px; background: var(--primary); top: -100px; right: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: var(--secondary); bottom: -50px; left: -50px; animation-delay: -5s; }
+        .orb-3 { width: 250px; height: 250px; background: var(--accent); top: 50%; left: 50%; margin-top: -125px; margin-left: -125px; animation-delay: -10s; opacity: 0.2; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(30px, -30px); }
+            50% { transform: translate(-20px, 20px); }
+            75% { transform: translate(20px, 30px); }
+        }
+
+        .container { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; padding: 2rem; }
+
+        header { text-align: center; margin-bottom: 2rem; }
+        header h1 { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
+        .subtitle { color: var(--text-muted); }
+
+        .panel { background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 1.25rem; margin-bottom: 1rem; }
+
+        label { display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+
+        textarea, input[type="text"] { width: 100%; background: rgba(0, 0, 0, 0.3); border: 1px solid var(--glass-border); border-radius: 12px; padding: 0.85rem; color: var(--text); font-family: inherit; font-size: 0.95rem; resize: vertical; transition: border-color 0.2s; }
+        textarea { font-family: 'JetBrains Mono', monospace; min-height: 100px; }
+        textarea:focus, input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2); }
+
+        select { background: rgba(0, 0, 0, 0.3); border: 1px solid var(--glass-border); border-radius: 10px; padding: 0.6rem; color: var(--text); font-family: inherit; cursor: pointer; }
+
+        .row { display: flex; gap: 0.75rem; align-items: flex-end; margin-bottom: 1rem; }
+
+        button { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; border-radius: 12px; padding: 0.65rem 1.25rem; font-family: inherit; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4); }
+
+        .btn-secondary { background: var(--glass); border: 1px solid var(--glass-border); }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); box-shadow: none; transform: none; }
+
+        .output-format { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+        .output-format button { flex: 1; background: transparent; border: 1px solid var(--glass-border); }
+        .output-format button.active { background: var(--primary); border-color: var(--primary); }
+
+        pre { background: rgba(0, 0, 0, 0.3); border-radius: 12px; padding: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; word-break: break-all; }
+
+        @media (max-width: 768px) { .container { padding: 1rem; } header h1 { font-size: 1.5rem; } }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>🔒 HMAC 生成器</h1>
+            <p class="subtitle">计算消息的 HMAC 哈希值</p>
+        </header>
+
+        <div class="panel">
+            <label>消息内容</label>
+            <textarea id="message" placeholder="输入要计算 HMAC 的消息..."></textarea>
+        </div>
+
+        <div class="panel">
+            <label>密钥 (Secret Key)</label>
+            <input type="text" id="secret" placeholder="输入密钥...">
+        </div>
+
+        <div class="panel">
+            <label>算法</label>
+            <select id="algorithm">
+                <option value="SHA-1">SHA-1</option>
+                <option value="SHA-256" selected>SHA-256</option>
+                <option value="SHA-384">SHA-384</option>
+                <option value="SHA-512">SHA-512</option>
+            </select>
+        </div>
+
+        <div class="panel">
+            <label>输出格式</label>
+            <div class="output-format">
+                <button class="active" onclick="setFormat('hex', this)">Hex</button>
+                <button onclick="setFormat('base64', this)">Base64</button>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; margin-bottom: 1rem;">
+            <button onclick="calculateHMAC()" style="flex: 1;">计算 HMAC</button>
+            <button class="btn-secondary" onclick="copyResult()">复制</button>
+            <button class="btn-secondary" onclick="clearAll()">清空</button>
+        </div>
+
+        <div class="panel">
+            <div style="font-weight: 600; margin-bottom: 0.75rem;">结果</div>
+            <pre id="result">-</pre>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        let outputFormat = 'hex';
+
+        window.setFormat = function(format, btn) {
+            outputFormat = format;
+            document.querySelectorAll('.output-format button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (document.getElementById('message').value && document.getElementById('secret').value) calculateHMAC();
+        };
+
+        window.calculateHMAC = async function() {
+            const message = document.getElementById('message').value;
+            const secret = document.getElementById('secret').value;
+            const algorithm = document.getElementById('algorithm').value;
+
+            if (!message || !secret) { document.getElementById('result').textContent = '请输入消息和密钥'; return; }
+
+            try {
+                const encoder = new TextEncoder();
+                const keyData = encoder.encode(secret);
+                const messageData = encoder.encode(message);
+
+                const key = await crypto.subtle.importKey('raw', keyData, { name: 'HMAC', hash: algorithm }, false, ['sign']);
+                const signature = await crypto.subtle.sign('HMAC', key, messageData);
+                const hashArray = new Uint8Array(signature);
+
+                let result;
+                if (outputFormat === 'hex') {
+                    result = Array.from(hashArray).map(b => b.toString(16).padStart(2, '0')).join('');
+                } else {
+                    result = btoa(String.fromCharCode(...hashArray));
+                }
+
+                document.getElementById('result').textContent = result;
+            } catch (e) {
+                document.getElementById('result').textContent = '错误: ' + e.message;
+            }
+        };
+
+        window.copyResult = function() {
+            const text = document.getElementById('result').textContent;
+            if (text && text !== '-') navigator.clipboard.writeText(text);
+        };
+
+        window.clearAll = function() {
+            document.getElementById('message').value = '';
+            document.getElementById('secret').value = '';
+            document.getElementById('result').textContent = '-';
+        };
+
+        document.getElementById('message').addEventListener('input', () => { if (document.getElementById('secret').value) calculateHMAC(); });
+        document.getElementById('secret').addEventListener('input', () => { if (document.getElementById('message').value) calculateHMAC(); });
+        document.getElementById('algorithm').addEventListener('change', calculateHMAC);
+    })();
+    </script>
+</body>
+</html>

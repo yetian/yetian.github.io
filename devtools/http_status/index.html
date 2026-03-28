@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP 状态码参考</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>HTTP 状态码参考</h1>
+            <p class="subtitle">快速查找 HTTP 响应状态码含义</p>
+        </header>
+
+        <main>
+            <div class="search-card">
+                <div class="search-wrapper">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="M21 21l-4.35-4.35"/>
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="搜索状态码或描述...">
+                    <button class="clear-search-btn" id="clearSearchBtn" title="清空">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 6L6 18M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="filter-card">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">全部</button>
+                    <button class="filter-btn" data-filter="1xx">1xx 信息</button>
+                    <button class="filter-btn" data-filter="2xx">2xx 成功</button>
+                    <button class="filter-btn" data-filter="3xx">3xx 重定向</button>
+                    <button class="filter-btn" data-filter="4xx">4xx 客户端错误</button>
+                    <button class="filter-btn" data-filter="5xx">5xx 服务器错误</button>
+                </div>
+            </div>
+
+            <div class="status-list" id="statusList">
+                <!-- Status codes will be rendered here -->
+            </div>
+
+            <div class="stats-card">
+                <div class="stat-item">
+                    <span class="stat-value" id="totalCount">0</span>
+                    <span class="stat-label">状态码总数</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="filteredCount">0</span>
+                    <span class="stat-label">当前显示</span>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>点击状态码可复制到剪贴板</p>
+        </footer>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

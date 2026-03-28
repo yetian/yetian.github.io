@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本对比工具</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景动画 -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- 顶部工具栏 -->
+        <header class="toolbar">
+            <div class="toolbar-left">
+                <h1 class="app-title">
+                    <span class="title-icon">⇆</span>
+                    文本对比工具
+                </h1>
+                <p class="app-subtitle">对比两段文本差异，高亮显示不同之处</p>
+            </div>
+            <div class="toolbar-center">
+                <div class="tool-group">
+                    <label class="option-label">
+                        <input type="checkbox" id="ignoreCase">
+                        <span>忽略大小写</span>
+                    </label>
+                </div>
+                <div class="tool-group">
+                    <label class="option-label">
+                        <input type="checkbox" id="ignoreWhitespace">
+                        <span>忽略空白</span>
+                    </label>
+                </div>
+            </div>
+            <div class="toolbar-right">
+                <button class="action-btn" id="clearBtn" title="清空">
+                    <span>🗑</span> 清空
+                </button>
+                <button class="action-btn" id="swapBtn" title="交换">
+                    <span>⇄</span> 交换
+                </button>
+                <button class="action-btn primary" id="compareBtn" title="对比">
+                    <span>🔍</span> 对比
+                </button>
+            </div>
+        </header>
+
+        <!-- 主编辑区 -->
+        <main class="editor-main">
+            <!-- 左侧文本面板 -->
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <span class="panel-title">原始文本</span>
+                    <div class="panel-actions">
+                        <button class="panel-btn" id="pasteBtn1" title="粘贴">📋</button>
+                    </div>
+                </div>
+                <div class="editor-wrapper">
+                    <div class="line-numbers" id="lineNumbers1"></div>
+                    <textarea id="textArea1" placeholder="在此输入原始文本..."></textarea>
+                </div>
+                <div class="editor-footer">
+                    <span id="stats1">0 字符 | 0 行</span>
+                </div>
+            </div>
+
+            <!-- 分割线 -->
+            <div class="resizer">
+                <div class="resizer-handle"></div>
+            </div>
+
+            <!-- 右侧文本面板 -->
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <span class="panel-title">修改文本</span>
+                    <div class="panel-actions">
+                        <button class="panel-btn" id="pasteBtn2" title="粘贴">📋</button>
+                    </div>
+                </div>
+                <div class="editor-wrapper">
+                    <div class="line-numbers" id="lineNumbers2"></div>
+                    <textarea id="textArea2" placeholder="在此输入修改后的文本..."></textarea>
+                </div>
+                <div class="editor-footer">
+                    <span id="stats2">0 字符 | 0 行</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- 对比结果区 -->
+        <div class="result-panel" id="resultPanel">
+            <div class="result-header">
+                <span class="result-title">对比结果</span>
+                <div class="result-stats">
+                    <span class="stat-item added">+<span id="addedCount">0</span> 行新增</span>
+                    <span class="stat-item removed">-<span id="removedCount">0</span> 行删除</span>
+                    <span class="stat-item unchanged">~<span id="unchangedCount">0</span> 行未变</span>
+                </div>
+                <button class="panel-btn" id="closeResultBtn" title="关闭">×</button>
+            </div>
+            <div class="result-content">
+                <div class="diff-view" id="diffView"></div>
+            </div>
+        </div>
+
+        <!-- 状态栏 -->
+        <footer class="status-bar">
+            <div class="status-left">
+                <span class="status-item" id="statusMsg">就绪</span>
+            </div>
+            <div class="status-right">
+                <span class="status-item">支持行级文本对比</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

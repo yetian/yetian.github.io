@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 圆角生成器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景动画 -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- 顶部工具栏 -->
+        <header class="toolbar">
+            <div class="toolbar-left">
+                <h1 class="app-title">
+                    <span class="title-icon">⬜</span>
+                    CSS 圆角生成器
+                </h1>
+                <p class="app-subtitle">可视化生成CSS border-radius代码</p>
+            </div>
+            <div class="toolbar-right">
+                <button class="action-btn" id="resetBtn" title="重置">
+                    <span>🔄</span> 重置
+                </button>
+                <button class="action-btn primary" id="copyBtn" title="复制 CSS">
+                    <span>📋</span> 复制 CSS
+                </button>
+            </div>
+        </header>
+
+        <!-- 主编辑区 -->
+        <main class="main-content">
+            <!-- 左侧：预览区域 -->
+            <div class="preview-section">
+                <div class="panel-header">
+                    <span class="panel-title">预览</span>
+                </div>
+                <div class="preview-area">
+                    <div class="preview-box" id="previewBox"></div>
+                </div>
+                <!-- 预览尺寸控制 -->
+                <div class="preview-size-control">
+                    <div class="size-slider">
+                        <label>宽度</label>
+                        <input type="range" id="widthSlider" min="50" max="400" value="200">
+                        <span id="widthValue">200px</span>
+                    </div>
+                    <div class="size-slider">
+                        <label>高度</label>
+                        <input type="range" id="heightSlider" min="50" max="400" value="200">
+                        <span id="heightValue">200px</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧：控制面板 -->
+            <div class="controls-section">
+                <div class="panel-header">
+                    <span class="panel-title">圆角控制</span>
+                    <div class="link-toggle">
+                        <span class="link-label">联动</span>
+                        <div class="toggle-switch active" id="linkToggle" title="联动所有角"></div>
+                    </div>
+                </div>
+                <div class="controls-area">
+                    <!-- 单位选择 -->
+                    <div class="unit-selector">
+                        <label>单位</label>
+                        <div class="unit-options">
+                            <button class="unit-btn active" data-unit="px">px</button>
+                            <button class="unit-btn" data-unit="%">%</button>
+                            <button class="unit-btn" data-unit="em">em</button>
+                            <button class="unit-btn" data-unit="rem">rem</button>
+                        </div>
+                    </div>
+
+                    <!-- 圆角控制网格 -->
+                    <div class="radius-grid">
+                        <!-- 四个角的输入 -->
+                        <div class="corner-control top-left">
+                            <label>左上</label>
+                            <input type="number" id="topLeft" min="0" max="999" value="16" class="radius-input">
+                        </div>
+                        <div class="corner-control top-right">
+                            <label>右上</label>
+                            <input type="number" id="topRight" min="0" max="999" value="16" class="radius-input">
+                        </div>
+                        <div class="corner-control bottom-right">
+                            <label>右下</label>
+                            <input type="number" id="bottomRight" min="0" max="999" value="16" class="radius-input">
+                        </div>
+                        <div class="corner-control bottom-left">
+                            <label>左下</label>
+                            <input type="number" id="bottomLeft" min="0" max="999" value="16" class="radius-input">
+                        </div>
+                        <!-- 中心链接指示器 -->
+                        <div class="link-indicator" id="linkIndicator">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- 快速滑块 -->
+                    <div class="quick-slider">
+                        <label>快速调整</label>
+                        <input type="range" id="quickSlider" min="0" max="100" value="16">
+                        <span id="quickValue">16</span>
+                    </div>
+
+                    <!-- 预设形状 -->
+                    <div class="presets-section">
+                        <h3 class="section-title">预设形状</h3>
+                        <div class="presets-grid" id="presetsGrid">
+                            <!-- 预设会动态生成 -->
+                        </div>
+                    </div>
+
+                    <!-- 生成的 CSS -->
+                    <div class="css-output">
+                        <div class="css-header">
+                            <h3 class="section-title">生成的 CSS</h3>
+                            <button class="copy-btn" id="copyCodeBtn" title="复制代码">
+                                📋 复制
+                            </button>
+                        </div>
+                        <pre class="css-code" id="cssCode"></pre>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 通知 -->
+    <div class="notification" id="notification">
+        <span id="notificationText"></span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

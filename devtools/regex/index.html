@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正则表达式测试器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景动画 -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- 顶部工具栏 -->
+        <div class="toolbar">
+            <div class="toolbar-left">
+                <div class="app-title">
+                    <span class="title-icon">.*</span>
+                    <span>正则表达式测试器</span>
+                </div>
+                <p class="app-subtitle">实时测试正则表达式匹配结果</p>
+            </div>
+            <div class="toolbar-right">
+                <button class="action-btn" id="clearBtn">
+                    <span>🗑️</span>
+                    <span>清空</span>
+                </button>
+                <button class="action-btn primary" id="copyRegexBtn">
+                    <span>📋</span>
+                    <span>复制正则</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 主内容区 -->
+        <div class="main-content">
+            <!-- 左侧：输入区 -->
+            <div class="input-section">
+                <!-- 正则输入 -->
+                <div class="regex-input-group">
+                    <div class="panel-header">
+                        <span class="panel-title">正则表达式</span>
+                    </div>
+                    <div class="regex-input-wrapper">
+                        <span class="regex-delimiter">/</span>
+                        <input type="text" id="regexInput" class="regex-input" placeholder="输入正则表达式..." autocomplete="off">
+                        <span class="regex-delimiter">/</span>
+                        <div class="flags-group">
+                            <label class="flag-checkbox" title="全局匹配">
+                                <input type="checkbox" id="flagG" checked>
+                                <span>g</span>
+                            </label>
+                            <label class="flag-checkbox" title="忽略大小写">
+                                <input type="checkbox" id="flagI">
+                                <span>i</span>
+                            </label>
+                            <label class="flag-checkbox" title="多行模式">
+                                <input type="checkbox" id="flagM">
+                                <span>m</span>
+                            </label>
+                            <label class="flag-checkbox" title="点匹配换行">
+                                <input type="checkbox" id="flagS">
+                                <span>s</span>
+                            </label>
+                            <label class="flag-checkbox" title="Unicode">
+                                <input type="checkbox" id="flagU">
+                                <span>u</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="errorMessage"></div>
+                </div>
+
+                <!-- 测试文本 -->
+                <div class="test-string-group">
+                    <div class="panel-header">
+                        <span class="panel-title">测试文本</span>
+                        <span class="char-count" id="charCount">0 字符</span>
+                    </div>
+                    <textarea id="testString" class="test-textarea" placeholder="在此输入要测试的文本..."></textarea>
+                </div>
+            </div>
+
+            <!-- 右侧：结果区 -->
+            <div class="results-section">
+                <div class="panel-header">
+                    <span class="panel-title">匹配结果</span>
+                    <span class="match-count" id="matchCount">0 个匹配</span>
+                </div>
+                <div class="results-wrapper">
+                    <div class="highlighted-text" id="highlightedText">
+                        <span class="placeholder-text">输入正则表达式和测试文本后，匹配结果将在此显示...</span>
+                    </div>
+                </div>
+
+                <!-- 捕获组 -->
+                <div class="capture-groups">
+                    <div class="panel-header">
+                        <span class="panel-title">捕获组</span>
+                    </div>
+                    <div class="groups-wrapper" id="groupsWrapper">
+                        <span class="placeholder-text">无捕获组</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 常用正则库 -->
+        <div class="patterns-library">
+            <div class="panel-header">
+                <span class="panel-title">常用正则表达式</span>
+            </div>
+            <div class="patterns-grid" id="patternsGrid">
+                <!-- 由 JS 动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

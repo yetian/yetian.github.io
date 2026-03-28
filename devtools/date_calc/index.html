@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日期计算</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f59e0b;
+            --primary-light: #fbbf24;
+            --primary-dark: #d97706;
+            --secondary: #10b981;
+            --accent: #3b82f6;
+            --dark: #0a0a0f;
+            --dark-light: #13131a;
+            --surface: #18181f;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body { font-family: 'Outfit', sans-serif; background: var(--dark); min-height: 100vh; color: var(--text); overflow-x: hidden; }
+
+        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; pointer-events: none; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: float 20s ease-in-out infinite; }
+        .orb-1 { width: 400px; height: 400px; background: var(--primary); top: -100px; right: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: var(--secondary); bottom: -50px; left: -50px; animation-delay: -5s; }
+        .orb-3 { width: 250px; height: 250px; background: var(--accent); top: 50%; left: 50%; margin-top: -125px; margin-left: -125px; animation-delay: -10s; opacity: 0.2; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(30px, -30px); }
+            50% { transform: translate(-20px, 20px); }
+            75% { transform: translate(20px, 30px); }
+        }
+
+        .container { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; padding: 2rem; }
+
+        header { text-align: center; margin-bottom: 2rem; }
+        header h1 { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
+        .subtitle { color: var(--text-muted); }
+
+        .panel { background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 1.25rem; margin-bottom: 1.25rem; }
+
+        .panel-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 1rem; }
+
+        .tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+        .tabs button { flex: 1; background: transparent; border: 1px solid var(--glass-border); color: var(--text); padding: 0.75rem; border-radius: 12px; cursor: pointer; font-family: inherit; font-weight: 500; transition: all 0.2s; }
+        .tabs button.active { background: var(--primary); border-color: var(--primary); }
+
+        label { display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+
+        input[type="date"] { width: 100%; background: rgba(0, 0, 0, 0.3); border: 1px solid var(--glass-border); border-radius: 12px; padding: 0.85rem; color: var(--text); font-family: inherit; font-size: 1rem; transition: border-color 0.2s; }
+        input[type="date"]:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2); }
+
+        .date-row { display: flex; gap: 1rem; align-items: flex-end; }
+        .date-row > div { flex: 1; }
+
+        button { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; border-radius: 12px; padding: 0.75rem 1.5rem; font-family: inherit; font-weight: 500; cursor: pointer; transition: all 0.2s; width: 100%; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); }
+
+        .result { background: rgba(0, 0, 0, 0.3); border-radius: 12px; padding: 1.25rem; text-align: center; }
+
+        .result-number { font-size: 2.5rem; font-weight: 700; color: var(--primary-light); font-family: 'JetBrains Mono', monospace; }
+        .result-unit { font-size: 1rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+        .result-details { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--glass-border); }
+        .detail-item { text-align: center; }
+        .detail-value { font-size: 1.25rem; font-weight: 600; color: var(--text); font-family: 'JetBrains Mono', monospace; }
+        .detail-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+        @media (max-width: 768px) { .container { padding: 1rem; } header h1 { font-size: 1.5rem; } .date-row { flex-direction: column; } .result-details { grid-template-columns: 1fr; } }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>📆 日期计算</h1>
+            <p class="subtitle">计算日期间隔、加减天数</p>
+        </header>
+
+        <div class="panel">
+            <div class="tabs">
+                <button class="active" onclick="switchTab('diff', this)">日期间隔</button>
+                <button onclick="switchTab('add', this)">日期加减</button>
+            </div>
+
+            <div id="diffPanel">
+                <div class="date-row">
+                    <div>
+                        <label>开始日期</label>
+                        <input type="date" id="startDate">
+                    </div>
+                    <div>
+                        <label>结束日期</label>
+                        <input type="date" id="endDate">
+                    </div>
+                </div>
+                <button onclick="calculateDiff()" style="margin-top: 1rem;">计算间隔</button>
+            </div>
+
+            <div id="addPanel" style="display: none;">
+                <label>基准日期</label>
+                <input type="date" id="baseDate" style="margin-bottom: 1rem;">
+                <label>天数 (负数为减)</label>
+                <input type="number" id="daysToAdd" value="0" style="width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: 12px; padding: 0.85rem; color: var(--text); font-family: inherit; margin-bottom: 1rem;">
+                <button onclick="calculateAdd()">计算日期</button>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-title">计算结果</div>
+            <div class="result" id="result">
+                <div class="result-number">-</div>
+                <div class="result-unit">选择日期后计算</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // Set default dates to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('startDate').value = today;
+        document.getElementById('endDate').value = today;
+        document.getElementById('baseDate').value = today;
+
+        window.switchTab = function(tab, btn) {
+            document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('diffPanel').style.display = tab === 'diff' ? 'block' : 'none';
+            document.getElementById('addPanel').style.display = tab === 'add' ? 'block' : 'none';
+        };
+
+        window.calculateDiff = function() {
+            const start = new Date(document.getElementById('startDate').value);
+            const end = new Date(document.getElementById('endDate').value);
+
+            if (isNaN(start) || isNaN(end)) {
+                document.getElementById('result').innerHTML = '<div class="result-number">!</div><div class="result-unit">请选择有效日期</div>';
+                return;
+            }
+
+            const diffTime = Math.abs(end - start);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const weeks = Math.floor(diffDays / 7);
+            const months = Math.floor(diffDays / 30);
+            const years = Math.floor(diffDays / 365);
+
+            const weekends = countWeekends(start, end);
+
+            document.getElementById('result').innerHTML = `
+                <div class="result-number">${diffDays}</div>
+                <div class="result-unit">天</div>
+                <div class="result-details">
+                    <div class="detail-item"><div class="detail-value">${weeks}</div><div class="detail-label">周</div></div>
+                    <div class="detail-item"><div class="detail-value">${months}</div><div class="detail-label">月</div></div>
+                    <div class="detail-item"><div class="detail-value">${years}</div><div class="detail-label">年</div></div>
+                    <div class="detail-item"><div class="detail-value">${weekends}</div><div class="detail-label">周末天数</div></div>
+                </div>
+            `;
+        };
+
+        function countWeekends(start, end) {
+            let count = 0;
+            const current = new Date(start);
+            const endDate = new Date(end);
+
+            while (current <= endDate) {
+                const day = current.getDay();
+                if (day === 0 || day === 6) count++;
+                current.setDate(current.getDate() + 1);
+            }
+            return count;
+        }
+
+        window.calculateAdd = function() {
+            const base = new Date(document.getElementById('baseDate').value);
+            const days = parseInt(document.getElementById('daysToAdd').value) || 0;
+
+            if (isNaN(base)) {
+                document.getElementById('result').innerHTML = '<div class="result-number">!</div><div class="result-unit">请选择有效日期</div>';
+                return;
+            }
+
+            const result = new Date(base);
+            result.setDate(result.getDate() + days);
+
+            const weekdays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+            const weekday = weekdays[result.getDay()];
+
+            document.getElementById('result').innerHTML = `
+                <div class="result-number">${result.getFullYear()}-${String(result.getMonth() + 1).padStart(2, '0')}-${String(result.getDate()).padStart(2, '0')}</div>
+                <div class="result-unit">${weekday}</div>
+                <div class="result-details">
+                    <div class="detail-item"><div class="detail-value">${days > 0 ? '+' : ''}${days}</div><div class="detail-label">天</div></div>
+                </div>
+            `;
+        };
+
+        // Auto calculate on input change
+        document.getElementById('startDate').addEventListener('change', calculateDiff);
+        document.getElementById('endDate').addEventListener('change', calculateDiff);
+        document.getElementById('baseDate').addEventListener('change', calculateAdd);
+        document.getElementById('daysToAdd').addEventListener('input', calculateAdd);
+    })();
+    </script>
+</body>
+</html>

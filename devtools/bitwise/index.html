@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>位运算计算器 - Bitwise Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>位运算计算器</h1>
+            <p class="subtitle">Bitwise Calculator</p>
+        </header>
+
+        <main>
+            <!-- Bit Mode Selector -->
+            <div class="mode-card">
+                <div class="mode-label">位数模式</div>
+                <div class="mode-tabs">
+                    <button class="mode-tab" data-bits="8">8位</button>
+                    <button class="mode-tab" data-bits="16">16位</button>
+                    <button class="mode-tab active" data-bits="32">32位</button>
+                    <button class="mode-tab" data-bits="64">64位</button>
+                </div>
+            </div>
+
+            <!-- Input A -->
+            <div class="input-card">
+                <div class="card-header">
+                    <h3>操作数 A</h3>
+                    <div class="input-tabs">
+                        <button class="input-tab active" data-input="a-dec">十进制</button>
+                        <button class="input-tab" data-input="a-hex">十六进制</button>
+                        <button class="input-tab" data-input="a-bin">二进制</button>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <input type="text" id="inputA" class="number-input" placeholder="输入数值">
+                    <button class="action-btn" id="clearA" title="清空">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 6L6 18M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Operation Buttons -->
+            <div class="operation-card">
+                <div class="operation-grid">
+                    <button class="op-btn" data-op="and">AND 与</button>
+                    <button class="op-btn" data-op="or">OR 或</button>
+                    <button class="op-btn" data-op="xor">XOR 异或</button>
+                    <button class="op-btn highlight" data-op="not">NOT 非</button>
+                    <button class="op-btn" data-op="shl"><< 左移</button>
+                    <button class="op-btn" data-op="shr">>> 右移</button>
+                </div>
+            </div>
+
+            <!-- Input B (for binary operations) -->
+            <div class="input-card" id="inputBCard">
+                <div class="card-header">
+                    <h3>操作数 B</h3>
+                    <div class="input-tabs">
+                        <button class="input-tab active" data-input="b-dec">十进制</button>
+                        <button class="input-tab" data-input="b-hex">十六进制</button>
+                        <button class="input-tab" data-input="b-bin">二进制</button>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <input type="text" id="inputB" class="number-input" placeholder="输入数值">
+                    <button class="action-btn" id="clearB" title="清空">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 6L6 18M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Result -->
+            <div class="result-card">
+                <div class="card-header">
+                    <h3>计算结果</h3>
+                    <button class="action-btn copy-btn" id="copyResult" title="复制结果">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                            <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="result-outputs">
+                    <div class="result-item">
+                        <span class="result-label">十进制 (Decimal)</span>
+                        <span class="result-value" id="resultDec">0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">十六进制 (Hex)</span>
+                        <span class="result-value" id="resultHex">0x0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">二进制 (Binary)</span>
+                        <span class="result-value mono" id="resultBin">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bit Visualization -->
+            <div class="visual-card">
+                <div class="card-header">
+                    <h3>位可视化</h3>
+                    <button class="action-btn" id="toggleVisual" title="切换视图">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="visual-section" id="visualSection">
+                    <div class="bit-row">
+                        <span class="bit-label">A:</span>
+                        <div class="bits-container" id="bitsA"></div>
+                    </div>
+                    <div class="bit-row" id="bitsBRow">
+                        <span class="bit-label">B:</span>
+                        <div class="bits-container" id="bitsB"></div>
+                    </div>
+                    <div class="bit-row result">
+                        <span class="bit-label">结果:</span>
+                        <div class="bits-container" id="bitsResult"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info -->
+            <div class="info-card">
+                <div class="info-item">
+                    <span class="info-label">当前操作</span>
+                    <span class="info-value" id="currentOp">AND 与运算</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">位数</span>
+                    <span class="info-value" id="currentBits">32位</span>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>支持 AND, OR, XOR, NOT 及位移运算 | 所有计算本地执行</p>
+        </footer>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

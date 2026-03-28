@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>假文生成器 - Lorem Ipsum Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景动画 -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- 顶部工具栏 -->
+        <div class="toolbar">
+            <div class="toolbar-left">
+                <div class="app-title">
+                    <span class="title-icon">📝</span>
+                    <span>假文生成器</span>
+                </div>
+                <p class="app-subtitle">生成中文/英文随机填充文本</p>
+            </div>
+        </div>
+
+        <!-- 主内容区 -->
+        <div class="main-content">
+            <!-- 控制面板 -->
+            <div class="control-panel">
+                <div class="control-group">
+                    <label class="control-label">生成类型</label>
+                    <div class="type-buttons">
+                        <button class="type-btn active" data-type="paragraphs">段落</button>
+                        <button class="type-btn" data-type="sentences">句子</button>
+                        <button class="type-btn" data-type="words">单词</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">数量</label>
+                    <div class="quantity-control">
+                        <button class="qty-btn" id="decreaseQty">−</button>
+                        <input type="number" id="quantity" value="3" min="1" max="100">
+                        <button class="qty-btn" id="increaseQty">+</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">语言</label>
+                    <div class="lang-switch">
+                        <button class="lang-btn active" data-lang="latin">Latin</button>
+                        <button class="lang-btn" data-lang="chinese">中文假文</button>
+                    </div>
+                </div>
+
+                <div class="control-group toggle-group">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="startWithLorem" checked>
+                        <span class="toggle-switch"></span>
+                        <span class="toggle-text">以 "Lorem ipsum" 开头</span>
+                    </label>
+                </div>
+
+                <button class="generate-btn" id="generateBtn">
+                    <span>🎲</span> 生成假文
+                </button>
+            </div>
+
+            <!-- 输出区域 -->
+            <div class="output-panel">
+                <div class="output-header">
+                    <span class="output-title">生成结果</span>
+                    <button class="copy-btn" id="copyBtn" title="复制">
+                        <span>📋</span> 复制
+                    </button>
+                </div>
+                <textarea id="output" placeholder="点击"生成假文"按钮生成内容..." readonly></textarea>
+            </div>
+        </div>
+
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <span id="statusText">准备就绪</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL 格式化</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-light: #60a5fa;
+            --primary-dark: #2563eb;
+            --secondary: #06b6d4;
+            --accent: #10b981;
+            --dark: #0a0a0f;
+            --dark-light: #13131a;
+            --surface: #18181f;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--dark);
+            min-height: 100vh;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            top: -100px;
+            right: -100px;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--secondary);
+            bottom: -50px;
+            left: -50px;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--accent);
+            top: 50%;
+            left: 50%;
+            margin-top: -125px;
+            margin-left: -125px;
+            animation-delay: -10s;
+            opacity: 0.2;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(30px, -30px); }
+            50% { transform: translate(-20px, 20px); }
+            75% { transform: translate(20px, 30px); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle { color: var(--text-muted); }
+
+        .toolbar {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 0.65rem 1.25rem;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: none;
+            transform: none;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.25rem;
+            background: var(--glass);
+            padding: 0.25rem;
+            border-radius: 10px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-group button {
+            background: transparent;
+            padding: 0.5rem 0.85rem;
+            font-size: 0.9rem;
+            border-radius: 8px;
+        }
+
+        .btn-group button.active {
+            background: var(--primary);
+        }
+
+        .btn-group button:hover { transform: none; box-shadow: none; }
+
+        .panels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .panels { grid-template-columns: 1fr; }
+            .container { padding: 1rem; }
+            header h1 { font-size: 1.5rem; }
+        }
+
+        .panel {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.25rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .panel-title { font-weight: 600; font-size: 0.95rem; }
+
+        textarea {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1rem;
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            resize: vertical;
+            min-height: 320px;
+            transition: border-color 0.2s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>💾 SQL 格式化</h1>
+            <p class="subtitle">美化、压缩 SQL 查询语句</p>
+        </header>
+
+        <div class="toolbar">
+            <button onclick="formatSQL()">格式化</button>
+            <button class="btn-secondary" onclick="compressSQL()">压缩</button>
+            <div class="btn-group">
+                <button class="active" onclick="setIndent(2, this)">2空格</button>
+                <button onclick="setIndent(4, this)">4空格</button>
+            </div>
+            <button class="btn-secondary" onclick="loadSample()">加载示例</button>
+            <button class="btn-secondary" onclick="copyResult()">复制结果</button>
+        </div>
+
+        <div class="panels">
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-title">输入 SQL</span>
+                    <button class="btn-secondary" onclick="clearAll()">清空</button>
+                </div>
+                <textarea id="sqlInput" placeholder="输入 SQL 语句..."></textarea>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-title">格式化结果</span>
+                </div>
+                <textarea id="sqlOutput" readonly></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        let indentSize = 2;
+
+        const sampleSQL = `SELECT u.id, u.name, u.email, COUNT(o.id) as order_count, SUM(o.total) as total_spent FROM users u LEFT JOIN orders o ON u.id = o.user_id WHERE u.status = 'active' AND o.created_at >= '2024-01-01' GROUP BY u.id, u.name, u.email HAVING COUNT(o.id) > 0 ORDER BY total_spent DESC LIMIT 10`;
+
+        window.setIndent = function(size, btn) {
+            indentSize = size;
+            document.querySelectorAll('.btn-group button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            formatSQL();
+        };
+
+        window.formatSQL = function() {
+            const input = document.getElementById('sqlInput').value;
+            if (!input.trim()) return;
+
+            let sql = input
+                .replace(/\s+/g, ' ')
+                .replace(/\s*,\s*/g, ', ')
+                .replace(/\s*\(\s*/g, ' (')
+                .replace(/\s*\)\s*/g, ') ')
+                .trim();
+
+            const majorClauses = [
+                'SELECT', 'FROM', 'WHERE', 'ORDER BY', 'GROUP BY', 'HAVING', 'LIMIT',
+                'LEFT JOIN', 'RIGHT JOIN', 'INNER JOIN', 'OUTER JOIN', 'JOIN',
+                'UNION', 'UNION ALL', 'INTERSECT', 'EXCEPT',
+                'INSERT INTO', 'VALUES', 'UPDATE', 'SET', 'DELETE FROM'
+            ];
+
+            majorClauses.forEach(keyword => {
+                const regex = new RegExp(`\\b${keyword}\\b`, 'gi');
+                sql = sql.replace(regex, '\n' + keyword);
+            });
+
+            const lines = sql.split('\n').map(line => line.trim()).filter(line => line);
+            const indent = ' '.repeat(indentSize);
+            let result = [];
+            let indentLevel = 0;
+
+            lines.forEach(line => {
+                if (/^(FROM|WHERE|ORDER BY|GROUP BY|HAVING|LIMIT|JOIN|LEFT JOIN|RIGHT JOIN|INNER JOIN|SET|VALUES)/i.test(line)) {
+                    indentLevel = 0;
+                } else if (/^(SELECT|UPDATE|INSERT INTO|DELETE FROM)/i.test(line)) {
+                    indentLevel = 0;
+                }
+                result.push(indent.repeat(indentLevel) + line);
+                if (line.includes('(') && !line.includes(')')) indentLevel++;
+            });
+
+            document.getElementById('sqlOutput').value = result.join('\n');
+        };
+
+        window.compressSQL = function() {
+            const input = document.getElementById('sqlInput').value;
+            if (!input.trim()) return;
+
+            const compressed = input
+                .replace(/\s+/g, ' ')
+                .replace(/\s*,\s*/g, ',')
+                .replace(/\s*\(\s*/g, '(')
+                .replace(/\s*\)\s*/g, ')')
+                .replace(/\s*=\s*/g, '=')
+                .trim();
+
+            document.getElementById('sqlOutput').value = compressed;
+        };
+
+        window.loadSample = function() {
+            document.getElementById('sqlInput').value = sampleSQL;
+            formatSQL();
+        };
+
+        window.copyResult = function() {
+            navigator.clipboard.writeText(document.getElementById('sqlOutput').value);
+        };
+
+        window.clearAll = function() {
+            document.getElementById('sqlInput').value = '';
+            document.getElementById('sqlOutput').value = '';
+        };
+
+        document.getElementById('sqlInput').addEventListener('input', formatSQL);
+    })();
+    </script>
+</body>
+</html>

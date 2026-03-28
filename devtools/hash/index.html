@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hash 哈希生成器</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Hash 哈希生成器</h1>
+            <p class="subtitle">MD5 / SHA-1 / SHA-256 / SHA-512</p>
+        </header>
+
+        <main>
+            <div class="input-card">
+                <div class="card-header">
+                    <h3>输入文本</h3>
+                    <div class="header-actions">
+                        <button class="action-btn" id="clearBtn" title="清空">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="textarea-wrapper">
+                    <textarea id="inputText" placeholder="在此输入文本或拖放文件..."></textarea>
+                    <div class="drop-overlay" id="dropOverlay">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                        </svg>
+                        <span>释放以读取文件</span>
+                    </div>
+                </div>
+                <div class="input-info">
+                    <span id="inputInfo">0 字符 | 0 字节</span>
+                </div>
+            </div>
+
+            <div class="hash-results" id="hashResults">
+                <div class="hash-item">
+                    <div class="hash-header">
+                        <span class="hash-name">MD5</span>
+                        <span class="hash-length">128 位 / 32 字符</span>
+                        <div class="hash-actions">
+                            <button class="copy-btn" data-hash="md5" title="复制">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hash-value" id="hashMd5">-</div>
+                </div>
+
+                <div class="hash-item">
+                    <div class="hash-header">
+                        <span class="hash-name">SHA-1</span>
+                        <span class="hash-length">160 位 / 40 字符</span>
+                        <div class="hash-actions">
+                            <button class="copy-btn" data-hash="sha1" title="复制">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hash-value" id="hashSha1">-</div>
+                </div>
+
+                <div class="hash-item">
+                    <div class="hash-header">
+                        <span class="hash-name">SHA-256</span>
+                        <span class="hash-length">256 位 / 64 字符</span>
+                        <div class="hash-actions">
+                            <button class="copy-btn" data-hash="sha256" title="复制">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hash-value" id="hashSha256">-</div>
+                </div>
+
+                <div class="hash-item">
+                    <div class="hash-header">
+                        <span class="hash-name">SHA-512</span>
+                        <span class="hash-length">512 位 / 128 字符</span>
+                        <div class="hash-actions">
+                            <button class="copy-btn" data-hash="sha512" title="复制">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hash-value" id="hashSha512">-</div>
+                </div>
+            </div>
+
+            <div class="verify-card">
+                <div class="card-header">
+                    <h3>哈希验证</h3>
+                </div>
+                <div class="verify-content">
+                    <input type="text" id="verifyInput" placeholder="粘贴期望的哈希值进行验证...">
+                    <button class="verify-btn" id="verifyBtn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        验证
+                    </button>
+                </div>
+                <div class="verify-result" id="verifyResult"></div>
+            </div>
+        </main>
+
+        <footer>
+            <p>所有计算在本地完成，数据不上传服务器</p>
+        </footer>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR码读取器</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+</head>
+<body>
+    <!-- 背景动画 -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- 顶部标题栏 -->
+        <header class="header">
+            <h1 class="app-title">
+                <span class="title-icon">📱</span>
+                QR码读取器
+            </h1>
+            <p class="app-subtitle">上传图片识别二维码内容</p>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 上传区域 -->
+            <div class="upload-zone" id="uploadZone">
+                <div class="upload-icon">📷</div>
+                <p class="upload-text">拖放图片到这里</p>
+                <p class="upload-hint">或点击选择文件</p>
+                <input type="file" id="fileInput" accept="image/*" hidden>
+            </div>
+
+            <!-- 预览区域 -->
+            <div class="preview-section" id="previewSection" style="display: none;">
+                <div class="preview-header">
+                    <span class="preview-label">图片预览</span>
+                    <button class="clear-btn" id="clearBtn">✕ 清除</button>
+                </div>
+                <div class="preview-container">
+                    <canvas id="previewCanvas"></canvas>
+                </div>
+            </div>
+
+            <!-- 结果区域 -->
+            <div class="result-section" id="resultSection" style="display: none;">
+                <div class="result-header">
+                    <span class="result-label">识别结果</span>
+                    <span class="result-status" id="resultStatus"></span>
+                </div>
+                <div class="result-content">
+                    <textarea id="resultText" readonly placeholder="识别结果将显示在这里..."></textarea>
+                </div>
+                <div class="result-actions">
+                    <button class="action-btn copy-btn" id="copyBtn">
+                        <span>📋</span> 复制结果
+                    </button>
+                </div>
+            </div>
+
+            <!-- 错误提示 -->
+            <div class="error-message" id="errorMessage" style="display: none;">
+                <span class="error-icon">⚠️</span>
+                <span class="error-text" id="errorText"></span>
+            </div>
+        </main>
+
+        <!-- 状态栏 -->
+        <footer class="status-bar">
+            <span class="status-item">支持格式: PNG, JPG, GIF, WebP</span>
+            <span class="status-item">|</span>
+            <span class="status-item">本地识别，无需上传服务器</span>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

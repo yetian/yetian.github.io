@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox 可视化工具</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景动画 -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- 顶部工具栏 -->
+        <header class="toolbar">
+            <div class="toolbar-left">
+                <h1 class="app-title">
+                    <span class="title-icon">📦</span>
+                    Flexbox 可视化工具
+                </h1>
+                <p class="app-subtitle">可视化配置Flex布局，实时预览效果</p>
+            </div>
+            <div class="toolbar-right">
+                <button class="action-btn" id="resetBtn" title="重置">
+                    <span>🔄</span> 重置
+                </button>
+            </div>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 左侧控制面板 -->
+            <div class="control-panel">
+                <div class="panel-header">
+                    <span class="panel-title">属性控制</span>
+                </div>
+                <div class="control-content">
+                    <!-- flex-direction -->
+                    <div class="control-group">
+                        <label class="control-label">flex-direction</label>
+                        <div class="btn-group">
+                            <button class="option-btn active" data-prop="flexDirection" data-value="row">row</button>
+                            <button class="option-btn" data-prop="flexDirection" data-value="row-reverse">row-reverse</button>
+                            <button class="option-btn" data-prop="flexDirection" data-value="column">column</button>
+                            <button class="option-btn" data-prop="flexDirection" data-value="column-reverse">column-reverse</button>
+                        </div>
+                    </div>
+
+                    <!-- justify-content -->
+                    <div class="control-group">
+                        <label class="control-label">justify-content</label>
+                        <div class="btn-group wrap">
+                            <button class="option-btn active" data-prop="justifyContent" data-value="flex-start">flex-start</button>
+                            <button class="option-btn" data-prop="justifyContent" data-value="flex-end">flex-end</button>
+                            <button class="option-btn" data-prop="justifyContent" data-value="center">center</button>
+                            <button class="option-btn" data-prop="justifyContent" data-value="space-between">space-between</button>
+                            <button class="option-btn" data-prop="justifyContent" data-value="space-around">space-around</button>
+                            <button class="option-btn" data-prop="justifyContent" data-value="space-evenly">space-evenly</button>
+                        </div>
+                    </div>
+
+                    <!-- align-items -->
+                    <div class="control-group">
+                        <label class="control-label">align-items</label>
+                        <div class="btn-group wrap">
+                            <button class="option-btn active" data-prop="alignItems" data-value="stretch">stretch</button>
+                            <button class="option-btn" data-prop="alignItems" data-value="flex-start">flex-start</button>
+                            <button class="option-btn" data-prop="alignItems" data-value="flex-end">flex-end</button>
+                            <button class="option-btn" data-prop="alignItems" data-value="center">center</button>
+                            <button class="option-btn" data-prop="alignItems" data-value="baseline">baseline</button>
+                        </div>
+                    </div>
+
+                    <!-- flex-wrap -->
+                    <div class="control-group">
+                        <label class="control-label">flex-wrap</label>
+                        <div class="btn-group">
+                            <button class="option-btn active" data-prop="flexWrap" data-value="nowrap">nowrap</button>
+                            <button class="option-btn" data-prop="flexWrap" data-value="wrap">wrap</button>
+                            <button class="option-btn" data-prop="flexWrap" data-value="wrap-reverse">wrap-reverse</button>
+                        </div>
+                    </div>
+
+                    <!-- gap -->
+                    <div class="control-group">
+                        <label class="control-label">gap: <span id="gapValue">0</span>px</label>
+                        <input type="range" class="slider" id="gapSlider" min="0" max="60" value="0">
+                    </div>
+
+                    <!-- 盒子数量 -->
+                    <div class="control-group">
+                        <label class="control-label">盒子数量: <span id="boxCountValue">5</span></label>
+                        <input type="range" class="slider" id="boxCountSlider" min="1" max="10" value="5">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧预览区 -->
+            <div class="preview-area">
+                <div class="panel-header">
+                    <span class="panel-title">可视化预览</span>
+                </div>
+                <div class="preview-container">
+                    <div class="flex-container" id="flexContainer"></div>
+                </div>
+
+                <!-- 生成的代码 -->
+                <div class="code-section">
+                    <div class="panel-header">
+                        <span class="panel-title">生成的 CSS</span>
+                        <button class="panel-btn" id="copyCodeBtn" title="复制代码">📋 复制</button>
+                    </div>
+                    <div class="code-block">
+                        <pre><code id="generatedCode"></code></pre>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 状态栏 -->
+        <footer class="status-bar">
+            <div class="status-left">
+                <span class="status-item">💡 点击盒子可高亮显示</span>
+            </div>
+            <div class="status-right">
+                <span class="status-item" id="copyStatus">CSS 代码已准备好</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

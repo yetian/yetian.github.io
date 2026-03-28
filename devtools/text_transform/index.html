@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本转换工具</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>文本转换工具</h1>
+            <p class="subtitle">快速转换文本格式</p>
+        </header>
+
+        <main class="main-content">
+            <div class="panels-container">
+                <div class="panel input-panel">
+                    <div class="panel-header">
+                        <span>输入文本</span>
+                        <div class="panel-actions">
+                            <button class="btn btn-icon" id="clearInput" title="清空">清空</button>
+                        </div>
+                    </div>
+                    <textarea id="inputText" placeholder="在此输入文本..."></textarea>
+                </div>
+
+                <div class="swap-container">
+                    <button class="btn btn-swap" id="swapBtn" title="交换">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 16l-4-4m0 0l4-4m-4 4h18M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="panel output-panel">
+                    <div class="panel-header">
+                        <span>输出文本</span>
+                        <div class="panel-actions">
+                            <button class="btn btn-icon" id="copyOutput" title="复制">复制</button>
+                        </div>
+                    </div>
+                    <textarea id="outputText" placeholder="转换结果..." readonly></textarea>
+                </div>
+            </div>
+
+            <div class="transform-sections">
+                <section class="transform-section">
+                    <h3 class="section-title">大小写转换</h3>
+                    <div class="btn-group">
+                        <button class="btn btn-transform" data-transform="uppercase">UPPERCASE</button>
+                        <button class="btn btn-transform" data-transform="lowercase">lowercase</button>
+                        <button class="btn btn-transform" data-transform="titleCase">Title Case</button>
+                        <button class="btn btn-transform" data-transform="sentenceCase">Sentence case</button>
+                    </div>
+                </section>
+
+                <section class="transform-section">
+                    <h3 class="section-title">代码格式</h3>
+                    <div class="btn-group">
+                        <button class="btn btn-transform" data-transform="camelCase">camelCase</button>
+                        <button class="btn btn-transform" data-transform="pascalCase">PascalCase</button>
+                        <button class="btn btn-transform" data-transform="snakeCase">snake_case</button>
+                        <button class="btn btn-transform" data-transform="kebabCase">kebab-case</button>
+                        <button class="btn btn-transform" data-transform="constantCase">CONSTANT_CASE</button>
+                    </div>
+                </section>
+
+                <section class="transform-section">
+                    <h3 class="section-title">其他转换</h3>
+                    <div class="btn-group">
+                        <button class="btn btn-transform" data-transform="reverseText">反转文本</button>
+                        <button class="btn btn-transform" data-transform="sortLines">排序行</button>
+                        <button class="btn btn-transform" data-transform="removeDuplicates">去重行</button>
+                        <button class="btn btn-transform" data-transform="trimWhitespace">去除空白</button>
+                        <button class="btn btn-transform" data-transform="numberLines">添加行号</button>
+                    </div>
+                </section>
+
+                <section class="transform-section">
+                    <h3 class="section-title">中文转换</h3>
+                    <div class="btn-group">
+                        <button class="btn btn-transform" data-transform="fullToHalf">全角转半角</button>
+                        <button class="btn btn-transform" data-transform="halfToFull">半角转全角</button>
+                        <button class="btn btn-transform" data-transform="traditionalToSimplified">繁体转简体</button>
+                        <button class="btn btn-transform" data-transform="simplifiedToTraditional">简体转繁体</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <footer>
+            <span class="char-count" id="charCount">字符: 0</span>
+        </footer>
+    </div>
+
+    <div class="orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

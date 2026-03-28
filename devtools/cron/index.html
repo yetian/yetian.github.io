@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cron 表达式解析器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <header class="header">
+            <div class="header-left">
+                <span class="app-icon">⏰</span>
+                <h1 class="app-title">Cron 表达式解析器</h1>
+                <p class="app-subtitle">可视化生成和解析Cron定时任务表达式</p>
+            </div>
+            <div class="header-right">
+                <div class="field-count">
+                    <button id="field5" class="toggle-btn active" data-fields="5">5字段</button>
+                    <button id="field6" class="toggle-btn" data-fields="6">6字段</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- 表达式输入 -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">📝 输入表达式</h2>
+                    <button id="copyBtn" class="action-btn" title="复制表达式">📋 复制</button>
+                </div>
+                <div class="input-section">
+                    <input type="text" id="cronInput" class="cron-input" placeholder="输入 Cron 表达式，如: 0 9 * * *">
+                    <button id="parseBtn" class="primary-btn">解析</button>
+                </div>
+                <div id="errorMsg" class="error-msg hidden"></div>
+            </section>
+
+            <!-- 字段解析 -->
+            <section id="parseResult" class="card hidden">
+                <div class="card-header">
+                    <h2 class="card-title">🔍 字段解析</h2>
+                </div>
+                <div id="fieldsContainer" class="fields-grid"></div>
+                <div class="human-read">
+                    <span class="human-label">人类可读:</span>
+                    <span id="humanText" class="human-text"></span>
+                </div>
+            </section>
+
+            <!-- 下次执行时间 -->
+            <section id="nextTimes" class="card hidden">
+                <div class="card-header">
+                    <h2 class="card-title">⏱️ 下次执行时间</h2>
+                </div>
+                <div id="nextTimesList" class="times-list"></div>
+            </section>
+
+            <!-- 可视化构建器 -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">🛠️ 可视化构建</h2>
+                </div>
+                <div id="builderFields" class="builder-grid"></div>
+                <button id="buildBtn" class="primary-btn">生成表达式</button>
+            </section>
+
+            <!-- 常用预设 -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">⚡ 常用预设</h2>
+                </div>
+                <div class="presets-grid">
+                    <button class="preset-btn" data-cron="* * * * *">
+                        <span class="preset-icon">🔄</span>
+                        <span class="preset-name">每分钟</span>
+                        <span class="preset-cron">* * * * *</span>
+                    </button>
+                    <button class="preset-btn" data-cron="0 * * * *">
+                        <span class="preset-icon">🕐</span>
+                        <span class="preset-name">每小时</span>
+                        <span class="preset-cron">0 * * * *</span>
+                    </button>
+                    <button class="preset-btn" data-cron="0 0 * * *">
+                        <span class="preset-icon">📅</span>
+                        <span class="preset-name">每天零点</span>
+                        <span class="preset-cron">0 0 * * *</span>
+                    </button>
+                    <button class="preset-btn" data-cron="0 9 * * *">
+                        <span class="preset-icon">🌅</span>
+                        <span class="preset-name">每天早9点</span>
+                        <span class="preset-cron">0 9 * * *</span>
+                    </button>
+                    <button class="preset-btn" data-cron="0 0 * * 1">
+                        <span class="preset-icon">📆</span>
+                        <span class="preset-name">每周一零点</span>
+                        <span class="preset-cron">0 0 * * 1</span>
+                    </button>
+                    <button class="preset-btn" data-cron="0 0 1 * *">
+                        <span class="preset-icon">🗓️</span>
+                        <span class="preset-name">每月1号零点</span>
+                        <span class="preset-cron">0 0 1 * *</span>
+                    </button>
+                    <button class="preset-btn" data-cron="0 0 1 1 *">
+                        <span class="preset-icon">🎊</span>
+                        <span class="preset-name">每年1月1日</span>
+                        <span class="preset-cron">0 0 1 1 *</span>
+                    </button>
+                    <button class="preset-btn" data-cron="*/5 * * * *">
+                        <span class="preset-icon">⚡</span>
+                        <span class="preset-name">每5分钟</span>
+                        <span class="preset-cron">*/5 * * * *</span>
+                    </button>
+                    <button class="preset-btn" data-cron="0 */2 * * *">
+                        <span class="preset-icon">🕑</span>
+                        <span class="preset-name">每2小时</span>
+                        <span class="preset-cron">0 */2 * * *</span>
+                    </button>
+                    <button class="preset-btn" data-cron="0 9 * * 1-5">
+                        <span class="preset-icon">💼</span>
+                        <span class="preset-name">工作日早9点</span>
+                        <span class="preset-cron">0 9 * * 1-5</span>
+                    </button>
+                    <button class="preset-btn" data-cron="30 14 * * *">
+                        <span class="preset-icon">☕</span>
+                        <span class="preset-name">每天下午2:30</span>
+                        <span class="preset-cron">30 14 * * *</span>
+                    </button>
+                    <button class="preset-btn" data-cron="0 0 29 2 *">
+                        <span class="preset-icon">🎂</span>
+                        <span class="preset-name">闰年2月29日</span>
+                        <span class="preset-cron">0 0 29 2 *</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- 语法说明 -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">📖 语法说明</h2>
+                </div>
+                <div class="syntax-guide">
+                    <div class="syntax-item">
+                        <code class="syntax-code">*</code>
+                        <span class="syntax-desc">任意值（每分钟/每小时/每天等）</span>
+                    </div>
+                    <div class="syntax-item">
+                        <code class="syntax-code">,</code>
+                        <span class="syntax-desc">列表分隔符，如 1,3,5</span>
+                    </div>
+                    <div class="syntax-item">
+                        <code class="syntax-code">-</code>
+                        <span class="syntax-desc">范围，如 1-5 表示 1到5</span>
+                    </div>
+                    <div class="syntax-item">
+                        <code class="syntax-code">/</code>
+                        <span class="syntax-desc">步长，如 */5 表示每5单位</span>
+                    </div>
+                </div>
+                <div class="field-ranges">
+                    <div class="field-range">
+                        <span class="field-name">分钟</span>
+                        <span class="field-val">0-59</span>
+                    </div>
+                    <div class="field-range">
+                        <span class="field-name">小时</span>
+                        <span class="field-val">0-23</span>
+                    </div>
+                    <div class="field-range">
+                        <span class="field-name">日</span>
+                        <span class="field-val">1-31</span>
+                    </div>
+                    <div class="field-range">
+                        <span class="field-name">月</span>
+                        <span class="field-val">1-12</span>
+                    </div>
+                    <div class="field-range">
+                        <span class="field-name">周</span>
+                        <span class="field-val">0-6 (0=周日)</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <span class="footer-text">5字段: 分 时 日 月 周 | 6字段: 秒 分 时 日 月 周</span>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代码美化</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ec4899;
+            --primary-light: #f472b6;
+            --primary-dark: #db2777;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --dark: #0a0a0f;
+            --dark-light: #13131a;
+            --surface: #18181f;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--dark);
+            min-height: 100vh;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            top: -100px;
+            right: -100px;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--secondary);
+            bottom: -50px;
+            left: -50px;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--accent);
+            top: 50%;
+            left: 50%;
+            margin-top: -125px;
+            margin-left: -125px;
+            animation-delay: -10s;
+            opacity: 0.2;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(30px, -30px); }
+            50% { transform: translate(-20px, 20px); }
+            75% { transform: translate(20px, 30px); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle { color: var(--text-muted); }
+
+        .toolbar {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 0.65rem 1.25rem;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: none;
+            transform: none;
+        }
+
+        select {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 0.65rem 1rem;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        select:focus { outline: none; border-color: var(--primary); }
+
+        .panels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .panels { grid-template-columns: 1fr; }
+            .container { padding: 1rem; }
+            header h1 { font-size: 1.5rem; }
+        }
+
+        .panel {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.25rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .panel-title { font-weight: 600; font-size: 0.95rem; }
+
+        textarea {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1rem;
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            resize: vertical;
+            min-height: 320px;
+            transition: border-color 0.2s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>✨ 代码美化</h1>
+            <p class="subtitle">格式化 JavaScript、CSS、HTML 代码</p>
+        </header>
+
+        <div class="toolbar">
+            <select id="langSelect">
+                <option value="js">JavaScript</option>
+                <option value="css">CSS</option>
+                <option value="html">HTML</option>
+            </select>
+            <button onclick="formatCode()">格式化</button>
+            <button class="btn-secondary" onclick="minifyCode()">压缩</button>
+            <button class="btn-secondary" onclick="loadSample()">加载示例</button>
+            <button class="btn-secondary" onclick="copyResult()">复制</button>
+        </div>
+
+        <div class="panels">
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-title">输入代码</span>
+                    <button class="btn-secondary" onclick="clearAll()">清空</button>
+                </div>
+                <textarea id="codeInput" placeholder="粘贴代码..."></textarea>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-title">格式化结果</span>
+                </div>
+                <textarea id="codeOutput" readonly></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        const samples = {
+            js: `function calculate(a,b){return a+b}const data=[1,2,3,4,5];data.map(x=>x*2).filter(x=>x>3).forEach(x=>console.log(x));`,
+            css: `.container{display:flex;justify-content:center;align-items:center;gap:1rem}.card{background:#fff;border-radius:8px;padding:1rem;box-shadow:0 2px 4px rgba(0,0,0,0.1)}`,
+            html: `<div class="container"><header><h1>Title</h1></header><main><p class="text">Hello World</p></main><footer><span>Copyright</span></footer></div>`
+        };
+
+        window.formatCode = function() {
+            const input = document.getElementById('codeInput').value;
+            const lang = document.getElementById('langSelect').value;
+            if (!input.trim()) return;
+
+            let result;
+            try {
+                if (lang === 'js') result = formatJS(input);
+                else if (lang === 'css') result = formatCSS(input);
+                else if (lang === 'html') result = formatHTML(input);
+                document.getElementById('codeOutput').value = result;
+            } catch (e) {
+                document.getElementById('codeOutput').value = '格式化错误: ' + e.message;
+            }
+        };
+
+        function formatJS(code) {
+            let result = code.replace(/\{/g, ' {\n').replace(/\}/g, '\n}\n').replace(/;/g, ';\n');
+            result = result.replace(/\n\s*\n/g, '\n');
+            let lines = result.split('\n').map(l => l.trim()).filter(l => l);
+            let indent = 0;
+            lines = lines.map(line => {
+                if (line.startsWith('}')) indent = Math.max(0, indent - 1);
+                const indented = '  '.repeat(indent) + line;
+                if (line.endsWith('{')) indent++;
+                return indented;
+            });
+            return lines.join('\n');
+        }
+
+        function formatCSS(code) {
+            let result = code.replace(/\{/g, ' {\n  ').replace(/\}/g, '\n}\n').replace(/;/g, ';\n  ');
+            result = result.replace(/\n\s*\n/g, '\n').replace(/  \n/g, '\n');
+            return result.trim();
+        }
+
+        function formatHTML(code) {
+            let result = code.replace(/></g, '>\n<');
+            let lines = result.split('\n').map(l => l.trim()).filter(l => l);
+            let indent = 0;
+            const selfClosing = ['br', 'hr', 'img', 'input', 'meta', 'link', 'area', 'base', 'col', 'embed', 'param', 'source', 'track', 'wbr'];
+            lines = lines.map(line => {
+                const tagName = line.match(/^<\/?(\w+)/)?.[1]?.toLowerCase() || '';
+                const isClosing = line.startsWith('</');
+                const isSelfClosing = selfClosing.includes(tagName) || line.endsWith('/>');
+                if (isClosing) indent = Math.max(0, indent - 1);
+                const indented = '  '.repeat(indent) + line;
+                if (!isClosing && !isSelfClosing && tagName) indent++;
+                return indented;
+            });
+            return lines.join('\n');
+        }
+
+        window.minifyCode = function() {
+            const input = document.getElementById('codeInput').value;
+            if (!input.trim()) return;
+            const result = input.replace(/\s+/g, ' ').replace(/\s*([{}();,:<>])\s*/g, '$1').replace(/<!--[\s\S]*?-->/g, '').replace(/\/\*[\s\S]*?\*\//g, '').trim();
+            document.getElementById('codeOutput').value = result;
+        };
+
+        window.loadSample = function() {
+            const lang = document.getElementById('langSelect').value;
+            document.getElementById('codeInput').value = samples[lang];
+            formatCode();
+        };
+
+        window.copyResult = function() {
+            navigator.clipboard.writeText(document.getElementById('codeOutput').value);
+        };
+
+        window.clearAll = function() {
+            document.getElementById('codeInput').value = '';
+            document.getElementById('codeOutput').value = '';
+        };
+
+        document.getElementById('langSelect').addEventListener('change', loadSample);
+    })();
+    </script>
+</body>
+</html>

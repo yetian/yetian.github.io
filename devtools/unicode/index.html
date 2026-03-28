@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unicode 转换 - DevTools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <a href="../index.html" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                返回
+            </a>
+            <h1>Unicode 转换</h1>
+            <p class="subtitle">文本与 Unicode 编码互转</p>
+        </header>
+
+        <main>
+            <!-- Mode Toggle -->
+            <div class="mode-toggle">
+                <button class="mode-btn active" data-mode="encode">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 7V4h16v3M9 20h6M12 4v16"/>
+                    </svg>
+                    文本转 Unicode
+                </button>
+                <button class="mode-btn" data-mode="decode">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="16 18 22 12 16 6"/>
+                        <polyline points="8 6 2 12 8 18"/>
+                    </svg>
+                    Unicode 转文本
+                </button>
+            </div>
+
+            <!-- Options -->
+            <div class="options-card">
+                <div class="option-group">
+                    <label class="option-label">编码格式</label>
+                    <div class="option-buttons">
+                        <button class="option-btn active" data-format="lower">\uXXXX</button>
+                        <button class="option-btn" data-format="upper">\UXXXX</button>
+                    </div>
+                </div>
+                <div class="option-group">
+                    <label class="option-label">分隔符</label>
+                    <div class="option-buttons">
+                        <button class="option-btn active" data-separator="none">无分隔</button>
+                        <button class="option-btn" data-separator="space">空格</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Converter -->
+            <div class="converter-container">
+                <div class="textarea-wrapper">
+                    <div class="textarea-header">
+                        <span class="textarea-label" id="inputLabel">输入文本</span>
+                        <span class="char-count" id="inputCount">0 字符</span>
+                    </div>
+                    <textarea id="inputText" placeholder="在此输入文本..."></textarea>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="action-btn" id="swapBtn" title="交换输入输出">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 16V4M7 4L3 8M7 4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/>
+                        </svg>
+                    </button>
+                    <button class="action-btn" id="clearBtn" title="清空">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="textarea-wrapper">
+                    <div class="textarea-header">
+                        <span class="textarea-label" id="outputLabel">Unicode 编码</span>
+                        <span class="char-count" id="outputCount">0 字符</span>
+                    </div>
+                    <textarea id="outputText" placeholder="转换结果..." readonly></textarea>
+                </div>
+            </div>
+
+            <!-- Copy Button -->
+            <button class="copy-btn" id="copyBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                </svg>
+                复制结果
+            </button>
+
+            <!-- Info Card -->
+            <div class="info-card">
+                <h3>Unicode 编码说明</h3>
+                <ul>
+                    <li><strong>\uXXXX</strong> - 小写格式，常用于 JavaScript、Python 等</li>
+                    <li><strong>\UXXXX</strong> - 大写格式，常见于 C/C++、Java 等</li>
+                    <li>ASCII 字符（如英文、数字）保持原样显示</li>
+                    <li>中文字符会转换为 4 位十六进制编码</li>
+                    <li>Emoji 表情会转换为高位编码</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <div class="notification" id="notification">
+        <span id="notificationText">已复制到剪贴板</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
