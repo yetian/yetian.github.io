@@ -51,5 +51,21 @@
       "year": "2004",
       "language": "英语"
     }
+  },
+  {
+    "id": "devsecops_in_action",
+    "title": "DevSecOps 实战",
+    "author": "周纪海",
+    "cover": "covers/devsecops_in_action.jpg",
+    "summary": "互联网和金融业大厂资深专家多年经验总结，从软件全生命周期讲解新时代软件快速交付效能与安全的融合。诙谐幽默，案例丰富，系统性强。",
+    "rating": 5,
+    "readDate": "2025-03",
+    "addedDate": "2026-04-12",
+    "category": "科技",
+    "keywords": ["安全", "实战", "DevSecOps"],
+    "metadata": {
+      "year": "2021",
+      "language": "中文"
+    }
   }
 ]

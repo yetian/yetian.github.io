@@ -682,6 +682,11 @@ body {
     .stats {
         flex-direction: column;
         gap: 0.75rem;
+        align-items: center;
+    }
+
+    .stat-item {
+        justify-content: center;
     }
 
     .toolbar {
