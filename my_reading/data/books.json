@@ -1,0 +1,55 @@
+[
+  {
+    "id": "divine_comedy",
+    "title": "神曲",
+    "author": "但丁·阿利吉耶里",
+    "cover": "covers/divine_comedy.jpg",
+    "summary": "一部穿越地狱、炼狱、天堂的史诗巨著，展现了中世纪基督教世界观下的宇宙图景。诗人以自身为主角，在古罗马诗人维吉尔的引导下游历三界，最终抵达天堂，得见上帝之光。",
+    "rating": 5,
+    "readDate": "2026-04",
+    "addedDate": "2026-04-12",
+    "category": "文学",
+    "keywords": ["史诗", "中世纪", "意大利", "宗教", "哲学"],
+    "metadata": {
+      "originalTitle": "Divina Commedia",
+      "year": "1320",
+      "pages": "约14000行",
+      "language": "意大利语",
+      "translator": "田德望"
+    }
+  },
+  {
+    "id": "brief_history_of_intelligence",
+    "title": "智能简史",
+    "author": "Max Bennett",
+    "cover": "covers/brief_history_of_intelligence.png",
+    "summary": "探索智能进化的五个层次，从原始生命到人工智能，揭示智能如何一步步演化至今。为理解AI时代第六阶梯的进化提供了坚实的理论与历史基础。",
+    "rating": 5,
+    "readDate": "2025-12",
+    "addedDate": "2026-04-12",
+    "category": "科技",
+    "keywords": ["人工智能", "进化", "认知"],
+    "metadata": {
+      "originalTitle": "A Brief History of Intelligence",
+      "year": "2023",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "system_reliability_theory",
+    "title": "系统可靠性理论",
+    "author": "Marvin Rausand 等",
+    "cover": "covers/system_reliability_theory.jpg",
+    "summary": "系统可靠性领域的经典著作，涵盖可靠性模型、统计分析方法、失效模式分析等核心内容，为工程实践提供完整的理论框架和应用指导。",
+    "rating": 5,
+    "readDate": "2025-06",
+    "addedDate": "2026-04-12",
+    "category": "科技",
+    "keywords": ["系统工程", "风险管理", "可靠性"],
+    "metadata": {
+      "originalTitle": "System Reliability Theory: Models, Statistical Methods, and Applications",
+      "year": "2004",
+      "language": "英语"
+    }
+  }
+]

@@ -126,6 +126,16 @@ yetian.github.io/
     ├── index.html
     ├── style.css
     └── script.js
+└── my_reading/                   # 我的书架
+    ├── index.html                # 书架主页
+    ├── style.css
+    ├── script.js
+    ├── data/
+    │   └── books.json            # 书籍元数据
+    ├── covers/                   # 封面图片
+    └── books/                    # 书籍详情页
+        └── {book_id}/
+            └── index.html
 ```
 
 ---
@@ -434,6 +444,38 @@ yetian.github.io/
 - marked.js - Markdown 解析
 - highlight.js - 代码高亮
 - KaTeX - 数学公式渲染
+
+---
+
+### 10. my_reading - 我的书架
+
+**功能**：读书笔记项目，记录读过的书籍及其读后感
+
+**功能特点**：
+- 书架主页：卡片式展示书籍（封面、书名、作者、3行简介）
+- 详情页面：书籍介绍、metadata、内容概述、读后感
+- 星级评分（1-5星）
+- 响应式设计
+
+**UI 设计**：
+- Liquid Glass 风格，紫色主题（`--primary: #8b5cf6`）
+- 浮动 orb 背景动画
+- 玻璃态卡片效果
+
+**添加新书流程**：
+- 通过问答方式补全书籍信息
+- 封面图片由用户提供URL，下载到 `covers/` 目录
+
+**文件**：
+- `index.html` - 书架主页
+- `style.css` - Liquid Glass 样式
+- `script.js` - 交互逻辑
+- `data/books.json` - 书籍元数据
+- `covers/` - 封面图片目录
+- `books/{book_id}/index.html` - 书籍详情页
+
+**示例书籍**：
+- 但丁《神曲》(divine_comedy)
 
 ---
 
