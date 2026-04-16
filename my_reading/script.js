@@ -155,12 +155,23 @@
 
     // 渲染分类按钮
     function renderCategories() {
+        // 计算每个分类的书籍数量
+        const categoryCounts = {};
+        state.books.forEach(book => {
+            const cat = book.category || '未分类';
+            categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+        });
+        categoryCounts['全部'] = state.books.length;
+
         const container = document.getElementById('categoryFilter');
-        container.innerHTML = state.categories.map(cat => `
-            <button class="category-btn ${cat === state.currentCategory ? 'active' : ''}" data-category="${cat}">
-                ${cat}
-            </button>
-        `).join('');
+        container.innerHTML = state.categories.map(cat => {
+            const count = categoryCounts[cat] || 0;
+            return `
+                <button class="category-btn ${cat === state.currentCategory ? 'active' : ''}" data-category="${cat}">
+                    ${cat} <span class="category-count">(${count})</span>
+                </button>
+            `;
+        }).join('');
 
         // 绑定事件
         container.querySelectorAll('.category-btn').forEach(btn => {

@@ -67,5 +67,292 @@
       "year": "2021",
       "language": "中文"
     }
+  },
+  {
+    "id": "advanced_macroeconomics",
+    "title": "高级宏观经济学",
+    "author": "戴维·罗默",
+    "cover": "covers/advanced_macroeconomics.jpg",
+    "summary": "宏观经济学研究生经典教材，涵盖经济增长、经济波动、货币政策等核心主题，理论与应用并重，是经济学专业必修读物。",
+    "rating": 4,
+    "readDate": "2018-06",
+    "addedDate": "2026-04-16",
+    "category": "学术",
+    "keywords": ["经济学", "宏观", "教材"],
+    "metadata": {
+      "originalTitle": "Advanced Macroeconomics",
+      "year": "2018",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "princeton_companion_mathematics",
+    "title": "普林斯顿数学指南",
+    "author": "普林斯顿大学数学系",
+    "cover": "covers/princeton_companion_mathematics.jpg",
+    "summary": "数学领域的百科全书式著作，涵盖线性代数、微积分、概率统计等核心分支，并包含数学史内容，适合数学爱好者与专业人士参考。",
+    "rating": 5,
+    "readDate": "2020-09",
+    "addedDate": "2026-04-16",
+    "category": "学术",
+    "keywords": ["数学", "百科", "教材"],
+    "metadata": {
+      "originalTitle": "The Princeton Companion to Mathematics",
+      "year": "2008",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "mathematical_economics",
+    "title": "数理经济学的基本方法",
+    "author": "蒋中一",
+    "cover": "covers/mathematical_economics.jpg",
+    "summary": "数理经济学入门经典，系统讲解经济学所需的数学基础，包括优化理论、动态分析等，是经济学研究生的必修教材。",
+    "rating": 4,
+    "readDate": "2017-12",
+    "addedDate": "2026-04-16",
+    "category": "学术",
+    "keywords": ["经济学", "数学", "教材"],
+    "metadata": {
+      "originalTitle": "Fundamental Methods of Mathematical Economics",
+      "year": "2005",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "data_mining",
+    "title": "数据挖掘：概念、模型、方法和算法",
+    "author": "Mehmed Kantardzic",
+    "cover": "covers/data_mining.jpg",
+    "summary": "数据挖掘领域的综合性教材，涵盖机器学习核心知识点，包括分类、聚类、关联规则等，理论与实践结合紧密。",
+    "rating": 4,
+    "readDate": "2019-03",
+    "addedDate": "2026-04-16",
+    "category": "科技",
+    "keywords": ["数据挖掘", "机器学习", "算法"],
+    "metadata": {
+      "originalTitle": "Data Mining: Concepts, Models, Methods, and Algorithms",
+      "year": "2011",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "apocalypse_paradise",
+    "title": "末日乐园",
+    "author": "须尾俱全",
+    "cover": "covers/apocalypse_paradise.jpg",
+    "summary": "女性主角的空间类无限流网文，世界观宏大，剧情精彩。篇幅较长但质量稳定，是无限流题材的佳作。",
+    "rating": 4,
+    "readDate": "2024-08",
+    "addedDate": "2026-04-16",
+    "category": "小说",
+    "keywords": ["无限流", "空间", "末世", "女频"],
+    "metadata": {
+      "language": "中文"
+    }
+  },
+  {
+    "id": "bureau_749",
+    "title": "749局秘闻",
+    "author": "当仁不让",
+    "cover": "covers/bureau_749.jpg",
+    "summary": "以神秘机构749局为背景的悬疑探险小说，融合历史与传说，情节紧凑引人入胜。",
+    "rating": 5,
+    "readDate": "2024-10",
+    "addedDate": "2026-04-16",
+    "category": "小说",
+    "keywords": ["悬疑", "探险", "神秘"],
+    "metadata": {
+      "language": "中文"
+    }
+  },
+  {
+    "id": "cold_case_restart",
+    "title": "冷案重启",
+    "author": "樊落",
+    "cover": "covers/cold_case_restart.jpg",
+    "summary": "冷案侦查题材推理小说，案件设计精巧，逻辑严密。主线故事精彩，建议跳过外传。",
+    "rating": 4,
+    "readDate": "2024-06",
+    "addedDate": "2026-04-16",
+    "category": "小说",
+    "keywords": ["推理", "悬疑", "冷案"],
+    "metadata": {
+      "language": "中文"
+    }
+  },
+  {
+    "id": "heavenly_library",
+    "title": "天道图书馆",
+    "author": "横扫天涯",
+    "cover": "covers/heavenly_library.jpg",
+    "summary": "玄幻龙傲天系列网文，主角拥有天道图书馆金手指，剧情爽快有始有终，整体质量稳定。",
+    "rating": 5,
+    "readDate": "2023-05",
+    "addedDate": "2026-04-16",
+    "category": "小说",
+    "keywords": ["玄幻", "龙傲天", "爽文"],
+    "metadata": {
+      "language": "中文"
+    }
+  },
+  {
+    "id": "murder_before_apocalypse",
+    "title": "世界末日前的谋杀",
+    "author": "荒木茜",
+    "cover": "covers/murder_before_apocalypse.jpg",
+    "summary": "设定新颖的末日题材推理小说，在世界末日倒计时的背景下展开悬疑故事，构思巧妙。",
+    "rating": 5,
+    "readDate": "2024-12",
+    "addedDate": "2026-04-16",
+    "category": "小说",
+    "keywords": ["推理", "末日", "悬疑"],
+    "metadata": {
+      "language": "中文"
+    }
+  },
+  {
+    "id": "human_weakness",
+    "title": "人性的弱点",
+    "author": "戴尔·卡耐基",
+    "cover": "covers/human_weakness.jpg",
+    "summary": "人际关系经典著作，教导读者如何与人相处、如何影响他人。需有一定人生阅历才能真正领悟书中智慧。",
+    "rating": 5,
+    "readDate": "2022-03",
+    "addedDate": "2026-04-16",
+    "category": "社科",
+    "keywords": ["心理学", "人际交往", "自我提升"],
+    "metadata": {
+      "originalTitle": "How to Win Friends and Influence People",
+      "year": "1936",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "lifecycle_of_software_objects",
+    "title": "软件体的生命周期",
+    "author": "Ted Chiang",
+    "cover": "covers/lifecycle_of_software_objects.jpg",
+    "summary": "科幻大师特德·姜的中篇小说，探讨人工智能的社会性成长，启发思考机器学习的社会效应。",
+    "rating": 5,
+    "readDate": "2024-11",
+    "addedDate": "2026-04-16",
+    "category": "小说",
+    "keywords": ["科幻", "AI", "特德·姜"],
+    "metadata": {
+      "originalTitle": "The Lifecycle of Software Objects",
+      "year": "2010",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "mysterious_revival",
+    "title": "神秘复苏",
+    "author": "佛前献花",
+    "cover": "covers/mysterious_revival.jpg",
+    "summary": "灵异复苏题材网文，设定新颖，前期精彩。后期偏向后宫文风格，阅读体验有所下降。",
+    "rating": 4,
+    "readDate": "2023-09",
+    "addedDate": "2026-04-16",
+    "category": "小说",
+    "keywords": ["灵异", "复苏", "网文"],
+    "metadata": {
+      "language": "中文"
+    }
+  },
+  {
+    "id": "earth_chronicles",
+    "title": "地球编年史",
+    "author": "撒迦利亚·西琴",
+    "cover": "covers/earth_chronicles.jpg",
+    "summary": "从外星人视角解读地球古代历史的奇书，融合考古学与神话学，堪称西方人的山海经。",
+    "rating": 5,
+    "readDate": "2023-07",
+    "addedDate": "2026-04-16",
+    "category": "社科",
+    "keywords": ["历史", "考古", "外星人", "神话"],
+    "metadata": {
+      "originalTitle": "The Earth Chronicles",
+      "year": "1976",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "decoding_shanhaijing",
+    "title": "破解山海经",
+    "author": "丁振宗",
+    "cover": "covers/decoding_shanhaijing.jpg",
+    "summary": "从现代视角解读山海经的奇书，与地球编年史对照阅读，视角独特，令人大开眼界。",
+    "rating": 5,
+    "readDate": "2023-08",
+    "addedDate": "2026-04-16",
+    "category": "社科",
+    "keywords": ["山海经", "历史", "神话"],
+    "metadata": {
+      "language": "中文"
+    }
+  },
+  {
+    "id": "taibai_jinxing",
+    "title": "太白金星有点烦",
+    "author": "马伯庸",
+    "cover": "covers/taibai_jinxing.jpg",
+    "summary": "从职场官场角度解构西游记的幽默小说，让人重新认识西游原著中的职场智慧，妙趣横生。",
+    "rating": 5,
+    "readDate": "2024-02",
+    "addedDate": "2026-04-16",
+    "category": "小说",
+    "keywords": ["西游记", "职场", "幽默"],
+    "metadata": {
+      "year": "2023",
+      "language": "中文"
+    }
+  },
+  {
+    "id": "grain_canal_silver",
+    "title": "粮食、运河与白银",
+    "author": "波音",
+    "cover": "covers/grain_canal_silver.jpg",
+    "summary": "从经济学视角解读中国历史，揭示粮食、运河、白银等经济因素如何影响历史进程，视角独特。",
+    "rating": 5,
+    "readDate": "2024-04",
+    "addedDate": "2026-04-16",
+    "category": "社科",
+    "keywords": ["历史", "经济学", "中国"],
+    "metadata": {
+      "year": "2022",
+      "language": "中文"
+    }
+  },
+  {
+    "id": "navigation_currency_trade",
+    "title": "航海、货币与贸易",
+    "author": "波音",
+    "cover": "covers/navigation_currency_trade.jpg",
+    "summary": "从经济学角度解读世界历史，揭示航海、货币、贸易如何塑造现代世界格局，与粮食运河白银互为姊妹篇。",
+    "rating": 5,
+    "readDate": "2024-05",
+    "addedDate": "2026-04-16",
+    "category": "社科",
+    "keywords": ["历史", "经济学", "世界"],
+    "metadata": {
+      "year": "2023",
+      "language": "中文"
+    }
+  },
+  {
+    "id": "slaying_gods_asylum",
+    "title": "我在精神病院里学斩神",
+    "author": "三九音域",
+    "cover": "covers/slaying_gods_asylum.jpg",
+    "summary": "超长篇都市玄幻网文，融合中国神话、西方神话与克苏鲁元素，世界观宏大，剧情紧凑，有始有终。",
+    "rating": 5,
+    "readDate": "2024-07",
+    "addedDate": "2026-04-16",
+    "category": "小说",
+    "keywords": ["玄幻", "神话", "克苏鲁", "都市"],
+    "metadata": {
+      "language": "中文"
+    }
   }
 ]
