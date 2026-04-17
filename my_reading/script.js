@@ -9,12 +9,13 @@
         categories: ['全部'],
         currentCategory: '全部',
         searchQuery: '',
-        viewMode: 'gallery',
+        viewMode: 'mini',
         sortBy: 'addedDate',
         sortOrder: 'desc',
         loadedCount: 0,
         batchSize: 20,
-        isLoading: false
+        isLoading: false,
+        flowIndex: 0 // Cover Flow 当前索引
     };
 
     // 获取所有分类
@@ -189,6 +190,47 @@
         const grid = document.getElementById('bookGrid');
         const loadingIndicator = document.getElementById('loadingIndicator');
 
+        // Cover Flow 视图单独处理
+        if (state.viewMode === 'flow') {
+            renderFlowView();
+            loadingIndicator.style.display = 'none';
+            return;
+        }
+
+        // Mini 视图一次性加载全部
+        if (state.viewMode === 'mini') {
+            if (clear || grid.children.length === 0 || !grid.classList.contains('mini-view')) {
+                grid.innerHTML = '';
+
+                if (state.filteredBooks.length === 0) {
+                    grid.innerHTML = `
+                        <div class="no-results">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="11" cy="11" r="8"/>
+                                <path d="m21 21-4.35-4.35"/>
+                            </svg>
+                            <p>没有找到匹配的书籍</p>
+                        </div>
+                    `;
+                    loadingIndicator.style.display = 'none';
+                    return;
+                }
+
+                const fragment = document.createDocumentFragment();
+                const tempDiv = document.createElement('div');
+
+                state.filteredBooks.forEach(book => {
+                    tempDiv.innerHTML = renderBookCard(book);
+                    fragment.appendChild(tempDiv.firstElementChild);
+                });
+
+                grid.appendChild(fragment);
+                state.loadedCount = state.filteredBooks.length;
+            }
+            loadingIndicator.style.display = 'none';
+            return;
+        }
+
         if (clear) {
             grid.innerHTML = '';
             state.loadedCount = 0;
@@ -233,8 +275,145 @@
         }
     }
 
+    // 渲染 Cover Flow 视图
+    function renderFlowView() {
+        const grid = document.getElementById('bookGrid');
+        const books = state.filteredBooks;
+
+        if (books.length === 0) {
+            grid.innerHTML = `
+                <div class="no-results">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                    <p>没有找到匹配的书籍</p>
+                </div>
+            `;
+            return;
+        }
+
+        // 确保索引在有效范围内
+        state.flowIndex = Math.max(0, Math.min(state.flowIndex, books.length - 1));
+
+        grid.innerHTML = `
+            <div class="flow-container">
+                ${books.map((book, index) => {
+                    let positionClass = '';
+                    if (index === state.flowIndex) {
+                        positionClass = 'active';
+                    } else if (index === state.flowIndex - 1) {
+                        positionClass = 'left-1';
+                    } else if (index === state.flowIndex - 2) {
+                        positionClass = 'left-2';
+                    } else if (index === state.flowIndex + 1) {
+                        positionClass = 'right-1';
+                    } else if (index === state.flowIndex + 2) {
+                        positionClass = 'right-2';
+                    } else if (index < state.flowIndex) {
+                        positionClass = 'hidden-left';
+                    } else {
+                        positionClass = 'hidden-right';
+                    }
+
+                    return `
+                        <div class="flow-book ${positionClass}" data-index="${index}">
+                            <div class="flow-book-wrapper">
+                                <div class="cover-area">
+                                    <img src="${book.cover}" alt="${book.title}" onerror="this.style.display='none'">
+                                </div>
+                                <div class="flow-reflection">
+                                    <img src="${book.cover}" alt="" onerror="this.style.display='none'">
+                                </div>
+                            </div>
+                            <div class="flow-info">
+                                <div class="flow-title">${book.title}</div>
+                                <div class="flow-author">${book.author}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+                <button class="flow-nav prev" ${state.flowIndex === 0 ? 'disabled' : ''}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+                <button class="flow-nav next" ${state.flowIndex === books.length - 1 ? 'disabled' : ''}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
+        `;
+
+        // 绑定导航按钮事件
+        grid.querySelector('.flow-nav.prev')?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (state.flowIndex > 0) {
+                state.flowIndex--;
+                renderFlowView();
+            }
+        });
+
+        grid.querySelector('.flow-nav.next')?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (state.flowIndex < books.length - 1) {
+                state.flowIndex++;
+                renderFlowView();
+            }
+        });
+
+        // 点击书籍事件
+        grid.querySelectorAll('.flow-book').forEach(book => {
+            book.addEventListener('click', (e) => {
+                const index = parseInt(book.dataset.index);
+                if (isNaN(index) || !books[index]) return;
+
+                if (book.classList.contains('active')) {
+                    // 点击 active 书籍跳转到详情页
+                    window.location.href = `books/${books[index].id}/`;
+                } else {
+                    // 点击其他书籍切换到该位置
+                    e.preventDefault();
+                    e.stopPropagation();
+                    state.flowIndex = index;
+                    renderFlowView();
+                }
+            });
+        });
+
+        // 触摸滑动支持
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const flowContainer = grid.querySelector('.flow-container');
+
+        flowContainer?.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        flowContainer?.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) { // 最小滑动距离
+                if (diff > 0 && state.flowIndex < books.length - 1) {
+                    state.flowIndex++;
+                    renderFlowView();
+                } else if (diff < 0 && state.flowIndex > 0) {
+                    state.flowIndex--;
+                    renderFlowView();
+                }
+            }
+        }
+    }
+
     // 加载更多（滚动触发）
     function loadMore() {
+        // mini 和 flow 视图不需要懒加载
+        if (state.viewMode === 'mini' || state.viewMode === 'flow') return;
         if (state.isLoading || state.loadedCount >= state.filteredBooks.length) return;
 
         state.isLoading = true;
@@ -253,10 +432,16 @@
         state.viewMode = mode;
         const grid = document.getElementById('bookGrid');
 
+        // 移除所有视图类
+        grid.classList.remove('list-view', 'mini-view', 'flow-view');
+
+        // 添加对应的视图类
         if (mode === 'list') {
             grid.classList.add('list-view');
-        } else {
-            grid.classList.remove('list-view');
+        } else if (mode === 'mini') {
+            grid.classList.add('mini-view');
+        } else if (mode === 'flow') {
+            grid.classList.add('flow-view');
         }
 
         // 更新按钮状态
@@ -266,6 +451,9 @@
 
         // 保存到 localStorage
         localStorage.setItem('bookshelf_view_mode', mode);
+
+        // 重新渲染（flow 视图需要完全重渲染）
+        renderBooks(true);
     }
 
     // 防抖函数
@@ -319,7 +507,7 @@
             updateStats();
 
             // 恢复视图模式
-            const savedMode = localStorage.getItem('bookshelf_view_mode') || 'gallery';
+            const savedMode = localStorage.getItem('bookshelf_view_mode') || 'mini';
             setViewMode(savedMode);
 
             // 恢复排序设置
@@ -378,6 +566,19 @@
 
         // 滚动监听
         setupScrollListener();
+
+        // 键盘导航（Cover Flow 视图）
+        document.addEventListener('keydown', (e) => {
+            if (state.viewMode !== 'flow') return;
+
+            if (e.key === 'ArrowLeft' && state.flowIndex > 0) {
+                state.flowIndex--;
+                renderFlowView();
+            } else if (e.key === 'ArrowRight' && state.flowIndex < state.filteredBooks.length - 1) {
+                state.flowIndex++;
+                renderFlowView();
+            }
+        });
     }
 
     // DOM Ready

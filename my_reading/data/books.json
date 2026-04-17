@@ -354,5 +354,638 @@
     "metadata": {
       "language": "中文"
     }
+  },
+  {
+    "id": "sapiens",
+    "title": "人类简史",
+    "author": "尤瓦尔·赫拉利",
+    "cover": "covers/sapiens.jpg",
+    "summary": "从认知革命、农业革命到科学革命，重新审视智人如何登上食物链顶端，成为地球的主宰者。以宏大视角梳理人类发展脉络，打破传统历史叙事框架。",
+    "rating": 5,
+    "readDate": "2023-01",
+    "addedDate": "2026-04-17",
+    "category": "社科",
+    "keywords": ["历史", "人类学", "文明"],
+    "metadata": {
+      "originalTitle": "Sapiens: A Brief History of Humankind",
+      "year": "2011",
+      "language": "希伯来语",
+      "translator": "林俊宏"
+    }
+  },
+  {
+    "id": "homo_deus",
+    "title": "未来简史",
+    "author": "尤瓦尔·赫拉利",
+    "cover": "covers/homo_deus.jpg",
+    "summary": "人类简史的续作，展望智人的未来命运。当饥荒、瘟疫、战争被攻克后，人类将追求永生、幸福与神性，但数据主义可能带来新的挑战。",
+    "rating": 5,
+    "readDate": "2023-02",
+    "addedDate": "2026-04-17",
+    "category": "社科",
+    "keywords": ["未来", "科技", "哲学"],
+    "metadata": {
+      "originalTitle": "Homo Deus: A Brief History of Tomorrow",
+      "year": "2015",
+      "language": "希伯来语",
+      "translator": "林俊宏"
+    }
+  },
+  {
+    "id": "21_lessons",
+    "title": "今日简史",
+    "author": "尤瓦尔·赫拉利",
+    "cover": "covers/21_lessons.jpg",
+    "summary": "赫拉利简史三部曲的收官之作，聚焦当下人类面临的21个重大议题：人工智能、数据霸权、民族主义、移民危机、战争与谦逊等。",
+    "rating": 4,
+    "readDate": "2023-03",
+    "addedDate": "2026-04-17",
+    "category": "社科",
+    "keywords": ["当代", "社会", "科技"],
+    "metadata": {
+      "originalTitle": "21 Lessons for the 21st Century",
+      "year": "2018",
+      "language": "希伯来语",
+      "translator": "林俊宏"
+    }
+  },
+  {
+    "id": "nexus",
+    "title": "联结",
+    "author": "尤瓦尔·赫拉利",
+    "cover": "covers/nexus.jpg",
+    "summary": "赫拉利最新力作，探讨信息网络如何塑造人类历史。从石器时代到人工智能，揭示信息从来不是中立的力量，而是人类社会的核心纽带。",
+    "rating": 4,
+    "readDate": "2024-09",
+    "addedDate": "2026-04-17",
+    "category": "社科",
+    "keywords": ["信息", "网络", "历史"],
+    "metadata": {
+      "originalTitle": "Nexus: A Brief History of Information Networks from the Stone Age to AI",
+      "year": "2024",
+      "language": "英语",
+      "translator": "林俊宏"
+    }
+  },
+  {
+    "id": "thinking_fast_slow",
+    "title": "思考，快与慢",
+    "author": "丹尼尔·卡尼曼",
+    "cover": "covers/thinking_fast_slow.jpg",
+    "summary": "诺贝尔经济学奖得主的心理学巨著，揭示人类思维的两个系统：快速直觉的系统一与缓慢理性的系统二，以及它们如何影响我们的判断与决策。",
+    "rating": 5,
+    "readDate": "2022-06",
+    "addedDate": "2026-04-17",
+    "category": "社科",
+    "keywords": ["心理学", "决策", "认知"],
+    "metadata": {
+      "originalTitle": "Thinking, Fast and Slow",
+      "year": "2011",
+      "language": "英语",
+      "translator": "胡晓姣等"
+    }
+  },
+  {
+    "id": "tipping_point",
+    "title": "引爆点",
+    "author": "马尔科姆·格拉德威尔",
+    "cover": "covers/tipping_point.jpg",
+    "summary": "探讨流行现象如何爆发的经典之作。揭示引爆点背后的三大法则：个别人物法则、附着力因素、环境威力法则，解释小变化如何引发大影响。",
+    "rating": 5,
+    "readDate": "2022-08",
+    "addedDate": "2026-04-17",
+    "category": "社科",
+    "keywords": ["社会学", "营销", "传播"],
+    "metadata": {
+      "originalTitle": "The Tipping Point",
+      "year": "2000",
+      "language": "英语",
+      "translator": "钱清"
+    }
+  },
+  {
+    "id": "designing_your_life",
+    "title": "设计你的人生",
+    "author": "比尔·伯内特 / 戴夫·埃文斯",
+    "cover": "covers/designing_your_life.jpg",
+    "summary": "斯坦福大学人生设计课程精华，用设计思维重新规划人生。打破找不到人生方向的困境，提供可操作的工具与方法。",
+    "rating": 4,
+    "readDate": "2023-06",
+    "addedDate": "2026-04-17",
+    "category": "社科",
+    "keywords": ["自我提升", "职业", "设计思维"],
+    "metadata": {
+      "originalTitle": "Designing Your Life",
+      "year": "2016",
+      "language": "英语",
+      "translator": "周芳芳"
+    }
+  },
+  {
+    "id": "world_without_us",
+    "title": "没有我们的世界",
+    "author": "艾伦·韦斯曼",
+    "cover": "covers/world_without_us.jpg",
+    "summary": "设想人类突然消失后地球的命运。从城市废墟到生态系统恢复，揭示人类文明的脆弱与自然的韧性，令人深思人类与地球的关系。",
+    "rating": 5,
+    "readDate": "2023-11",
+    "addedDate": "2026-04-17",
+    "category": "社科",
+    "keywords": ["环境", "生态", "未来"],
+    "metadata": {
+      "originalTitle": "The World Without Us",
+      "year": "2007",
+      "language": "英语",
+      "translator": "赵舒静"
+    }
+  },
+  {
+    "id": "confession",
+    "title": "告白",
+    "author": "凑佳苗",
+    "cover": "covers/confession.jpg",
+    "summary": "日本推理小说杰作，以独特的多人视角展开叙事。女教师为亡女复仇的故事，层层剥开人性的阴暗面，令人不寒而栗。",
+    "rating": 5,
+    "readDate": "2024-01",
+    "addedDate": "2026-04-17",
+    "category": "小说",
+    "keywords": ["推理", "日本", "复仇"],
+    "metadata": {
+      "originalTitle": "告白",
+      "year": "2008",
+      "language": "日语",
+      "translator": "竺家荣"
+    }
+  },
+  {
+    "id": "psychology_life_encyclopedia",
+    "title": "心理生活百科",
+    "author": "电子工业出版社（编委会）",
+    "cover": "covers/psychology_life_encyclopedia.jpg",
+    "summary": "DK出品的心理学百科全书，全面介绍心理学发展史与核心概念，图文并茂，是快速了解心理学全貌的理想读物。",
+    "rating": 5,
+    "readDate": "2024-03",
+    "addedDate": "2026-04-17",
+    "category": "社科",
+    "keywords": ["心理学", "百科", "DK"],
+    "metadata": {
+      "year": "2020",
+      "language": "中文"
+    }
+  },
+  {
+    "id": "scientia",
+    "title": "多学科科普合集",
+    "author": "马特·特威德等",
+    "cover": "covers/scientia.jpg",
+    "summary": "一页一个科学小知识，涵盖数学、物理、化学、生物等多学科内容，适合快速浏览科学世界的精彩概览。",
+    "rating": 4,
+    "readDate": "2023-10",
+    "addedDate": "2026-04-17",
+    "category": "科普",
+    "keywords": ["科学", "百科", "多学科"],
+    "metadata": {
+      "originalTitle": "Sciencia",
+      "year": "2011",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "medicine_book",
+    "title": "DK医学百科",
+    "author": "英国DK出版社",
+    "cover": "covers/medicine_book.jpg",
+    "summary": "DK出品的医学百科全书，全面介绍医学发展史与重要里程碑，从古代医学到现代医疗技术，信息丰富图文并茂。",
+    "rating": 5,
+    "readDate": "2024-04",
+    "addedDate": "2026-04-17",
+    "category": "科普",
+    "keywords": ["医学", "百科", "DK"],
+    "metadata": {
+      "originalTitle": "The Medicine Book",
+      "year": "2021",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "biology_book",
+    "title": "DK生物学百科",
+    "author": "英国DK出版社",
+    "cover": "covers/biology_book.jpg",
+    "summary": "DK出品的生物学百科全书，从细胞到生态系统全面介绍生命科学，图文并茂，是生物学入门的理想选择。",
+    "rating": 5,
+    "readDate": "2024-02",
+    "addedDate": "2026-04-17",
+    "category": "科普",
+    "keywords": ["生物学", "百科", "DK"],
+    "metadata": {
+      "originalTitle": "The Biology Book",
+      "year": "2021",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "how_space_works",
+    "title": "太空是如何运作的",
+    "author": "英国DK出版社",
+    "cover": "covers/how_space_works.jpg",
+    "summary": "DK出品的太空科普巨著，全面讲解宇宙、星系、行星、黑洞等太空知识，图文并茂，是太空探索的完美指南。",
+    "rating": 5,
+    "readDate": "2023-12",
+    "addedDate": "2026-04-17",
+    "category": "科普",
+    "keywords": ["太空", "宇宙", "天文", "DK"],
+    "metadata": {
+      "originalTitle": "How Space Works",
+      "year": "2021",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "how_philosophy_works",
+    "title": "哲学是如何运作的",
+    "author": "英国DK出版社",
+    "cover": "covers/how_philosophy_works.jpg",
+    "summary": "DK出品的哲学百科全书，系统介绍哲学发展史与核心思想，堪称《苏菲的世界》的扩展版，图文并茂。",
+    "rating": 5,
+    "readDate": "2024-01",
+    "addedDate": "2026-04-17",
+    "category": "社科",
+    "keywords": ["哲学", "百科", "DK"],
+    "metadata": {
+      "originalTitle": "How Philosophy Works",
+      "year": "2019",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "sherlock_holmes_book",
+    "title": "福尔摩斯百科",
+    "author": "英国DK出版社",
+    "cover": "covers/sherlock_holmes_book.jpg",
+    "summary": "DK出品的福尔摩斯百科全书，全面解读柯南·道尔笔下的侦探世界，案件分析、人物图谱、时代背景一应俱全。",
+    "rating": 5,
+    "readDate": "2023-04",
+    "addedDate": "2026-04-17",
+    "category": "文学",
+    "keywords": ["福尔摩斯", "侦探", "百科", "DK"],
+    "metadata": {
+      "originalTitle": "The Sherlock Holmes Book",
+      "year": "2015",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "tools_encyclopedia",
+    "title": "工具大百科",
+    "author": "英国DK出版社",
+    "cover": "covers/tools_encyclopedia.jpg",
+    "summary": "DK出品的工具百科全书，收录人类历史上各式各样的工具，从古代手工具到现代电动工具，图文并茂。",
+    "rating": 5,
+    "readDate": "2022-10",
+    "addedDate": "2026-04-17",
+    "category": "科普",
+    "keywords": ["工具", "百科", "DK"],
+    "metadata": {
+      "originalTitle": "Das große Buch der Werkzeuge",
+      "year": "2017",
+      "language": "德语"
+    }
+  },
+  {
+    "id": "mammut_technik",
+    "title": "技术大百科",
+    "author": "大卫·麦考利",
+    "cover": "covers/mammut_technik.jpg",
+    "summary": "用猛犸象讲科学故事的独特科普书，涵盖机械、物理、工程等领域，生动有趣，适合各年龄段读者。",
+    "rating": 5,
+    "readDate": "2022-08",
+    "addedDate": "2026-04-17",
+    "category": "科普",
+    "keywords": ["技术", "科学", "猛犸象", "DK"],
+    "metadata": {
+      "originalTitle": "Das neue große MAMMUT-BUCH DER TECHNIK",
+      "year": "2016",
+      "language": "德语"
+    }
+  },
+  {
+    "id": "wonders_of_world",
+    "title": "世界奇观",
+    "author": "Lonely Planet（孤独星球）",
+    "cover": "covers/wonders_of_world.jpg",
+    "summary": "孤独星球出品的世界奇观图集，收录全球最壮观的自然与人文景观，摄影精美，令人心驰神往。",
+    "rating": 5,
+    "readDate": "2023-09",
+    "addedDate": "2026-04-17",
+    "category": "旅行",
+    "keywords": ["旅行", "奇观", "摄影"],
+    "metadata": {
+      "originalTitle": "Wonders of the World",
+      "year": "2022",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "haicuotu_notes",
+    "title": "海错图笔记",
+    "author": "张辰亮",
+    "cover": "covers/haicuotu_notes.jpg",
+    "summary": "科普博主「博物君」解读清代《海错图》的著作，考证古代海洋生物图谱，兼具科学性与趣味性，还记录了各种水生物的食用方法。",
+    "rating": 5,
+    "readDate": "2024-06",
+    "addedDate": "2026-04-17",
+    "category": "科普",
+    "keywords": ["海洋生物", "科普", "考证"],
+    "metadata": {
+      "year": "2016",
+      "language": "中文"
+    }
+  },
+  {
+    "id": "life_motto",
+    "title": "世界上最好的人生格言",
+    "author": "Christian Sprang",
+    "cover": "covers/life_motto.jpg",
+    "summary": "德语人生格言合集，收录各种励志名言警句，适合德语学习者作为入门阅读材料。",
+    "rating": 3,
+    "readDate": "2021-05",
+    "addedDate": "2026-04-17",
+    "category": "社科",
+    "keywords": ["格言", "德语", "人生"],
+    "metadata": {
+      "originalTitle": "Das beste Lebensmotto der Welt",
+      "year": "2015",
+      "language": "德语"
+    }
+  },
+  {
+    "id": "fun_statistics",
+    "title": "妙趣横生的统计学",
+    "author": "加里·史密斯",
+    "cover": "covers/fun_statistics.jpg",
+    "summary": "通俗易懂的统计学入门读物，案例清晰，排版精良，让枯燥的统计学变得生动有趣。",
+    "rating": 5,
+    "readDate": "2023-07",
+    "addedDate": "2026-04-17",
+    "category": "学术",
+    "keywords": ["统计学", "数据分析", "入门"],
+    "metadata": {
+      "originalTitle": "Statistics",
+      "year": "2015",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "cloud_computing",
+    "title": "云计算工程",
+    "author": "王鹏",
+    "cover": "covers/cloud_computing.jpg",
+    "summary": "云计算领域的综合性教材，涵盖云计算架构、虚拟化、分布式系统等内容，可作为技术参考手册。",
+    "rating": 4,
+    "readDate": "2022-03",
+    "addedDate": "2026-04-17",
+    "category": "科技",
+    "keywords": ["云计算", "分布式", "虚拟化"],
+    "metadata": {
+      "year": "2016",
+      "language": "中文"
+    }
+  },
+  {
+    "id": "macro_history",
+    "title": "宏观经济学史",
+    "author": "罗杰·E·巴克豪斯",
+    "cover": "covers/macro_history.jpg",
+    "summary": "从凯恩斯到卢卡斯及之后的宏观经济学发展史，系统梳理宏观经济学理论的演进脉络，适合经济学专业学生阅读。",
+    "rating": 5,
+    "readDate": "2019-06",
+    "addedDate": "2026-04-17",
+    "category": "学术",
+    "keywords": ["经济学", "宏观经济", "学术史"],
+    "metadata": {
+      "originalTitle": "A History of Macroeconomics from Keynes to Lucas and Beyond",
+      "year": "2018",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "getting_more",
+    "title": "沃顿商学院最受欢迎的谈判课",
+    "author": "斯图尔特·戴蒙德",
+    "cover": "covers/getting_more.jpg",
+    "summary": "沃顿商学院谈判课程精华，超越传统BATNA理论，提供实用的谈判技巧和策略，案例丰富。",
+    "rating": 5,
+    "readDate": "2022-11",
+    "addedDate": "2026-04-17",
+    "category": "社科",
+    "keywords": ["谈判", "商业", "沟通"],
+    "metadata": {
+      "originalTitle": "Getting More",
+      "year": "2010",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "corporate_finance",
+    "title": "公司理财",
+    "author": "斯蒂芬·罗斯",
+    "cover": "covers/corporate_finance.jpg",
+    "summary": "公司理财领域的经典教材，涵盖资本预算、资本结构、股利政策等核心内容，理论与实践并重。",
+    "rating": 5,
+    "readDate": "2018-12",
+    "addedDate": "2026-04-17",
+    "category": "学术",
+    "keywords": ["金融", "公司理财", "教材"],
+    "metadata": {
+      "originalTitle": "Corporate Finance",
+      "year": "2016",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "concrete_mathematics",
+    "title": "具体数学（第2版）",
+    "author": "罗纳德·格雷厄姆 / 唐纳德·克努特",
+    "cover": "covers/concrete_mathematics.jpg",
+    "summary": "计算机科学数学基础经典著作，涵盖递归、数论、离散概率等内容，是《计算机程序设计艺术》的数学基础。",
+    "rating": 5,
+    "readDate": "2020-06",
+    "addedDate": "2026-04-17",
+    "category": "科技",
+    "keywords": ["数学", "计算机科学", "算法"],
+    "metadata": {
+      "originalTitle": "Concrete Mathematics: A Foundation for Computer Science",
+      "year": "1994",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "quantum_mechanics",
+    "title": "量子力学",
+    "author": "Leonard Susskind",
+    "cover": "covers/quantum_mechanics.jpg",
+    "summary": "理论物理学家Susskind的量子力学入门书，以最精简的方式讲解量子力学的核心概念和数学框架。",
+    "rating": 5,
+    "readDate": "2021-08",
+    "addedDate": "2026-04-17",
+    "category": "学术",
+    "keywords": ["量子力学", "物理", "理论物理"],
+    "metadata": {
+      "originalTitle": "Quantum Mechanics: The Theoretical Minimum",
+      "year": "2014",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "code_complete",
+    "title": "代码大全2",
+    "author": "史蒂夫·麦康奈尔",
+    "cover": "covers/code_complete.jpg",
+    "summary": "微软出品的编程经典巨著，涵盖代码构建、设计、调试等方方面面，是程序员必备的代码规范指南。",
+    "rating": 5,
+    "readDate": "2019-03",
+    "addedDate": "2026-04-17",
+    "category": "科技",
+    "keywords": ["编程", "代码规范", "软件工程"],
+    "metadata": {
+      "originalTitle": "Code Complete 2",
+      "year": "2004",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "work_charts",
+    "title": "工作型图表设计",
+    "author": "永田丰志",
+    "cover": "covers/work_charts.jpg",
+    "summary": "职场图表设计实用指南，什么样的数据用什么样的图表，作为日常工作参考非常实用。",
+    "rating": 5,
+    "readDate": "2023-02",
+    "addedDate": "2026-04-17",
+    "category": "实用",
+    "keywords": ["图表", "数据可视化", "职场"],
+    "metadata": {
+      "year": "2015",
+      "language": "日语"
+    }
+  },
+  {
+    "id": "mathematical_universe",
+    "title": "穿越平行宇宙",
+    "author": "迈克斯·泰格马克",
+    "cover": "covers/mathematical_universe.jpg",
+    "summary": "物理学家Max Tegmark的科普力作，提出数学宇宙假说：宇宙的本质就是数学结构。从量子力学到多重宇宙，带领读者探索现实的终极本质。",
+    "rating": 5,
+    "readDate": "2021-11",
+    "addedDate": "2026-04-17",
+    "category": "科普",
+    "keywords": ["物理学", "宇宙", "数学", "多重宇宙"],
+    "metadata": {
+      "originalTitle": "Our Mathematical Universe",
+      "year": "2014",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "string_theory",
+    "title": "弦理论",
+    "author": "约瑟夫·波钦斯基",
+    "cover": "covers/string_theory.jpg",
+    "summary": "弦理论领域的经典教材，系统讲解弦理论的基本概念和数学框架。对于有志于研究高能物理的人来说，这是必读之作。",
+    "rating": 5,
+    "readDate": "2005-01",
+    "addedDate": "2026-04-17",
+    "category": "学术",
+    "keywords": ["弦理论", "物理学", "理论物理"],
+    "metadata": {
+      "originalTitle": "String Theory",
+      "year": "1998",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "black_hole_war",
+    "title": "黑洞战争",
+    "author": "伦纳德·萨斯坎德",
+    "cover": "covers/black_hole_war.jpg",
+    "summary": "理论物理学家Susskind讲述围绕黑洞信息悖论的物理故事，霍金与Susskind等人的思想交锋。既有物理深度，又像科幻小说一样引人入胜。",
+    "rating": 5,
+    "readDate": "2020-10",
+    "addedDate": "2026-04-17",
+    "category": "科普",
+    "keywords": ["黑洞", "物理学", "霍金"],
+    "metadata": {
+      "originalTitle": "The Black Hole War",
+      "year": "2008",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "oxford_plain_english",
+    "title": "牛津英语写作指南",
+    "author": "马丁·卡茨",
+    "cover": "covers/oxford_plain_english.jpg",
+    "summary": "牛津出品的英语写作指南，教你写出简洁清晰的英语。从句子结构到段落组织，从常见错误到改进技巧，实用性强。",
+    "rating": 5,
+    "readDate": "2022-07",
+    "addedDate": "2026-04-17",
+    "category": "语言",
+    "keywords": ["英语", "写作", "牛津"],
+    "metadata": {
+      "originalTitle": "Oxford Guide to Plain English",
+      "year": "2020",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "computer_hardware",
+    "title": "大话计算机",
+    "author": "张冬",
+    "cover": "covers/computer_hardware.jpg",
+    "summary": "计算机硬件领域的经典之作，共三册。从CPU、内存到存储、网络，全面讲解计算机硬件的工作原理，内容详实深入。",
+    "rating": 5,
+    "readDate": "2021-04",
+    "addedDate": "2026-04-17",
+    "category": "科技",
+    "keywords": ["计算机", "硬件", "原理"],
+    "metadata": {
+      "year": "2016",
+      "language": "中文"
+    }
+  },
+  {
+    "id": "quantum_computation",
+    "title": "量子计算与量子信息（10周年版）",
+    "author": "Michael A. Nielsen / Isaac L. Chuang",
+    "cover": "covers/quantum_computation.jpg",
+    "summary": "量子计算领域的奠基之作，系统讲解量子计算和量子信息的理论基础。适合计算机专业背景的读者学习量子计算。",
+    "rating": 5,
+    "readDate": "2022-05",
+    "addedDate": "2026-04-17",
+    "category": "科技",
+    "keywords": ["量子计算", "量子信息", "计算机科学"],
+    "metadata": {
+      "originalTitle": "Quantum Computation and Quantum Information",
+      "year": "2010",
+      "language": "英语"
+    }
+  },
+  {
+    "id": "causality",
+    "title": "因果推断（系列教材）",
+    "author": "朱迪亚·珀尔",
+    "cover": "covers/causality.jpg",
+    "summary": "因果推断领域的圣经级著作，图灵奖得主Judea Pearl的代表作。为人工智能理解因果关系、构建世界模型奠定理论基础。",
+    "rating": 5,
+    "readDate": "2023-05",
+    "addedDate": "2026-04-17",
+    "category": "学术",
+    "keywords": ["因果推断", "人工智能", "统计学"],
+    "metadata": {
+      "originalTitle": "Causality",
+      "year": "2009",
+      "language": "英语"
+    }
   }
 ]
