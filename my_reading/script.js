@@ -9,7 +9,7 @@
         categories: ['全部'],
         currentCategory: '全部',
         searchQuery: '',
-        viewMode: 'mini',
+        viewMode: 'gallery',
         sortBy: 'addedDate',
         sortOrder: 'desc',
         loadedCount: 0,
@@ -507,7 +507,7 @@
             updateStats();
 
             // 恢复视图模式
-            const savedMode = localStorage.getItem('bookshelf_view_mode') || 'mini';
+            const savedMode = localStorage.getItem('bookshelf_view_mode') || 'gallery';
             setViewMode(savedMode);
 
             // 恢复排序设置

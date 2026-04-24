@@ -136,6 +136,16 @@ yetian.github.io/
     └── books/                    # 书籍详情页
         └── {book_id}/
             └── index.html
+└── cvss/                         # CVSS 漏洞评分计算器
+    ├── index.html                # 主页面
+    ├── style.css                 # Liquid Glass 样式
+    ├── script.js                 # 核心逻辑
+    └── data/
+        ├── cvss-vectors.json     # 指标定义
+        └── i18n/
+            ├── zh.json           # 中文翻译
+            ├── en.json           # 英文翻译
+            └── de.json           # 德语翻译
 ```
 
 ---
@@ -476,6 +486,48 @@ yetian.github.io/
 
 **示例书籍**：
 - 但丁《神曲》(divine_comedy)
+
+---
+
+### 11. cvss - CVSS 漏洞评分计算器
+
+**功能**：通用漏洞评分系统计算器，支持 CVSS 3.0、3.1、4.0 三个版本
+
+**功能特点**：
+- 三版本支持：CVSS 3.0、3.1、4.0
+- 版本切换时重叠指标值自动迁移 (carry over)
+- 多语言支持：中文、英文、德语
+- 必填项未选择时有明显标识（红色星号、脉冲边框动画）
+- 每个指标提供详细解释说明
+- 实时分数计算和可视化仪表盘
+- CVSS Vector 字符串生成
+- PDF/PNG 导出功能
+- Reset 重置按钮
+
+**指标结构**：
+- **基础指标**：攻击向量、攻击复杂度、所需权限、用户交互、范围、机密性/完整性/可用性影响
+- **时间指标**：利用代码成熟度、修复水平、报告可信度
+- **环境指标**：安全需求、修改版基础指标
+- **补充指标**（仅 4.0）：安全性、可自动化、供应商紧急度、恢复能力、价值密度、响应努力
+
+**UI 设计**：
+- Liquid Glass 风格
+- 圆形仪表盘显示分数
+- 颜色编码严重程度（None/Low/Medium/High/Critical）
+- 折叠面板分组展示指标
+
+**文件**：
+- `index.html` - 主页面
+- `style.css` - Liquid Glass 样式
+- `script.js` - 核心逻辑（IIFE 封装）
+- `data/cvss-vectors.json` - 指标定义和权重
+- `data/i18n/*.json` - 多语言翻译文件
+
+**技术实现**：
+- CVSS 3.0/3.1 使用公式计算
+- CVSS 4.0 使用 EQ 查找表方法
+- html2canvas 库实现 PNG 导出
+- 打印窗口方式实现 PDF 导出
 
 ---
 

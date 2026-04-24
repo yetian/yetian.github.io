@@ -1,0 +1,532 @@
+{
+  "app": {
+    "title": "CVSS Rechner",
+    "subtitle": "Common Vulnerability Scoring System"
+  },
+  "ui": {
+    "version": "Version",
+    "language": "Sprache",
+    "reset": "Zurücksetzen",
+    "exportPDF": "PDF exportieren",
+    "exportPNG": "PNG exportieren",
+    "metricSelection": "Metrik-Auswahl",
+    "scoreSummary": "Ergebnis-Zusammenfassung",
+    "vectorString": "Vektor-Zeichenkette",
+    "required": "Erforderlich",
+    "optional": "Optional",
+    "selectValue": "Auswählen"
+  },
+  "scores": {
+    "baseScore": "Basis-Score",
+    "temporalScore": "Temporaler Score",
+    "environmentalScore": "Umgebungs-Score",
+    "severity": "Schweregrad"
+  },
+  "severity": {
+    "none": "Keiner",
+    "low": "Niedrig",
+    "medium": "Mittel",
+    "high": "Hoch",
+    "critical": "Kritisch"
+  },
+  "groups": {
+    "base": "Basis-Metriken",
+    "temporal": "Temporal-Metriken",
+    "threat": "Bedrohungs-Metriken",
+    "environmental": "Umgebungs-Metriken",
+    "supplemental": "Ergänzende Metriken"
+  },
+  "metrics": {
+    "AV": {
+      "name": "Angriffsvektor",
+      "description": "Diese Metrik spiegelt den Kontext wider, in dem eine Schwachstellen-Ausnutzung möglich ist. Je niedriger der Wert, desto näher muss der Angreifer an der Zielkomponente sein.",
+      "values": {
+        "N": {
+          "name": "Netzwerk",
+          "description": "Die verwundbare Komponente ist an den Netzwerk-Stack gebunden und der Angriffspfad erfolgt über OSI-Schicht 3. Beispiel: Senden manipulierter Pakete über das Internet."
+        },
+        "A": {
+          "name": "Angrenzend",
+          "description": "Der Angriff ist auf dasselbe gemeinsame physische oder logische Netzwerk beschränkt und kann nicht über OSI-Schicht-3-Grenzen hinweg durchgeführt werden. Beispiel: gleiches LAN, Bluetooth, lokales WLAN."
+        },
+        "L": {
+          "name": "Lokal",
+          "description": "Die verwundbare Komponente ist nicht an den Netzwerk-Stack gebunden. Beispiel: erfordert, dass der Benutzer eine bösartige Datei ausführt."
+        },
+        "P": {
+          "name": "Physisch",
+          "description": "Der Angriff erfordert, dass der Angreifer die verwundbare Komponente physisch berührt oder manipuliert. Beispiel: Einstecken eines USB-Geräts, physischer Konsolenzugriff."
+        }
+      }
+    },
+    "AC": {
+      "name": "Angriffskomplexität",
+      "description": "Diese Metrik beschreibt die Bedingungen außerhalb der Kontrolle des Angreifers, die für die Ausnutzung der Schwachstelle bestehen müssen. Niedrigere Komplexität bedeutet einfachere Ausnutzung.",
+      "values": {
+        "L": {
+          "name": "Niedrig",
+          "description": "Es gibt keine spezialisierten Zugriffsbedingungen oder erschwerenden Umstände. Ein Angreifer kann wiederholbaren Erfolg gegen die verwundbare Komponente erwarten."
+        },
+        "H": {
+          "name": "Hoch",
+          "description": "Ein erfolgreicher Angriff hängt von Bedingungen ab, die außerhalb der Kontrolle des Angreifers liegen. Beispiel: spezifische Konfiguration, Gewinnung einer Race Condition."
+        }
+      }
+    },
+    "PR": {
+      "name": "Erforderliche Berechtigungen",
+      "description": "Diese Metrik beschreibt die Ebene der Berechtigungen, die ein Angreifer vor der erfolgreichen Ausnutzung der Schwachstelle besitzen muss.",
+      "values": {
+        "N": {
+          "name": "Keine",
+          "description": "Der Angreifer ist vor dem Angriff nicht autorisiert und benötigt daher keinen Zugriff auf Einstellungen oder Informationen des verwundbaren Systems."
+        },
+        "L": {
+          "name": "Niedrig",
+          "description": "Der Angreifer benötigt Berechtigungen, die grundlegende Benutzerfunktionen bereitstellen, die normalerweise nur Einstellungen und Dateien eines Benutzers betreffen."
+        },
+        "H": {
+          "name": "Hoch",
+          "description": "Der Angreifer benötigt Berechtigungen, die erhebliche (z. B. administrative) Kontrolle über die verwundbare Komponente ermöglichen."
+        }
+      }
+    },
+    "UI": {
+      "name": "Benutzerinteraktion",
+      "description": "Diese Metrik erfasst die Anforderung, dass ein menschlicher Benutzer, außer dem Angreifer, an der erfolgreichen Kompromittierung der verwundbaren Komponente teilnimmt.",
+      "values": {
+        "N": {
+          "name": "Keine",
+          "description": "Das verwundbare System kann ohne Interaktion eines Benutzers ausgenutzt werden."
+        },
+        "R": {
+          "name": "Erforderlich",
+          "description": "Eine erfolgreiche Ausnutzung dieser Schwachstelle erfordert, dass ein Benutzer eine Aktion ausführt. Beispiel: Anklicken eines Links, Öffnen einer Datei."
+        },
+        "P": {
+          "name": "Passiv",
+          "description": "Erfordert passive Interaktion, wie das Besuchen einer Webseite mit bösartigem Inhalt (CVSS 4.0)."
+        },
+        "A": {
+          "name": "Aktiv",
+          "description": "Erfordert aktive Interaktion, wie das Importieren einer Datei oder Bestätigen einer Sicherheitswarnung (CVSS 4.0)."
+        }
+      }
+    },
+    "S": {
+      "name": "Geltungsbereich",
+      "description": "Der Geltungsbereich identifiziert, ob die Schwachstelle Ressourcen beeinträchtigen kann, die über die vom Autorisierungskontext der verwundbaren Komponente beabsichtigten Berechtigungen hinausgehen.",
+      "values": {
+        "U": {
+          "name": "Unverändert",
+          "description": "Eine ausgenutzte Schwachstelle kann nur Ressourcen beeinträchtigen, die von derselben Sicherheitsbehörde verwaltet werden. Die verwundbare Komponente und die betroffene Komponente sind identisch."
+        },
+        "C": {
+          "name": "Geändert",
+          "description": "Eine ausgenutzte Schwachstelle kann Ressourcen beeinträchtigen, die über die von der verwundbaren Komponente beabsichtigten Autorisierungsberechtigungen hinausgehen."
+        }
+      }
+    },
+    "C": {
+      "name": "Auswirkung auf Vertraulichkeit",
+      "description": "Diese Metrik misst die Auswirkung auf die Vertraulichkeit der von einer Softwarekomponente verwalteten Informationsressourcen aufgrund einer erfolgreich ausgenutzten Schwachstelle.",
+      "values": {
+        "H": {
+          "name": "Hoch",
+          "description": "Es gibt einen totalen Verlust der Vertraulichkeit, wodurch alle Ressourcen innerhalb der betroffenen Komponente dem Angreifer offengelegt werden."
+        },
+        "L": {
+          "name": "Niedrig",
+          "description": "Zugriff auf einige eingeschränkte Informationen wird erlangt, aber der Angreifer hat keine Kontrolle darüber, welche Informationen erlangt werden."
+        },
+        "N": {
+          "name": "Keine",
+          "description": "Es gibt keinen Verlust der Vertraulichkeit innerhalb der betroffenen Komponente."
+        }
+      }
+    },
+    "I": {
+      "name": "Auswirkung auf Integrität",
+      "description": "Diese Metrik misst die Auswirkung auf die Integrität einer erfolgreich ausgenutzten Schwachstelle.",
+      "values": {
+        "H": {
+          "name": "Hoch",
+          "description": "Es gibt einen totalen Verlust der Integrität oder einen vollständigen Verlust des Schutzes. Der Angreifer kann alle von der betroffenen Komponente geschützten Dateien ändern."
+        },
+        "L": {
+          "name": "Niedrig",
+          "description": "Modifikation von Daten ist möglich, aber der Angreifer hat keine Kontrolle über die Konsequenz einer Modifikation."
+        },
+        "N": {
+          "name": "Keine",
+          "description": "Es gibt keinen Verlust der Integrität innerhalb der betroffenen Komponente."
+        }
+      }
+    },
+    "A": {
+      "name": "Auswirkung auf Verfügbarkeit",
+      "description": "Diese Metrik misst die Auswirkung auf die Verfügbarkeit der betroffenen Komponente, die sich aus einer erfolgreich ausgenutzten Schwachstelle ergibt.",
+      "values": {
+        "H": {
+          "name": "Hoch",
+          "description": "Es gibt einen totalen Verlust der Verfügbarkeit, was dazu führt, dass der Angreifer den Zugriff auf Ressourcen in der betroffenen Komponente vollständig verweigern kann."
+        },
+        "L": {
+          "name": "Niedrig",
+          "description": "Es gibt reduzierte Leistung oder Unterbrechungen der Ressourcenverfügbarkeit."
+        },
+        "N": {
+          "name": "Keine",
+          "description": "Es gibt keine Auswirkung auf die Verfügbarkeit innerhalb der betroffenen Komponente."
+        }
+      }
+    },
+    "AT": {
+      "name": "Angriffsanforderungen",
+      "description": "Diese Metrik erfasst die Voraussetzungen für Bereitstellung und Ausführung oder Variablen des verwundbaren Systems, die den Angriff ermöglichen (CVSS 4.0).",
+      "values": {
+        "N": {
+          "name": "Keine",
+          "description": "Es gibt keine spezifischen Bereitstellungs- oder Ausführungsbedingungen, die für das Gelingen des Angriffs erforderlich sind."
+        },
+        "P": {
+          "name": "Vorhanden",
+          "description": "Der Angriff hängt von spezifischen Bereitstellungs- oder Ausführungsbedingungen ab, wie dem Gewinnen einer Race Condition oder Netzwerkinjektion (MITM)."
+        }
+      }
+    },
+    "VC": {
+      "name": "Vertraulichkeit des verwundbaren Systems",
+      "description": "Mißt die Auswirkung auf die Vertraulichkeit des verwundbaren Systems (CVSS 4.0).",
+      "values": {
+        "H": { "name": "Hoch", "description": "Totale oder sensible Informationspreisgabe." },
+        "L": { "name": "Niedrig", "description": "Begrenzte Informationspreisgabe." },
+        "N": { "name": "Keine", "description": "Keine Informationspreisgabe." }
+      }
+    },
+    "VI": {
+      "name": "Integrität des verwundbaren Systems",
+      "description": "Mißt die Auswirkung auf die Integrität des verwundbaren Systems (CVSS 4.0).",
+      "values": {
+        "H": { "name": "Hoch", "description": "Beliebige Dateimodifikation oder schwerwiegende Manipulation." },
+        "L": { "name": "Niedrig", "description": "Begrenzte Datenmodifikation." },
+        "N": { "name": "Keine", "description": "Keine Modifikation." }
+      }
+    },
+    "VA": {
+      "name": "Verfügbarkeit des verwundbaren Systems",
+      "description": "Mißt die Auswirkung auf die Verfügbarkeit des verwundbaren Systems (CVSS 4.0).",
+      "values": {
+        "H": { "name": "Hoch", "description": "Vollständige Dienstverweigerung." },
+        "L": { "name": "Niedrig", "description": "Reduzierte Leistung oder intermittierende Unterbrechung." },
+        "N": { "name": "Keine", "description": "Keine Auswirkung." }
+      }
+    },
+    "SC": {
+      "name": "Vertraulichkeit nachfolgender Systeme",
+      "description": "Mißt die Auswirkung auf die Vertraulichkeit nachfolgender Systeme, ersetzt Scope in CVSS 3.x (CVSS 4.0).",
+      "values": {
+        "H": { "name": "Hoch", "description": "Sensible Informationen an nachfolgende Systeme preisgegeben." },
+        "L": { "name": "Niedrig", "description": "Begrenzte Informationen an nachfolgende Systeme preisgegeben." },
+        "N": { "name": "Keine", "description": "Keine Auswirkung." }
+      }
+    },
+    "SI": {
+      "name": "Integrität nachfolgender Systeme",
+      "description": "Mißt die Auswirkung auf die Integrität nachfolgender Systeme (CVSS 4.0).",
+      "values": {
+        "H": { "name": "Hoch", "description": "Vollständiger Integritätsverlust in nachfolgenden Systemen." },
+        "L": { "name": "Niedrig", "description": "Begrenzte Integritätsauswirkung." },
+        "N": { "name": "Keine", "description": "Keine Auswirkung." }
+      }
+    },
+    "SA": {
+      "name": "Verfügbarkeit nachfolgender Systeme",
+      "description": "Mißt die Auswirkung auf die Verfügbarkeit nachfolgender Systeme (CVSS 4.0).",
+      "values": {
+        "H": { "name": "Hoch", "description": "Vollständige Dienstverweigerung in nachfolgenden Systemen." },
+        "L": { "name": "Niedrig", "description": "Reduzierte Leistung." },
+        "N": { "name": "Keine", "description": "Keine Auswirkung." }
+      }
+    },
+    "E": {
+      "name": "Reife des Exploit-Codes",
+      "description": "Diese Metrik misst die Wahrscheinlichkeit, dass die Schwachstelle angegriffen wird, basierend auf dem aktuellen Stand der Exploit-Techniken, der Verfügbarkeit von Exploit-Code oder der aktiven Nutzung 'in the wild'.",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Ändert den Score nicht, verwendet Standardwert." },
+        "H": { "name": "Hoch", "description": "Es existiert funktionaler autonomer Code oder es ist kein Exploit erforderlich. Die Exploit-Entwicklung hat das Niveau zuverlässiger, weit verbreiteter, einfach zu bedienender automatisierter Tools erreicht." },
+        "F": { "name": "Funktional", "description": "Funktionaler Exploit-Code ist verfügbar. Der Code funktioniert in den meisten Situationen, in denen die Schwachstelle existiert." },
+        "P": { "name": "Proof-of-Concept", "description": "Proof-of-Concept-Exploit-Code ist verfügbar, oder eine Angriffsdemonstration ist für die meisten Systeme nicht praktikabel." },
+        "U": { "name": "Unbewiesen", "description": "Es ist kein Exploit-Code verfügbar, oder ein Exploit ist theoretisch." },
+        "A": { "name": "Angegriffen", "description": "Angriffe wurden gemeldet oder Exploit-Tools sind öffentlich verfügbar (CVSS 4.0)." }
+      }
+    },
+    "RL": {
+      "name": "Behebungsstufe",
+      "description": "Diese Metrik beschreibt die verfügbare Behebungsstufe für die Schwachstelle.",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Ändert den Score nicht." },
+        "U": { "name": "Nicht verfügbar", "description": "Es gibt entweder keine verfügbare Lösung oder es ist unmöglich, sie anzuwenden." },
+        "W": { "name": "Workaround", "description": "Es ist eine inoffizielle, nicht vom Anbieter stammende Lösung verfügbar." },
+        "T": { "name": "Temporäre Korrektur", "description": "Es ist eine offizielle, aber temporäre Korrektur verfügbar." },
+        "O": { "name": "Offizielle Korrektur", "description": "Eine vollständige Anbieterlösung ist verfügbar." }
+      }
+    },
+    "RC": {
+      "name": "Berichtskonfidenz",
+      "description": "Diese Metrik misst das Vertrauen in die Existenz der Schwachstelle und die Glaubwürdigkeit der bekannten technischen Details.",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Ändert den Score nicht." },
+        "C": { "name": "Bestätigt", "description": "Es existieren detaillierte Berichte oder eine funktionale Reproduktion ist möglich." },
+        "R": { "name": "Angemessen", "description": "Bedeutende Details wurden veröffentlicht, aber Forscher haben kein volles Vertrauen in die Ursache." },
+        "U": { "name": "Unbekannt", "description": "Es gibt Berichte über Auswirkungen, die auf eine Schwachstelle hindeuten. Die Ursache ist unbekannt." }
+      }
+    },
+    "CR": {
+      "name": "Vertraulichkeitsanforderung",
+      "description": "Diese Metrik ermöglicht es dem Analysten, die Bedeutung der Vertraulichkeit der Informationen für die Organisation anzugeben.",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Ändert den Score nicht." },
+        "H": { "name": "Hoch", "description": "Verlust der Vertraulichkeit hat wahrscheinlich katastrophale Auswirkungen auf die Organisation." },
+        "M": { "name": "Mittel", "description": "Verlust der Vertraulichkeit hat wahrscheinlich schwerwiegende Auswirkungen auf die Organisation." },
+        "L": { "name": "Niedrig", "description": "Verlust der Vertraulichkeit hat wahrscheinlich nur begrenzte Auswirkungen auf die Organisation." }
+      }
+    },
+    "IR": {
+      "name": "Integritätsanforderung",
+      "description": "Diese Metrik ermöglicht es dem Analysten, die Bedeutung der Integrität der Informationen für die Organisation anzugeben.",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Ändert den Score nicht." },
+        "H": { "name": "Hoch", "description": "Verlust der Integrität hat wahrscheinlich katastrophale Auswirkungen auf die Organisation." },
+        "M": { "name": "Mittel", "description": "Verlust der Integrität hat wahrscheinlich schwerwiegende Auswirkungen auf die Organisation." },
+        "L": { "name": "Niedrig", "description": "Verlust der Integrität hat wahrscheinlich nur begrenzte Auswirkungen auf die Organisation." }
+      }
+    },
+    "AR": {
+      "name": "Verfügbarkeitsanforderung",
+      "description": "Diese Metrik ermöglicht es dem Analysten, die Bedeutung der Verfügbarkeit der Informationen für die Organisation anzugeben.",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Ändert den Score nicht." },
+        "H": { "name": "Hoch", "description": "Verlust der Verfügbarkeit hat wahrscheinlich katastrophale Auswirkungen auf die Organisation." },
+        "M": { "name": "Mittel", "description": "Verlust der Verfügbarkeit hat wahrscheinlich schwerwiegende Auswirkungen auf die Organisation." },
+        "L": { "name": "Niedrig", "description": "Verlust der Verfügbarkeit hat wahrscheinlich nur begrenzte Auswirkungen auf die Organisation." }
+      }
+    },
+    "MAV": {
+      "name": "Modifizierter Angriffsvektor",
+      "description": "Ermöglicht das Überschreiben des Basis-Angriffsvektorwerts.",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Basis-AV-Wert verwenden." },
+        "N": { "name": "Netzwerk", "description": "Netzwerkangriff." },
+        "A": { "name": "Angrenzend", "description": "Angrenzender Netzwerkangriff." },
+        "L": { "name": "Lokal", "description": "Lokaler Angriff." },
+        "P": { "name": "Physisch", "description": "Physischer Angriff." }
+      }
+    },
+    "MAC": {
+      "name": "Modifizierte Angriffskomplexität",
+      "description": "Ermöglicht das Überschreiben des Basis-Angriffskomplexitätswerts.",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Basis-AC-Wert verwenden." },
+        "L": { "name": "Niedrig", "description": "Niedrige Komplexität." },
+        "H": { "name": "Hoch", "description": "Hohe Komplexität." }
+      }
+    },
+    "MAT": {
+      "name": "Modifizierte Angriffsanforderungen",
+      "description": "Ermöglicht das Überschreiben des Basis-Angriffsanforderungenwerts (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Basis-AT-Wert verwenden." },
+        "N": { "name": "Keine", "description": "Keine spezifischen Anforderungen." },
+        "P": { "name": "Vorhanden", "description": "Spezifische Bedingungen vorhanden." }
+      }
+    },
+    "MPR": {
+      "name": "Modifizierte erforderliche Berechtigungen",
+      "description": "Ermöglicht das Überschreiben des Basis-Berechtigungswerts.",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Basis-PR-Wert verwenden." },
+        "N": { "name": "Keine", "description": "Keine Berechtigungen erforderlich." },
+        "L": { "name": "Niedrig", "description": "Niedrige Berechtigungen." },
+        "H": { "name": "Hoch", "description": "Hohe Berechtigungen." }
+      }
+    },
+    "MUI": {
+      "name": "Modifizierte Benutzerinteraktion",
+      "description": "Ermöglicht das Überschreiben des Basis-Benutzerinteraktionswerts.",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Basis-UI-Wert verwenden." },
+        "N": { "name": "Keine", "description": "Keine Interaktion erforderlich." },
+        "R": { "name": "Erforderlich", "description": "Interaktion erforderlich." },
+        "P": { "name": "Passiv", "description": "Passive Interaktion." },
+        "A": { "name": "Aktiv", "description": "Aktive Interaktion." }
+      }
+    },
+    "MS": {
+      "name": "Modifizierter Geltungsbereich",
+      "description": "Ermöglicht das Überschreiben des Basis-Geltungsbereichwerts.",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Basis-S-Wert verwenden." },
+        "U": { "name": "Unverändert", "description": "Geltungsbereich unverändert." },
+        "C": { "name": "Geändert", "description": "Geltungsbereich geändert." }
+      }
+    },
+    "MC": {
+      "name": "Modifizierte Vertraulichkeit",
+      "description": "Ermöglicht das Überschreiben des Basis-Vertraulichkeitswerts.",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Basis-C-Wert verwenden." },
+        "H": { "name": "Hoch", "description": "Hohe Auswirkung." },
+        "L": { "name": "Niedrig", "description": "Niedrige Auswirkung." },
+        "N": { "name": "Keine", "description": "Keine Auswirkung." }
+      }
+    },
+    "MI": {
+      "name": "Modifizierte Integrität",
+      "description": "Ermöglicht das Überschreiben des Basis-Integritätswerts.",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Basis-I-Wert verwenden." },
+        "H": { "name": "Hoch", "description": "Hohe Auswirkung." },
+        "L": { "name": "Niedrig", "description": "Niedrige Auswirkung." },
+        "N": { "name": "Keine", "description": "Keine Auswirkung." }
+      }
+    },
+    "MA": {
+      "name": "Modifizierte Verfügbarkeit",
+      "description": "Ermöglicht das Überschreiben des Basis-Verfügbarkeitswerts.",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Basis-A-Wert verwenden." },
+        "H": { "name": "Hoch", "description": "Hohe Auswirkung." },
+        "L": { "name": "Niedrig", "description": "Niedrige Auswirkung." },
+        "N": { "name": "Keine", "description": "Keine Auswirkung." }
+      }
+    },
+    "MVC": {
+      "name": "Modifizierte Vertraulichkeit des verwundbaren Systems",
+      "description": "Ermöglicht das Überschreiben des Vertraulichkeitswerts des verwundbaren Systems (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Basis-VC-Wert verwenden." },
+        "H": { "name": "Hoch", "description": "Hohe Auswirkung." },
+        "L": { "name": "Niedrig", "description": "Niedrige Auswirkung." },
+        "N": { "name": "Keine", "description": "Keine Auswirkung." }
+      }
+    },
+    "MVI": {
+      "name": "Modifizierte Integrität des verwundbaren Systems",
+      "description": "Ermöglicht das Überschreiben des Integritätswerts des verwundbaren Systems (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Basis-VI-Wert verwenden." },
+        "H": { "name": "Hoch", "description": "Hohe Auswirkung." },
+        "L": { "name": "Niedrig", "description": "Niedrige Auswirkung." },
+        "N": { "name": "Keine", "description": "Keine Auswirkung." }
+      }
+    },
+    "MVA": {
+      "name": "Modifizierte Verfügbarkeit des verwundbaren Systems",
+      "description": "Ermöglicht das Überschreiben des Verfügbarkeitswerts des verwundbaren Systems (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Basis-VA-Wert verwenden." },
+        "H": { "name": "Hoch", "description": "Hohe Auswirkung." },
+        "L": { "name": "Niedrig", "description": "Niedrige Auswirkung." },
+        "N": { "name": "Keine", "description": "Keine Auswirkung." }
+      }
+    },
+    "MSC": {
+      "name": "Modifizierte Vertraulichkeit nachfolgender Systeme",
+      "description": "Ermöglicht das Überschreiben des Vertraulichkeitswerts nachfolgender Systeme (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Basis-SC-Wert verwenden." },
+        "H": { "name": "Hoch", "description": "Hohe Auswirkung." },
+        "L": { "name": "Niedrig", "description": "Niedrige Auswirkung." },
+        "N": { "name": "Keine", "description": "Keine Auswirkung." }
+      }
+    },
+    "MSI": {
+      "name": "Modifizierte Integrität nachfolgender Systeme",
+      "description": "Ermöglicht das Überschreiben des Integritätswerts nachfolgender Systeme (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Basis-SI-Wert verwenden." },
+        "H": { "name": "Hoch", "description": "Hohe Auswirkung." },
+        "L": { "name": "Niedrig", "description": "Niedrige Auswirkung." },
+        "N": { "name": "Keine", "description": "Keine Auswirkung." }
+      }
+    },
+    "MSA": {
+      "name": "Modifizierte Verfügbarkeit nachfolgender Systeme",
+      "description": "Ermöglicht das Überschreiben des Verfügbarkeitswerts nachfolgender Systeme (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Basis-SA-Wert verwenden." },
+        "H": { "name": "Hoch", "description": "Hohe Auswirkung." },
+        "L": { "name": "Niedrig", "description": "Niedrige Auswirkung." },
+        "N": { "name": "Keine", "description": "Keine Auswirkung." }
+      }
+    },
+    "SAF": {
+      "name": "Sicherheit",
+      "description": "Mißt die potenziellen Auswirkungen auf die menschliche Sicherheit, wenn die Schwachstelle ausgenutzt würde (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Nicht bewertet." },
+        "P": { "name": "Vorhanden", "description": "Kann zu Marginaler, Kritischer oder Katastrophaler Verletzung führen." },
+        "N": { "name": "Vernachlässigbar", "description": "Höchstens geringfügige Verletzung." }
+      }
+    },
+    "AU": {
+      "name": "Automatisierbar",
+      "description": "Mißt, ob die Schwachstelle automatisch ausgenutzt werden kann (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Nicht bewertet." },
+        "Y": { "name": "Ja", "description": "Kann vollständig automatisiert werden, wie Wurm-Schwachstellen." },
+        "N": { "name": "Nein", "description": "Kann nicht alle 4 Schritte der Kill-Chain automatisieren." }
+      }
+    },
+    "U": {
+      "name": "Anbieter-Dringlichkeit",
+      "description": "Die Bewertung des Anbieters zur Dringlichkeit der Schwachstelle (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Nicht bewertet." },
+        "Red": { "name": "Rot", "description": "Höchste Dringlichkeit." },
+        "Amber": { "name": "Bernstein", "description": "Mittlere Dringlichkeit." },
+        "Green": { "name": "Grün", "description": "Niedrigere Dringlichkeit." },
+        "Clear": { "name": "Klar", "description": "Keine Dringlichkeit, informativ." }
+      }
+    },
+    "R": {
+      "name": "Wiederherstellung",
+      "description": "Die Fähigkeit des Systems, sich von einem Angriff zu erholen (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Nicht bewertet." },
+        "A": { "name": "Automatisch", "description": "Service erholt sich automatisch." },
+        "U": { "name": "Benutzer", "description": "Erfordert manuelles Eingreifen des Benutzers zur Wiederherstellung." },
+        "I": { "name": "Unwiederbringlich", "description": "Kann nicht wiederhergestellt werden." }
+      }
+    },
+    "V": {
+      "name": "Wertdichte",
+      "description": "Die Wertdichte der betroffenen Ressourcen (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Nicht bewertet." },
+        "D": { "name": "Diffus", "description": "Begrenzte Ressourcen, wie ein einzelner E-Mail-Client." },
+        "C": { "name": "Konzentriert", "description": "Reichhaltige Ressourcen, wie ein zentraler E-Mail-Server." }
+      }
+    },
+    "RE": {
+      "name": "Aufwand für Schwachstellenreaktion",
+      "description": "Der erforderliche Aufwand zur Reaktion auf die Schwachstelle (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Nicht definiert", "description": "Nicht bewertet." },
+        "L": { "name": "Niedrig", "description": "Geringer Aufwand, wie Konfigurations-Workarounds." },
+        "M": { "name": "Mittel", "description": "Mittlerer Aufwand, wie einfache Remote-Updates." },
+        "H": { "name": "Hoch", "description": "Hoher Aufwand, wie physischer Austausch oder BIOS-Updates." }
+      }
+    }
+  },
+  "report": {
+    "title": "CVSS Bewertungsbericht",
+    "generated": "Erstellt",
+    "version": "CVSS Version",
+    "metrics": "Ausgewählte Metriken",
+    "metric": "Metrik",
+    "value": "Wert",
+    "description": "Beschreibung"
+  }
+}

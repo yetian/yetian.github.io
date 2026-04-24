@@ -1,0 +1,532 @@
+{
+  "app": {
+    "title": "CVSS Calculator",
+    "subtitle": "Common Vulnerability Scoring System"
+  },
+  "ui": {
+    "version": "Version",
+    "language": "Language",
+    "reset": "Reset",
+    "exportPDF": "Export PDF",
+    "exportPNG": "Export PNG",
+    "metricSelection": "Metric Selection",
+    "scoreSummary": "Score Summary",
+    "vectorString": "Vector String",
+    "required": "Required",
+    "optional": "Optional",
+    "selectValue": "Select"
+  },
+  "scores": {
+    "baseScore": "Base Score",
+    "temporalScore": "Temporal Score",
+    "environmentalScore": "Environmental Score",
+    "severity": "Severity"
+  },
+  "severity": {
+    "none": "None",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "critical": "Critical"
+  },
+  "groups": {
+    "base": "Base Metrics",
+    "temporal": "Temporal Metrics",
+    "threat": "Threat Metrics",
+    "environmental": "Environmental Metrics",
+    "supplemental": "Supplemental Metrics"
+  },
+  "metrics": {
+    "AV": {
+      "name": "Attack Vector",
+      "description": "This metric reflects the context by which vulnerability exploitation is possible. The lower the value, the more an attacker must be close to the target component.",
+      "values": {
+        "N": {
+          "name": "Network",
+          "description": "The vulnerable component is bound to the network stack and the attacker's path is through OSI layer 3. Example: sending crafted packets over the internet."
+        },
+        "A": {
+          "name": "Adjacent",
+          "description": "The attack is limited to the same shared physical or logical network and cannot be performed across OSI layer 3 boundaries. Example: same LAN, Bluetooth, local wireless."
+        },
+        "L": {
+          "name": "Local",
+          "description": "The vulnerable component is not bound to the network stack, and the attacker's path is via read/write/execute capabilities. Example: requires user to execute a malicious file."
+        },
+        "P": {
+          "name": "Physical",
+          "description": "The attack requires the attacker to physically touch or manipulate the vulnerable component. Example: inserting a USB device, physical console access."
+        }
+      }
+    },
+    "AC": {
+      "name": "Attack Complexity",
+      "description": "This metric describes the conditions beyond the attacker's control that must exist in order to exploit the vulnerability. Lower complexity means easier exploitation.",
+      "values": {
+        "L": {
+          "name": "Low",
+          "description": "Specialized access conditions or extenuating circumstances do not exist. An attacker can expect repeatable success against the vulnerable component."
+        },
+        "H": {
+          "name": "High",
+          "description": "A successful attack depends on conditions beyond the attacker's control. Example: specific configuration, winning a race condition."
+        }
+      }
+    },
+    "PR": {
+      "name": "Privileges Required",
+      "description": "This metric describes the level of privileges an attacker must possess before successfully exploiting the vulnerability.",
+      "values": {
+        "N": {
+          "name": "None",
+          "description": "The attacker is unauthorized prior to attack, and therefore does not require any access to settings or information of the vulnerable system."
+        },
+        "L": {
+          "name": "Low",
+          "description": "The attacker requires privileges that provide basic user capabilities that could normally affect only settings and files owned by a user."
+        },
+        "H": {
+          "name": "High",
+          "description": "The attacker requires privileges that provide significant (e.g., administrative) control over the vulnerable component allowing access to component-wide settings and files."
+        }
+      }
+    },
+    "UI": {
+      "name": "User Interaction",
+      "description": "This metric captures the requirement for a human user, other than the attacker, to participate in the successful compromise of the vulnerable component.",
+      "values": {
+        "N": {
+          "name": "None",
+          "description": "The vulnerable system can be exploited without interaction from any user."
+        },
+        "R": {
+          "name": "Required",
+          "description": "Successful exploitation of this vulnerability requires a user to take some action before the vulnerability can be exploited. Example: clicking a link, opening a file."
+        },
+        "P": {
+          "name": "Passive",
+          "description": "Requires passive interaction, such as visiting a web page containing malicious content (CVSS 4.0)."
+        },
+        "A": {
+          "name": "Active",
+          "description": "Requires active interaction, such as importing a file or confirming a security warning (CVSS 4.0)."
+        }
+      }
+    },
+    "S": {
+      "name": "Scope",
+      "description": "Scope identifies whether the vulnerability can affect resources beyond the authorization privileges intended by the vulnerable component.",
+      "values": {
+        "U": {
+          "name": "Unchanged",
+          "description": "An exploited vulnerability can only affect resources managed by the same security authority. The vulnerable component and impacted component are the same."
+        },
+        "C": {
+          "name": "Changed",
+          "description": "An exploited vulnerability can affect resources beyond the authorization privileges intended by the vulnerable component. The vulnerable component and impacted component are different."
+        }
+      }
+    },
+    "C": {
+      "name": "Confidentiality Impact",
+      "description": "This metric measures the impact to the confidentiality of the information resources managed by a software component due to a successfully exploited vulnerability.",
+      "values": {
+        "H": {
+          "name": "High",
+          "description": "There is total loss of confidentiality, resulting in all resources within the impacted component being divulged to the attacker."
+        },
+        "L": {
+          "name": "Low",
+          "description": "Access to some restricted information is obtained, but the attacker does not have control over what information is obtained."
+        },
+        "N": {
+          "name": "None",
+          "description": "There is no loss of confidentiality within the impacted component."
+        }
+      }
+    },
+    "I": {
+      "name": "Integrity Impact",
+      "description": "This metric measures the impact to integrity of a successfully exploited vulnerability.",
+      "values": {
+        "H": {
+          "name": "High",
+          "description": "There is a total loss of integrity, or a complete loss of protection. The attacker can modify any/all files protected by the impacted component."
+        },
+        "L": {
+          "name": "Low",
+          "description": "Modification of data is possible, but the attacker does not have control over the consequence of a modification."
+        },
+        "N": {
+          "name": "None",
+          "description": "There is no loss of integrity within the impacted component."
+        }
+      }
+    },
+    "A": {
+      "name": "Availability Impact",
+      "description": "This metric measures the impact to the availability of the impacted component resulting from a successfully exploited vulnerability.",
+      "values": {
+        "H": {
+          "name": "High",
+          "description": "There is total loss of availability, resulting in the attacker being able to fully deny access to resources in the impacted component."
+        },
+        "L": {
+          "name": "Low",
+          "description": "There is reduced performance or interruptions in resource availability."
+        },
+        "N": {
+          "name": "None",
+          "description": "There is no impact to availability within the impacted component."
+        }
+      }
+    },
+    "AT": {
+      "name": "Attack Requirements",
+      "description": "This metric captures the prerequisite deployment and execution conditions or variables of the vulnerable system that enable the attack (CVSS 4.0).",
+      "values": {
+        "N": {
+          "name": "None",
+          "description": "There are no specific deployment or execution conditions required for the attack to succeed."
+        },
+        "P": {
+          "name": "Present",
+          "description": "The attack relies on specific deployment or execution conditions, such as winning a race condition or network injection (MITM)."
+        }
+      }
+    },
+    "VC": {
+      "name": "Vulnerable System Confidentiality",
+      "description": "Measures the impact to the confidentiality of the vulnerable system (CVSS 4.0).",
+      "values": {
+        "H": { "name": "High", "description": "Total or sensitive information disclosure." },
+        "L": { "name": "Low", "description": "Limited information disclosure." },
+        "N": { "name": "None", "description": "No information disclosure." }
+      }
+    },
+    "VI": {
+      "name": "Vulnerable System Integrity",
+      "description": "Measures the impact to the integrity of the vulnerable system (CVSS 4.0).",
+      "values": {
+        "H": { "name": "High", "description": "Arbitrary file modification or severe tampering." },
+        "L": { "name": "Low", "description": "Limited data modification." },
+        "N": { "name": "None", "description": "No modification." }
+      }
+    },
+    "VA": {
+      "name": "Vulnerable System Availability",
+      "description": "Measures the impact to the availability of the vulnerable system (CVSS 4.0).",
+      "values": {
+        "H": { "name": "High", "description": "Total denial of service." },
+        "L": { "name": "Low", "description": "Reduced performance or intermittent disruption." },
+        "N": { "name": "None", "description": "No impact." }
+      }
+    },
+    "SC": {
+      "name": "Subsequent System Confidentiality",
+      "description": "Measures the impact to the confidentiality of subsequent systems, replacing Scope in CVSS 3.x (CVSS 4.0).",
+      "values": {
+        "H": { "name": "High", "description": "Sensitive information disclosed to subsequent systems." },
+        "L": { "name": "Low", "description": "Limited information disclosed to subsequent systems." },
+        "N": { "name": "None", "description": "No impact." }
+      }
+    },
+    "SI": {
+      "name": "Subsequent System Integrity",
+      "description": "Measures the impact to the integrity of subsequent systems (CVSS 4.0).",
+      "values": {
+        "H": { "name": "High", "description": "Complete loss of integrity in subsequent systems." },
+        "L": { "name": "Low", "description": "Limited integrity impact." },
+        "N": { "name": "None", "description": "No impact." }
+      }
+    },
+    "SA": {
+      "name": "Subsequent System Availability",
+      "description": "Measures the impact to the availability of subsequent systems (CVSS 4.0).",
+      "values": {
+        "H": { "name": "High", "description": "Total denial of service in subsequent systems." },
+        "L": { "name": "Low", "description": "Reduced performance." },
+        "N": { "name": "None", "description": "No impact." }
+      }
+    },
+    "E": {
+      "name": "Exploit Code Maturity",
+      "description": "This metric measures the likelihood of the vulnerability being attacked, and is typically based on the current state of exploit techniques, exploit code availability, or active, 'in-the-wild' use.",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Does not change the score, uses default value." },
+        "H": { "name": "High", "description": "Functional autonomous code exists, or no exploit is required. Exploit development has reached the level of reliable, widely-available, easy-to-use automated tools." },
+        "F": { "name": "Functional", "description": "Functional exploit code is available. The code works in most situations where the vulnerability exists." },
+        "P": { "name": "Proof-of-Concept", "description": "Proof-of-concept exploit code is available, or an attack demonstration is not practical for most systems." },
+        "U": { "name": "Unproven", "description": "No exploit code is available, or an exploit is theoretical." },
+        "A": { "name": "Attacked", "description": "Attacks have been reported or exploit tools are publicly available (CVSS 4.0)." }
+      }
+    },
+    "RL": {
+      "name": "Remediation Level",
+      "description": "This metric describes the level of remediation available for the vulnerability.",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Does not change the score." },
+        "U": { "name": "Unavailable", "description": "There is either no solution available or it is impossible to apply." },
+        "W": { "name": "Workaround", "description": "There is an unofficial, non-vendor solution available. This includes situations where the community has developed a solution." },
+        "T": { "name": "Temporary Fix", "description": "There is an official but temporary fix available. This includes instances where the vendor issues a temporary hotfix or patch." },
+        "O": { "name": "Official Fix", "description": "A complete vendor solution is available. The vendor has issued an official patch, or the vulnerability is fixed in a newer version." }
+      }
+    },
+    "RC": {
+      "name": "Report Confidence",
+      "description": "This metric measures the degree of confidence in the existence of the vulnerability and the credibility of the known technical details.",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Does not change the score." },
+        "C": { "name": "Confirmed", "description": "Detailed reports exist, or functional reproduction is possible. The author or vendor of the affected code has confirmed the presence of the vulnerability." },
+        "R": { "name": "Reasonable", "description": "Significant details are published, but researchers either do not have full confidence in the root cause, or do not have access to source code." },
+        "U": { "name": "Unknown", "description": "There are reports of impacts that indicate a vulnerability is present. The reports indicate that the cause of the vulnerability is unknown." }
+      }
+    },
+    "CR": {
+      "name": "Confidentiality Requirement",
+      "description": "This metric enables the analyst to specify the importance of the confidentiality of the information to the organization.",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Does not change the score." },
+        "H": { "name": "High", "description": "Loss of confidentiality is likely to have a catastrophic adverse effect on the organization." },
+        "M": { "name": "Medium", "description": "Loss of confidentiality is likely to have a serious adverse effect on the organization." },
+        "L": { "name": "Low", "description": "Loss of confidentiality is likely to have only a limited adverse effect on the organization." }
+      }
+    },
+    "IR": {
+      "name": "Integrity Requirement",
+      "description": "This metric enables the analyst to specify the importance of the integrity of the information to the organization.",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Does not change the score." },
+        "H": { "name": "High", "description": "Loss of integrity is likely to have a catastrophic adverse effect on the organization." },
+        "M": { "name": "Medium", "description": "Loss of integrity is likely to have a serious adverse effect on the organization." },
+        "L": { "name": "Low", "description": "Loss of integrity is likely to have only a limited adverse effect on the organization." }
+      }
+    },
+    "AR": {
+      "name": "Availability Requirement",
+      "description": "This metric enables the analyst to specify the importance of the availability of the information to the organization.",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Does not change the score." },
+        "H": { "name": "High", "description": "Loss of availability is likely to have a catastrophic adverse effect on the organization." },
+        "M": { "name": "Medium", "description": "Loss of availability is likely to have a serious adverse effect on the organization." },
+        "L": { "name": "Low", "description": "Loss of availability is likely to have only a limited adverse effect on the organization." }
+      }
+    },
+    "MAV": {
+      "name": "Modified Attack Vector",
+      "description": "Allows overriding the base Attack Vector value.",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Use base AV value." },
+        "N": { "name": "Network", "description": "Network attack." },
+        "A": { "name": "Adjacent", "description": "Adjacent network attack." },
+        "L": { "name": "Local", "description": "Local attack." },
+        "P": { "name": "Physical", "description": "Physical attack." }
+      }
+    },
+    "MAC": {
+      "name": "Modified Attack Complexity",
+      "description": "Allows overriding the base Attack Complexity value.",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Use base AC value." },
+        "L": { "name": "Low", "description": "Low complexity." },
+        "H": { "name": "High", "description": "High complexity." }
+      }
+    },
+    "MAT": {
+      "name": "Modified Attack Requirements",
+      "description": "Allows overriding the base Attack Requirements value (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Use base AT value." },
+        "N": { "name": "None", "description": "No specific requirements." },
+        "P": { "name": "Present", "description": "Specific conditions present." }
+      }
+    },
+    "MPR": {
+      "name": "Modified Privileges Required",
+      "description": "Allows overriding the base Privileges Required value.",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Use base PR value." },
+        "N": { "name": "None", "description": "No privileges required." },
+        "L": { "name": "Low", "description": "Low privileges." },
+        "H": { "name": "High", "description": "High privileges." }
+      }
+    },
+    "MUI": {
+      "name": "Modified User Interaction",
+      "description": "Allows overriding the base User Interaction value.",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Use base UI value." },
+        "N": { "name": "None", "description": "No interaction required." },
+        "R": { "name": "Required", "description": "Interaction required." },
+        "P": { "name": "Passive", "description": "Passive interaction." },
+        "A": { "name": "Active", "description": "Active interaction." }
+      }
+    },
+    "MS": {
+      "name": "Modified Scope",
+      "description": "Allows overriding the base Scope value.",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Use base S value." },
+        "U": { "name": "Unchanged", "description": "Scope unchanged." },
+        "C": { "name": "Changed", "description": "Scope changed." }
+      }
+    },
+    "MC": {
+      "name": "Modified Confidentiality",
+      "description": "Allows overriding the base Confidentiality Impact value.",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Use base C value." },
+        "H": { "name": "High", "description": "High impact." },
+        "L": { "name": "Low", "description": "Low impact." },
+        "N": { "name": "None", "description": "No impact." }
+      }
+    },
+    "MI": {
+      "name": "Modified Integrity",
+      "description": "Allows overriding the base Integrity Impact value.",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Use base I value." },
+        "H": { "name": "High", "description": "High impact." },
+        "L": { "name": "Low", "description": "Low impact." },
+        "N": { "name": "None", "description": "No impact." }
+      }
+    },
+    "MA": {
+      "name": "Modified Availability",
+      "description": "Allows overriding the base Availability Impact value.",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Use base A value." },
+        "H": { "name": "High", "description": "High impact." },
+        "L": { "name": "Low", "description": "Low impact." },
+        "N": { "name": "None", "description": "No impact." }
+      }
+    },
+    "MVC": {
+      "name": "Modified Vulnerable System Confidentiality",
+      "description": "Allows overriding the Vulnerable System Confidentiality value (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Use base VC value." },
+        "H": { "name": "High", "description": "High impact." },
+        "L": { "name": "Low", "description": "Low impact." },
+        "N": { "name": "None", "description": "No impact." }
+      }
+    },
+    "MVI": {
+      "name": "Modified Vulnerable System Integrity",
+      "description": "Allows overriding the Vulnerable System Integrity value (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Use base VI value." },
+        "H": { "name": "High", "description": "High impact." },
+        "L": { "name": "Low", "description": "Low impact." },
+        "N": { "name": "None", "description": "No impact." }
+      }
+    },
+    "MVA": {
+      "name": "Modified Vulnerable System Availability",
+      "description": "Allows overriding the Vulnerable System Availability value (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Use base VA value." },
+        "H": { "name": "High", "description": "High impact." },
+        "L": { "name": "Low", "description": "Low impact." },
+        "N": { "name": "None", "description": "No impact." }
+      }
+    },
+    "MSC": {
+      "name": "Modified Subsequent System Confidentiality",
+      "description": "Allows overriding the Subsequent System Confidentiality value (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Use base SC value." },
+        "H": { "name": "High", "description": "High impact." },
+        "L": { "name": "Low", "description": "Low impact." },
+        "N": { "name": "None", "description": "No impact." }
+      }
+    },
+    "MSI": {
+      "name": "Modified Subsequent System Integrity",
+      "description": "Allows overriding the Subsequent System Integrity value (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Use base SI value." },
+        "H": { "name": "High", "description": "High impact." },
+        "L": { "name": "Low", "description": "Low impact." },
+        "N": { "name": "None", "description": "No impact." }
+      }
+    },
+    "MSA": {
+      "name": "Modified Subsequent System Availability",
+      "description": "Allows overriding the Subsequent System Availability value (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Use base SA value." },
+        "H": { "name": "High", "description": "High impact." },
+        "L": { "name": "Low", "description": "Low impact." },
+        "N": { "name": "None", "description": "No impact." }
+      }
+    },
+    "SAF": {
+      "name": "Safety",
+      "description": "Measures the potential impact to human safety if the vulnerability were to be exploited (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Not assessed." },
+        "P": { "name": "Present", "description": "May result in Marginal, Critical, or Catastrophic harm." },
+        "N": { "name": "Negligible", "description": "At most minor harm." }
+      }
+    },
+    "AU": {
+      "name": "Automatable",
+      "description": "Measures whether the vulnerability can be exploited automatically (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Not assessed." },
+        "Y": { "name": "Yes", "description": "Can be fully automated, such as worm-type vulnerabilities." },
+        "N": { "name": "No", "description": "Cannot automate all 4 steps of the kill chain." }
+      }
+    },
+    "U": {
+      "name": "Provider Urgency",
+      "description": "The vendor's assessment of the urgency of the vulnerability (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Not assessed." },
+        "Red": { "name": "Red", "description": "Highest urgency." },
+        "Amber": { "name": "Amber", "description": "Medium urgency." },
+        "Green": { "name": "Green", "description": "Lower urgency." },
+        "Clear": { "name": "Clear", "description": "No urgency, informational." }
+      }
+    },
+    "R": {
+      "name": "Recovery",
+      "description": "The system's ability to recover from an attack (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Not assessed." },
+        "A": { "name": "Automatic", "description": "Service automatically recovers." },
+        "U": { "name": "User", "description": "Requires user manual intervention to recover." },
+        "I": { "name": "Irrecoverable", "description": "Cannot recover." }
+      }
+    },
+    "V": {
+      "name": "Value Density",
+      "description": "The value density of the affected resources (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Not assessed." },
+        "D": { "name": "Diffuse", "description": "Limited resources, such as a single email client." },
+        "C": { "name": "Concentrated", "description": "Rich resources, such as a central email server." }
+      }
+    },
+    "RE": {
+      "name": "Vulnerability Response Effort",
+      "description": "The effort required to respond to the vulnerability (CVSS 4.0).",
+      "values": {
+        "X": { "name": "Not Defined", "description": "Not assessed." },
+        "L": { "name": "Low", "description": "Low effort, such as configuration workarounds." },
+        "M": { "name": "Moderate", "description": "Moderate effort, such as simple remote updates." },
+        "H": { "name": "High", "description": "High effort, such as physical replacement or BIOS updates." }
+      }
+    }
+  },
+  "report": {
+    "title": "CVSS Assessment Report",
+    "generated": "Generated",
+    "version": "CVSS Version",
+    "metrics": "Selected Metrics",
+    "metric": "Metric",
+    "value": "Value",
+    "description": "Description"
+  }
+}

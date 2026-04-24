@@ -1,0 +1,810 @@
+{
+  "versions": {
+    "3.0": {
+      "metrics": {
+        "base": {
+          "AV": {
+            "name": "Attack Vector",
+            "required": true,
+            "values": {
+              "N": { "name": "Network", "weight": 0.85 },
+              "A": { "name": "Adjacent", "weight": 0.62 },
+              "L": { "name": "Local", "weight": 0.55 },
+              "P": { "name": "Physical", "weight": 0.2 }
+            }
+          },
+          "AC": {
+            "name": "Attack Complexity",
+            "required": true,
+            "values": {
+              "L": { "name": "Low", "weight": 0.77 },
+              "H": { "name": "High", "weight": 0.44 }
+            }
+          },
+          "PR": {
+            "name": "Privileges Required",
+            "required": true,
+            "values": {
+              "N": { "name": "None", "weight": 0.85 },
+              "L": { "name": "Low", "weightUnchanged": 0.62, "weightChanged": 0.68 },
+              "H": { "name": "High", "weightUnchanged": 0.27, "weightChanged": 0.50 }
+            }
+          },
+          "UI": {
+            "name": "User Interaction",
+            "required": true,
+            "values": {
+              "N": { "name": "None", "weight": 0.85 },
+              "R": { "name": "Required", "weight": 0.62 }
+            }
+          },
+          "S": {
+            "name": "Scope",
+            "required": true,
+            "values": {
+              "U": { "name": "Unchanged" },
+              "C": { "name": "Changed" }
+            }
+          },
+          "C": {
+            "name": "Confidentiality Impact",
+            "required": true,
+            "values": {
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          },
+          "I": {
+            "name": "Integrity Impact",
+            "required": true,
+            "values": {
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          },
+          "A": {
+            "name": "Availability Impact",
+            "required": true,
+            "values": {
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          }
+        },
+        "temporal": {
+          "E": {
+            "name": "Exploit Code Maturity",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined", "weight": 1 },
+              "H": { "name": "High", "weight": 1 },
+              "F": { "name": "Functional", "weight": 0.97 },
+              "P": { "name": "Proof-of-Concept", "weight": 0.94 },
+              "U": { "name": "Unproven", "weight": 0.91 }
+            }
+          },
+          "RL": {
+            "name": "Remediation Level",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined", "weight": 1 },
+              "U": { "name": "Unavailable", "weight": 1 },
+              "W": { "name": "Workaround", "weight": 0.97 },
+              "T": { "name": "Temporary Fix", "weight": 0.96 },
+              "O": { "name": "Official Fix", "weight": 0.95 }
+            }
+          },
+          "RC": {
+            "name": "Report Confidence",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined", "weight": 1 },
+              "C": { "name": "Confirmed", "weight": 1 },
+              "R": { "name": "Reasonable", "weight": 0.96 },
+              "U": { "name": "Unknown", "weight": 0.92 }
+            }
+          }
+        },
+        "environmental": {
+          "CR": {
+            "name": "Confidentiality Requirement",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined", "weight": 1 },
+              "H": { "name": "High", "weight": 1.5 },
+              "M": { "name": "Medium", "weight": 1 },
+              "L": { "name": "Low", "weight": 0.5 }
+            }
+          },
+          "IR": {
+            "name": "Integrity Requirement",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined", "weight": 1 },
+              "H": { "name": "High", "weight": 1.5 },
+              "M": { "name": "Medium", "weight": 1 },
+              "L": { "name": "Low", "weight": 0.5 }
+            }
+          },
+          "AR": {
+            "name": "Availability Requirement",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined", "weight": 1 },
+              "H": { "name": "High", "weight": 1.5 },
+              "M": { "name": "Medium", "weight": 1 },
+              "L": { "name": "Low", "weight": 0.5 }
+            }
+          },
+          "MAV": {
+            "name": "Modified Attack Vector",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "N": { "name": "Network", "weight": 0.85 },
+              "A": { "name": "Adjacent", "weight": 0.62 },
+              "L": { "name": "Local", "weight": 0.55 },
+              "P": { "name": "Physical", "weight": 0.2 }
+            }
+          },
+          "MAC": {
+            "name": "Modified Attack Complexity",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "L": { "name": "Low", "weight": 0.77 },
+              "H": { "name": "High", "weight": 0.44 }
+            }
+          },
+          "MPR": {
+            "name": "Modified Privileges Required",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "N": { "name": "None", "weight": 0.85 },
+              "L": { "name": "Low", "weightUnchanged": 0.62, "weightChanged": 0.68 },
+              "H": { "name": "High", "weightUnchanged": 0.27, "weightChanged": 0.50 }
+            }
+          },
+          "MUI": {
+            "name": "Modified User Interaction",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "N": { "name": "None", "weight": 0.85 },
+              "R": { "name": "Required", "weight": 0.62 }
+            }
+          },
+          "MS": {
+            "name": "Modified Scope",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "U": { "name": "Unchanged" },
+              "C": { "name": "Changed" }
+            }
+          },
+          "MC": {
+            "name": "Modified Confidentiality",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          },
+          "MI": {
+            "name": "Modified Integrity",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          },
+          "MA": {
+            "name": "Modified Availability",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          }
+        }
+      },
+      "modifiedImpactExponent": 15
+    },
+    "3.1": {
+      "metrics": {
+        "base": {
+          "AV": {
+            "name": "Attack Vector",
+            "required": true,
+            "values": {
+              "N": { "name": "Network", "weight": 0.85 },
+              "A": { "name": "Adjacent", "weight": 0.62 },
+              "L": { "name": "Local", "weight": 0.55 },
+              "P": { "name": "Physical", "weight": 0.2 }
+            }
+          },
+          "AC": {
+            "name": "Attack Complexity",
+            "required": true,
+            "values": {
+              "L": { "name": "Low", "weight": 0.77 },
+              "H": { "name": "High", "weight": 0.44 }
+            }
+          },
+          "PR": {
+            "name": "Privileges Required",
+            "required": true,
+            "values": {
+              "N": { "name": "None", "weight": 0.85 },
+              "L": { "name": "Low", "weightUnchanged": 0.62, "weightChanged": 0.68 },
+              "H": { "name": "High", "weightUnchanged": 0.27, "weightChanged": 0.50 }
+            }
+          },
+          "UI": {
+            "name": "User Interaction",
+            "required": true,
+            "values": {
+              "N": { "name": "None", "weight": 0.85 },
+              "R": { "name": "Required", "weight": 0.62 }
+            }
+          },
+          "S": {
+            "name": "Scope",
+            "required": true,
+            "values": {
+              "U": { "name": "Unchanged" },
+              "C": { "name": "Changed" }
+            }
+          },
+          "C": {
+            "name": "Confidentiality Impact",
+            "required": true,
+            "values": {
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          },
+          "I": {
+            "name": "Integrity Impact",
+            "required": true,
+            "values": {
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          },
+          "A": {
+            "name": "Availability Impact",
+            "required": true,
+            "values": {
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          }
+        },
+        "temporal": {
+          "E": {
+            "name": "Exploit Code Maturity",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined", "weight": 1 },
+              "H": { "name": "High", "weight": 1 },
+              "F": { "name": "Functional", "weight": 0.97 },
+              "P": { "name": "Proof-of-Concept", "weight": 0.94 },
+              "U": { "name": "Unproven", "weight": 0.91 }
+            }
+          },
+          "RL": {
+            "name": "Remediation Level",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined", "weight": 1 },
+              "U": { "name": "Unavailable", "weight": 1 },
+              "W": { "name": "Workaround", "weight": 0.97 },
+              "T": { "name": "Temporary Fix", "weight": 0.96 },
+              "O": { "name": "Official Fix", "weight": 0.95 }
+            }
+          },
+          "RC": {
+            "name": "Report Confidence",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined", "weight": 1 },
+              "C": { "name": "Confirmed", "weight": 1 },
+              "R": { "name": "Reasonable", "weight": 0.96 },
+              "U": { "name": "Unknown", "weight": 0.92 }
+            }
+          }
+        },
+        "environmental": {
+          "CR": {
+            "name": "Confidentiality Requirement",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined", "weight": 1 },
+              "H": { "name": "High", "weight": 1.5 },
+              "M": { "name": "Medium", "weight": 1 },
+              "L": { "name": "Low", "weight": 0.5 }
+            }
+          },
+          "IR": {
+            "name": "Integrity Requirement",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined", "weight": 1 },
+              "H": { "name": "High", "weight": 1.5 },
+              "M": { "name": "Medium", "weight": 1 },
+              "L": { "name": "Low", "weight": 0.5 }
+            }
+          },
+          "AR": {
+            "name": "Availability Requirement",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined", "weight": 1 },
+              "H": { "name": "High", "weight": 1.5 },
+              "M": { "name": "Medium", "weight": 1 },
+              "L": { "name": "Low", "weight": 0.5 }
+            }
+          },
+          "MAV": {
+            "name": "Modified Attack Vector",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "N": { "name": "Network", "weight": 0.85 },
+              "A": { "name": "Adjacent", "weight": 0.62 },
+              "L": { "name": "Local", "weight": 0.55 },
+              "P": { "name": "Physical", "weight": 0.2 }
+            }
+          },
+          "MAC": {
+            "name": "Modified Attack Complexity",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "L": { "name": "Low", "weight": 0.77 },
+              "H": { "name": "High", "weight": 0.44 }
+            }
+          },
+          "MPR": {
+            "name": "Modified Privileges Required",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "N": { "name": "None", "weight": 0.85 },
+              "L": { "name": "Low", "weightUnchanged": 0.62, "weightChanged": 0.68 },
+              "H": { "name": "High", "weightUnchanged": 0.27, "weightChanged": 0.50 }
+            }
+          },
+          "MUI": {
+            "name": "Modified User Interaction",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "N": { "name": "None", "weight": 0.85 },
+              "R": { "name": "Required", "weight": 0.62 }
+            }
+          },
+          "MS": {
+            "name": "Modified Scope",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "U": { "name": "Unchanged" },
+              "C": { "name": "Changed" }
+            }
+          },
+          "MC": {
+            "name": "Modified Confidentiality",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          },
+          "MI": {
+            "name": "Modified Integrity",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          },
+          "MA": {
+            "name": "Modified Availability",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          }
+        }
+      },
+      "modifiedImpactExponent": 13
+    },
+    "4.0": {
+      "metrics": {
+        "base": {
+          "AV": {
+            "name": "Attack Vector",
+            "required": true,
+            "values": {
+              "N": { "name": "Network", "weight": 0.85 },
+              "A": { "name": "Adjacent", "weight": 0.62 },
+              "L": { "name": "Local", "weight": 0.55 },
+              "P": { "name": "Physical", "weight": 0.2 }
+            }
+          },
+          "AC": {
+            "name": "Attack Complexity",
+            "required": true,
+            "values": {
+              "L": { "name": "Low", "weight": 0.77 },
+              "H": { "name": "High", "weight": 0.44 }
+            }
+          },
+          "AT": {
+            "name": "Attack Requirements",
+            "required": true,
+            "values": {
+              "N": { "name": "None", "weight": 0.86 },
+              "P": { "name": "Present", "weight": 0.62 }
+            }
+          },
+          "PR": {
+            "name": "Privileges Required",
+            "required": true,
+            "values": {
+              "N": { "name": "None", "weight": 0.85 },
+              "L": { "name": "Low", "weight": 0.62 },
+              "H": { "name": "High", "weight": 0.27 }
+            }
+          },
+          "UI": {
+            "name": "User Interaction",
+            "required": true,
+            "values": {
+              "N": { "name": "None", "weight": 0.85 },
+              "P": { "name": "Passive", "weight": 0.62 },
+              "A": { "name": "Active", "weight": 0.62 }
+            }
+          },
+          "VC": {
+            "name": "Vulnerable System Confidentiality",
+            "required": true,
+            "values": {
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          },
+          "VI": {
+            "name": "Vulnerable System Integrity",
+            "required": true,
+            "values": {
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          },
+          "VA": {
+            "name": "Vulnerable System Availability",
+            "required": true,
+            "values": {
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          },
+          "SC": {
+            "name": "Subsequent System Confidentiality",
+            "required": true,
+            "values": {
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          },
+          "SI": {
+            "name": "Subsequent System Integrity",
+            "required": true,
+            "values": {
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          },
+          "SA": {
+            "name": "Subsequent System Availability",
+            "required": true,
+            "values": {
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          }
+        },
+        "threat": {
+          "E": {
+            "name": "Exploit Maturity",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined", "weight": 1 },
+              "A": { "name": "Attacked", "weight": 1 },
+              "P": { "name": "Proof-of-Concept", "weight": 0.94 },
+              "U": { "name": "Unreported", "weight": 0.91 }
+            }
+          }
+        },
+        "environmental": {
+          "CR": {
+            "name": "Confidentiality Requirement",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined", "weight": 1 },
+              "H": { "name": "High", "weight": 1.5 },
+              "M": { "name": "Medium", "weight": 1 },
+              "L": { "name": "Low", "weight": 0.5 }
+            }
+          },
+          "IR": {
+            "name": "Integrity Requirement",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined", "weight": 1 },
+              "H": { "name": "High", "weight": 1.5 },
+              "M": { "name": "Medium", "weight": 1 },
+              "L": { "name": "Low", "weight": 0.5 }
+            }
+          },
+          "AR": {
+            "name": "Availability Requirement",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined", "weight": 1 },
+              "H": { "name": "High", "weight": 1.5 },
+              "M": { "name": "Medium", "weight": 1 },
+              "L": { "name": "Low", "weight": 0.5 }
+            }
+          },
+          "MAV": {
+            "name": "Modified Attack Vector",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "N": { "name": "Network", "weight": 0.85 },
+              "A": { "name": "Adjacent", "weight": 0.62 },
+              "L": { "name": "Local", "weight": 0.55 },
+              "P": { "name": "Physical", "weight": 0.2 }
+            }
+          },
+          "MAC": {
+            "name": "Modified Attack Complexity",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "L": { "name": "Low", "weight": 0.77 },
+              "H": { "name": "High", "weight": 0.44 }
+            }
+          },
+          "MAT": {
+            "name": "Modified Attack Requirements",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "N": { "name": "None", "weight": 0.86 },
+              "P": { "name": "Present", "weight": 0.62 }
+            }
+          },
+          "MPR": {
+            "name": "Modified Privileges Required",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "N": { "name": "None", "weight": 0.85 },
+              "L": { "name": "Low", "weight": 0.62 },
+              "H": { "name": "High", "weight": 0.27 }
+            }
+          },
+          "MUI": {
+            "name": "Modified User Interaction",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "N": { "name": "None", "weight": 0.85 },
+              "P": { "name": "Passive", "weight": 0.62 },
+              "A": { "name": "Active", "weight": 0.62 }
+            }
+          },
+          "MVC": {
+            "name": "Modified Vulnerable System Confidentiality",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          },
+          "MVI": {
+            "name": "Modified Vulnerable System Integrity",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          },
+          "MVA": {
+            "name": "Modified Vulnerable System Availability",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          },
+          "MSC": {
+            "name": "Modified Subsequent System Confidentiality",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          },
+          "MSI": {
+            "name": "Modified Subsequent System Integrity",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          },
+          "MSA": {
+            "name": "Modified Subsequent System Availability",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "H": { "name": "High", "weight": 0.56 },
+              "L": { "name": "Low", "weight": 0.22 },
+              "N": { "name": "None", "weight": 0 }
+            }
+          }
+        },
+        "supplemental": {
+          "SAF": {
+            "name": "Safety",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "P": { "name": "Present" },
+              "N": { "name": "Negligible" }
+            }
+          },
+          "AU": {
+            "name": "Automatable",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "Y": { "name": "Yes" },
+              "N": { "name": "No" }
+            }
+          },
+          "U": {
+            "name": "Provider Urgency",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "Red": { "name": "Red" },
+              "Amber": { "name": "Amber" },
+              "Green": { "name": "Green" },
+              "Clear": { "name": "Clear" }
+            }
+          },
+          "R": {
+            "name": "Recovery",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "A": { "name": "Automatic" },
+              "U": { "name": "User" },
+              "I": { "name": "Irrecoverable" }
+            }
+          },
+          "V": {
+            "name": "Value Density",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "D": { "name": "Diffuse" },
+              "C": { "name": "Concentrated" }
+            }
+          },
+          "RE": {
+            "name": "Vulnerability Response Effort",
+            "required": false,
+            "values": {
+              "X": { "name": "Not Defined" },
+              "L": { "name": "Low" },
+              "M": { "name": "Moderate" },
+              "H": { "name": "High" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "carryOverMapping": {
+    "3.0-3.1": {
+      "AV": "AV", "AC": "AC", "PR": "PR", "UI": "UI", "S": "S",
+      "C": "C", "I": "I", "A": "A",
+      "E": "E", "RL": "RL", "RC": "RC",
+      "CR": "CR", "IR": "IR", "AR": "AR",
+      "MAV": "MAV", "MAC": "MAC", "MPR": "MPR", "MUI": "MUI", "MS": "MS",
+      "MC": "MC", "MI": "MI", "MA": "MA"
+    },
+    "3.1-3.0": {
+      "AV": "AV", "AC": "AC", "PR": "PR", "UI": "UI", "S": "S",
+      "C": "C", "I": "I", "A": "A",
+      "E": "E", "RL": "RL", "RC": "RC",
+      "CR": "CR", "IR": "IR", "AR": "AR",
+      "MAV": "MAV", "MAC": "MAC", "MPR": "MPR", "MUI": "MUI", "MS": "MS",
+      "MC": "MC", "MI": "MI", "MA": "MA"
+    },
+    "3.1-4.0": {
+      "AV": "AV", "AC": "AC", "PR": "PR",
+      "UI": { "N": "N", "R": "P" },
+      "C": "VC", "I": "VI", "A": "VA",
+      "E": "E",
+      "CR": "CR", "IR": "IR", "AR": "AR"
+    },
+    "4.0-3.1": {
+      "AV": "AV", "AC": "AC", "PR": "PR",
+      "UI": { "N": "N", "P": "R", "A": "R" },
+      "VC": "C", "VI": "I", "VA": "A",
+      "E": "E",
+      "CR": "CR", "IR": "IR", "AR": "AR"
+    },
+    "3.0-4.0": {
+      "AV": "AV", "AC": "AC", "PR": "PR",
+      "UI": { "N": "N", "R": "P" },
+      "C": "VC", "I": "VI", "A": "VA",
+      "E": "E",
+      "CR": "CR", "IR": "IR", "AR": "AR"
+    },
+    "4.0-3.0": {
+      "AV": "AV", "AC": "AC", "PR": "PR",
+      "UI": { "N": "N", "P": "R", "A": "R" },
+      "VC": "C", "VI": "I", "VA": "A",
+      "E": "E",
+      "CR": "CR", "IR": "IR", "AR": "AR"
+    }
+  },
+  "groupOrder": ["base", "temporal", "threat", "environmental", "supplemental"]
+}

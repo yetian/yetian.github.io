@@ -1,0 +1,532 @@
+{
+  "app": {
+    "title": "CVSS 计算器",
+    "subtitle": "通用漏洞评分系统"
+  },
+  "ui": {
+    "version": "版本",
+    "language": "语言",
+    "reset": "重置",
+    "exportPDF": "导出 PDF",
+    "exportPNG": "导出 PNG",
+    "metricSelection": "指标选择",
+    "scoreSummary": "分数摘要",
+    "vectorString": "向量字符串",
+    "required": "必填",
+    "optional": "可选",
+    "selectValue": "请选择"
+  },
+  "scores": {
+    "baseScore": "基础分数",
+    "temporalScore": "时间分数",
+    "environmentalScore": "环境分数",
+    "severity": "严重程度"
+  },
+  "severity": {
+    "none": "无",
+    "low": "低",
+    "medium": "中",
+    "high": "高",
+    "critical": "严重"
+  },
+  "groups": {
+    "base": "基础指标",
+    "temporal": "时间指标",
+    "threat": "威胁指标",
+    "environmental": "环境指标",
+    "supplemental": "补充指标"
+  },
+  "metrics": {
+    "AV": {
+      "name": "攻击向量",
+      "description": "此指标反映漏洞可被利用的上下文环境。攻击向量值越低，攻击者需要越接近目标组件才能利用漏洞。",
+      "values": {
+        "N": {
+          "name": "网络",
+          "description": "漏洞组件绑定到网络栈，攻击者可通过 OSI 第3层（网络层）远程利用漏洞。例如：通过互联网发送特制数据包。"
+        },
+        "A": {
+          "name": "邻接",
+          "description": "攻击限于同一共享物理或逻辑网络，无法跨越网络边界。例如：同一局域网、蓝牙、本地无线网络。"
+        },
+        "L": {
+          "name": "本地",
+          "description": "漏洞组件未绑定网络栈，攻击者需通过本地访问或用户交互来利用漏洞。例如：需要用户执行恶意文件。"
+        },
+        "P": {
+          "name": "物理",
+          "description": "攻击者需要物理接触或操作漏洞组件。例如：插入 USB 设备、物理访问控制台。"
+        }
+      }
+    },
+    "AC": {
+      "name": "攻击复杂度",
+      "description": "此指标描述利用漏洞所需条件超出攻击者控制范围的程度。复杂度越低，越容易被利用。",
+      "values": {
+        "L": {
+          "name": "低",
+          "description": "不存在特殊的访问条件或特殊情况，攻击可重复成功。攻击者可以预期稳定的利用结果。"
+        },
+        "H": {
+          "name": "高",
+          "description": "成功的攻击依赖于攻击者无法控制的条件。例如：需要特定的配置、需要赢得竞态条件。"
+        }
+      }
+    },
+    "PR": {
+      "name": "所需权限",
+      "description": "此指标描述攻击者在成功利用漏洞之前所需的权限级别。",
+      "values": {
+        "N": {
+          "name": "无",
+          "description": "攻击者在攻击前未经授权，不需要任何权限。"
+        },
+        "L": {
+          "name": "低",
+          "description": "攻击者需要基本用户级别的权限，通常可以访问普通用户的资源和功能。"
+        },
+        "H": {
+          "name": "高",
+          "description": "攻击者需要管理员或高级权限，可以完全控制系统或访问敏感资源。"
+        }
+      }
+    },
+    "UI": {
+      "name": "用户交互",
+      "description": "此指标捕获是否需要用户交互才能利用漏洞。",
+      "values": {
+        "N": {
+          "name": "无",
+          "description": "漏洞系统可以在无需任何用户交互的情况下被利用。"
+        },
+        "R": {
+          "name": "需要",
+          "description": "需要用户采取某些操作才能利用漏洞。例如：点击链接、打开文件。"
+        },
+        "P": {
+          "name": "被动",
+          "description": "需要被动交互，如访问包含恶意内容的网页（CVSS 4.0）。"
+        },
+        "A": {
+          "name": "主动",
+          "description": "需要主动操作，如导入文件、确认安全警告（CVSS 4.0）。"
+        }
+      }
+    },
+    "S": {
+      "name": "范围",
+      "description": "范围标识漏洞的影响是否限于漏洞组件管理的资源，还是会影响其他组件管理的资源。",
+      "values": {
+        "U": {
+          "name": "不变",
+          "description": "漏洞只能影响同一安全权威管理的资源。漏洞组件和受影响组件属于同一范围。"
+        },
+        "C": {
+          "name": "改变",
+          "description": "漏洞可以影响不同安全权威管理的资源。漏洞组件和受影响组件属于不同范围。"
+        }
+      }
+    },
+    "C": {
+      "name": "机密性影响",
+      "description": "机密性影响衡量信息泄露给未经授权方的程度。",
+      "values": {
+        "H": {
+          "name": "高",
+          "description": "机密性完全丧失，受影响组件中的所有信息都泄露给攻击者。"
+        },
+        "L": {
+          "name": "低",
+          "description": "获取部分受限信息，但攻击者无法控制获取哪些信息。"
+        },
+        "N": {
+          "name": "无",
+          "description": "受影响组件内的信息不会泄露给攻击者。"
+        }
+      }
+    },
+    "I": {
+      "name": "完整性影响",
+      "description": "完整性影响衡量信息的可信度和完整性的丧失程度。",
+      "values": {
+        "H": {
+          "name": "高",
+          "description": "完整性完全丧失，攻击者可以任意修改受影响组件中的所有数据。"
+        },
+        "L": {
+          "name": "低",
+          "description": "数据修改是可能的，但攻击者无法控制修改的后果。"
+        },
+        "N": {
+          "name": "无",
+          "description": "受影响组件内的数据完整性不会受到影响。"
+        }
+      }
+    },
+    "A": {
+      "name": "可用性影响",
+      "description": "可用性影响衡量用户访问受影响组件资源的能力的丧失程度。",
+      "values": {
+        "H": {
+          "name": "高",
+          "description": "可用性完全丧失，攻击者可以完全拒绝用户访问资源。"
+        },
+        "L": {
+          "name": "低",
+          "description": "资源可用性降低或间歇性中断，但不会完全丧失。"
+        },
+        "N": {
+          "name": "无",
+          "description": "受影响组件内的资源可用性不会受到影响。"
+        }
+      }
+    },
+    "AT": {
+      "name": "攻击要求",
+      "description": "此指标捕获成功攻击所需的部署或执行条件（CVSS 4.0 新增）。",
+      "values": {
+        "N": {
+          "name": "无",
+          "description": "没有特定的部署或执行条件要求。"
+        },
+        "P": {
+          "name": "存在",
+          "description": "需要特定的部署条件，如赢得竞态条件或网络注入（中间人攻击）。"
+        }
+      }
+    },
+    "VC": {
+      "name": "脆弱系统机密性",
+      "description": "衡量对脆弱系统机密性的影响（CVSS 4.0）。",
+      "values": {
+        "H": { "name": "高", "description": "全部或敏感信息泄露。" },
+        "L": { "name": "低", "description": "部分受限信息泄露。" },
+        "N": { "name": "无", "description": "无信息泄露。" }
+      }
+    },
+    "VI": {
+      "name": "脆弱系统完整性",
+      "description": "衡量对脆弱系统完整性的影响（CVSS 4.0）。",
+      "values": {
+        "H": { "name": "高", "description": "任意文件可修改或严重篡改。" },
+        "L": { "name": "低", "description": "有限数据修改。" },
+        "N": { "name": "无", "description": "无修改。" }
+      }
+    },
+    "VA": {
+      "name": "脆弱系统可用性",
+      "description": "衡量对脆弱系统可用性的影响（CVSS 4.0）。",
+      "values": {
+        "H": { "name": "高", "description": "完全拒绝服务。" },
+        "L": { "name": "低", "description": "性能降低或间歇性中断。" },
+        "N": { "name": "无", "description": "无影响。" }
+      }
+    },
+    "SC": {
+      "name": "后续系统机密性",
+      "description": "衡量对后续系统机密性的影响，替代 CVSS 3.x 的 Scope（CVSS 4.0）。",
+      "values": {
+        "H": { "name": "高", "description": "敏感信息泄露到后续系统。" },
+        "L": { "name": "低", "description": "部分信息泄露到后续系统。" },
+        "N": { "name": "无", "description": "无影响。" }
+      }
+    },
+    "SI": {
+      "name": "后续系统完整性",
+      "description": "衡量对后续系统完整性的影响（CVSS 4.0）。",
+      "values": {
+        "H": { "name": "高", "description": "后续系统的完整性完全丧失。" },
+        "L": { "name": "低", "description": "有限的完整性影响。" },
+        "N": { "name": "无", "description": "无影响。" }
+      }
+    },
+    "SA": {
+      "name": "后续系统可用性",
+      "description": "衡量对后续系统可用性的影响（CVSS 4.0）。",
+      "values": {
+        "H": { "name": "高", "description": "后续系统完全拒绝服务。" },
+        "L": { "name": "低", "description": "性能降低。" },
+        "N": { "name": "无", "description": "无影响。" }
+      }
+    },
+    "E": {
+      "name": "利用代码成熟度",
+      "description": "此指标衡量利用技术或代码公开可用的可能性和状态。",
+      "values": {
+        "X": { "name": "未定义", "description": "不改变分数，使用默认值。" },
+        "H": { "name": "高", "description": "存在自主功能代码，自动化工具广泛可用。" },
+        "F": { "name": "功能性", "description": "存在功能性利用代码，在大多数情况下有效。" },
+        "P": { "name": "概念验证", "description": "存在 PoC 代码，可能需要熟练攻击者的修改。" },
+        "U": { "name": "未证实", "description": "没有利用代码可用，或仅存在理论上的利用。" },
+        "A": { "name": "已被攻击", "description": "已有攻击报告或利用工具公开（CVSS 4.0）。"}
+      }
+    },
+    "RL": {
+      "name": "修复水平",
+      "description": "此指标描述修复漏洞的解决方案可用性级别。",
+      "values": {
+        "X": { "name": "未定义", "description": "不改变分数。" },
+        "U": { "name": "不可用", "description": "没有可用的解决方案或无法应用。" },
+        "W": { "name": "变通方案", "description": "存在非官方、非供应商的解决方案。" },
+        "T": { "name": "临时修复", "description": "存在官方但临时的修复。" },
+        "O": { "name": "官方修复", "description": "存在完整的供应商解决方案。" }
+      }
+    },
+    "RC": {
+      "name": "报告可信度",
+      "description": "此指标衡量漏洞存在及其技术细节的可信度。",
+      "values": {
+        "X": { "name": "未定义", "description": "不改变分数。" },
+        "C": { "name": "已确认", "description": "存在详细报告，或可以功能性地复现。" },
+        "R": { "name": "合理", "description": "发布了重要细节，但研究人员不完全确信根本原因。" },
+        "U": { "name": "未知", "description": "报告表明存在漏洞，但原因未知。" }
+      }
+    },
+    "CR": {
+      "name": "机密性需求",
+      "description": "此指标允许分析人员根据组织环境指定机密性的重要性。",
+      "values": {
+        "X": { "name": "未定义", "description": "不改变分数。" },
+        "H": { "name": "高", "description": "机密性丧失可能对组织造成灾难性影响。" },
+        "M": { "name": "中", "description": "机密性丧失可能造成严重影响。" },
+        "L": { "name": "低", "description": "机密性丧失仅有有限影响。" }
+      }
+    },
+    "IR": {
+      "name": "完整性需求",
+      "description": "此指标允许分析人员根据组织环境指定完整性的重要性。",
+      "values": {
+        "X": { "name": "未定义", "description": "不改变分数。" },
+        "H": { "name": "高", "description": "完整性丧失可能对组织造成灾难性影响。" },
+        "M": { "name": "中", "description": "完整性丧失可能造成严重影响。" },
+        "L": { "name": "低", "description": "完整性丧失仅有有限影响。" }
+      }
+    },
+    "AR": {
+      "name": "可用性需求",
+      "description": "此指标允许分析人员根据组织环境指定可用性的重要性。",
+      "values": {
+        "X": { "name": "未定义", "description": "不改变分数。" },
+        "H": { "name": "高", "description": "可用性丧失可能对组织造成灾难性影响。" },
+        "M": { "name": "中", "description": "可用性丧失可能造成严重影响。" },
+        "L": { "name": "低", "description": "可用性丧失仅有有限影响。" }
+      }
+    },
+    "MAV": {
+      "name": "修改攻击向量",
+      "description": "允许覆盖基础攻击向量值。",
+      "values": {
+        "X": { "name": "未定义", "description": "使用基础 AV 值。" },
+        "N": { "name": "网络", "description": "网络攻击。" },
+        "A": { "name": "邻接", "description": "邻接网络攻击。" },
+        "L": { "name": "本地", "description": "本地攻击。" },
+        "P": { "name": "物理", "description": "物理攻击。" }
+      }
+    },
+    "MAC": {
+      "name": "修改攻击复杂度",
+      "description": "允许覆盖基础攻击复杂度值。",
+      "values": {
+        "X": { "name": "未定义", "description": "使用基础 AC 值。" },
+        "L": { "name": "低", "description": "低复杂度。" },
+        "H": { "name": "高", "description": "高复杂度。" }
+      }
+    },
+    "MAT": {
+      "name": "修改攻击要求",
+      "description": "允许覆盖基础攻击要求值（CVSS 4.0）。",
+      "values": {
+        "X": { "name": "未定义", "description": "使用基础 AT 值。" },
+        "N": { "name": "无", "description": "无特定要求。" },
+        "P": { "name": "存在", "description": "特定条件存在。" }
+      }
+    },
+    "MPR": {
+      "name": "修改所需权限",
+      "description": "允许覆盖基础所需权限值。",
+      "values": {
+        "X": { "name": "未定义", "description": "使用基础 PR 值。" },
+        "N": { "name": "无", "description": "无需权限。" },
+        "L": { "name": "低", "description": "低权限。" },
+        "H": { "name": "高", "description": "高权限。" }
+      }
+    },
+    "MUI": {
+      "name": "修改用户交互",
+      "description": "允许覆盖基础用户交互值。",
+      "values": {
+        "X": { "name": "未定义", "description": "使用基础 UI 值。" },
+        "N": { "name": "无", "description": "无需交互。" },
+        "R": { "name": "需要", "description": "需要交互。" },
+        "P": { "name": "被动", "description": "被动交互。" },
+        "A": { "name": "主动", "description": "主动交互。" }
+      }
+    },
+    "MS": {
+      "name": "修改范围",
+      "description": "允许覆盖基础范围值。",
+      "values": {
+        "X": { "name": "未定义", "description": "使用基础 S 值。" },
+        "U": { "name": "不变", "description": "范围不变。" },
+        "C": { "name": "改变", "description": "范围改变。" }
+      }
+    },
+    "MC": {
+      "name": "修改机密性",
+      "description": "允许覆盖基础机密性影响值。",
+      "values": {
+        "X": { "name": "未定义", "description": "使用基础 C 值。" },
+        "H": { "name": "高", "description": "高影响。" },
+        "L": { "name": "低", "description": "低影响。" },
+        "N": { "name": "无", "description": "无影响。" }
+      }
+    },
+    "MI": {
+      "name": "修改完整性",
+      "description": "允许覆盖基础完整性影响值。",
+      "values": {
+        "X": { "name": "未定义", "description": "使用基础 I 值。" },
+        "H": { "name": "高", "description": "高影响。" },
+        "L": { "name": "低", "description": "低影响。" },
+        "N": { "name": "无", "description": "无影响。" }
+      }
+    },
+    "MA": {
+      "name": "修改可用性",
+      "description": "允许覆盖基础可用性影响值。",
+      "values": {
+        "X": { "name": "未定义", "description": "使用基础 A 值。" },
+        "H": { "name": "高", "description": "高影响。" },
+        "L": { "name": "低", "description": "低影响。" },
+        "N": { "name": "无", "description": "无影响。" }
+      }
+    },
+    "MVC": {
+      "name": "修改脆弱系统机密性",
+      "description": "允许覆盖脆弱系统机密性值（CVSS 4.0）。",
+      "values": {
+        "X": { "name": "未定义", "description": "使用基础 VC 值。" },
+        "H": { "name": "高", "description": "高影响。" },
+        "L": { "name": "低", "description": "低影响。" },
+        "N": { "name": "无", "description": "无影响。" }
+      }
+    },
+    "MVI": {
+      "name": "修改脆弱系统完整性",
+      "description": "允许覆盖脆弱系统完整性值（CVSS 4.0）。",
+      "values": {
+        "X": { "name": "未定义", "description": "使用基础 VI 值。" },
+        "H": { "name": "高", "description": "高影响。" },
+        "L": { "name": "低", "description": "低影响。" },
+        "N": { "name": "无", "description": "无影响。" }
+      }
+    },
+    "MVA": {
+      "name": "修改脆弱系统可用性",
+      "description": "允许覆盖脆弱系统可用性值（CVSS 4.0）。",
+      "values": {
+        "X": { "name": "未定义", "description": "使用基础 VA 值。" },
+        "H": { "name": "高", "description": "高影响。" },
+        "L": { "name": "低", "description": "低影响。" },
+        "N": { "name": "无", "description": "无影响。" }
+      }
+    },
+    "MSC": {
+      "name": "修改后续系统机密性",
+      "description": "允许覆盖后续系统机密性值（CVSS 4.0）。",
+      "values": {
+        "X": { "name": "未定义", "description": "使用基础 SC 值。" },
+        "H": { "name": "高", "description": "高影响。" },
+        "L": { "name": "低", "description": "低影响。" },
+        "N": { "name": "无", "description": "无影响。" }
+      }
+    },
+    "MSI": {
+      "name": "修改后续系统完整性",
+      "description": "允许覆盖后续系统完整性值（CVSS 4.0）。",
+      "values": {
+        "X": { "name": "未定义", "description": "使用基础 SI 值。" },
+        "H": { "name": "高", "description": "高影响。" },
+        "L": { "name": "低", "description": "低影响。" },
+        "N": { "name": "无", "description": "无影响。" }
+      }
+    },
+    "MSA": {
+      "name": "修改后续系统可用性",
+      "description": "允许覆盖后续系统可用性值（CVSS 4.0）。",
+      "values": {
+        "X": { "name": "未定义", "description": "使用基础 SA 值。" },
+        "H": { "name": "高", "description": "高影响。" },
+        "L": { "name": "低", "description": "低影响。" },
+        "N": { "name": "无", "description": "无影响。" }
+      }
+    },
+    "SAF": {
+      "name": "安全性",
+      "description": "衡量漏洞对人类安全的潜在影响（CVSS 4.0）。",
+      "values": {
+        "X": { "name": "未定义", "description": "未评估。" },
+        "P": { "name": "存在", "description": "可能导致 Marginal、Critical 或 Catastrophic 伤害。" },
+        "N": { "name": "可忽略", "description": "最多轻微伤害。" }
+      }
+    },
+    "AU": {
+      "name": "可自动化",
+      "description": "衡量漏洞是否可以被自动化利用（CVSS 4.0）。",
+      "values": {
+        "X": { "name": "未定义", "description": "未评估。" },
+        "Y": { "name": "是", "description": "可以完全自动化，如蠕虫型漏洞。" },
+        "N": { "name": "否", "description": "无法自动化 kill chain 全部 4 步。" }
+      }
+    },
+    "U": {
+      "name": "供应商紧急度",
+      "description": "供应商对漏洞紧急度的评估（CVSS 4.0）。",
+      "values": {
+        "X": { "name": "未定义", "description": "未评估。" },
+        "Red": { "name": "红色", "description": "最高紧急度。" },
+        "Amber": { "name": "琥珀色", "description": "中等紧急度。" },
+        "Green": { "name": "绿色", "description": "较低紧急度。" },
+        "Clear": { "name": "清除", "description": "无紧急度，信息性。" }
+      }
+    },
+    "R": {
+      "name": "恢复能力",
+      "description": "系统从攻击中恢复的能力（CVSS 4.0）。",
+      "values": {
+        "X": { "name": "未定义", "description": "未评估。" },
+        "A": { "name": "自动", "description": "服务自动恢复。" },
+        "U": { "name": "用户", "description": "需要用户手动干预恢复。" },
+        "I": { "name": "不可恢复", "description": "不可恢复。" }
+      }
+    },
+    "V": {
+      "name": "价值密度",
+      "description": "受影响资源的价值密度（CVSS 4.0）。",
+      "values": {
+        "X": { "name": "未定义", "description": "未评估。" },
+        "D": { "name": "分散", "description": "资源有限，如单个邮件客户端。" },
+        "C": { "name": "集中", "description": "资源丰富，如中央邮件服务器。" }
+      }
+    },
+    "RE": {
+      "name": "漏洞响应努力",
+      "description": "响应漏洞所需的努力程度（CVSS 4.0）。",
+      "values": {
+        "X": { "name": "未定义", "description": "未评估。" },
+        "L": { "name": "低", "description": "低努力，如配置变通。" },
+        "M": { "name": "中", "description": "中等努力，如简单远程更新。" },
+        "H": { "name": "高", "description": "高努力，如物理更换、BIOS 更新。" }
+      }
+    }
+  },
+  "report": {
+    "title": "CVSS 评估报告",
+    "generated": "生成时间",
+    "version": "CVSS 版本",
+    "metrics": "选择的指标",
+    "metric": "指标",
+    "value": "值",
+    "description": "描述"
+  }
+}
