@@ -7,25 +7,134 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>汉字学习</h1>
-
-    <div class="search-container">
-        <input type="text" id="search-input" placeholder="输入汉字..." maxlength="1">
-        <button id="search-button">搜索</button>
+    <!-- 背景动画 -->
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
     </div>
 
-    <div class="character-container">
-        <div id="character-target"></div>
+    <!-- 主容器 -->
+    <div class="app-container">
+        <!-- 顶部工具栏 -->
+        <header class="toolbar">
+            <h1>汉字学习</h1>
+            <div class="toolbar-actions">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="输入汉字..." maxlength="1">
+                    <button id="search-button">搜索</button>
+                </div>
+                <button id="random-button" class="tool-btn">随机</button>
+                <button id="favorites-button" class="tool-btn">生字本 <span id="fav-count">0</span></button>
+            </div>
+        </header>
+
+        <!-- 部首筛选行 -->
+        <section class="radical-row">
+            <h3>部首筛选</h3>
+            <div class="radical-list-wrapper">
+                <div id="radical-list" class="radical-list"></div>
+            </div>
+            <button id="radical-more" class="radical-more-btn" style="display: none;">更多 ▼</button>
+        </section>
+
+        <!-- 主内容区：左汉字 + 右详情 -->
+        <main class="main-row">
+            <!-- 左侧汉字动画区 -->
+            <section class="character-section">
+                <div class="character-card">
+                    <div id="character-target" class="character-svg"></div>
+                </div>
+                <div class="control-panel">
+                    <button id="btn-stroke" class="control-btn">逐笔</button>
+                    <button id="btn-loop" class="control-btn">循环</button>
+                    <button id="btn-reset" class="control-btn">重置</button>
+                    <button id="btn-random-char" class="control-btn primary">随机</button>
+                </div>
+            </section>
+
+            <!-- 右侧详情区 -->
+            <section class="detail-section">
+                <div class="detail-card">
+                    <div class="detail-header">
+                        <span id="char-display" class="char-display"></span>
+                        <span id="pinyin-display" class="pinyin-display"></span>
+                    </div>
+                    <div class="detail-body">
+                        <div class="detail-item">
+                            <label>部首</label>
+                            <span id="radical-display"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>释义</label>
+                            <span id="definition-display"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>拆解</label>
+                            <span id="decomposition-display"></span>
+                        </div>
+                        <div class="detail-item etymology-item">
+                            <label>字源</label>
+                            <p id="etymology-display"></p>
+                        </div>
+                    </div>
+                    <div class="detail-footer">
+                        <button id="btn-favorite" class="favorite-btn">
+                            <span class="star">☆</span> 收藏
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 笔画拆解区：占据整行 -->
+        <section class="stroke-breakdown-row">
+            <div class="breakdown-header">
+                <h3>笔画拆解</h3>
+                <button id="btn-breakdown" class="breakdown-btn">生成拆解</button>
+            </div>
+            <div id="stroke-evolution" class="stroke-evolution"></div>
+        </section>
+
+        <!-- 笔画点阵区 -->
+        <section class="stroke-dots-row">
+            <div class="breakdown-header">
+                <h3>笔画点阵</h3>
+                <div class="dots-controls">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="connect-dots" checked>
+                        <span>连线</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="show-labels" checked>
+                        <span>标号</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="monochrome-mode">
+                        <span>单色</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="transparent-bg" checked>
+                        <span>透明背景</span>
+                    </label>
+                    <button id="btn-dots" class="breakdown-btn">生成点阵</button>
+                    <button id="btn-download-png" class="breakdown-btn" style="background: linear-gradient(135deg, #10b981, #06b6d4);">下载PNG</button>
+                    <button id="btn-download-svg" class="breakdown-btn" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">下载SVG</button>
+                </div>
+            </div>
+            <div id="stroke-dots" class="stroke-dots-container"></div>
+        </section>
     </div>
 
-    <div id="character-details">
-        <p id="pinyin"></p>
-        <p id="definition"></p>
-    </div>
-
-    <div class="controls">
-        <button id="replay-button" class="action-button replay">重新播放</button>
-        <button id="random-button" class="action-button">随机一个</button>
+    <!-- 生字本弹窗 -->
+    <div id="favorites-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>我的生字本</h2>
+                <button id="modal-close" class="modal-close">&times;</button>
+            </div>
+            <div id="favorites-list" class="favorites-grid"></div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
