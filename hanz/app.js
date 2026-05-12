@@ -44,6 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const strokeDots = document.getElementById('stroke-dots');
     const btnDownloadPng = document.getElementById('btn-download-png');
     const btnDownloadSvg = document.getElementById('btn-download-svg');
+    const btnPrint = document.getElementById('btn-print');
+    const btnPrintBW = document.getElementById('btn-print-bw');
 
     // 加载汉字数据
     fetch('data/dictionary.json')
@@ -882,6 +884,291 @@ document.addEventListener('DOMContentLoaded', () => {
         URL.revokeObjectURL(link.href);
     }
 
+    // === 打印功能 ===
+
+    function printDots(isBlackWhite = false) {
+        if (!currentChar) {
+            alert('请先选择汉字');
+            return;
+        }
+
+        const shouldConnect = connectDots.checked;
+        const shouldShowLabels = showLabels.checked;
+        // 黑白模式下强制单色
+        const isMonochrome = isBlackWhite ? true : monochromeMode.checked;
+
+        HanziWriter.loadCharacterData(currentChar.character).then(data => {
+            const strokes = data.strokes;
+            let medians = data.medians;
+            if (!medians || medians.length === 0) {
+                alert('无点阵数据');
+                return;
+            }
+
+            // 插值处理
+            medians = interpolateMedians(medians);
+
+            // A4纸尺寸 210mm x 297mm，1200 DPI
+            const width = 9921;
+            const height = 14031;
+            const viewBoxSize = 1024;
+            const scale = width / viewBoxSize * 0.75;
+
+            // 创建打印用SVG
+            const svgNS = 'http://www.w3.org/2000/svg';
+            const svg = document.createElementNS(svgNS, 'svg');
+            svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+            svg.setAttribute('width', `${width}px`);
+            svg.setAttribute('height', `${height}px`);
+            svg.setAttribute('xmlns', svgNS);
+
+            // 白色背景
+            const bg = document.createElementNS(svgNS, 'rect');
+            bg.setAttribute('width', width);
+            bg.setAttribute('height', height);
+            bg.setAttribute('fill', 'white');
+            svg.appendChild(bg);
+
+            // ========== 标题区域 ==========
+            const titleY = 350;
+
+            // 汉字
+            const charText = document.createElementNS(svgNS, 'text');
+            charText.setAttribute('x', width / 2);
+            charText.setAttribute('y', titleY);
+            charText.setAttribute('text-anchor', 'middle');
+            charText.setAttribute('font-size', 200);
+            charText.setAttribute('font-weight', '700');
+            charText.setAttribute('font-family', 'SimSun, serif');
+            charText.textContent = currentChar.character;
+            svg.appendChild(charText);
+
+            // 拼音
+            const pinyinText = document.createElementNS(svgNS, 'text');
+            pinyinText.setAttribute('x', width / 2);
+            pinyinText.setAttribute('y', titleY + 180);
+            pinyinText.setAttribute('text-anchor', 'middle');
+            pinyinText.setAttribute('font-size', 90);
+            pinyinText.setAttribute('font-family', 'Arial, sans-serif');
+            pinyinText.setAttribute('fill', '#666');
+            const pinyin = currentChar.pinyin && currentChar.pinyin.length > 0 ? currentChar.pinyin.join(', ') : '-';
+            pinyinText.textContent = `拼音: ${pinyin}`;
+            svg.appendChild(pinyinText);
+
+            // ========== 笔画拆解区域 ==========
+            const breakdownY = titleY + 350;
+            const breakdownItemSize = 350;
+            const breakdownGap = 30;
+            const itemsPerRow = 10;
+            const numStrokes = strokes.length;
+
+            // 标题
+            const breakdownTitle = document.createElementNS(svgNS, 'text');
+            breakdownTitle.setAttribute('x', width / 2);
+            breakdownTitle.setAttribute('y', breakdownY - 50);
+            breakdownTitle.setAttribute('text-anchor', 'middle');
+            breakdownTitle.setAttribute('font-size', 70);
+            breakdownTitle.setAttribute('font-family', 'Arial, sans-serif');
+            breakdownTitle.setAttribute('fill', '#333');
+            breakdownTitle.textContent = '笔画拆解';
+            svg.appendChild(breakdownTitle);
+
+            // 计算总行数
+            const totalItems = numStrokes + 1; // 包含空白
+            const rows = Math.ceil(totalItems / itemsPerRow);
+
+            // 生成每个阶段
+            for (let i = 0; i <= numStrokes; i++) {
+                const row = Math.floor(i / itemsPerRow);
+                const col = i % itemsPerRow;
+
+                const rowWidth = Math.min(itemsPerRow, totalItems - row * itemsPerRow) * (breakdownItemSize + breakdownGap);
+                const startX = (width - rowWidth) / 2;
+
+                const itemX = startX + col * (breakdownItemSize + breakdownGap);
+                const itemY = breakdownY + row * (breakdownItemSize + 80);
+
+                // 创建小SVG
+                const miniSvg = document.createElementNS(svgNS, 'svg');
+                miniSvg.setAttribute('x', itemX);
+                miniSvg.setAttribute('y', itemY);
+                miniSvg.setAttribute('viewBox', '0 0 1024 1024');
+                miniSvg.setAttribute('width', breakdownItemSize);
+                miniSvg.setAttribute('height', breakdownItemSize);
+
+                // 边框
+                const border = document.createElementNS(svgNS, 'rect');
+                border.setAttribute('x', 0);
+                border.setAttribute('y', 0);
+                border.setAttribute('width', 1024);
+                border.setAttribute('height', 1024);
+                border.setAttribute('fill', 'none');
+                border.setAttribute('stroke', '#ddd');
+                border.setAttribute('stroke-width', 8);
+                miniSvg.appendChild(border);
+
+                // 创建组并翻转
+                const group = document.createElementNS(svgNS, 'g');
+                group.setAttribute('transform', 'translate(0 1024) scale(1 -1)');
+
+                // 添加前 i 笔
+                for (let j = 0; j < i; j++) {
+                    const path = document.createElementNS(svgNS, 'path');
+                    path.setAttribute('d', strokes[j]);
+                    const isNewStroke = (j === i - 1);
+
+                    // 颜色设置：黑白模式 vs 普通模式
+                    let fillColor, strokeColor;
+                    if (isBlackWhite) {
+                        // 黑白模式：当前笔画黑色，过往笔画灰色(30%灰度)
+                        fillColor = isNewStroke ? '#333333' : '#b3b3b3';
+                        strokeColor = fillColor;
+                    } else {
+                        // 普通模式：当前笔画粉色，过往笔画紫色
+                        fillColor = isNewStroke ? '#ec4899' : '#a78bfa';
+                        strokeColor = fillColor;
+                    }
+
+                    path.setAttribute('fill', fillColor);
+                    path.setAttribute('stroke', strokeColor);
+                    path.setAttribute('stroke-width', 10);
+                    path.setAttribute('stroke-linecap', 'round');
+                    path.setAttribute('stroke-linejoin', 'round');
+                    group.appendChild(path);
+                }
+
+                miniSvg.appendChild(group);
+                svg.appendChild(miniSvg);
+
+                // 标签
+                const label = document.createElementNS(svgNS, 'text');
+                label.setAttribute('x', itemX + breakdownItemSize / 2);
+                label.setAttribute('y', itemY + breakdownItemSize + 50);
+                label.setAttribute('text-anchor', 'middle');
+                label.setAttribute('font-size', 40);
+                label.setAttribute('font-family', 'Arial, sans-serif');
+                label.setAttribute('fill', '#666');
+                label.textContent = i === 0 ? '空白' : `第${i}笔`;
+                svg.appendChild(label);
+            }
+
+            // ========== 笔画点阵区域 ==========
+            const dotsStartY = breakdownY + rows * (breakdownItemSize + 80) + 150;
+
+            // 点阵标题
+            const dotsTitle = document.createElementNS(svgNS, 'text');
+            dotsTitle.setAttribute('x', width / 2);
+            dotsTitle.setAttribute('y', dotsStartY);
+            dotsTitle.setAttribute('text-anchor', 'middle');
+            dotsTitle.setAttribute('font-size', 70);
+            dotsTitle.setAttribute('font-family', 'Arial, sans-serif');
+            dotsTitle.setAttribute('fill', '#333');
+            dotsTitle.textContent = '笔画点阵';
+            svg.appendChild(dotsTitle);
+
+            // 计算边界框以居中
+            const bounds = calculateBounds(medians);
+            const centerX = (bounds.minX + bounds.maxX) / 2;
+            const centerY = (bounds.minY + bounds.maxY) / 2;
+            const svgCenterX = viewBoxSize / 2;
+            const svgCenterY = viewBoxSize / 2;
+
+            // 点阵居中位置
+            const dotsCenterX = width / 2;
+            const dotsCenterY = dotsStartY + 200 + (height - dotsStartY - 200) / 2;
+
+            // 颜色
+            const colors = ['#8b5cf6', '#ec4899', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#6366f1', '#14b8a6'];
+            const blackColor = '#333333';
+
+            let globalIndex = 1;
+
+            medians.forEach((points, strokeIndex) => {
+                const strokeColor = isMonochrome ? blackColor : colors[strokeIndex % colors.length];
+
+                // 绘制连线
+                if (shouldConnect && points.length > 1) {
+                    const pathD = points.map((p, i) =>
+                        (i === 0 ? 'M' : 'L') + `${p[0] * scale} ${(viewBoxSize - p[1]) * scale}`
+                    ).join(' ');
+
+                    const linePath = document.createElementNS(svgNS, 'path');
+                    linePath.setAttribute('d', pathD);
+                    linePath.setAttribute('fill', 'none');
+                    linePath.setAttribute('stroke', strokeColor);
+                    linePath.setAttribute('stroke-width', 14 * scale);
+                    linePath.setAttribute('stroke-linecap', 'round');
+                    linePath.setAttribute('stroke-linejoin', 'round');
+                    linePath.setAttribute('opacity', '0.4');
+                    linePath.setAttribute('transform', `translate(${dotsCenterX - svgCenterX*scale}, ${dotsCenterY - svgCenterY*scale})`);
+                    svg.appendChild(linePath);
+                }
+
+                // 绘制点和标签
+                points.forEach((point, i) => {
+                    const scaledX = point[0] * scale;
+                    const scaledY = (viewBoxSize - point[1]) * scale;
+                    const finalX = scaledX + dotsCenterX - svgCenterX * scale;
+                    const finalY = scaledY + dotsCenterY - svgCenterY * scale;
+
+                    // 点
+                    const circle = document.createElementNS(svgNS, 'circle');
+                    circle.setAttribute('cx', finalX);
+                    circle.setAttribute('cy', finalY);
+                    circle.setAttribute('r', 12 * scale);
+                    circle.setAttribute('fill', strokeColor);
+                    svg.appendChild(circle);
+
+                    // 标签
+                    if (shouldShowLabels) {
+                        const text = document.createElementNS(svgNS, 'text');
+                        text.setAttribute('x', finalX + 18 * scale);
+                        text.setAttribute('y', finalY + 8 * scale);
+                        text.setAttribute('fill', strokeColor);
+                        text.setAttribute('font-size', 28 * scale);
+                        text.setAttribute('font-weight', '600');
+                        text.setAttribute('font-family', 'Arial, sans-serif');
+                        text.textContent = globalIndex;
+                        svg.appendChild(text);
+                    }
+
+                    globalIndex++;
+                });
+            });
+
+            // 创建打印窗口
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>打印 - ${currentChar.character}</title>
+                    <style>
+                        @page { size: A4; margin: 10mm; }
+                        body { margin: 0; padding: 0; }
+                        svg { width: 100%; height: auto; }
+                        @media print {
+                            body { margin: 0; }
+                            svg { width: 190mm; height: auto; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${new XMLSerializer().serializeToString(svg)}
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+
+            setTimeout(() => {
+                printWindow.print();
+            }, 500);
+        }).catch(err => {
+            console.error('打印失败:', err);
+            alert('打印失败');
+        });
+    }
+
     // === URL 参数处理 ===
 
     function handleQueryParams() {
@@ -930,6 +1217,8 @@ document.addEventListener('DOMContentLoaded', () => {
     btnDots.addEventListener('click', generateStrokeDots);
     btnDownloadPng.addEventListener('click', downloadAsPNG);
     btnDownloadSvg.addEventListener('click', downloadAsSVG);
+    btnPrint.addEventListener('click', () => printDots(false));
+    btnPrintBW.addEventListener('click', () => printDots(true));
 
     // 单色模式：禁用透明背景选项
     monochromeMode.addEventListener('change', () => {
