@@ -1,0 +1,2385 @@
+{
+  "meta": {
+    "title": "通用数据保护条例",
+    "titleEn": "General Data Protection Regulation",
+    "shortTitle": "GDPR",
+    "effectiveDate": "2018-05-25",
+    "totalArticles": 99,
+    "totalChapters": 11
+  },
+  "chapters": [
+    {
+      "id": 1,
+      "title": "总则",
+      "titleEn": "General Provisions",
+      "articleRange": [
+        1,
+        4
+      ]
+    },
+    {
+      "id": 2,
+      "title": "原则",
+      "titleEn": "Principles",
+      "articleRange": [
+        5,
+        11
+      ]
+    },
+    {
+      "id": 3,
+      "title": "数据主体权利",
+      "titleEn": "Rights of the data subject",
+      "articleRange": [
+        12,
+        23
+      ]
+    },
+    {
+      "id": 4,
+      "title": "控制者和处理者",
+      "titleEn": "Controller and processor",
+      "articleRange": [
+        24,
+        49
+      ]
+    },
+    {
+      "id": 5,
+      "title": "个人数据向第三国传输",
+      "titleEn": "Transfers of personal data",
+      "articleRange": [
+        44,
+        50
+      ]
+    },
+    {
+      "id": 6,
+      "title": "独立监管机构",
+      "titleEn": "Independent supervisory authorities",
+      "articleRange": [
+        51,
+        59
+      ]
+    },
+    {
+      "id": 7,
+      "title": "合作与一致性",
+      "titleEn": "Cooperation and consistency",
+      "articleRange": [
+        60,
+        76
+      ]
+    },
+    {
+      "id": 8,
+      "title": "救济、责任和处罚",
+      "titleEn": "Remedies, liability and penalties",
+      "articleRange": [
+        77,
+        84
+      ]
+    },
+    {
+      "id": 9,
+      "title": "特定处理情形条款",
+      "titleEn": "Provisions relating to specific processing situations",
+      "articleRange": [
+        85,
+        91
+      ]
+    },
+    {
+      "id": 10,
+      "title": "授权法案和实施法案",
+      "titleEn": "Delegated acts and implementing acts",
+      "articleRange": [
+        92,
+        93
+      ]
+    },
+    {
+      "id": 11,
+      "title": "最终条款",
+      "titleEn": "Final provisions",
+      "articleRange": [
+        94,
+        99
+      ]
+    }
+  ],
+  "articles": [
+    {
+      "number": 1,
+      "chapter": 1,
+      "title": "主题与范围",
+      "titleEn": "Subject matter and scope",
+      "contentZh": [
+        "本条例制定有关自然人个人数据处理及此类数据自由流动的规则，以保护自然人的基本权利和自由，特别是其个人数据保护权。",
+        "本条例保护自然人的基本权利和自由，特别是其个人数据保护权。本条例不得限制或禁止因公共利益保护目的而对个人数据自由流动进行的限制。"
+      ],
+      "contentEn": [
+        "This Regulation lays down rules relating to the protection of natural persons with regard to the processing of personal data and rules relating to the free movement of personal data.",
+        "This Regulation protects fundamental rights and freedoms of natural persons and in particular their right to the protection of personal data. The free movement of personal data within the Union shall be neither restricted nor prohibited for reasons connected with the protection of natural persons with regard to the processing of personal data."
+      ],
+      "interpretation": "本条确立了 GDPR 的双重目标：既要保护个人数据权利，又要确保数据在欧盟内部的自由流动。这体现了欧盟在隐私保护与数字经济发展之间寻求平衡的立法意图。值得注意的是，GDPR 不限制成员国为公共利益对数据流动进行合理限制。",
+      "keywords": [
+        "适用范围",
+        "立法目的",
+        "基本权利",
+        "数据自由流动"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 2,
+      "chapter": 1,
+      "title": "适用范围",
+      "titleEn": "Scope",
+      "contentZh": [
+        "本条例适用于全部或部分以自动化手段处理个人数据，以及以自动化手段以外的方式处理个人数据，但该等处理构成或旨在构成档案系统的一部分。",
+        "本条例不适用于：在履行欧盟法律未涵盖的活动过程中，自然人进行的纯个人或家庭活动；主管机关为预防、调查、侦查或起诉刑事犯罪或执行刑事处罚目的而处理个人数据，包括防范公共安全威胁。"
+      ],
+      "contentEn": [
+        "This Regulation applies to the processing of personal data wholly or partly by automated means and to the processing other than by automated means of personal data which form part of a filing system or are intended to form part of a filing system.",
+        "This Regulation does not apply to the processing of personal data: in the course of an activity which falls outside the scope of Union law; by the Member States when carrying out activities which fall within the scope of Chapter 2 of Title V of the TEU; by a natural person in the course of a purely personal or household activity; by competent authorities for the purposes of the prevention, investigation, detection or prosecution of criminal offences or the execution of criminal penalties, including the safeguarding against and the prevention of threats to public security."
+      ],
+      "interpretation": "本条明确了 GDPR 的适用边界。关键点包括：(1) 自动化处理和人工档案系统均在规制范围内；(2) 纯个人/家庭活动豁免，但个人商业活动不在豁免之列；(3) 刑事执法活动由其他专门法律规制。",
+      "keywords": [
+        "适用范围",
+        "豁免情形",
+        "自动化处理",
+        "档案系统"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 3,
+      "chapter": 1,
+      "title": "地域范围",
+      "titleEn": "Territorial scope",
+      "contentZh": [
+        "本条例适用于在欧盟境内设有机构的数据控制者或处理者在欧盟境内的活动，无论其处理活动是否在欧盟境内进行。",
+        "本条例适用于在欧盟境外设立的数据控制者或处理者，其处理活动涉及向欧盟境内的数据主体提供商品或服务（无论是否付费），或监控数据主体在欧盟境内的行为。",
+        "本条例适用于在欧盟境外设立的数据控制者，其处理活动涉及根据国际公法适用成员国法律的情形。"
+      ],
+      "contentEn": [
+        "This Regulation applies to the processing of personal data in the context of the activities of an establishment of a controller or a processor in the Union, regardless of whether the processing takes place in the Union or not.",
+        "This Regulation applies to the processing of personal data of data subjects who are in the Union by a controller or processor not established in the Union, where the processing activities are related to: the offering of goods or services, irrespective of whether a payment of the data subject is required, to such data subjects in the Union; or the monitoring of their behaviour as far as their behaviour takes place within the Union.",
+        "This Regulation applies to the processing of personal data by a controller not established in the Union, but in a place where Member State law applies by virtue of public international law."
+      ],
+      "interpretation": "这是 GDPR 最具影响力的条款之一，确立了「长臂管辖」原则。即使企业不在欧盟境内，只要向欧盟用户提供服务或监控欧盟用户行为，就必须遵守 GDPR。这使 GDPR 成为事实上的全球数据保护标准。",
+      "keywords": [
+        "地域范围",
+        "长臂管辖",
+        "向欧盟用户提供服务",
+        "行为监控"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 4,
+      "chapter": 1,
+      "title": "定义",
+      "titleEn": "Definitions",
+      "contentZh": [
+        "就本条例而言：",
+        "(1) 「个人数据」是指已识别或可识别的自然人（「数据主体」）的任何信息；可识别的自然人是指可以直接或间接识别的人，特别是通过姓名、身份证号、位置数据、在线标识符等标识符，或通过该自然人特有的一个或多个身体、生理、遗传、精神、经济、文化或社会身份等因素；",
+        "(2) 「处理」是指对个人数据执行的任何操作，无论是否通过自动化手段，如收集、记录、组织、结构化、存储、改编、检索、咨询、使用、披露、传播、排列、组合、限制、删除或销毁；",
+        "(3) 「限制」是指对个人数据进行的任何操作，以暂时停止对其进行处理；",
+        "(4) 「画像」是指对个人数据的任何自动化处理，包括使用个人数据评估自然人的某些个人方面，特别是与该自然人的工作表现、经济状况、健康、个人偏好、兴趣、可靠性、行为、位置或行踪相关的分析和预测；",
+        "(5) 「匿名化」是指在不可逆的方式下，使个人数据无法识别到特定数据主体，包括通过处理使其无法或极其困难识别的过程；",
+        "(6) 「档案系统」是指任何结构化的个人数据集合，无论其是否集中、分散或以功能或地理为基础，并可按特定标准访问；",
+        "(7) 「控制者」是指单独或与他人共同决定个人数据处理目的和方式的自然人或法人、公共机关、机构或其他组织；",
+        "(8) 「处理者」是指代表控制者处理个人数据的自然人或法人、公共机关、机构或其他组织；",
+        "(9) 「接收者」是指被披露个人数据的自然人或法人、公共机关、机构或其他组织，无论其是否第三方；",
+        "(10) 「第三方」是指除数据主体、控制者、处理者及经其授权处理个人数据的人员以外的自然人或法人、公共机关、机构或其他组织。"
+      ],
+      "contentEn": [
+        "For the purposes of this Regulation:",
+        "(1) 'personal data' means any information relating to an identified or identifiable natural person ('data subject'); an identifiable natural person is one who can be identified, directly or indirectly, in particular by reference to an identifier such as a name, an identification number, location data, an online identifier or to one or more factors specific to the physical, physiological, genetic, mental, economic, cultural or social identity of that natural person;",
+        "(2) 'processing' means any operation or set of operations which is performed on personal data or on sets of personal data, whether or not by automated means, such as collection, recording, organisation, structuring, storage, adaptation or alteration, retrieval, consultation, use, disclosure by transmission, dissemination or otherwise making available, alignment or combination, restriction, erasure or destruction;",
+        "(3) 'restriction of processing' means the marking of stored personal data with the aim of limiting their processing in the future;",
+        "(4) 'profiling' means any form of automated processing of personal data consisting of the use of personal data to evaluate certain personal aspects relating to a natural person, in particular to analyse or predict aspects concerning that natural person's performance at work, economic situation, health, personal preferences, interests, reliability, behaviour, location or movements;",
+        "(5) 'pseudonymisation' means the processing of personal data in such a manner that the personal data can no longer be attributed to a specific data subject without the use of additional information, provided that such additional information is kept separately and is subject to technical and organisational measures to ensure that the personal data are not attributed to an identified or identifiable natural person;",
+        "(6) 'filing system' means any structured set of personal data which are accessible according to specific criteria, whether centralised, decentralised or dispersed on a functional or geographical basis;",
+        "(7) 'controller' means the natural or legal person, public authority, agency or other body which, alone or jointly with others, determines the purposes and means of the processing of personal data;",
+        "(8) 'processor' means a natural or legal person, public authority, agency or other body which processes personal data on behalf of the controller;",
+        "(9) 'recipient' means a natural or legal person, public authority, agency or another body, to which the personal data are disclosed, whether a third party or not;",
+        "(10) 'third party' means a natural or legal person, public authority, agency or body other than the data subject, controller, processor and persons who, under the direct authority of the controller or processor, are authorised to process personal data."
+      ],
+      "interpretation": "本条是 GDPR 最核心的定义条款。重点概念包括：\n\n【个人数据】范围极广，包括姓名、ID、位置、Cookie、IP地址等可直接或间接识别个人的信息。\n\n【控制者 vs 处理者】控制者决定「为什么」和「怎么」处理数据，承担主要合规责任；处理者仅代表控制者执行处理，责任较轻。\n\n【画像】自动化决策、推荐系统、信用评分等均属于画像，受 GDPR 严格规制。\n\n【匿名化 vs 假名化】匿名化后的数据不再属于个人数据；假名化只是降低识别风险，仍需保护。",
+      "keywords": [
+        "个人数据",
+        "处理",
+        "控制者",
+        "处理者",
+        "画像",
+        "匿名化",
+        "假名化"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 5,
+      "chapter": 2,
+      "title": "处理个人数据的原则",
+      "titleEn": "Principles relating to processing of personal data",
+      "contentZh": [
+        "个人数据应当：",
+        "(a) 以合法、公平、透明的方式处理数据主体（「合法性、公平性和透明性」）；",
+        "(b) 为特定、明确、合法的目的收集，不得以与该等目的不符的方式进一步处理；为公共利益、科学或历史研究或统计目的进一步处理的，在不违背本条例第89(1)条规定的保障措施的前提下，应视为不 incompatible（不兼容）；",
+        "(c) 充足、相关，并限于处理目的所必需（「数据最小化」）；",
+        "(d) 准确，必要时保持最新；采取一切合理步骤确保不准确的数据被及时删除或更正（「准确性」）；",
+        "(e) 以能够识别数据主体的形式保存的时间不得超过处理目的所必需的时间；为公共利益、科学或历史研究或统计目的存储个人数据的，在不违背本条例第89(1)条规定的保障措施的前提下，可以延长保存期限；",
+        "(f) 以确保个人数据适当安全的方式处理，包括使用适当的技术或组织措施，防止未经授权或非法处理、意外丢失、销毁或损害（「完整性和保密性」）。",
+        "控制者应当负责并能够证明其遵守第1款所述原则（「可归责性」）。"
+      ],
+      "contentEn": [
+        "Personal data shall be:",
+        "(a) processed lawfully, fairly and in a transparent manner in relation to the data subject ('lawfulness, fairness and transparency');",
+        "(b) collected for specified, explicit and legitimate purposes and not further processed in a manner that is incompatible with those purposes; further processing for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes shall, in accordance with Article 89(1), not be considered to be incompatible with the initial purposes ('purpose limitation');",
+        "(c) adequate, relevant and limited to what is necessary in relation to the purposes for which they are processed ('data minimisation');",
+        "(d) accurate and, where necessary, kept up to date; every reasonable step must be taken to ensure that personal data that are inaccurate, having regard to the purposes for which they are processed, are erased or rectified without delay ('accuracy');",
+        "(e) kept in a form which permits identification of data subjects for no longer than is necessary for the purposes for which the personal data are processed; personal data may be stored for longer periods insofar as the personal data will be processed solely for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes in accordance with Article 89(1) subject to implementation of the appropriate technical and organisational measures required by this Regulation in order to safeguard the rights and freedoms of the data subject ('storage limitation');",
+        "(f) processed in a manner that ensures appropriate security of the personal data, including protection against unauthorised or unlawful processing and against accidental loss, destruction or damage, using appropriate technical or organisational measures ('integrity and confidentiality').",
+        "The controller shall be responsible for, and be able to demonstrate compliance with, paragraph 1 ('accountability')."
+      ],
+      "interpretation": "这是 GDPR 最核心的原则条款，简称「六大原则 + 可归责性」：\n\n1. 【合法性、公平性、透明性】处理必须有合法依据，不得欺骗用户\n2. 【目的限制】数据只能用于特定目的，不得随意挪用\n3. 【数据最小化】只收集必要的数据\n4. 【准确性】确保数据正确，及时更正错误\n5. 【存储限制】数据到期必须删除\n6. 【完整性和保密性】安全保障措施\n\n【可归责性】控制者必须能证明自己合规——合规是做出来的，不是说出来的",
+      "keywords": [
+        "六大原则",
+        "合法性",
+        "目的限制",
+        "数据最小化",
+        "准确性",
+        "存储限制",
+        "完整性",
+        "可归责性"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 6,
+      "chapter": 2,
+      "title": "处理的合法性",
+      "titleEn": "Lawfulness of processing",
+      "contentZh": [
+        "处理仅在适用以下至少一项条件时合法：",
+        "(a) 数据主体已同意为其一个或多个特定目的处理其个人数据；",
+        "(b) 处理是为履行数据主体作为一方的合同所必需，或在订立合同前应数据主体要求采取措施所必需；",
+        "(c) 处理是为履行控制者承担的法律义务所必需；",
+        "(d) 处理是为保护数据主体或另一自然人的重大利益所必需；",
+        "(e) 处理是为执行公共利益任务或行使授予控制者的官方职权所必需；",
+        "(f) 处理是为控制者或第三方追求的合法利益所必需，但被数据主体的利益或基本权利和自由（特别是儿童的权利）所覆盖的情形除外。"
+      ],
+      "contentEn": [
+        "Processing shall be lawful only if and to the extent that at least one of the following applies:",
+        "(a) the data subject has given consent to the processing of his or her personal data for one or more specific purposes;",
+        "(b) processing is necessary for the performance of a contract to which the data subject is party or in order to take steps at the request of the data subject prior to entering into a contract;",
+        "(c) processing is necessary for compliance with a legal obligation to which the controller is subject;",
+        "(d) processing is necessary in order to protect the vital interests of the data subject or of another natural person;",
+        "(e) processing is necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in the controller;",
+        "(f) processing is necessary for the purposes of the legitimate interests pursued by a controller or a third party, except where such interests are overridden by the interests or fundamental rights and freedoms of the data subject which require protection of personal data, in particular where the data subject is a child."
+      ],
+      "interpretation": "这是 GDPR 最常用的条款之一，确立了六种合法处理依据（简称「六大合法依据」）：\n\n【同意】最常用但要求严格，必须是明确、具体、自愿、可撤回的\n【合同】履约必需，但不能把「同意」绑定为签约前提\n【法律义务】如税务报告、反洗钱\n【重大利益】紧急医疗等\n【公共利益】政府职能、公共卫生\n【合法利益】企业最常用的依据，但需进行利益平衡测试\n\n实践中，「合法利益」是最灵活也最容易被滥用的依据，必须文档化平衡过程。",
+      "keywords": [
+        "六大合法依据",
+        "同意",
+        "合同履行",
+        "法律义务",
+        "重大利益",
+        "公共利益",
+        "合法利益"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 7,
+      "chapter": 2,
+      "title": "同意的条件",
+      "titleEn": "Conditions for consent",
+      "contentZh": [
+        "在数据主体通过书面声明同意处理其个人数据的情形下，该等同意应当清晰可辨，并与其他事项明确区分。声明应以清晰、通俗的语言，采用易于访问和理解的形式，不使用任何误导性或混淆性条款。声明应当以书面形式（包括电子形式）呈现。",
+        "如同意是通过书面声明作出的，且该声明还涉及其他事项，同意请求应以可区分和可识别的方式呈现，使用清晰、通俗的语言。声明中构成同意的部分违反本条例的，不影响声明的其余部分的效力。",
+        "数据主体有权随时撤回其同意。撤回同意不得影响撤回前基于同意进行的处理的合法性。在同意前，数据主体应被告知撤回权。撤回同意应与给予同意同样容易。",
+        "评估同意是否自愿作出时，应充分考虑在履行合同（包括提供服务）时，同意是否作为条件，包括是否对履行合同或提供服务而言是必需的。"
+      ],
+      "contentEn": [
+        "Where processing is based on consent, the controller shall be able to demonstrate that the data subject has consented to processing of his or her personal data.",
+        "If the data subject's consent is given in the context of a written declaration which also concerns other matters, the request for consent shall be presented in a manner which is clearly distinguishable from the other matters, in an intelligible and easily accessible form, using clear and plain language. Any part of such a declaration which constitutes an infringement of this Regulation shall not be binding.",
+        "The data subject shall have the right to withdraw his or her consent at any time. The withdrawal of consent shall not affect the lawfulness of processing based on consent before its withdrawal. Prior to giving consent, the data subject shall be informed thereof. It shall be as easy to withdraw as to give consent.",
+        "When assessing whether consent is freely given, utmost account shall be taken of whether, inter alia, the performance of a contract, including the provision of a service, is conditional on consent to the processing of personal data that is not necessary for the performance of that contract."
+      ],
+      "interpretation": "本条对「同意」设定了严格标准：\n\n【清晰可辨】同意条款必须与其他条款区分开，不能用「打包同意」方式蒙混过关\n\n【自愿】不得将同意作为合同履行的条件（除非数据对合同确有必要）\n\n【可撤回】撤回权和同意权必须对等，不能「同意容易撤回难」\n\n【举证责任】控制者必须能证明用户同意过——这也是为什么 Cookie 横幅要记录用户选择\n\n实践中，很多企业的「隐私政策弹窗」不符合本条要求，被监管机构处罚。",
+      "keywords": [
+        "同意条件",
+        "自愿",
+        "可撤回",
+        "清晰可辨",
+        "举证责任"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 8,
+      "chapter": 2,
+      "title": "儿童同意条件",
+      "titleEn": "Conditions applicable to child's consent in relation to information society services",
+      "contentZh": [
+        "在适用第6(1)条(a)项的情况下，针对直接向儿童提供信息社会服务，当儿童年满16岁时，其同意具有法律效力。对于未满16岁的儿童，该等同意仅在持监护责任者同意或授权的情况下具有法律效力。",
+        "成员国可通过法律降低上述年龄限制，但不得低于13岁。"
+      ],
+      "contentEn": [
+        "Where point (a) of Article 6(1) applies, in relation to the offer of information society services directly to a child, the processing of the personal data of a child shall be lawful where the child is at least 16 years old. Where the child is below the age of 16 years, such processing shall be lawful only if and to the extent that consent is given or authorised by the holder of parental responsibility over the child.",
+        "Member States may provide by law for a lower age for those purposes provided that such lower age is not below 13 years."
+      ],
+      "interpretation": "本条专门针对儿童在线服务设定了同意年龄门槛：\n\n【年龄标准】默认16岁，成员国可下调至13岁\n\n【信息社会服务】仅适用于在线服务（网站、App、游戏等）\n\n【监护人同意】低于年龄门槛需监护人授权\n\n【控制者责任】必须尽合理努力验证监护人身份\n\n实践中，儿童年龄验证是合规难点，很多企业选择直接禁止儿童使用或简化处理。",
+      "keywords": [
+        "儿童保护",
+        "同意年龄",
+        "监护人同意",
+        "信息社会服务"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 9,
+      "chapter": 2,
+      "title": "特殊类别个人数据处理",
+      "titleEn": "Processing of special categories of personal data",
+      "contentZh": [
+        "禁止处理揭示种族或民族出身、政治观点、宗教或哲学信仰、工会成员身份的个人数据，以及基因数据、用于唯一识别自然人的生物特征数据、有关健康的数据或有关自然人性生活或性取向的数据。",
+        "在以下情形下可处理：(a) 数据主体明确同意；(b) 履行就业义务；(c) 保护重大利益；(d) 基金会、协会或其他非营利机构处理；(e) 公开数据；(f) 建立、行使或抗辩法律主张；(g) 重大公共利益；(h) 预防性或职业医学；(i) 公共卫生领域公共利益；(j) 存档、科学或历史研究或统计目的。"
+      ],
+      "contentEn": [
+        "Processing of personal data revealing racial or ethnic origin, political opinions, religious or philosophical beliefs, or trade union membership, and the processing of genetic data, biometric data for the purpose of uniquely identifying a natural person, data concerning health or data concerning a natural person's sex life or sexual orientation shall be prohibited.",
+        "Paragraph 1 shall not apply if one of the following applies: the data subject has given explicit consent; processing is necessary for employment law; vital interests; legitimate activities by foundations; data made public; legal claims; substantial public interest; preventive or occupational medicine; public health; archiving, scientific or historical research or statistical purposes."
+      ],
+      "interpretation": "本条保护最敏感的个人数据类别，处理标准更严格：\n\n【九类敏感数据】种族、政治、宗教、工会、基因、生物特征、健康、性生活、性取向\n\n【明确同意】普通同意不够，必须是「明确同意」\n\n【例外情形】共10种例外，需严格控制适用范围\n\n【生物特征】仅限用于「唯一识别」目的，其他用途不在此限\n\n实践中，HR系统、医疗健康App、生物识别设备都受本条严格规制。",
+      "keywords": [
+        "敏感数据",
+        "特殊类别",
+        "种族",
+        "宗教",
+        "健康数据",
+        "生物特征",
+        "明确同意"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 10,
+      "chapter": 2,
+      "title": "敏感数据处理的标识",
+      "titleEn": "Processing of personal data relating to criminal convictions and offences",
+      "contentZh": [
+        "处理有关刑事定罪和犯罪的个人数据，只能在官方机关监督下进行，或由欧盟或成员国法律授权。",
+        "控制者处理刑事定罪数据时，应采取适当的技术和组织措施，保障数据主体权利和自由。"
+      ],
+      "contentEn": [
+        "Processing of personal data relating to criminal convictions and offences or related security measures based on Article 6(1) shall be carried out only under the control of official authority or when the processing is authorised by Union or Member State law providing for appropriate safeguards for the rights and freedoms of data subjects.",
+        "Any comprehensive register of criminal convictions shall be kept only under the control of official authority."
+      ],
+      "interpretation": "本条专门规制刑事定罪和犯罪记录数据的处理：\n\n【处理主体】仅限官方机关或法律授权\n\n【保障措施】必须采取适当的技术和组织措施\n\n【登记册】刑事定罪综合登记册只能由官方机关维护\n\n实践中，HR背景调查、安保行业、金融机构反洗钱等场景涉及此类数据。",
+      "keywords": [
+        "刑事定罪",
+        "犯罪记录",
+        "官方机关",
+        "敏感数据"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 11,
+      "chapter": 2,
+      "title": "无需识别的处理",
+      "titleEn": "Processing which does not require identification",
+      "contentZh": [
+        "如果控制者的处理目的不需要、或不再需要识别数据主体，控制者无义务为遵守本条例而额外获取信息以识别数据主体。",
+        "控制者应告知数据主体无法识别的情况。"
+      ],
+      "contentEn": [
+        "If the purposes for which a controller processes personal data do not or do no longer require the identification of a data subject by the controller, the controller shall not be obliged to maintain, acquire or process additional information in order to identify the data subject for the sole purpose of complying with this Regulation.",
+        "Where, in cases referred to in paragraph 1 of this Article, the controller is able to demonstrate that it is not in a position to identify the data subject, the controller shall inform the data subject accordingly, if possible."
+      ],
+      "interpretation": "本条规定了控制者在无法识别数据主体时的义务豁免：\n\n【豁免情形】处理目的不需要识别数据主体\n\n【无额外义务】无需为合规而额外获取识别信息\n\n【告知义务】应告知数据主体无法识别的情况\n\n实践中，匿名化数据处理、统计分析等场景可适用本条豁免。",
+      "keywords": [
+        "无需识别",
+        "匿名化",
+        "豁免",
+        "统计分析"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 12,
+      "chapter": 3,
+      "title": "信息、沟通和访问权的透明性",
+      "titleEn": "Transparent information, communication and modalities for the exercise of the data subject's rights",
+      "contentZh": [
+        "控制者应采取适当措施，以简洁、透明、可理解和易于访问的形式，使用清晰、通俗的语言，向数据主体提供与处理相关的信息，并行使本条例赋予的权利。控制者应当书面（包括电子方式）提供信息。",
+        "控制者应当便利数据主体行使本条例赋予的权利。在适用情形下，控制者还应提供远程电子手段行使权利的机制。控制者应告知数据主体行使权利的身份识别程序。"
+      ],
+      "contentEn": [
+        "The controller shall take appropriate measures to provide any information referred to in Articles 13 and 14 and any communication under Articles 15 to 22 and 34 relating to processing to the data subject in a concise, transparent, intelligible and easily accessible form, using clear and plain language, in particular for any information addressed specifically to a child. The information shall be provided in writing, or by other means, including, where appropriate, by electronic means. When requested by the data subject, the information may be provided orally, provided that the identity of the data subject is proven by other means.",
+        "The controller shall facilitate the exercise of data subject rights under Articles 15 to 22. In the cases referred to in Article 11(2), the controller shall not refuse to act on the request of the data subject for exercising his or her rights under Articles 15 to 22, unless the controller demonstrates that it is not in a position to identify the data subject."
+      ],
+      "interpretation": "本条确立了数据主体权利行使的基本原则：\n\n【透明性】隐私政策必须简洁、清晰、易懂——不能用法律术语堆砌的「天书」\n\n【便利性】必须提供便捷的权利行使渠道\n\n【儿童保护】针对儿童的信息应特别清晰\n\n实践中，很多企业的隐私政策因过于冗长复杂而被监管机构认定为不符合透明性要求。",
+      "keywords": [
+        "透明性",
+        "信息提供",
+        "权利行使",
+        "儿童保护"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 13,
+      "chapter": 3,
+      "title": "从数据主体获取数据时的信息提供",
+      "titleEn": "Information to be provided where personal data are collected from the data subject",
+      "contentZh": [
+        "控制者从数据主体获取个人数据时，应向数据主体提供以下信息：控制者身份和联系方式、DPO联系方式、处理目的和法律依据、数据接收者类别、跨境传输信息、保存期限、数据主体权利（访问、更正、删除、限制、携带、反对、撤回同意）、投诉权、提供数据的强制性、自动化决策（含画像）信息。",
+        "信息应在获取数据时提供，以简洁、透明、可理解和易于访问的形式，使用清晰、通俗的语言。"
+      ],
+      "contentEn": [
+        "Where personal data relating to a data subject are collected from the data subject, the controller shall, at the time when personal data are obtained, provide the data subject with all of the following information: the identity and the contact details of the controller and the DPO; the purposes of the processing and the legal basis; the recipients or categories of recipients; transfers to third countries; the period for which the personal data will be stored; the existence of the rights; the right to lodge a complaint; whether the provision of personal data is obligatory; the existence of automated decision-making, including profiling.",
+        "The information shall be provided in a concise, transparent, intelligible and easily accessible form, using clear and plain language."
+      ],
+      "interpretation": "这是隐私政策的核心法律依据。控制者必须告知用户：\n\n【必须披露的信息】约13项，包括控制者身份、DPO、目的、法律依据、接收者、保存期限、权利等\n\n【时机】获取数据时（注册时、填表时）\n\n【形式】简洁、清晰、易懂\n\n实践中，这是监管机构检查隐私政策的重点条款，缺失任何一项都可能构成违规。",
+      "keywords": [
+        "信息提供",
+        "隐私政策",
+        "透明性",
+        "数据主体权利"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 14,
+      "chapter": 3,
+      "title": "非从数据主体获取数据时的信息提供",
+      "titleEn": "Information to be provided where personal data have not been obtained from the data subject",
+      "contentZh": [
+        "个人数据非从数据主体获取时，控制者应在获取数据后合理期限内（最迟一个月内）向数据主体提供信息，包括：控制者身份、DPO联系方式、处理目的和法律依据、数据类别、数据来源、接收者、保存期限、数据主体权利、投诉权、自动化决策信息。",
+        "如数据用于与数据主体沟通，应在首次沟通时提供信息。",
+        "如数据需向另一接收者披露，应在首次披露时提供信息。"
+      ],
+      "contentEn": [
+        "Where personal data have not been obtained from the data subject, the controller shall provide the data subject with the information referred to in paragraph 1(f) within a reasonable period after obtaining the personal data, but at the latest within one month.",
+        "Where the personal data are to be used for communication with the data subject, the controller shall provide the information at the latest at the time of first communication.",
+        "Where the personal data are to be disclosed to another recipient, the controller shall provide the information at the latest when the personal data are first disclosed."
+      ],
+      "interpretation": "本条规制间接获取数据（如购买数据、第三方共享）时的告知义务：\n\n【时限】获取后一个月内，或首次沟通/披露时\n\n【额外信息】必须说明数据来源\n\n【豁免情形】法律要求、数据已公开、获取数据明显不现实等\n\n实践中，数据采购、合作伙伴数据共享场景必须遵守本条。",
+      "keywords": [
+        "信息提供",
+        "间接获取",
+        "数据来源",
+        "第三方数据"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 15,
+      "chapter": 3,
+      "title": "访问权",
+      "titleEn": "Right of access by the data subject",
+      "contentZh": [
+        "数据主体有权从控制者处确认其个人数据是否被处理，并在被处理的情况下获得访问权，包括：处理目的、数据类别、接收者类别（特别是第三国）、保存期限、更正/删除/限制权、投诉权、自动化决策信息、数据来源。",
+        "控制者应提供正在处理的个人数据副本。数据主体要求电子形式的，应提供电子格式。"
+      ],
+      "contentEn": [
+        "The data subject shall have the right to obtain from the controller confirmation as to whether or not personal data concerning him or her are being processed, and, where that is the case, access to the personal data and the following information: the purposes of the processing; the categories of personal data concerned; the recipients; the envisaged period; the existence of the right to rectification or erasure; the right to lodge a complaint; information about the source of the data.",
+        "The controller shall provide a copy of the personal data undergoing processing. For any further copies requested by the data subject, the controller may charge a reasonable fee."
+      ],
+      "interpretation": "访问权是数据主体最常用的权利之一：\n\n【核心内容】确认数据处理 + 获取数据副本\n\n【附加信息】处理目的、接收者、来源、保存期限等\n\n【响应时间】一个月内（可延长至三个月）\n\n【格式】电子形式优先\n\n实践中，企业必须建立 DSAR（数据主体访问请求）处理流程，很多企业使用自动化工具处理。",
+      "keywords": [
+        "访问权",
+        "DSAR",
+        "数据副本",
+        "数据主体权利"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 16,
+      "chapter": 3,
+      "title": "更正权",
+      "titleEn": "Right to rectification",
+      "contentZh": [
+        "数据主体有权要求控制者及时更正其不准确的个人数据。",
+        "考虑到处理目的，数据主体有权要求补充不完整的个人数据，包括通过提供补充声明的方式。"
+      ],
+      "contentEn": [
+        "The data subject shall have the right to obtain from the controller without undue delay the rectification of inaccurate personal data concerning him or her.",
+        "Taking into account the purposes of the processing, the data subject shall have the right to have incomplete personal data completed, including by means of providing a supplementary statement."
+      ],
+      "interpretation": "更正权是数据主体基本权利之一：\n\n【核心内容】更正不准确数据 + 补充不完整数据\n\n【时限】不得无故拖延\n\n【补充方式】可提供补充声明\n\n实践中，用户信息更新、错误修正请求都依据本条处理。",
+      "keywords": [
+        "更正权",
+        "数据准确性",
+        "补充声明",
+        "数据主体权利"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 17,
+      "chapter": 3,
+      "title": "删除权（被遗忘权）",
+      "titleEn": "Right to erasure ('right to be forgotten')",
+      "contentZh": [
+        "数据主体有权要求控制者删除其个人数据，且控制者有义务在以下情形下及时删除个人数据：",
+        "(a) 个人数据对于收集或处理目的已不再必要；",
+        "(b) 数据主体撤回同意，且处理无其他合法依据；",
+        "(c) 数据主体反对处理，且无压倒性正当理由继续处理；",
+        "(d) 个人数据被非法处理；",
+        "(e) 为履行法律义务，必须删除个人数据；",
+        "(f) 为提供信息社会服务，收集儿童个人数据。"
+      ],
+      "contentEn": [
+        "The data subject shall have the right to obtain from the controller the erasure of personal data concerning him or her without undue delay and the controller shall have the obligation to erase personal data without undue delay where one of the following grounds applies:",
+        "(a) the personal data are no longer necessary in relation to the purposes for which they were collected or otherwise processed;",
+        "(b) the data subject withdraws consent on which the processing is based according to point (a) of Article 6(1), or point (a) of Article 9(2), and where there is no other legal ground for the processing;",
+        "(c) the data subject objects to the processing pursuant to Article 21(1) and there are no overriding legitimate grounds for the processing, or the data subject objects to the processing pursuant to Article 21(2);",
+        "(d) the personal data have been unlawfully processed;",
+        "(e) the personal data have to be erased for compliance with a legal obligation in Union or Member State law to which the controller is subject;",
+        "(f) the personal data have been collected in relation to the offer of information society services referred to in Article 8(1)."
+      ],
+      "interpretation": "这是 GDPR 最著名条款之一——「被遗忘权」。关键点：\n\n【适用情形】数据不再必要、撤回同意、反对处理、非法处理、法定义务、儿童数据\n\n【时间要求】「不得无故拖延」，通常理解为一个月内\n\n【例外情形】言论自由、公共利益、法律义务、医疗诊断等可拒绝删除\n\n【传播义务】已公开的数据，控制者需通知其他处理者删除\n\n实践中，搜索引擎删除、社交媒体删除是最常见的被遗忘权案例。",
+      "keywords": [
+        "删除权",
+        "被遗忘权",
+        "撤回同意",
+        "非法处理",
+        "儿童数据"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 18,
+      "chapter": 3,
+      "title": "限制处理权",
+      "titleEn": "Right to restriction of processing",
+      "contentZh": [
+        "数据主体有权要求控制者限制处理其个人数据，在以下情形：(a) 数据主体对准确性提出异议，控制者需要核实；(b) 处理非法但数据主体反对删除；(c) 控制者不再需要数据但数据主体需用于法律主张；(d) 数据主体已提出异议，等待验证。"
+      ],
+      "contentEn": [
+        "The data subject shall have the right to obtain from the controller restriction of processing where one of the following applies: the data subject contests the accuracy of the personal data; the processing is unlawful and the data subject opposes the erasure; the controller no longer needs the personal data but they are required by the data subject for the establishment, exercise or defence of legal claims; the data subject has objected to processing pending the verification whether the legitimate grounds of the controller override those of the data subject."
+      ],
+      "interpretation": "限制处理权是更正权和反对权的中间状态：\n\n【触发情形】准确性争议、非法处理但反对删除、保留用于诉讼、异议待核实\n\n【限制效果】数据只能存储，不能处理\n\n【解除条件】数据主体同意、法律程序结束等\n\n实践中，数据争议期间的「冻结」状态即为本条的应用。",
+      "keywords": [
+        "限制处理",
+        "数据冻结",
+        "准确性争议",
+        "法律主张"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 19,
+      "chapter": 3,
+      "title": "限制处理的通知义务",
+      "titleEn": "Notification obligation in relation to rectification or erasure of personal data or restriction of processing",
+      "contentZh": [
+        "控制者应将根据第16、17、18条进行的更正、删除或限制处理告知已向其披露个人数据的每个接收者，除非这被证明是不可能的或需要不相称的努力。",
+        "数据主体有权要求控制者告知其数据的接收者。"
+      ],
+      "contentEn": [
+        "The controller shall communicate any rectification or erasure of personal data or restriction of processing carried out in accordance with Article 16, Article 17(1) and Article 18 to each recipient to whom the personal data have been disclosed, unless this proves impossible or involves disproportionate effort.",
+        "The data subject has the right to request that the controller inform those recipients."
+      ],
+      "interpretation": "本条确立了数据变更后的通知义务：\n\n【通知对象】所有数据接收者\n\n【通知内容】更正、删除、限制处理\n\n【豁免情形】不可能或成本过高\n\n【数据主体权利】可要求控制者告知接收者\n\n实践中，数据删除后需通知下游数据接收者，确保数据生态链同步更新。",
+      "keywords": [
+        "通知义务",
+        "数据接收者",
+        "数据传播",
+        "下游通知"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 20,
+      "chapter": 3,
+      "title": "数据携带权",
+      "titleEn": "Right to data portability",
+      "contentZh": [
+        "数据主体有权以结构化、常用、机器可读的格式获取其提供给控制者的个人数据，并有权将这些数据传输给另一控制者，不受阻碍。",
+        "数据主体有权将个人数据从一控制者直接传输给另一控制者，在技术上可行的情况下。",
+        "行使本条权利不得影响第17条规定的删除权。本条不适用于为公共利益或行使官方职权而进行的处理。"
+      ],
+      "contentEn": [
+        "The data subject shall have the right to receive the personal data concerning him or her, which he or she has provided to a controller, in a structured, commonly used and machine-readable format and have the right to transmit those data to another controller without hindrance from the controller to which the personal data have been provided.",
+        "In exercising his or her right to data portability, the data subject shall have the right to have the personal data transmitted directly from one controller to another, where technically feasible.",
+        "The exercise of the right shall not adversely affect the rights and freedoms of others."
+      ],
+      "interpretation": "数据携带权旨在促进数据流动和市场竞争：\n\n【适用范围】仅限「数据主体提供」的数据（不包括推断数据）\n\n【格式要求】结构化、常用、机器可读（如JSON、CSV）\n\n【传输方式】下载后自行转移，或控制者间直接传输\n\n【限制】公共利益处理不适用\n\n实践中，社交媒体迁移、云服务商切换是最常见的携带权场景。",
+      "keywords": [
+        "数据携带权",
+        "数据迁移",
+        "机器可读",
+        "互操作性"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 21,
+      "chapter": 3,
+      "title": "反对权",
+      "titleEn": "Right to object",
+      "contentZh": [
+        "数据主体有权随时反对基于第6(1)条(e)或(f)项对其个人数据进行处理，包括基于这些条款进行的画像。控制者须停止处理，除非能证明有压倒性正当理由或用于法律主张。",
+        "在直接营销目的下处理个人数据的，数据主体有权随时反对。此权利应明确告知数据主体。",
+        "在科研/统计目的下，数据主体有权反对处理，除非处理对公共利益任务确有必要。"
+      ],
+      "contentEn": [
+        "The data subject shall have the right to object, on grounds relating to his or her particular situation, at any time to processing of personal data concerning him or her which is based on point (e) or (f) of Article 6(1), including profiling based on those provisions. The controller shall no longer process the personal data unless the controller demonstrates compelling legitimate grounds for the processing which override the interests, rights and freedoms of the data subject or for the establishment, exercise or defence of legal claims.",
+        "Where personal data are processed for direct marketing purposes, the data subject shall have the right to object at any time to processing of personal data concerning him or her for such marketing.",
+        "Where the data subject objects to processing for direct marketing purposes, the personal data shall no longer be processed for such purposes."
+      ],
+      "interpretation": "反对权是最强的数据主体权利之一：\n\n【反对情形】基于公共利益(e)或合法利益(f)的处理\n\n【控制者举证】必须证明「压倒性正当理由」才能继续处理\n\n【直接营销】绝对禁止，无例外——必须停止\n\n【告知义务】须在首次沟通时告知此权利\n\n实践中，营销邮件/短信的「退订」功能就是本条的直接体现。",
+      "keywords": [
+        "反对权",
+        "直接营销",
+        "退出机制",
+        "合法利益"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 22,
+      "chapter": 3,
+      "title": "自动化决策",
+      "titleEn": "Automated individual decision-making, including profiling",
+      "contentZh": [
+        "数据主体有权不受仅基于自动化处理（包括画像）的决定的约束，如果该决定对其产生法律效力或类似重大影响。",
+        "以下情形除外：(a) 订立或履行合同所必需；(b) 授权欧盟或成员国法律；(c) 基于数据主体明确同意。",
+        "上述情形下，控制者应采取适当措施保障数据主体权利，包括人工干预、表达观点、对决定提出争议。敏感数据处理需额外保障措施。"
+      ],
+      "contentEn": [
+        "The data subject shall have the right not to be subject to a decision based solely on automated processing, including profiling, which produces legal effects concerning him or her or similarly significantly affects him or her.",
+        "Paragraph 1 shall not apply if the decision: is necessary for entering into, or performance of, a contract between the data subject and a data controller; is authorised by Union or Member State law to which the controller is subject and which also lays down suitable measures to safeguard the data subject's rights and freedoms and legitimate interests; or is based on the data subject's explicit consent.",
+        "In the cases referred to in points (a) and (c) of paragraph 2, the data controller shall implement suitable measures to safeguard the data subject's rights and freedoms and legitimate interests, at least the right to obtain human intervention on the part of the controller, to express his or her point of view and to contest the decision."
+      ],
+      "interpretation": "本条规制AI和算法决策，是GDPR最具前瞻性的条款：\n\n【禁止范围】仅基于自动化处理的决策，产生法律效力或重大影响\n\n【例外情形】合同必需、法定授权、明确同意\n\n【保障措施】人工干预、表达观点、争议权利\n\n【画像定义】广泛的用户评分、信用评估、个性化推荐均可能落入\n\n实践中，信用评分系统、自动拒绝申请、算法推荐都受本条规制。",
+      "keywords": [
+        "自动化决策",
+        "画像",
+        "人工智能",
+        "算法",
+        "人工干预"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 23,
+      "chapter": 3,
+      "title": "权利限制",
+      "titleEn": "Restrictions",
+      "contentZh": [
+        "欧盟或成员国法律可通过立法限制第12-22条和第34条规定的权利和义务范围，如该限制是民主社会必要且相称的措施，用于保障：国家安全、国防、公共安全、刑事侦查、预防犯罪、成员国重要经济或财政利益等。"
+      ],
+      "contentEn": [
+        "Union or Member State law to which the data controller or processor is subject may restrict by way of a legislative measure the scope of the obligations and rights provided for in Articles 12 to 22 and Article 34 as well as Article 5 in so far as its provisions correspond to the rights and obligations provided for in Articles 12 to 22, when such a restriction respects the essence of the fundamental rights and freedoms and is a necessary and proportionate measure in a democratic society."
+      ],
+      "interpretation": "本条规定了数据主体权利的限制情形：\n\n【限制方式】必须有法律依据\n\n【限制目的】国家安全、国防、公共安全、刑事侦查等\n\n【限制原则】必要且相称，尊重基本权利本质\n\n实践中，情报机构、刑事侦查等场景可依法限制数据主体权利。",
+      "keywords": [
+        "权利限制",
+        "国家安全",
+        "刑事侦查",
+        "公共安全"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 24,
+      "chapter": 4,
+      "title": "控制者责任",
+      "titleEn": "Responsibility of the controller",
+      "contentZh": [
+        "控制者应实施适当的技术和组织措施，确保并能够证明处理活动符合本条例。这些措施应考虑处理活动的性质、范围、背景和目的，以及处理对自然人权利和自由的风险。",
+        "控制者应实施适当的数据保护政策，并以可访问的形式提供。"
+      ],
+      "contentEn": [
+        "Taking into account the nature, scope, context and purposes of processing as well as the risks of varying likelihood and severity for the rights and freedoms of natural persons, the controller shall implement appropriate technical and organisational measures to ensure and to be able to demonstrate that processing is performed in accordance with this Regulation.",
+        "The measures referred to in paragraph 1 shall be reviewed and updated where necessary."
+      ],
+      "interpretation": "本条确立了控制者的核心合规责任：\n\n【举证责任】控制者必须能证明合规\n\n【措施要求】技术措施 + 组织措施\n\n【风险导向】根据风险调整措施\n\n【持续更新】定期审查和更新\n\n这是「可归责性原则」的具体体现，控制者必须建立完善的合规体系。",
+      "keywords": [
+        "控制者责任",
+        "可归责性",
+        "举证责任",
+        "合规体系"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 25,
+      "chapter": 4,
+      "title": "隐私设计和默认",
+      "titleEn": "Data protection by design and by default",
+      "contentZh": [
+        "考虑到现有技术水平、实施成本、处理性质、范围、背景和目的以及风险，控制者应在确定处理方式和处理本身时，实施适当的技术和组织措施，以有效实现数据保护原则和必要保障。",
+        "控制者应实施适当的技术和组织措施，确保默认情况下只处理特定目的所必需的个人数据。"
+      ],
+      "contentEn": [
+        "Taking into account the state of the art, the cost of implementation and the nature, scope, context and purposes of processing as well as the risks of varying likelihood and severity for rights and freedoms of natural persons posed by the processing, the controller shall, both at the time of the determination of the means for processing and at the time of the processing itself, implement appropriate technical and organisational measures, such as pseudonymisation, which are designed to implement data-protection principles.",
+        "The controller shall implement appropriate technical and organisational measures for ensuring that, by default, only personal data which are necessary for each specific purpose of the processing are processed."
+      ],
+      "interpretation": "隐私设计和默认是GDPR最具前瞻性的原则之一：\n\n【隐私设计】从设计阶段就嵌入数据保护\n\n【隐私默认】默认设置应最保护隐私\n\n【实施时机】确定处理方式时 + 处理过程中\n\n【典型措施】假名化、数据最小化、访问控制\n\n实践中，产品开发必须遵循Privacy by Design原则，默认收集最少数据。",
+      "keywords": [
+        "隐私设计",
+        "隐私默认",
+        "Privacy by Design",
+        "数据最小化"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 26,
+      "chapter": 4,
+      "title": "共同控制者",
+      "titleEn": "Joint controllers",
+      "contentZh": [
+        "两个或多个控制者共同决定处理目的和方式的，为共同控制者。共同控制者应以透明方式确定各自的责任，并尊重数据主体权利。",
+        "共同控制者应通过安排确定各自的主要责任，允许数据主体向任一控制者行使权利。"
+      ],
+      "contentEn": [
+        "Where two or more controllers jointly determine the purposes and means of processing, they shall be joint controllers. They shall in a transparent manner determine their respective responsibilities for compliance with the obligations under this Regulation.",
+        "The arrangement may designate a contact point for data subjects."
+      ],
+      "interpretation": "本条规制共同控制情形（如联合营销、数据共享合作）：\n\n【定义】共同决定目的和方式 = 共同控制者\n\n【责任分配】必须明确各自责任\n\n【透明要求】以透明方式确定责任\n\n【数据主体权利】可向任一控制者主张\n\n实践中，联合营销、平台合作等场景需签署联合控制协议。",
+      "keywords": [
+        "共同控制者",
+        "联合控制",
+        "责任分配",
+        "数据共享"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 27,
+      "chapter": 4,
+      "title": "非欧盟控制者或处理者的代表",
+      "titleEn": "Representatives of controllers or processors not established in the Union",
+      "contentZh": [
+        "在适用第3(2)条的情形下，控制者或处理者应以书面形式在欧盟指定一名代表。",
+        "代表应设在数据主体所在的成员国。",
+        "代表应作为控制者或处理者与监管机构、数据主体沟通的联系点。在控制者或处理者违规时，代表应接受执法程序。"
+      ],
+      "contentEn": [
+        "Where Article 3(2) applies, the controller or the processor shall designate in writing a representative in the Union.",
+        "The representative shall be established in one of the Member States where the data subjects, whose personal data are processed in relation to the offering of goods or services to them or whose behaviour is monitored, are.",
+        "The representative shall be subject to enforcement proceedings in the event of non-compliance by the controller or processor."
+      ],
+      "interpretation": "本条要求非欧盟企业指定欧盟代表：\n\n【适用情形】第3(2)条长臂管辖（向欧盟用户提供服务/监控）\n\n【代表要求】书面指定，设在欧盟成员国\n\n【代表职责】与监管机构和数据主体沟通的联系点\n\n【例外】偶尔处理或公共机构\n\n实践中，中国、美国企业向欧盟用户提供服务时需指定欧盟代表。",
+      "keywords": [
+        "欧盟代表",
+        "非欧盟企业",
+        "长臂管辖",
+        "联系点"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 28,
+      "chapter": 4,
+      "title": "处理者",
+      "titleEn": "Processor",
+      "contentZh": [
+        "控制者应仅使用提供充分保障的处理者，特别是实施适当技术和组织措施的处理者。",
+        "处理者处理个人数据须有控制者的书面授权。处理者不得聘请另一处理者，除非获得控制者事先具体或一般书面授权。",
+        "控制者与处理者的合同应包括：处理主题和期限、处理性质和目的、数据类别、控制者义务、处理者义务等。"
+      ],
+      "contentEn": [
+        "Where processing is to be carried out on behalf of a controller, the controller shall use only processors providing sufficient guarantees to implement appropriate technical and organisational measures in such a manner that processing will meet the requirements of this Regulation and ensure the protection of the rights of the data subject.",
+        "The processor shall not engage another processor without prior specific or general written authorisation of the controller.",
+        "Processing by a processor shall be governed by a contract or other legal act under Union or Member State law."
+      ],
+      "interpretation": "本条规制控制者-处理者关系，是数据处理协议（DPA）的法律基础：\n\n【控制者义务】选择有保障的处理者\n\n【处理者义务】书面授权、不得擅自委托子处理者\n\n【合同要求】DPA必须包含特定条款\n\n【子处理者】需事先授权\n\n实践中，企业与服务商签署DPA是合规的基本要求。",
+      "keywords": [
+        "处理者",
+        "DPA",
+        "数据处理协议",
+        "子处理者",
+        "书面授权"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 29,
+      "chapter": 4,
+      "title": "处理者代表控制者处理",
+      "titleEn": "Processing under the authority of the controller or processor",
+      "contentZh": [
+        "代表控制者处理个人数据的处理者，应仅按照控制者的指示处理数据，除非欧盟或成员国法律另有要求。控制者和处理者应确保其授权处理个人数据的任何人已承诺保密或承担法定保密义务。"
+      ],
+      "contentEn": [
+        "The processor and any person acting under the authority of the controller or processor, who has access to personal data, shall not process those data except on instructions from the controller, unless required to do so by Union or Member State law."
+      ],
+      "interpretation": "本条强调处理者必须遵循控制者指示：\n\n【指示原则】处理者只能按控制者指示处理\n\n【例外情形】法律要求\n\n【保密义务】授权人员必须承担保密义务\n\n实践中，处理者不得擅自改变处理目的或方式。",
+      "keywords": [
+        "指示原则",
+        "保密义务",
+        "处理者",
+        "控制者指示"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 30,
+      "chapter": 4,
+      "title": "处理活动记录",
+      "titleEn": "Records of processing activities",
+      "contentZh": [
+        "控制者应保存处理活动记录，包括：控制者名称和联系方式、DPO信息、处理目的、数据类别、接收者类别、跨境传输、删除时限、技术和组织措施。员工250人以下的企业，处理不影响数据主体权利或不频繁的，可豁免。",
+        "处理者也应保存处理活动记录，包括处理者名称、控制者名称、处理类别、跨境传输、技术和组织措施。"
+      ],
+      "contentEn": [
+        "Each controller and, where applicable, the controller's joint controller, shall maintain a record of processing activities under its responsibility. That record shall contain all of the following information: the name and contact details of the controller and DPO; the purposes of the processing; a description of the categories of data subjects and of the categories of personal data; the categories of recipients; transfers to third countries; where possible, the envisaged time limits; where possible, the envisaged time limits for erasure; and a general description of the technical and organisational security measures.",
+        "The obligations referred to in paragraph 1 shall not apply to an enterprise or an organisation employing fewer than 250 persons unless the processing it carries out is likely to result in a risk to the rights and freedoms of data subjects, the processing is not occasional, or the processing includes special categories of data."
+      ],
+      "interpretation": "处理活动记录（ROPA）是合规的核心文档：\n\n【控制者记录】处理目的、数据类别、接收者、保存期限、安全措施等\n\n【处理者记录】控制者信息、处理类别、跨境传输等\n\n【豁免条件】员工<250人 且 低风险/偶尔/非敏感数据\n\n实践中，ROPA是数据审计、DPIA、监管检查的基础文档。",
+      "keywords": [
+        "ROPA",
+        "处理活动记录",
+        "合规文档",
+        "豁免条件"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 31,
+      "chapter": 4,
+      "title": "安全措施合作",
+      "titleEn": "Cooperation with supervisory authorities",
+      "contentZh": [
+        "控制者和处理者应应监管机构要求，与其合作执行本条例。",
+        "监管机构可要求控制者和处理者提供处理活动记录、DPIA、事先咨询文件等。"
+      ],
+      "contentEn": [
+        "The controller and the processor and, where applicable, their representatives, shall cooperate, upon request, with the supervisory authority in the performance of its tasks.",
+        "The supervisory authority may require the controller and the processor to provide any information necessary for the performance of its tasks."
+      ],
+      "interpretation": "本条确立了配合监管机构的义务：\n\n【配合义务】应监管机构要求提供信息\n\n【适用主体】控制者、处理者及其代表\n\n【信息范围】处理活动记录、DPIA等合规文件\n\n实践中，监管机构检查时企业必须配合，否则可能面临处罚。",
+      "keywords": [
+        "监管配合",
+        "信息提供",
+        "监管机构",
+        "检查义务"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 32,
+      "chapter": 4,
+      "title": "处理安全性",
+      "titleEn": "Security of processing",
+      "contentZh": [
+        "考虑到现有技术水平、实施成本、处理的性质、范围、背景和目的，以及自然人权利和自由的风险程度和严重性，控制者和处理者应当采取适当的技术和组织措施，确保与风险相称的安全水平，包括适当时：",
+        "(a) 个人数据假名化和加密；",
+        "(b) 确保处理系统和服务持续保密性、完整性、可用性和弹性的能力；",
+        "(c) 发生物理或技术事件时及时恢复个人数据可用性和访问的能力；",
+        "(d) 定期测试、评估和评价技术和管理措施有效性的程序。"
+      ],
+      "contentEn": [
+        "Taking into account the state of the art, the costs of implementation and the nature, scope, context and purposes of processing as well as the risk of varying likelihood and severity for the rights and freedoms of natural persons, the controller and the processor shall implement appropriate technical and organisational measures to ensure a level of security appropriate to the risk, including inter alia as appropriate:",
+        "(a) the pseudonymisation and encryption of personal data;",
+        "(b) the ability to ensure the ongoing confidentiality, integrity, availability and resilience of processing systems and services;",
+        "(c) the ability to restore the availability and access to personal data in a timely manner in the event of a physical or technical incident;",
+        "(d) a process for regularly testing, assessing and evaluating the effectiveness of technical and organisational measures for ensuring the security of the processing."
+      ],
+      "interpretation": "本条确立了数据安全的基本要求，强调「风险导向」：\n\n【四项核心措施】\n1. 加密和假名化\n2. 系统安全（CIA三要素：机密性、完整性、可用性）\n3. 数据备份和恢复能力\n4. 定期安全测试和评估\n\n【风险导向】措施应与风险相称，不需要为低风险数据投入过高成本\n\n【控制者和处理者共同责任】双方都需确保安全\n\n这是数据泄露事故后监管机构重点审查的条款之一。",
+      "keywords": [
+        "安全性",
+        "加密",
+        "假名化",
+        "机密性",
+        "完整性",
+        "可用性",
+        "风险导向"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 33,
+      "chapter": 4,
+      "title": "向监管机构通知个人数据泄露",
+      "titleEn": "Notification of a personal data breach to the supervisory authority",
+      "contentZh": [
+        "在发生个人数据泄露后，控制者应在知悉后72小时内向监管机构通知，除非该泄露不太可能对自然人权利和自由造成风险。通知应包括：泄露性质、数据类别和大致数量、DPO联系方式、可能后果、控制者采取或拟采取的措施。",
+        "无法在72小时内通知的，应说明延迟原因，并可分阶段通知。",
+        "处理者知悉泄露后，应立即通知控制者。"
+      ],
+      "contentEn": [
+        "In the case of a personal data breach, the controller shall without undue delay and, where feasible, not later than 72 hours after having become aware of it, notify the personal data breach to the supervisory authority competent in accordance with Article 55, unless the personal data breach is unlikely to result in a risk to the rights and freedoms of natural persons.",
+        "The processor shall notify the controller without undue delay after becoming aware of a personal data breach.",
+        "The notification shall at least describe the nature of the personal data breach, the categories and approximate number of data subjects concerned, the name and contact details of the DPO, the likely consequences, and the measures taken."
+      ],
+      "interpretation": "数据泄露通知是GDPR最重要的合规义务之一：\n\n【时限】72小时内通知监管机构\n\n【豁免条件】不太可能对权利造成风险\n\n【通知内容】泄露性质、受影响人数、后果、补救措施\n\n【处理者义务】立即通知控制者\n\n实践中，企业必须建立数据泄露应急响应流程，预留时间进行内部调查和报告。",
+      "keywords": [
+        "数据泄露",
+        "72小时",
+        "通知义务",
+        "应急响应"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 34,
+      "chapter": 4,
+      "title": "向数据主体通知个人数据泄露",
+      "titleEn": "Communication of a personal data breach to the data subject",
+      "contentZh": [
+        "当个人数据泄露可能对自然人权利和自由造成高风险时，控制者应及时向数据主体传达泄露情况，不得无故拖延。",
+        "通知应使用清晰、通俗的语言描述泄露性质、DPO联系方式、可能后果、控制者采取的措施。",
+        "以下情形无需通知：(a) 已采取适当技术保护措施；(b) 后续措施确保高风险不再可能实现；(c) 需要不相称的努力（但应采取公告等替代措施）。"
+      ],
+      "contentEn": [
+        "When the personal data breach is likely to result in a high risk to the rights and freedoms of natural persons, the controller shall communicate the personal data breach to the data subject without undue delay.",
+        "The communication to the data subject shall describe in clear and plain language the nature of the personal data breach and contain at least the information and recommendations referred to in Article 33(2).",
+        "The communication shall not be required if: the controller has implemented appropriate technical protection measures; subsequent measures ensure high risk no longer likely to materialise; it would involve disproportionate effort."
+      ],
+      "interpretation": "本条是数据泄露通知的第二层要求——通知用户：\n\n【触发条件】高风险（比第33条的「风险」门槛更高）\n\n【通知方式】直接通知受影响用户\n\n【豁免情形】已加密、后续措施消除风险、通知成本过高\n\n【替代措施】成本过高时可采用公告\n\n实践中，密码泄露、信用卡信息泄露是典型的高风险场景，必须通知用户。",
+      "keywords": [
+        "数据泄露",
+        "用户通知",
+        "高风险",
+        "加密豁免"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 35,
+      "chapter": 4,
+      "title": "数据保护影响评估",
+      "titleEn": "Data protection impact assessment",
+      "contentZh": [
+        "当处理可能对自然人权利和自由造成高风险时，控制者应在处理前进行数据保护影响评估（DPIA）。以下情形必须进行：(a) 系统性画像或大规模处理敏感数据；(b) 大规模系统监控公共区域；(c) 其他监管机构指定的情形。",
+        "评估应包含：处理的系统性描述、处理目的、与目的相称性的评估、对数据主体权利的风险评估、降低风险的措施。",
+        "控制者可就评估寻求DPO建议。"
+      ],
+      "contentEn": [
+        "Where a type of processing in particular using new technologies, and taking into account the nature, scope, context and purposes of the processing, is likely to result in a high risk to the rights and freedoms of natural persons, the controller shall, prior to the processing, carry out an assessment of the impact of the envisaged processing operations on the protection of personal data.",
+        "A single assessment may address a set of similar processing operations that present similar high risks.",
+        "The assessment shall contain at least: a systematic description of the processing operations; an assessment of the necessity and proportionality; an assessment of the risks; and the measures envisaged to address the risks."
+      ],
+      "interpretation": "DPIA是高风险处理的前置合规要求：\n\n【触发条件】高风险处理（画像、大规模敏感数据、公共监控等）\n\n【评估内容】处理描述、必要性、风险、缓解措施\n\n【时机】处理开始前\n\n【DPO角色】提供咨询和建议\n\n实践中，新系统上线、新产品发布前必须进行DPIA，是项目管理的标准步骤。",
+      "keywords": [
+        "DPIA",
+        "影响评估",
+        "高风险处理",
+        "隐私设计"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 36,
+      "chapter": 4,
+      "title": "事先咨询",
+      "titleEn": "Prior consultation",
+      "contentZh": [
+        "DPIA表明处理将对自然人权利和自由造成高风险，且控制者未采取措施降低风险的，控制者应在处理前咨询监管机构。",
+        "监管机构应在收到咨询请求后八周内向控制者提供书面建议，可延长至六个月。"
+      ],
+      "contentEn": [
+        "The controller shall consult the supervisory authority prior to processing where a data protection impact assessment under Article 35 indicates that the processing would result in a high risk in the absence of measures taken by the controller to mitigate the risk.",
+        "The supervisory authority shall provide written advice to the controller within eight weeks of receipt of the request for consultation."
+      ],
+      "interpretation": "事先咨询是高风险处理的最后保障：\n\n【触发条件】DPIA显示高风险且未降低\n\n【咨询时机】处理开始前\n\n【监管机构时限】8周（可延长至6个月）\n\n【暂停处理】咨询期间不得开始处理\n\n实践中，大规模敏感数据处理、新型技术应用（如人脸识别）常需事先咨询。",
+      "keywords": [
+        "事先咨询",
+        "DPIA",
+        "高风险处理",
+        "监管机构"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 37,
+      "chapter": 4,
+      "title": "数据保护官任命",
+      "titleEn": "Designation of the data protection officer",
+      "contentZh": [
+        "以下情形控制者和处理者应任命数据保护官（DPO）：(a) 公共机关或机构；(b) 核心活动需要大规模定期监控数据主体；(c) 核心活动涉及大规模处理敏感数据或刑事定罪数据。",
+        "企业集团可任命一名DPO。DPO应有数据保护专业能力，联系方式应公开并通报监管机构。",
+        "控制者应确保DPO独立行使职责，不得因履行DPO职责而解雇或处罚。"
+      ],
+      "contentEn": [
+        "The controller and the processor shall designate a data protection officer in any case where: the processing is carried out by a public authority or body; the core activities of the controller or the processor consist of processing operations which require regular and systematic monitoring of data subjects on a large scale; or the core activities consist of processing on a large scale of special categories of data or criminal convictions.",
+        "A group of undertakings may appoint a single data protection officer provided that a data protection officer is easily accessible from each establishment.",
+        "The controller and the processor shall publish the contact details of the data protection officer and communicate them to the supervisory authority."
+      ],
+      "interpretation": "DPO任命是GDPR的重要合规要求：\n\n【强制任命】公共机构、大规模监控、大规模敏感数据处理\n\n【可选任命】其他企业可自愿任命\n\n【DPO资格】需具备专业知识和能力\n\n【独立性保障】不得因履行职责被解雇\n\n实践中，大型互联网公司、银行、医疗机构必须任命DPO，中小企业多采用兼职或外包。",
+      "keywords": [
+        "DPO",
+        "数据保护官",
+        "任命",
+        "独立性"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 38,
+      "chapter": 4,
+      "title": "DPO职位",
+      "titleEn": "Position of the data protection officer",
+      "contentZh": [
+        "控制者和处理者应确保DPO适当、及时地参与处理活动相关事项。",
+        "控制者和处理者应向DPO提供执行任务所需的资源，包括人员、设备和培训。DPO不得因履行职责被解雇或处罚。"
+      ],
+      "contentEn": [
+        "The controller and the processor shall ensure that the data protection officer is involved, properly and in a timely manner, in all issues which relate to the protection of personal data.",
+        "The controller and processor shall support the data protection officer in performing the tasks referred to in Article 39 by providing resources necessary to carry out those tasks and access to personal data and processing operations, and to maintain his or her expert knowledge."
+      ],
+      "interpretation": "本条保障DPO的独立性和资源：\n\n【参与权】适当、及时参与数据保护事项\n\n【资源保障】人员、设备、培训支持\n\n【独立性】不得因履职被解雇或处罚\n\n【专业知识】保持专业能力\n\n实践中，DPO应直接向最高管理层报告，具有独立地位。",
+      "keywords": [
+        "DPO",
+        "独立性",
+        "资源保障",
+        "参与权"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 39,
+      "chapter": 4,
+      "title": "DPO职责",
+      "titleEn": "Tasks of the data protection officer",
+      "contentZh": [
+        "DPO应至少执行以下任务：(a) 告知和建议控制者和处理者本条例义务；(b) 监督本条例合规情况；(c) 就DPIA提供意见并监督执行；(d) 作为与监管机构沟通的联系点；(e) 其他与数据保护相关的任务。"
+      ],
+      "contentEn": [
+        "The data protection officer shall have at least the following tasks: to inform and advise the controller or the processor and the employees who carry out processing of their obligations pursuant to this Regulation and to other Union or Member State data protection provisions; to monitor compliance with this Regulation; to provide advice where requested as regards the data protection impact assessment; to cooperate with the supervisory authority; and to act as the contact point for the supervisory authority."
+      ],
+      "interpretation": "本条明确DPO的五大核心职责：\n\n【告知和建议】向组织提供合规指导\n\n【监督合规】监控GDPR执行情况\n\n【DPIA意见】参与影响评估\n\n【监管沟通】作为联系点\n\n【其他任务】数据保护相关工作\n\nDPO不承担个人合规责任，责任仍在控制者。",
+      "keywords": [
+        "DPO",
+        "DPO职责",
+        "合规监督",
+        "DPIA",
+        "监管沟通"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 40,
+      "chapter": 4,
+      "title": "遵守行为准则",
+      "titleEn": "Codes of conduct",
+      "contentZh": [
+        "成员国、监管机构、欧洲数据保护委员会和欧盟委员会应鼓励在欧盟或特定成员国制定行为准则，以促进本条例的正确适用。",
+        "行为准则可由协会或其他代表控制者或处理者类别的机构起草。"
+      ],
+      "contentEn": [
+        "The Member States, the supervisory authorities, the Board and the Commission shall encourage the drawing up of codes of conduct intended to contribute to the proper application of this Regulation, taking account of the specific features of the various processing sectors and the specific needs of micro, small and medium-sized enterprises.",
+        "Associations and other bodies representing categories of controllers or processors may prepare codes of conduct, or amend or extend such codes, for the purpose of specifying the application of this Regulation."
+      ],
+      "interpretation": "行为准则是行业自律合规工具：\n\n【制定主体】行业协会、代表机构\n\n【目的】促进GDPR正确适用\n\n【鼓励对象】特别是中小企业\n\n【监管参与】监管机构和委员会鼓励\n\n实践中，行业协会常制定行为准则帮助会员合规。",
+      "keywords": [
+        "行为准则",
+        "行业自律",
+        "合规工具",
+        "协会"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 41,
+      "chapter": 4,
+      "title": "行为准则监测",
+      "titleEn": "Monitoring of approved codes of conduct",
+      "contentZh": [
+        "行为准则的监测可由经主管监管机构认可的机构进行。",
+        "认可应符合监管机构规定的条件，包括专业能力、独立性等。"
+      ],
+      "contentEn": [
+        "The monitoring of compliance with a code of conduct referred to in Article 40 may be carried out by an accredited body in accordance with that Article. An accredited body may be an association or other body representing categories of controllers or processors.",
+        "A body as referred to in paragraph 1 shall be accredited by the competent supervisory authority."
+      ],
+      "interpretation": "本条规定行为准则的监测机制：\n\n【监测主体】经认可的机构\n\n【认可条件】专业能力、独立性\n\n【监管监督】监管机构认可和监督\n\n实践中，第三方认证机构可承担监测职责。",
+      "keywords": [
+        "行为准则",
+        "监测机构",
+        "认可",
+        "第三方认证"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 42,
+      "chapter": 4,
+      "title": "认证",
+      "titleEn": "Certification",
+      "contentZh": [
+        "成员国、监管机构、欧洲数据保护委员会和欧盟委员会应鼓励在欧盟或特定成员国建立数据保护认证机制和数据保护印章和标记，以证明控制者和处理者的处理操作符合本条例。",
+        "认证应是自愿的，并通过透明的过程提供。"
+      ],
+      "contentEn": [
+        "The Member States, the supervisory authorities, the Board and the Commission shall encourage, in particular at Union level, the establishment of data protection certification mechanisms and of data protection seals and marks, for the purpose of demonstrating compliance with this Regulation of processing operations by controllers and processors.",
+        "The certification shall be voluntary and available via a process that is transparent."
+      ],
+      "interpretation": "认证是证明合规的自愿机制：\n\n【目的】证明处理操作符合GDPR\n\n【性质】自愿性认证\n\n【形式】数据保护印章、标记\n\n【透明性】认证过程透明\n\n实践中，ISO 27701、Europrivacy等是常见的数据保护认证。",
+      "keywords": [
+        "认证",
+        "数据保护印章",
+        "合规证明",
+        "自愿认证"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 43,
+      "chapter": 4,
+      "title": "认证机构",
+      "titleEn": "Certification bodies",
+      "contentZh": [
+        "认证机构应由监管机构认可。认可应符合条件：独立于控制者或处理者、具备专业能力、符合ISO/IEC标准等。",
+        "认可机构应定期审查认证机构的合规性。"
+      ],
+      "contentEn": [
+        "Certification bodies which have an appropriate level of expertise in relation to data protection shall, after informing the supervisory authority in order to allow it to exercise its powers pursuant to point (h) of Article 58(2) where necessary, issue and renew certification.",
+        "The certification bodies referred to in paragraph 1 shall be accredited by a supervisory authority or by the national accreditation body."
+      ],
+      "interpretation": "本条规制认证机构的资质：\n\n【认可主体】监管机构或国家认可机构\n\n【认可条件】独立性、专业能力、符合ISO标准\n\n【职责】颁发和更新认证\n\n实践中，认证机构需经严格审核才能获得认可。",
+      "keywords": [
+        "认证机构",
+        "认可",
+        "独立性",
+        "专业能力"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 44,
+      "chapter": 5,
+      "title": "跨境传输的一般原则",
+      "titleEn": "General principle for transfers",
+      "contentZh": [
+        "个人数据向第三国或国际组织传输，仅在本条例其他条款合规的前提下，且符合本章条件方可进行。",
+        "本条例第45-49条规定的传输条件适用于从控制者向处理者或子处理者的传输，不适用于公开数据。",
+        "本章规定不影响成员国之间的数据流动。"
+      ],
+      "contentEn": [
+        "Any transfer of personal data which are undergoing processing or are intended for processing after transfer to a third country or an international organisation shall take place only if, subject to the other provisions of this Regulation, the conditions laid down in this Chapter are complied with by the controller and processor, including for onward transfers of personal data from the third country or an international organisation to another third country or to another international organisation.",
+        "This Chapter shall not apply to the processing of personal data which do not fall within the scope of this Regulation.",
+        "This Chapter shall not affect the application of the rules on the protection of personal data in the Member States."
+      ],
+      "interpretation": "跨境传输是GDPR最具争议的领域之一：\n\n【基本原则】必须满足GDPR所有要求 + 跨境传输额外条件\n\n【传输链】包括后续传输（第三国到第三国）\n\n【适用范围】所有受GDPR规制的数据\n\n实践中，欧盟-美国数据传输是最大争议点，多次被法院否决。",
+      "keywords": [
+        "跨境传输",
+        "第三国",
+        "数据流出",
+        "国际组织"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 45,
+      "chapter": 5,
+      "title": "充分性认定",
+      "titleEn": "Transfers on the basis of an adequacy decision",
+      "contentZh": [
+        "个人数据可向欧盟委员会认定具有充分保护水平的第三国传输。充分性认定应考虑第三国的法治、人权、监管机构、国际承诺等因素。",
+        "欧盟委员会应定期审查充分性认定，至少每四年一次。"
+      ],
+      "contentEn": [
+        "A transfer of personal data to a third country or an international organisation may take place where the Commission has decided that the third country, a territory or one or more specified sectors within that third country, or the international organisation in question ensures an adequate level of protection.",
+        "The Commission shall, after assessing the adequacy of the level of protection, decide that a third country, a territory or one or more specified sectors within that third country, or an international organisation ensures an adequate level of protection."
+      ],
+      "interpretation": "充分性认定是跨境传输最简便的方式：\n\n【认定主体】欧盟委员会\n\n【认定标准】法治、人权、监管、国际承诺\n\n【审查周期】至少每四年审查一次\n\n【已认定国家】日本、韩国、加拿大（商业组织）、英国（脱欧后）等\n\n【Schrems II】美国 adequacy 决定被否决，导致 Privacy Shield 失效",
+      "keywords": [
+        "充分性认定",
+        "欧盟委员会",
+        "跨境传输",
+        "Schrems II"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 46,
+      "chapter": 5,
+      "title": "适当保障措施",
+      "titleEn": "Transfers subject to appropriate safeguards",
+      "contentZh": [
+        "在缺乏充分性认定的情况下，个人数据可向第三国传输，前提是控制者或处理者提供适当保障措施，且数据主体享有可执行的权利和有效救济。",
+        "适当保障措施包括：(a) 具有约束力的企业规则（BCR）；(b) 欧盟标准合同条款；(c) 经监管机构批准的行为准则或认证机制；(d) 合同条款。",
+        "监管机构可要求保障措施需事先授权。"
+      ],
+      "contentEn": [
+        "In the absence of a decision pursuant to Article 45(3), a controller or processor may transfer personal data to a third country or an international organisation only if the controller or processor has provided appropriate safeguards, and on condition that enforceable data subject rights and effective legal remedies for data subjects are available.",
+        "The appropriate safeguards referred to in paragraph 1 may be provided for, without requiring any specific authorisation from a supervisory authority, by: a legally binding and enforceable instrument between public authorities or bodies; binding corporate rules in accordance with Article 47; standard data protection clauses adopted by the Commission; standard data protection clauses adopted by a supervisory authority and approved by the Commission; an approved code of conduct or an approved certification mechanism.",
+        "The supervisory authority may require that appropriate safeguards be provided for in a binding instrument."
+      ],
+      "interpretation": "适当保障措施是跨境传输的核心合规工具：\n\n【SCC】标准合同条款——最常用的工具，但Schrems II后需要额外评估\n\n【BCR】约束性企业规则——跨国公司内部传输\n\n【认证/行为准则】新兴工具，仍在发展中\n\n【TIA】传输影响评估——Schrems II后的新增要求\n\n实践中，SCC + TIA是最常见的合规方案。",
+      "keywords": [
+        "跨境传输",
+        "SCC",
+        "BCR",
+        "适当保障",
+        "Schrems II"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 47,
+      "chapter": 5,
+      "title": "约束性企业规则",
+      "titleEn": "Binding corporate rules",
+      "contentZh": [
+        "控制者或处理者可向主管监管机构申请批准约束性企业规则（BCR），用于企业集团内部向第三国传输个人数据。",
+        "BCR应包含：具有法律约束力、适用于集团所有成员、明确数据主体权利、包含可执行机制、经监管机构批准。"
+      ],
+      "contentEn": [
+        "The competent supervisory authority shall approve binding corporate rules in accordance with the consistency mechanism set out in Article 63, provided that it has first ascertained that the rules: are legally binding and apply to and are enforced by every member concerned of the group of undertakings, or group of enterprises engaged in a joint economic activity; expressly confer enforceable rights on data subjects with regard to the processing of their personal data; fulfil the requirements laid down in paragraph 2.",
+        "The approval of binding corporate rules shall be without prejudice to the obligations of the Member States with respect to the processing operations of the controller or the processor concerned."
+      ],
+      "interpretation": "BCR是跨国企业内部数据传输的最佳合规工具：\n\n【适用主体】企业集团内部传输\n\n【法律效力】具有法律约束力\n\n【权利保障】明确数据主体权利\n\n【批准主体】主管监管机构\n\n【审批流程】需通过一致性机制\n\n实践中，Google、微软等大型跨国公司使用BCR实现全球数据流转。",
+      "keywords": [
+        "BCR",
+        "约束性企业规则",
+        "跨国企业",
+        "内部传输"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 48,
+      "chapter": 5,
+      "title": "国际协议传输",
+      "titleEn": "Transfers or disclosures not authorised by Union law",
+      "contentZh": [
+        "个人数据向第三国传输，如基于欧盟或成员国与第三国之间具有法律约束力的国际协议，且该协议不影响数据主体权利保护，可进行传输。",
+        "控制者或处理者应将任何此类请求通知监管机构。"
+      ],
+      "contentEn": [
+        "Any judgment of a court or tribunal and any decision of an administrative authority of a third country requiring a controller or processor to transfer or disclose personal data may be recognised or enforceable in any manner only if based on an international agreement, such as a mutual legal assistance treaty, in force between the requesting third country and the Union or a Member State.",
+        "The controller or processor shall inform the supervisory authority about any such request."
+      ],
+      "interpretation": "本条规制基于国际协议的数据传输：\n\n【法律基础】具有法律约束力的国际协议\n\n【条件】不影响数据主体权利保护\n\n【通知义务】收到请求应通知监管机构\n\n实践中，刑事司法协助、执法合作等场景适用本条。",
+      "keywords": [
+        "国际协议",
+        "跨境传输",
+        "司法协助",
+        "执法合作"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 49,
+      "chapter": 5,
+      "title": "特定情形下的传输",
+      "titleEn": "Derogations for specific situations",
+      "contentZh": [
+        "在无充分性认定或适当保障措施的情况下，个人数据可在以下特定情形传输：(a) 数据主体明确同意；(b) 履行合同必需；(c) 重要公共利益；(d) 法律主张；(e) 保护重大利益；(f) 登记簿传输。"
+      ],
+      "contentEn": [
+        "In the absence of an adequacy decision pursuant to Article 45(3), or of appropriate safeguards pursuant to Article 46, including binding corporate rules, a transfer or a set of transfers of personal data to a third country or an international organisation shall take place only on one of the following conditions: the data subject has explicitly consented to the proposed transfer; the transfer is necessary for the performance of a contract; the transfer is necessary for important reasons of public interest; the transfer is necessary for the establishment, exercise or defence of legal claims; the transfer is necessary in order to protect the vital interests of the data subject; the transfer is made from a register."
+      ],
+      "interpretation": "特定情形传输是跨境传输的最后手段：\n\n【适用条件】无充分性认定 + 无适当保障措施\n\n【六种情形】明确同意、合同、公共利益、法律主张、重大利益、登记簿\n\n【限制】仅限特定情形，不得滥用\n\n【重复传输】不得作为常规传输的依据\n\n实践中，明确同意最常用，但需真正「明确」且告知风险。",
+      "keywords": [
+        "特定情形",
+        "跨境传输",
+        "明确同意",
+        "例外条款"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 50,
+      "chapter": 5,
+      "title": "国际组织保护",
+      "titleEn": "Protective measures",
+      "contentZh": [
+        "监管机构应采取适当措施，确保本条款的正确适用，包括告知数据主体跨境传输风险。",
+        "委员会应在必要时向第三国或国际组织通报个人数据正在或已经根据本章传输。"
+      ],
+      "contentEn": [
+        "Where appropriate, the Commission shall, after consulting the Board, inform the third country or international organisation that the personal data are being or have been transmitted pursuant to this Chapter.",
+        "The supervisory authority shall take appropriate measures to ensure that the provisions of this Chapter are complied with."
+      ],
+      "interpretation": "本条强调监管机构的跨境传输保护职责：\n\n【告知义务】必要时告知第三国或国际组织\n\n【保护措施】监管机构应采取适当措施\n\n【目的】确保跨境传输条款的正确适用\n\n实践中，监管机构需监控跨境传输合规情况。",
+      "keywords": [
+        "保护措施",
+        "监管机构",
+        "跨境传输",
+        "合规监控"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 51,
+      "chapter": 6,
+      "title": "监管机构",
+      "titleEn": "Supervisory authority",
+      "contentZh": [
+        "每个成员国应规定一个或多个独立公共机构负责监督本条例的适用，以保护自然人处理个人数据的基本权利和自由，并促进欧盟内部个人数据的自由流动（监管机构）。",
+        "每个监管机构应促进本条例在整个欧盟的一致适用。"
+      ],
+      "contentEn": [
+        "Each Member State shall provide for one or more independent public authorities to be responsible for ensuring the application of this Regulation, in order to protect the fundamental rights and freedoms of natural persons in relation to processing and to facilitate the free flow of personal data within the Union ('supervisory authority').",
+        "Each supervisory authority shall contribute to the consistent application of this Regulation throughout the Union."
+      ],
+      "interpretation": "监管机构是GDPR执法的核心：\n\n【设立要求】每个成员国设立一个或多个\n\n【独立性】独立行使职权，不受外部影响\n\n【职责】监督GDPR适用、保护数据主体权利\n\n【著名机构】爱尔兰DPC（监管Facebook等）、法国CNIL、德国各州机构",
+      "keywords": [
+        "监管机构",
+        "独立性",
+        "执法机关",
+        "DPC",
+        "CNIL"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 52,
+      "chapter": 6,
+      "title": "监管机构独立性",
+      "titleEn": "Independence",
+      "contentZh": [
+        "监管机构应独立行使职权，不受任何直接或间接的外部影响，包括来自政府、议会或其他公共或私人机构的影响。监管机构成员不得在任职期间从事其他职业或活动。",
+        "监管机构成员和工作人员在履行本条例赋予的任务或权力时，不得寻求或接受任何机构的指示。"
+      ],
+      "contentEn": [
+        "The supervisory authority shall act with complete independence in performing its tasks and exercising its powers in accordance with this Regulation.",
+        "The member or members and the staff of the supervisory authority shall, neither seek nor take instructions from anybody, concerning the exercise of the tasks or the powers conferred on it."
+      ],
+      "interpretation": "独立性是监管机构有效执法的保障：\n\n【独立行使】不受任何外部影响\n\n【禁止指令】不得接受任何机构的指令\n\n【职业限制】成员不得从事其他职业\n\n实践中，监管机构的独立性是欧盟数据保护体系的基石。",
+      "keywords": [
+        "独立性",
+        "监管机构",
+        "不受影响",
+        "职业限制"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 53,
+      "chapter": 6,
+      "title": "监管机构成员",
+      "titleEn": "General conditions for the members of the supervisory authority",
+      "contentZh": [
+        "成员国应规定监管机构成员的任命方式和条件，包括任期、免职程序等。成员应具备履行职责所需的专业资格和能力。",
+        "任命应通过透明程序进行，由议会、政府或国家元首任命。"
+      ],
+      "contentEn": [
+        "Member States shall provide for each member of the supervisory authority to be appointed by means of a transparent procedure by: their parliament; their government; or their head of State.",
+        "Member States shall provide that each member of the supervisory authority shall possess the qualifications, experience and skills, in particular in the area of data protection, required for the exercise of its duties."
+      ],
+      "interpretation": "本条规定监管机构成员的任命要求：\n\n【任命方式】议会、政府或国家元首任命\n\n【透明程序】任命过程透明\n\n【资格要求】具备专业资格和能力\n\n【任期保障】有固定任期和免职程序",
+      "keywords": [
+        "监管机构",
+        "成员任命",
+        "透明程序",
+        "专业资格"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 54,
+      "chapter": 6,
+      "title": "多监管机构",
+      "titleEn": "Competence of the supervisory authority",
+      "contentZh": [
+        "成员国设有多个监管机构的，应指定一个机构作为跨境处理的主要联系点，并建立机制确保机构间有效合作。",
+        "成员国应确保对控制者和处理者活动的监督以及对投诉的调查作出规定。"
+      ],
+      "contentEn": [
+        "Each Member State shall ensure that provisions are made for the supervision of the activities of controllers and processors that fall within the scope of this Regulation and for the investigation of complaints.",
+        "Where a Member State has more than one supervisory authority, the Member State shall designate the supervisory authority which is to represent those authorities in the Board."
+      ],
+      "interpretation": "本条处理多监管机构的协调：\n\n【监督职责】确保对控制者和处理者的监督\n\n【指定代表】指定一个机构代表其他机构\n\n【合作机制】建立机构间合作机制\n\n实践中，德国有16个州级监管机构，需协调执法。",
+      "keywords": [
+        "多监管机构",
+        "协调机制",
+        "主要联系点",
+        "德国模式"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 55,
+      "chapter": 6,
+      "title": "监管机构职权范围",
+      "titleEn": "Competence",
+      "contentZh": [
+        "每个监管机构应有权在其成员国境内行使本条例赋予的职权和权力。",
+        "对于公共机关或基于第6(1)条(c)或(e)项行事的私人机构进行的处理，相关成员国的监管机构应有管辖权。"
+      ],
+      "contentEn": [
+        "Each supervisory authority shall be competent for the performance of the tasks assigned to and the exercise of the powers conferred on it in accordance with this Regulation on the territory of its own Member State.",
+        "Where processing is carried out by public authorities or private bodies acting on the basis of point (c) or (e) of Article 6(1), the supervisory authority of the Member State concerned shall be competent."
+      ],
+      "interpretation": "本条确定监管机构的管辖权：\n\n【属地原则】对境内处理活动有管辖权\n\n【跨境处理】主要营业地监管机构管辖\n\n【公共机构】由相关成员国监管机构管辖\n\n【一站式机制】跨境处理由主监管机构协调\n\n实践中，跨国企业主要由主要营业地监管机构监管。",
+      "keywords": [
+        "管辖权",
+        "主要营业地",
+        "一站式机制",
+        "跨境处理"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 56,
+      "chapter": 6,
+      "title": "一站式机制",
+      "titleEn": "Competence of the lead supervisory authority",
+      "contentZh": [
+        "在不损害第55(2)条的前提下，控制者或处理者的主要营业机构或唯一营业机构所在成员国的监管机构应作为主要监管机构，按照第60条规定的程序处理该控制者或处理者进行的跨境处理。",
+        "主要监管机构应是该控制者或处理者跨境处理的唯一联系点。"
+      ],
+      "contentEn": [
+        "Without prejudice to Article 55(2), the supervisory authority of the main establishment or of the single establishment of the controller or processor shall be competent to act as lead supervisory authority for the cross-border processing carried out by such controller or processor in accordance with the procedure provided in Article 60.",
+        "The lead supervisory authority shall be the sole interlocutor of the controller or processor for the cross-border processing carried out by such controller or processor."
+      ],
+      "interpretation": "一站式机制是跨境监管的核心创新：\n\n【主要监管机构】主要营业地监管机构\n\n【唯一联系点】控制者只需与主监管机构沟通\n\n【协调机制】主监管机构与其他监管机构协调\n\n【例外情形】仅在当地有影响的处理\n\n实践中，跨国企业如Google爱尔兰受爱尔兰DPC管辖。",
+      "keywords": [
+        "一站式机制",
+        "主要监管机构",
+        "跨境监管",
+        "唯一联系点"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 57,
+      "chapter": 6,
+      "title": "监管机构任务",
+      "titleEn": "Tasks",
+      "contentZh": [
+        "监管机构应执行以下任务：监督本条例适用、提高公众意识、处理投诉、调查违规、与其他监管机构合作、出具认证、批准行为准则、制定标准合同条款等。"
+      ],
+      "contentEn": [
+        "Without prejudice to other tasks referred to in this Regulation, each supervisory authority shall on its territory: monitor and enforce the application of this Regulation; promote public awareness; advise the parliament and government; hear complaints; investigate the application of this Regulation; monitor developments that affect the protection of personal data; adopt binding decisions; encourage the drawing up of codes of conduct; encourage the establishment of data protection certification mechanisms; adopt standard contractual clauses; establish and maintain lists in relation to the record of processing activities; and encourage the establishment of certification bodies."
+      ],
+      "interpretation": "监管机构的核心任务包括：\n\n【监督执法】监控和执行GDPR\n\n【公众教育】提高数据保护意识\n\n【投诉处理】受理数据主体投诉\n\n【调查处罚】调查违规并作出决定\n\n【标准制定】批准行为准则、SCC等",
+      "keywords": [
+        "监管机构",
+        "任务",
+        "监督执法",
+        "投诉处理",
+        "认证"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 58,
+      "chapter": 6,
+      "title": "监管机构权力",
+      "titleEn": "Powers",
+      "contentZh": [
+        "每个监管机构应具有以下调查权：要求控制者和处理者提供其履行职责所需的任何信息；以审计形式进行调查；对已颁发的认证进行审查；通知控制者或处理者涉嫌违规；从控制者和处理者获取所有个人数据和履行职责所需的任何信息；进入控制者和处理者的任何场所。",
+        "每个监管机构应具有以下纠正权：发出警告；谴责控制者或处理者；命令控制者或处理者遵守数据主体的请求；命令控制者或处理者使处理操作符合本条例；命令控制者通知数据主体个人数据泄露；施加临时或永久限制，包括禁止处理；命令更正或删除个人数据；撤销认证；施加行政处罚；命令暂停向第三国接收者传输数据。"
+      ],
+      "contentEn": [
+        "Each supervisory authority shall have all of the following investigative powers: to order the controller and the processor to provide any information it requires for the performance of its tasks; to carry out investigations in the form of audits; to carry out a review on certifications issued; to notify the controller or processor of an alleged infringement; to obtain, from the controller and the processor, access to all personal data and to all information necessary for the performance of its tasks; and to obtain access to any premises of the controller and the processor.",
+        "Each supervisory authority shall have all of the following corrective powers: to issue warnings; to reprimand a controller or a processor; to order the controller or the processor to comply with the data subject's requests; to order the controller or processor to bring processing operations into compliance; to order the controller to notify the data subject of a personal data breach; to impose a temporary or definitive limitation including a ban on processing; to order the rectification or erasure of personal data; to withdraw a certification; to impose an administrative fine; and to order the suspension of data flows to a recipient in a third country."
+      ],
+      "interpretation": "监管机构的三大权力：\n\n【调查权】要求信息、审计、进入场所\n\n【纠正权】警告、整改令、暂停处理、删除令、罚款\n\n【授权权】认证、行为准则批准\n\n【罚款权力】最常用的处罚手段\n\n实践中，监管机构可责令整改、暂停处理、删除数据、处以罚款。",
+      "keywords": [
+        "监管权力",
+        "调查权",
+        "纠正权",
+        "罚款",
+        "整改令"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 59,
+      "chapter": 6,
+      "title": "活动报告",
+      "titleEn": "Activity reports",
+      "contentZh": [
+        "监管机构应每年向成员国议会、政府和欧盟数据保护委员会提交活动报告。报告应公开。"
+      ],
+      "contentEn": [
+        "Each supervisory authority shall draw up an annual report on its activities, which may include a list of types of infringement notified and types of measures taken in accordance with Article 58(2). Those reports shall be transmitted to the national parliament, to the government and to other supervisory authorities, the Board and the Commission. They shall be made available to the public."
+      ],
+      "interpretation": "年度报告是监管透明度的保障：\n\n【报告内容】年度活动、违规类型、采取措施\n\n【报告对象】议会、政府、委员会、委员会\n\n【公开要求】向公众公开\n\n实践中，各监管机构年度报告是了解执法趋势的重要来源。",
+      "keywords": [
+        "年度报告",
+        "透明度",
+        "监管机构",
+        "公开"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 60,
+      "chapter": 7,
+      "title": "主要监管机构合作",
+      "titleEn": "Cooperation between the lead supervisory authority and the other supervisory authorities concerned",
+      "contentZh": [
+        "主要监管机构应与其他相关监管机构合作，就跨境处理事项进行协调。主要监管机构应主动提交信息草案给其他监管机构征求意见。",
+        "主要监管机构可随时请求其他相关监管机构根据第61条提供协助，并可依据第62条开展联合措施。"
+      ],
+      "contentEn": [
+        "The lead supervisory authority shall cooperate with the other supervisory authorities concerned in accordance with this Article in an endeavour to reach consensus. The lead supervisory authority and the supervisory authorities concerned shall exchange all relevant information with each other.",
+        "The lead supervisory authority may request at any time other supervisory authorities concerned to provide mutual assistance pursuant to Article 61 and may conduct joint measures pursuant to Article 62."
+      ],
+      "interpretation": "主要监管机构的合作义务：\n\n【信息交换】与相关监管机构交换信息\n\n【征求意见】就决定草案征求意见\n\n【协助请求】可请求其他机构协助\n\n【联合行动】可开展联合措施\n\n实践中，一站式机制依赖监管机构间的密切合作。",
+      "keywords": [
+        "主要监管机构",
+        "合作",
+        "信息交换",
+        "一站式机制"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 61,
+      "chapter": 7,
+      "title": "相互协助",
+      "titleEn": "Mutual assistance",
+      "contentZh": [
+        "监管机构应相互提供协助，包括信息提供、调查支持等。相互协助应高效进行，遵守保密义务。",
+        "每个监管机构应采取一切适当措施在收到请求后一个月内答复，不得无故拖延。"
+      ],
+      "contentEn": [
+        "Supervisory authorities shall provide each other with relevant information and mutual assistance in order to implement and apply this Regulation in a consistent manner, and shall put in place measures for effective cross-border cooperation.",
+        "Each supervisory authority shall take all appropriate measures required to reply to a request from another supervisory authority without undue delay and no later than one month after receiving the request."
+      ],
+      "interpretation": "监管机构相互协助机制：\n\n【协助内容】信息提供、调查支持\n\n【时限要求】一个月内回复\n\n【保密义务】遵守保密要求\n\n【联合行动】可开展联合调查\n\n实践中，跨境案件常需多国监管机构协作。",
+      "keywords": [
+        "相互协助",
+        "监管合作",
+        "跨境案件",
+        "联合调查"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 62,
+      "chapter": 7,
+      "title": "联合行动",
+      "titleEn": "Joint operations of supervisory authorities",
+      "contentZh": [
+        "监管机构可开展联合行动，包括联合调查。联合行动应有明确的任务分工和协调机制。"
+      ],
+      "contentEn": [
+        "The supervisory authorities shall carry out joint operations including joint investigations and enforcement measures. Where a supervisory authority does not submit, within one month of being requested to do so, the information requested by another supervisory authority for the purpose of a joint operation, the requesting supervisory authority may adopt a provisional measure."
+      ],
+      "interpretation": "联合行动是跨境执法的重要机制：\n\n【行动类型】联合调查、联合执法\n\n【协调机制】明确分工和协调\n\n【临时措施】未获协助时可采取临时措施\n\n实践中，重大跨境案件常开展联合行动。",
+      "keywords": [
+        "联合行动",
+        "联合调查",
+        "跨境执法",
+        "临时措施"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 63,
+      "chapter": 7,
+      "title": "一致性机制",
+      "titleEn": "Consistency mechanism",
+      "contentZh": [
+        "委员会应制定一致性机制，确保本条例在所有成员国的一致适用。委员会可主动或应委员会要求，发布指南、建议和最佳实践。",
+        "如果主管监管机构不遵循委员会意见，委员会可在两周内通知欧盟委员会。"
+      ],
+      "contentEn": [
+        "The Board shall contribute to the consistent application of this Regulation throughout the Union. For that purpose, the Board may, on its own initiative or where requested by the Commission, in particular in order to ensure the consistent application of this Regulation in the context of cross-border processing, examine any question covering the application of this Regulation and issue guidelines, recommendations, and best practices.",
+        "Where the competent supervisory authority does not follow the opinion of the Board, the Board may, within two weeks, inform the Commission thereof."
+      ],
+      "interpretation": "一致性机制确保GDPR统一适用：\n\n【机制主体】欧盟数据保护委员会\n\n【功能】发布指南、建议、最佳实践\n\n【约束力】监管机构应考虑委员会意见\n\n【争议处理】不遵循意见可报告委员会\n\n实践中，EDPB发布的指南是合规的重要参考。",
+      "keywords": [
+        "一致性机制",
+        "EDPB",
+        "指南",
+        "统一适用"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 64,
+      "chapter": 7,
+      "title": "委员会意见",
+      "titleEn": "Opinion of the Board",
+      "contentZh": [
+        "委员会应就重大数据保护问题发表意见，包括标准合同条款、充分性认定、行为准则等。意见应在特定时限内发布。",
+        "如果主管监管机构通知委员会其不打算遵循委员会意见，委员会可在两周内通知欧盟委员会。"
+      ],
+      "contentEn": [
+        "The Board shall issue an opinion where a competent supervisory authority intends to adopt any of the measures below. That opinion shall be issued within eight weeks of being requested by the competent supervisory authority. The Board may extend the time limit by a further six weeks.",
+        "Where the competent supervisory authority informs the Board of its intention not to follow the opinion of the Board, the Board may, within two weeks, inform the Commission thereof."
+      ],
+      "interpretation": "委员会意见的法律效力：\n\n【意见类型】标准合同条款、充分性认定、行为准则等\n\n【时限要求】8周内发布（可延长6周）\n\n【约束机制】监管机构应考虑意见\n\n【争议处理】不遵循意见可报告委员会",
+      "keywords": [
+        "委员会意见",
+        "EDPB意见",
+        "标准合同条款",
+        "充分性认定"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 65,
+      "chapter": 7,
+      "title": "争议解决",
+      "titleEn": "Dispute resolution",
+      "contentZh": [
+        "监管机构之间就跨境处理发生争议的，委员会应作出具有约束力的决定。争议应在特定时限内解决。",
+        "委员会应在收到事项后一个月内作出决定。因事项复杂可延长一个月。"
+      ],
+      "contentEn": [
+        "In order to ensure the correct and consistent application of this Regulation, the Board shall adopt binding decisions in individual cases. Any supervisory authority concerned or the Commission may request the Board to take a decision in the event of a dispute between supervisory authorities.",
+        "The Board shall adopt a decision within one month from the referral of the subject-matter. This period may be extended by a further month on account of the complexity of the subject-matter."
+      ],
+      "interpretation": "监管机构争议解决机制：\n\n【解决主体】欧盟数据保护委员会\n\n【申请主体】相关监管机构或欧盟委员会\n\n【时限要求】1个月（可延长至2个月）\n\n【法律效力】决定具有约束力\n\n实践中，争议解决是一站式机制的保障。",
+      "keywords": [
+        "争议解决",
+        "EDPB决定",
+        "约束力",
+        "一站式机制"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 66,
+      "chapter": 7,
+      "title": "紧急措施",
+      "titleEn": "Urgency procedure",
+      "contentZh": [
+        "在紧急情况下，监管机构可立即采取临时措施，但应在三个月内通过一致性机制获得认可。"
+      ],
+      "contentEn": [
+        "By way of derogation from Article 65, where a supervisory authority intends to adopt a measure referred to in Article 58(2) as a matter of urgency, it may, in cases where it considers it necessary to adopt such a measure, immediately adopt provisional measures intended to be effective for a specified period not exceeding three months."
+      ],
+      "interpretation": "紧急情况下监管机构可采取临时措施：\n\n【适用条件】紧急情况\n\n【措施类型】临时措施，有效期不超过3个月\n\n【后续程序】需通过一致性机制获得认可\n\n实践中，数据泄露紧急处置、暂停高风险处理等适用本条。",
+      "keywords": [
+        "紧急措施",
+        "临时措施",
+        "有效期",
+        "一致性机制"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 67,
+      "chapter": 7,
+      "title": "信息交换",
+      "titleEn": "Exchange of information",
+      "contentZh": [
+        "监管机构之间、监管机构与委员会之间应建立安全的信息交换机制，确保信息安全和保密。",
+        "信息应以安全方式在委员会和监管机构之间传递。"
+      ],
+      "contentEn": [
+        "Without prejudice to Article 60, each supervisory authority shall, where appropriate, communicate to the Board, without delay, any relevant information, including information in respect of a breach of this Regulation.",
+        "The information referred to in paragraph 1 shall be communicated between the Board and the supervisory authorities in a secure manner."
+      ],
+      "interpretation": "信息安全交换机制：\n\n【交换对象】监管机构之间、监管机构与委员会\n\n【交换内容】相关信息，包括违规信息\n\n【安全要求】确保信息安全和保密",
+      "keywords": [
+        "信息交换",
+        "安全通信",
+        "保密",
+        "违规信息"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 68,
+      "chapter": 7,
+      "title": "欧盟数据保护委员会",
+      "titleEn": "European Data Protection Board",
+      "contentZh": [
+        "兹设立欧盟数据保护委员会（委员会），作为欧盟机构，并具有法人资格。",
+        "委员会应由每个成员国一名监管机构负责人和欧盟数据保护监督官或其代表组成。"
+      ],
+      "contentEn": [
+        "A European Data Protection Board (the 'Board') is hereby established as a body of the Union and shall have legal personality.",
+        "The Board shall be composed of the head of one supervisory authority of each Member State and of the European Data Protection Supervisor, or their respective representatives."
+      ],
+      "interpretation": "EDPB是欧盟数据保护的核心机构：\n\n【组成】各成员国监管机构负责人 + 欧盟数据保护监督官\n\n【法律地位】欧盟机构，具有法人资格\n\n【主席】由成员选举产生\n\n【职责】确保GDPR一致适用、发布指南、解决争议",
+      "keywords": [
+        "EDPB",
+        "欧盟数据保护委员会",
+        "欧盟机构",
+        "法人资格"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 69,
+      "chapter": 7,
+      "title": "委员会独立性",
+      "titleEn": "Independence of the Board",
+      "contentZh": [
+        "委员会独立行使职权，不受任何外部影响。委员会成员应以联盟整体利益行事。",
+        "委员会成员在履行职责和行使权力时应独立行事，以联盟整体利益为出发点。"
+      ],
+      "contentEn": [
+        "The Board shall act independently when exercising its powers and performing its tasks under this Regulation.",
+        "The members of the Board shall, whether they vote or not, act independently in the performance of their tasks and in the exercise of their powers, in the interests of the Union as a whole."
+      ],
+      "interpretation": "EDPB独立性保障：\n\n【独立行使】不受外部影响\n\n【利益导向】以联盟整体利益行事\n\n【投票独立】投票不受干预",
+      "keywords": [
+        "独立性",
+        "EDPB",
+        "联盟利益",
+        "独立行使"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 70,
+      "chapter": 7,
+      "title": "委员会任务",
+      "titleEn": "Tasks of the Board",
+      "contentZh": [
+        "委员会应执行以下任务：确保GDPR一致适用、发布指南、就充分性认定提供建议、批准标准合同条款、解决监管机构争议等。"
+      ],
+      "contentEn": [
+        "The Board shall ensure the consistent application of this Regulation. To that end, the Board shall, on its own initiative or, where relevant, at the request of the Commission, in particular: examine any question covering the application of this Regulation; issue guidelines, recommendations, and best practices; advise the Commission on any issue related to the protection of personal data; issue opinions for the assessment of the adequacy of the level of protection in a third country; approve standard contractual clauses; approve binding corporate rules; and provide general guidance on data protection impact assessments."
+      ],
+      "interpretation": "EDPB的核心任务：\n\n【指南发布】发布指南、建议、最佳实践\n\n【充分性认定】就第三国保护水平评估提供意见\n\n【条款批准】批准SCC、BCR\n\n【争议解决】解决监管机构争议\n\n【DPIA指导】提供影响评估指导",
+      "keywords": [
+        "EDPB任务",
+        "指南",
+        "SCC批准",
+        "BCR批准",
+        "争议解决"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 71,
+      "chapter": 7,
+      "title": "委员会报告",
+      "titleEn": "Reports",
+      "contentZh": [
+        "委员会应向欧洲议会、理事会和委员会提交年度报告，说明其活动和工作计划。",
+        "年度报告应公开。"
+      ],
+      "contentEn": [
+        "The Board shall draw up an annual report regarding the protection of natural persons with regard to processing in the Union and, where relevant, in third countries and international organisations, which it shall transmit to the European Parliament, the Council and the Commission, and to the other Union institutions concerned.",
+        "The annual report shall be made public."
+      ],
+      "interpretation": "EDPB年度报告要求：\n\n【报告对象】欧洲议会、理事会、委员会\n\n【报告内容】年度活动、数据保护状况\n\n【公开要求】向公众公开",
+      "keywords": [
+        "年度报告",
+        "EDPB",
+        "欧洲议会",
+        "公开"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 72,
+      "chapter": 7,
+      "title": "委员会程序",
+      "titleEn": "Procedure",
+      "contentZh": [
+        "委员会应以成员简单多数作出决定，本条例另有规定的除外。",
+        "委员会应以成员三分之二多数通过议事规则，并自行组织其运作安排。",
+        "委员会应由主席主持。"
+      ],
+      "contentEn": [
+        "The Board shall take decisions by a simple majority of its members, unless otherwise provided for in this Regulation.",
+        "The Board shall adopt its own rules of procedure by a two-thirds majority of its members and organise its own operational arrangements.",
+        "The Board shall be chaired by the Chair."
+      ],
+      "interpretation": "EDPB内部程序规则：\n\n【表决原则】简单多数（另有规定除外）\n\n【议事规则】三分之二多数通过\n\n【主席职责】主持会议\n\n实践中，EDPB制定详细的议事规则和操作安排。",
+      "keywords": [
+        "程序规则",
+        "表决",
+        "议事规则",
+        "简单多数"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 73,
+      "chapter": 7,
+      "title": "委员会主席",
+      "titleEn": "Chair",
+      "contentZh": [
+        "委员会应从成员中选举主席和副主席，任期五年，可连任一次。",
+        "主席和副主席应以成员简单多数选举产生。"
+      ],
+      "contentEn": [
+        "The Board shall elect a chair and two deputy chairs from amongst its members by simple majority.",
+        "The chair and the deputy chairs shall be elected for a term of five years and may be re-elected once."
+      ],
+      "interpretation": "EDPB主席选举：\n\n【选举方式】成员简单多数选举\n\n【职位设置】主席1人，副主席2人\n\n【任期】5年，可连任一次\n\n【候选人】须为成员",
+      "keywords": [
+        "主席",
+        "副主席",
+        "选举",
+        "任期"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 74,
+      "chapter": 7,
+      "title": "主席职责",
+      "titleEn": "Tasks of the Chair",
+      "contentZh": [
+        "主席负责召集委员会会议、制定议程、代表委员会对外发言等。"
+      ],
+      "contentEn": [
+        "The Chair shall have the following tasks: to prepare the work of the Board; to convene and preside over meetings of the Board; to provide the European Parliament, the Council and the Commission, at their request, with any information necessary for the exercise of their tasks; to approve the annual work programme of the Board for the following year; and to ensure the timely preparation of opinions, decisions, and other texts adopted by the Board."
+      ],
+      "interpretation": "主席的核心职责：\n\n【会议召集】召集并主持会议\n\n【议程制定】准备工作计划和议程\n\n【对外代表】代表委员会发言\n\n【文件批准】批准年度工作计划\n\n【信息提供】向欧盟机构提供信息",
+      "keywords": [
+        "主席职责",
+        "会议召集",
+        "议程",
+        "对外代表"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 75,
+      "chapter": 7,
+      "title": "秘书处",
+      "titleEn": "Secretariat",
+      "contentZh": [
+        "委员会应设立秘书处，由欧盟数据保护监督官提供支持。秘书处负责日常行政事务。",
+        "秘书处应仅服从主席的指示履行其职责。",
+        "参与执行本条例赋予委员会任务的工作人员应具有独立于执行欧盟数据保护监督官任务工作人员的汇报线。"
+      ],
+      "contentEn": [
+        "The Board shall have a secretariat, which shall be provided by the European Data Protection Supervisor.",
+        "The secretariat shall perform its tasks exclusively under the instructions of the Chair of the Board.",
+        "The staff of the European Data Protection Supervisor involved in carrying out the tasks conferred on the Board by this Regulation shall be subject to separate reporting lines from the staff involved in carrying out tasks conferred on the European Data Protection Supervisor."
+      ],
+      "interpretation": "EDPB秘书处的设置：\n\n【提供主体】欧盟数据保护监督官\n\n【职责】日常行政事务支持\n\n【汇报线】独立于EDPS的汇报线\n\n【指令服从】仅服从主席指令",
+      "keywords": [
+        "秘书处",
+        "EDPS",
+        "行政支持",
+        "独立汇报"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 76,
+      "chapter": 7,
+      "title": "委员会与EDPS合作",
+      "titleEn": "Cooperation with the European Data Protection Supervisor",
+      "contentZh": [
+        "委员会应与欧盟数据保护监督官密切合作，确保欧盟机构数据保护法规的一致适用。",
+        "委员会在履行职责时，应与欧盟数据保护监督官以及相关国家监管机构密切合作。"
+      ],
+      "contentEn": [
+        "The Board shall cooperate with the European Data Protection Supervisor in the manner set out in this Article.",
+        "The Board shall, in the performance of its tasks, act in close cooperation with the European Data Protection Supervisor and, where appropriate, with national supervisory authorities, in order to ensure consistency in the application of data protection law within the Union."
+      ],
+      "interpretation": "EDPB与EDPS的合作机制：\n\n【合作对象】欧盟数据保护监督官\n\n【合作目的】确保一致性\n\n【合作范围】欧盟机构数据保护法规适用\n\n实践中，EDPB和EDPS密切合作发布指南。",
+      "keywords": [
+        "合作",
+        "EDPS",
+        "一致性",
+        "欧盟机构"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 77,
+      "chapter": 8,
+      "title": "向监管机构投诉权",
+      "titleEn": "Right to lodge a complaint with a supervisory authority",
+      "contentZh": [
+        "在不影响任何其他行政或司法救济的情况下，每个数据主体均有权向监管机构投诉，特别是向其惯常居住地、工作地或涉嫌侵权发生地所在成员国的监管机构投诉，如果数据主体认为与其相关的个人数据处理违反本条例。",
+        "收到投诉的监管机构应告知投诉人投诉的进展和结果，包括根据第78条寻求司法救济的可能性。"
+      ],
+      "contentEn": [
+        "Without prejudice to any other administrative or judicial remedy, every data subject shall have the right to lodge a complaint with a supervisory authority, in particular in the Member State of his or her habitual residence, place of work or place of the alleged infringement if the data subject considers that the processing of personal data relating to him or her infringes this Regulation.",
+        "The supervisory authority with which the complaint has been lodged shall inform the complainant on the progress and the outcome of the complaint including the possibility of a judicial remedy pursuant to Article 78."
+      ],
+      "interpretation": "向监管机构投诉是数据主体维权的重要途径：\n\n【投诉权】任何数据主体均可投诉\n\n【管辖选择】惯常居住地、工作地或侵权地\n\n【反馈义务】监管机构应告知进展和结果\n\n【后续救济】可寻求司法救济\n\n实践中，大量投诉来自个人隐私权被侵犯。",
+      "keywords": [
+        "投诉权",
+        "监管机构",
+        "数据主体",
+        "维权"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 78,
+      "chapter": 8,
+      "title": "司法救济权",
+      "titleEn": "Right to an effective judicial remedy against a supervisory authority",
+      "contentZh": [
+        "在不影响任何其他可用救济的情况下，每个自然人或法人有权对监管机构关于其的具有法律约束力的决定寻求有效的司法救济。",
+        "在不影响任何其他可用救济的情况下，每个控制者、处理者以及数据保护官有权对监管机构认定其违规的决定寻求有效的司法救济。"
+      ],
+      "contentEn": [
+        "Without prejudice to any other remedy available, each natural or legal person shall have the right to an effective judicial remedy against a legally binding decision of a supervisory authority concerning them.",
+        "Without prejudice to any other remedy available, each controller, processor and, where applicable, the data protection officer shall have the right to an effective judicial remedy against a decision of a supervisory authority which finds that an infringement has occurred."
+      ],
+      "interpretation": "司法救济是行政决定的最终救济：\n\n【数据主体权利】对监管机构决定寻求司法救济\n\n【企业权利】控制者、处理者也可寻求司法救济\n\n【诉讼时效】自知道决定之日起三个月内\n\n实践中，企业和数据主体常对监管机构的罚款或决定提起诉讼。",
+      "keywords": [
+        "司法救济",
+        "诉讼权",
+        "监管机构",
+        "行政决定"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 79,
+      "chapter": 8,
+      "title": "对控制者或处理者的司法救济",
+      "titleEn": "Right to an effective judicial remedy against a controller or processor",
+      "contentZh": [
+        "在不影响任何可用的行政或非司法救济（包括根据第77条向监管机构投诉的权利）的情况下，每个数据主体如果认为其根据本条例的权利因违反本条例的处理而受到侵犯，均有权获得有效的司法救济。",
+        "对控制者或处理者的诉讼应向控制者或处理者设有营业机构的成员国法院提起。"
+      ],
+      "contentEn": [
+        "Without prejudice to any available administrative or non-judicial remedy, including the right to lodge a complaint with a supervisory authority pursuant to Article 77, every data subject shall have the right to an effective judicial remedy if he or she considers that his or her rights under this Regulation have been infringed as a result of the processing of his or her personal data in non-compliance with this Regulation.",
+        "Proceedings against a controller or a processor shall be brought before the courts of the Member State where the controller or processor has an establishment."
+      ],
+      "interpretation": "数据主体可向法院起诉企业：\n\n【起诉权】对控制者或处理者提起诉讼\n\n【管辖法院】企业营业地或数据主体居住地\n\n【选择权】可选择向监管机构投诉或直接起诉\n\n实践中，大规模数据泄露后常引发集体诉讼。",
+      "keywords": [
+        "司法救济",
+        "诉讼",
+        "管辖法院",
+        "集体诉讼"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 80,
+      "chapter": 8,
+      "title": "代表机构诉讼",
+      "titleEn": "Representation of data subjects",
+      "contentZh": [
+        "数据主体有权授权非营利机构、组织或协会代表其行使权利，包括向监管机构投诉和提起诉讼。该机构需符合法定条件。",
+        "成员国可规定任何此类机构无需数据主体授权即可向监管机构投诉或行使司法救济权。"
+      ],
+      "contentEn": [
+        "The data subject shall have the right to mandate a not-for-profit body, organisation or association which has been properly constituted in accordance with the law of a Member State, has statutory objectives which are in the public interest, and is active in the field of data protection to lodge a complaint on his or her behalf with a supervisory authority or to exercise the right to a judicial remedy on his or her behalf.",
+        "Member States may provide that any body, organisation or association referred to in paragraph 1 of this Article, regardless of the mandate by a data subject, has the right to lodge a complaint with a supervisory authority or to exercise the right to a judicial remedy."
+      ],
+      "interpretation": "代表诉讼是集体维权的重要机制：\n\n【代表主体】非营利机构、组织、协会\n\n【条件】依法成立、公共利益目标、数据保护领域活跃\n\n【权利范围】投诉、诉讼\n\n【集体诉讼】成员国可允许机构无需个人授权即可起诉\n\n实践中，隐私保护组织如NOYB常代表消费者维权。",
+      "keywords": [
+        "代表诉讼",
+        "集体维权",
+        "NOYB",
+        "非营利组织"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 81,
+      "chapter": 8,
+      "title": "诉讼中止",
+      "titleEn": "Suspension of proceedings",
+      "contentZh": [
+        "监管机构正在处理的投诉相关事项如已成为司法程序标的，监管机构应中止处理。",
+        "如成员国法院已就同一事项启动程序，法院应中止其程序。中止原因消除后，程序应恢复。"
+      ],
+      "contentEn": [
+        "Where a supervisory authority decides to lodge a judicial remedy against a decision of another supervisory authority, the first supervisory authority shall, without prejudice to its powers, inform the lead supervisory authority and the Board.",
+        "Where a court of a Member State has before it proceedings concerning the same subject matter, the court shall stay its proceedings."
+      ],
+      "interpretation": "本条处理行政和司法程序的协调：\n\n【中止条件】司法程序已启动\n\n【目的】避免重复处理\n\n【恢复条件】司法程序结束后恢复",
+      "keywords": [
+        "诉讼中止",
+        "程序协调",
+        "司法程序"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 82,
+      "chapter": 8,
+      "title": "赔偿权",
+      "titleEn": "Right to compensation and liability",
+      "contentZh": [
+        "任何人因违反本条例的处理而遭受物质或非物质损害的，有权从控制者或处理者处获得损害赔偿。",
+        "参与处理的任何控制者和任何处理者应对违反本条例的处理所造成的损害承担责任。",
+        "控制者或处理者如能证明其对造成损害的事件不负任何责任，可免除责任。"
+      ],
+      "contentEn": [
+        "Any person who has suffered material or non-material damage as a result of an infringement of this Regulation shall have the right to receive compensation from the controller or processor for the damage suffered.",
+        "Any controller involved in processing and any processor shall be liable for the damage caused by processing which infringes this Regulation.",
+        "A controller or processor shall be exempt from liability if it proves that it is not in any way responsible for the event giving rise to the damage."
+      ],
+      "interpretation": "赔偿权是数据主体的重要救济：\n\n【赔偿范围】物质损害 + 非物质损害（精神损害）\n\n【责任主体】控制者或处理者\n\n【举证责任】企业需证明自己无责才能免责\n\n【连带责任】多个责任方承担连带责任\n\n实践中，数据泄露导致的精神损害赔偿案例增多。",
+      "keywords": [
+        "赔偿权",
+        "物质损害",
+        "非物质损害",
+        "精神损害赔偿"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 83,
+      "chapter": 8,
+      "title": "行政处罚",
+      "titleEn": "General conditions for imposing administrative fines",
+      "contentZh": [
+        "每个监管机构应确保根据本条例实施的行政处罚在每个具体案件中都是有效的、相称的和有威慑力的。",
+        "行政处罚应根据每个案件的具体情况确定，除第58(2)条(a)至(h)和(j)项所述措施和补救措施外，还可附加于或替代这些措施。",
+        "如果控制者或处理者故意或过失地就相同或关联的处理操作违反本条例多项规定，罚款总额不得超过最严重违规行为规定的金额。"
+      ],
+      "contentEn": [
+        "Each supervisory authority shall ensure that the imposition of administrative fines pursuant to this Article in respect of infringements of this Regulation shall in each individual case be effective, proportionate and dissuasive.",
+        "Administrative fines shall, depending on the circumstances of each individual case, be imposed in addition to, or instead of, measures and remedies referred to in points (a) to (h) and (j) of Article 58(2).",
+        "If a controller or processor intentionally or negligently, for the same or linked processing operations, infringes several provisions of this Regulation, the total amount of the administrative fine shall not exceed the amount specified for the gravest infringement."
+      ],
+      "interpretation": "这是GDPR最著名的「天价罚单」条款：\n\n【罚款上限】\n- 一般违规：1000万欧元或年营业额2%\n- 严重违规：2000万欧元或年营业额4%\n\n【考量因素】侵权性质、严重程度、故意程度、配合态度、财务状况\n\n【著名案例】\n- Google 5000万欧元\n- Amazon 7.46亿欧元\n- Meta 12亿欧元\n\n实践中，大公司罚单动辄上亿，中小企业也需高度重视合规。",
+      "keywords": [
+        "行政处罚",
+        "罚款",
+        "天价罚单",
+        "年营业额4%"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 84,
+      "chapter": 8,
+      "title": "处罚",
+      "titleEn": "Penalties",
+      "contentZh": [
+        "成员国应制定适用于违反本条例行为的处罚规则，并采取一切必要措施确保处罚执行。处罚应有效、相称、有威慑力。",
+        "成员国应在2018年5月25日前通知委员会这些规则，并应立即通知其后续任何影响这些规则的修订。"
+      ],
+      "contentEn": [
+        "Member States shall lay down the rules on penalties applicable to infringements of this Regulation and shall take all measures necessary to ensure that they are implemented. Such penalties shall be effective, proportionate and dissuasive.",
+        "Member States shall notify the Commission of those rules by 25 May 2018 and shall notify it without delay of any subsequent amendment affecting them."
+      ],
+      "interpretation": "成员国处罚规则：\n\n【立法要求】成员国制定处罚规则\n\n【处罚原则】有效、相称、有威慑力\n\n【通知义务】向欧盟委员会报告\n\n实践中，各国处罚力度不同，但行政处罚（第83条）是主要手段。",
+      "keywords": [
+        "处罚",
+        "成员国",
+        "有效",
+        "相称",
+        "有威慑力"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 85,
+      "chapter": 9,
+      "title": "处理与言论自由",
+      "titleEn": "Processing and freedom of expression and information",
+      "contentZh": [
+        "成员国可通过法律调和本条例赋予的权利与言论自由和信息自由的关系，包括处理个人数据用于新闻目的或学术、艺术或文学表达目的。",
+        "成员国应规定对透明度义务、访问权、更正权、限制权和删除权的豁免或减损，以便新闻目的的处理。"
+      ],
+      "contentEn": [
+        "Member States shall by law reconcile the right to the protection of personal data pursuant to this Regulation with the right to freedom of expression and information, including processing for journalistic purposes and the purposes of academic, artistic or literary expression.",
+        "Member States shall provide for exemptions or derogations from the following provisions: transparency obligations, the rights to access, rectification, restriction and erasure for processing for journalistic purposes."
+      ],
+      "interpretation": "言论自由与数据保护的平衡：\n\n【调和义务】成员国立法调和权利冲突\n\n【适用范围】新闻、学术、艺术、文学表达\n\n【豁免条款】可豁免透明度、访问、更正、删除等权利\n\n实践中，媒体处理个人数据享有较大豁免空间。",
+      "keywords": [
+        "言论自由",
+        "新闻目的",
+        "艺术表达",
+        "权利调和"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 86,
+      "chapter": 9,
+      "title": "公共数据再处理",
+      "titleEn": "Processing and public access to official documents",
+      "contentZh": [
+        "成员国个人数据已依据法律公开的，本条例应允许公众获取官方文件中的个人数据。"
+      ],
+      "contentEn": [
+        "Personal data in official documents held by a public authority or a public body or a private body for the performance of a task carried out in the public interest may be disclosed by the authority or body concerned in accordance with Union or Member State law to which the authority or body is subject in order to reconcile public access to official documents with the right to the protection of personal data pursuant to Article 14(5)."
+      ],
+      "interpretation": "公共文件中的个人数据处理：\n\n【公开依据】欧盟或成员国法律\n\n【调和原则】平衡信息公开与数据保护\n\n【适用主体】公共机构或公共利益机构\n\n实践中，政府信息公开需兼顾个人数据保护。",
+      "keywords": [
+        "公共文件",
+        "信息公开",
+        "官方文件",
+        "数据保护"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 87,
+      "chapter": 9,
+      "title": "国民身份号码",
+      "titleEn": "Processing of the national identification number",
+      "contentZh": [
+        "成员国可制定国民身份号码处理的具体条件，以确保数据处理合法、公平、透明。"
+      ],
+      "contentEn": [
+        "Member States may further determine the specific conditions for the processing of a national identification number or any other identifier of general application. In that case the national identification number or any other identifier of general application shall be used only under appropriate safeguards for the rights and freedoms of the data subject pursuant to this Regulation."
+      ],
+      "interpretation": "国民身份号码的特殊处理：\n\n【成员国权限】可制定具体条件\n\n【安全保障】必须采取适当保障措施\n\n【使用限制】仅在必要情况下使用\n\n实践中，身份证号、社保号等敏感标识符处理需谨慎。",
+      "keywords": [
+        "国民身份号码",
+        "身份证号",
+        "标识符",
+        "安全保障"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 88,
+      "chapter": 9,
+      "title": "员工数据处理",
+      "titleEn": "Processing in the context of employment",
+      "contentZh": [
+        "成员国可通过法律或集体协议制定员工数据处理的具体规则，包括招聘、履行合同、终止、健康安全等场景。"
+      ],
+      "contentEn": [
+        "Member States may, by law or by collective agreements, provide for more specific rules to ensure the protection of the rights and freedoms in respect of the processing of employees' personal data in the employment context, in particular for the purposes of the recruitment, the performance of the contract of employment, including discharge of obligations laid down by law or by collective agreements, management, planning and organisation of work, equality and diversity in the workplace, health and safety at work, and for the purposes of the exercise and enjoyment, on an individual or collective basis, of rights and benefits related to employment."
+      ],
+      "interpretation": "员工数据处理的特殊规则：\n\n【立法权限】成员国法律或集体协议\n\n【适用场景】招聘、履约、离职、健康安全等\n\n【保护要求】确保权利和自由保护\n\n实践中，HR系统、考勤、绩效管理等均受本条影响。",
+      "keywords": [
+        "员工数据",
+        "HR",
+        "招聘",
+        "雇佣关系",
+        "集体协议"
+      ],
+      "importance": "high"
+    },
+    {
+      "number": 89,
+      "chapter": 9,
+      "title": "存档、科研和统计",
+      "titleEn": "Safeguards and derogations relating to processing for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes",
+      "contentZh": [
+        "为公共利益存档、科学或历史研究或统计目的处理个人数据的，应采取适当保障措施，如假名化。成员国可对数据主体权利作出减损。",
+        "这些保障措施应确保技术和组织措施到位，特别是确保尊重数据最小化原则。"
+      ],
+      "contentEn": [
+        "Processing for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes, shall be subject to appropriate safeguards, in accordance with this Regulation, for the rights and freedoms of the data subject.",
+        "Those safeguards shall ensure that technical and organisational measures are in place in particular in order to ensure respect for the principle of data minimisation."
+      ],
+      "interpretation": "科研和存档的保障措施：\n\n【适用范围】公共利益存档、科研、历史研究、统计\n\n【保障措施】假名化、数据最小化等\n\n【权利减损】成员国可限制部分权利\n\n实践中，医学研究、社会科学研究、档案馆等适用本条。",
+      "keywords": [
+        "科研目的",
+        "存档",
+        "统计",
+        "假名化",
+        "数据最小化"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 90,
+      "chapter": 9,
+      "title": "保密义务",
+      "titleEn": "Obligations of secrecy",
+      "contentZh": [
+        "本条例不影响成员国法律规定的职业保密义务，如律师、医生等专业人员的保密责任。",
+        "成员国可规定仅在预防、调查、侦查或起诉刑事犯罪或执行刑事处罚所必需的情况下披露个人数据。"
+      ],
+      "contentEn": [
+        "This Regulation shall not affect the application of the law of the Member States which provides for the obligation of professional secrecy or other equivalent obligations of secrecy, including a statutory obligation of secrecy.",
+        "Member States may provide for the disclosure of personal data only where it is necessary for the purposes of the prevention, investigation, detection or prosecution of criminal offences or the execution of criminal penalties."
+      ],
+      "interpretation": "保密义务优先适用：\n\n【适用范围】职业保密义务（律师、医生等）\n\n【优先原则】GDPR不影响保密义务\n\n【披露限制】仅在刑事侦查等必要情况下披露",
+      "keywords": [
+        "保密义务",
+        "职业保密",
+        "律师",
+        "医生",
+        "专业人员"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 91,
+      "chapter": 9,
+      "title": "教会和宗教团体",
+      "titleEn": "Existing data protection rules of churches and religious associations",
+      "contentZh": [
+        "在成员国设有营业机构的教会和宗教团体，如其已制定符合本条例的数据保护规则，可继续适用。",
+        "基于第1款处理个人数据的教会和宗教团体应接受独立监督机构的监督，该机构可以是专门的，但须符合本条例第六章规定的条件。"
+      ],
+      "contentEn": [
+        "In Member States in which churches and religious associations or communities apply, at the time of entry into force of this Regulation, comprehensive rules relating to the protection of natural persons with regard to processing, such rules may continue to apply, provided that they are brought into line with this Regulation.",
+        "Churches and religious associations which process personal data on the basis of paragraph 1 shall be subject to independent supervision by a body which may be specific, provided that it fulfils the conditions laid down in Chapter VI of this Regulation."
+      ],
+      "interpretation": "教会和宗教团体的特殊安排：\n\n【继续适用】已有数据保护规则可继续适用\n\n【合规要求】必须与GDPR保持一致\n\n【独立监督】需设立独立监督机构",
+      "keywords": [
+        "教会",
+        "宗教团体",
+        "数据保护",
+        "独立监督"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 92,
+      "chapter": 10,
+      "title": "授权法案",
+      "titleEn": "Exercise of the delegation",
+      "contentZh": [
+        "欧盟委员会被授权在特定情形下通过授权法案，制定技术性规定。授权自生效日起五年有效。",
+        "委员会应在五年期限结束前至少九个月提交关于授权的报告。"
+      ],
+      "contentEn": [
+        "The power to adopt delegated acts is conferred on the Commission subject to the conditions laid down in this Article.",
+        "The power to adopt delegated acts referred to in Article 12(8) and Article 43(8) shall be conferred on the Commission for a period of five years from 24 May 2016. The Commission shall draw up a report in respect of the delegation of power not later than nine months before the end of the five-year period."
+      ],
+      "interpretation": "授权法案是欧盟委员会的立法工具：\n\n【授权范围】技术性规定\n\n【有效期】五年\n\n【报告义务】委员会需定期报告",
+      "keywords": [
+        "授权法案",
+        "欧盟委员会",
+        "技术规定",
+        "五年有效期"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 93,
+      "chapter": 10,
+      "title": "委员会程序",
+      "titleEn": "Committee procedure",
+      "contentZh": [
+        "认证机构应由监管机构认可。认可应符合条件：独立于控制者或处理者、具备专业能力、符合ISO/IEC标准等。",
+        "欧盟委员会通过实施法案时，应由委员会协助，适用审查程序。"
+      ],
+      "contentEn": [
+        "The Commission shall be assisted by a committee. That committee shall be a committee within the meaning of Regulation (EU) No 182/2011.",
+        "Where reference is made to this paragraph, Article 5 of Regulation (EU) No 182/2011 shall apply."
+      ],
+      "interpretation": "委员会程序是实施法案的程序要求：\n\n【协助机构】委员会\n\n【适用程序】审查程序\n\n【法律依据】(EU) No 182/2011",
+      "keywords": [
+        "委员会程序",
+        "实施法案",
+        "审查程序"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 94,
+      "chapter": 11,
+      "title": "生效日期",
+      "titleEn": "Entry into force and application",
+      "contentZh": [
+        "本条例于2018年5月25日生效，自生效日起适用。但第99(2)条自2016年5月24日生效。",
+        "本条例应在欧盟官方公报上公布后第二十天生效。"
+      ],
+      "contentEn": [
+        "This Regulation shall enter into force on the twentieth day following that of its publication in the Official Journal of the European Union.",
+        "It shall apply from 25 May 2018."
+      ],
+      "interpretation": "GDPR生效时间：\n\n【通过时间】2016年4月27日\n\n【生效时间】2018年5月25日\n\n【过渡期】约两年过渡期\n\n【适用范围】所有欧盟成员国直接适用",
+      "keywords": [
+        "生效日期",
+        "2018年5月25日",
+        "过渡期",
+        "直接适用"
+      ],
+      "importance": "medium"
+    },
+    {
+      "number": 95,
+      "chapter": 11,
+      "title": "与原指令的关系",
+      "titleEn": "Repeal of Directive 95/46/EC",
+      "contentZh": [
+        "自2018年5月25日起，第95/46/EC号指令废止。已根据该指令通过的成员国法律应继续适用，直至与新条款不一致。",
+        "引用原指令的视为引用本条例。"
+      ],
+      "contentEn": [
+        "Directive 95/46/EC is repealed with effect from 25 May 2018.",
+        "References to the repealed Directive shall be construed as references to this Regulation."
+      ],
+      "interpretation": "GDPR取代原数据保护指令：\n\n【废止对象】第95/46/EC号指令\n\n【废止时间】2018年5月25日\n\n【引用转换】引用原指令的视为引用GDPR",
+      "keywords": [
+        "原指令",
+        "95/46/EC",
+        "废止",
+        "取代"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 96,
+      "chapter": 11,
+      "title": "与其他法律的关系",
+      "titleEn": "Relationship with previously concluded Agreements",
+      "contentZh": [
+        "本条例不影响成员国在GDPR生效前与国际组织签署的国际协议效力。",
+        "委员会可在评估这些协议执行情况后，提议与相关第三国重新谈判，以获得符合本条例要求的新协议。"
+      ],
+      "contentEn": [
+        "This Regulation shall not affect the application of international agreements concluded between Member States and third countries before 24 May 2016 which comply with the conditions set out in Article 26(1) of Directive 95/46/EC.",
+        "The Commission may, after assessing the implementation of those agreements, propose that the Council authorise the opening of negotiations with the third countries concerned with a view to obtaining a new agreement complying with the requirements of this Regulation."
+      ],
+      "interpretation": "已有国际协议的效力：\n\n【保护原则】不影响已有协议\n\n【条件】符合原指令要求\n\n【新协议】委员会可提议重新谈判",
+      "keywords": [
+        "国际协议",
+        "已有协议",
+        "第三国",
+        "重新谈判"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 97,
+      "chapter": 11,
+      "title": "委员会报告",
+      "titleEn": "Commission reports",
+      "contentZh": [
+        "欧盟委员会应于2020年5月25日及此后每四年评估本条例的适用情况，并向欧洲议会、理事会和经社理事会报告。",
+        "委员会应在适当情况下提出本条例的修订建议。"
+      ],
+      "contentEn": [
+        "The Commission shall, by 25 May 2020 and every four years thereafter, submit a report on the evaluation and review of this Regulation to the European Parliament and to the Council.",
+        "The Commission shall, where appropriate, submit proposals for amendments of this Regulation."
+      ],
+      "interpretation": "委员会定期评估GDPR：\n\n【首次报告】2020年5月25日\n\n【后续报告】每四年一次\n\n【报告对象】欧洲议会、理事会、经社理事会\n\n【修法建议】可提出修订建议",
+      "keywords": [
+        "委员会报告",
+        "评估",
+        "修法",
+        "四年一次"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 98,
+      "chapter": 11,
+      "title": "其他法律审查",
+      "titleEn": "Review of other Union legal acts on data protection",
+      "contentZh": [
+        "欧盟委员会应审查本条例与部门性数据保护法规的关系，并在必要时提出修订建议。",
+        "委员会应特别注意本条例第12(2)条和第14(2)条的规定。"
+      ],
+      "contentEn": [
+        "The Commission shall, if necessary, submit appropriate proposals with a view to amending other Union legal acts on the protection of personal data, in order to ensure consistency with this Regulation.",
+        "The Commission shall, in particular, take into account the provisions of Article 12(2) and Article 14(2) of this Regulation."
+      ],
+      "interpretation": "与其他法规的一致性审查：\n\n【审查对象】部门性数据保护法规\n\n【审查目的】确保与GDPR一致\n\n【修法建议】必要时提出修订建议",
+      "keywords": [
+        "部门法规",
+        "一致性",
+        "修法",
+        "审查"
+      ],
+      "importance": "low"
+    },
+    {
+      "number": 99,
+      "chapter": 11,
+      "title": "最终条款",
+      "titleEn": "Final provisions",
+      "contentZh": [
+        "本条例具有整体约束力，直接适用于所有成员国。",
+        "本条例应在欧盟官方公报上公布后第二十天生效。"
+      ],
+      "contentEn": [
+        "This Regulation shall be binding in its entirety and directly applicable in all Member States.",
+        "This Regulation shall enter into force on the twentieth day following that of its publication in the Official Journal of the European Union."
+      ],
+      "interpretation": "GDPR的法律效力：\n\n【约束力】整体约束力\n\n【直接适用】直接适用于所有成员国\n\n【无需转化】无需成员国立法转化\n\n这是「条例」形式立法的直接效力特点。",
+      "keywords": [
+        "直接适用",
+        "整体约束力",
+        "条例",
+        "欧盟法"
+      ],
+      "importance": "medium"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GDPR 通用数据保护条例学习平台 - 中英双语对照解读">
+    <meta name="keywords" content="GDPR, 数据保护, 隐私, 个人数据, 合规">
+    <title>GDPR 通用数据保护条例 - 学习平台</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景动画 -->
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- 主容器 -->
+    <div class="app-container">
+        <!-- 头部 -->
+        <header>
+            <h1>通用数据保护条例</h1>
+            <p class="subtitle">General Data Protection Regulation</p>
+            <p class="meta">欧盟法规 (EU) 2016/679 · 2018年5月25日生效</p>
+        </header>
+
+        <!-- 统计信息 -->
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="statsArticles">99</div>
+                <div class="stat-label">条文</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="statsChapters">11</div>
+                <div class="stat-label">章节</div>
+            </div>
+        </div>
+
+        <!-- 工具栏 -->
+        <div class="toolbar">
+            <!-- 搜索框 -->
+            <div class="search-box">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input type="text" id="searchInput" placeholder="搜索条文编号、标题或关键词..." autocomplete="off">
+            </div>
+
+            <!-- 章节筛选 -->
+            <div class="chapter-filter" id="chapterFilter"></div>
+        </div>
+
+        <!-- 文章卡片网格 -->
+        <div class="article-grid" id="articleGrid">
+            <!-- 由 JavaScript 动态生成 -->
+        </div>
+    </div>
+
+    <!-- Modal 详情弹窗 -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <!-- Modal 头部 -->
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <h2 class="modal-title" id="modalTitle">第 X 条 - 标题</h2>
+                    <p class="modal-title-en" id="modalTitleEn">Article X - Title</p>
+                </div>
+                <div class="modal-actions">
+                    <button class="modal-nav-btn" id="prevBtn" title="上一条 (←)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button class="modal-nav-btn" id="nextBtn" title="下一条 (→)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                    <button class="modal-close" id="modalClose" title="关闭 (Esc)">×</button>
+                </div>
+            </div>
+
+            <!-- Modal 内容区 -->
+            <div class="modal-body">
+                <!-- 双语内容区 -->
+                <div class="content-area">
+                    <!-- 中文内容 -->
+                    <div class="content-panel zh">
+                        <h3>中文</h3>
+                        <div id="modalContentZh"></div>
+                    </div>
+                    <!-- 英文内容 -->
+                    <div class="content-panel en">
+                        <h3>English</h3>
+                        <div id="modalContentEn"></div>
+                    </div>
+                </div>
+
+                <!-- 解读区 -->
+                <div class="interpretation-area">
+                    <h3>解读</h3>
+                    <p class="interpretation-text" id="modalInterpretation"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
