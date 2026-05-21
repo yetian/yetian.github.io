@@ -8,7 +8,9 @@
         currentArticle: null,
         currentIndex: 0,
         activeChapter: 'all',
-        searchQuery: ''
+        searchQuery: '',
+        isModalOpen: false,
+        isClosingFromPopstate: false
     };
 
     // DOM 元素
@@ -20,7 +22,6 @@
         modalTitle: document.getElementById('modalTitle'),
         modalTitleEn: document.getElementById('modalTitleEn'),
         modalContentZh: document.getElementById('modalContentZh'),
-        modalContentEn: document.getElementById('modalContentEn'),
         modalInterpretation: document.getElementById('modalInterpretation'),
         modalClose: document.getElementById('modalClose'),
         prevBtn: document.getElementById('prevBtn'),
@@ -167,11 +168,20 @@
         elements.modalTitle.textContent = `第 ${article.number} 条 - ${article.title}`;
         elements.modalTitleEn.textContent = `Article ${article.number} - ${article.titleEn}`;
 
-        // 渲染中文内容
-        elements.modalContentZh.innerHTML = article.contentZh.map(p => `<p>${p}</p>`).join('');
-
-        // 渲染英文内容
-        elements.modalContentEn.innerHTML = article.contentEn.map(p => `<p>${p}</p>`).join('');
+        // 渲染段落对齐内容
+        const maxParagraphs = Math.max(article.contentZh.length, article.contentEn.length);
+        let html = '';
+        for (let i = 0; i < maxParagraphs; i++) {
+            const zhText = article.contentZh[i] || '';
+            const enText = article.contentEn[i] || '';
+            html += `
+                <div class="paragraph-row">
+                    <div class="paragraph-zh">${zhText}</div>
+                    <div class="paragraph-en">${enText}</div>
+                </div>
+            `;
+        }
+        elements.modalContentZh.innerHTML = html;
 
         // 渲染解读
         elements.modalInterpretation.textContent = article.interpretation || '暂无解读';
@@ -182,6 +192,12 @@
         // 显示 Modal
         elements.modal.classList.add('show');
         document.body.style.overflow = 'hidden';
+        state.isModalOpen = true;
+
+        // 添加历史记录，支持回退关闭
+        if (!state.isClosingFromPopstate) {
+            history.pushState({ modal: true }, '', '');
+        }
     }
 
     // 更新导航按钮状态
@@ -203,15 +219,22 @@
             showArticleDetail(filtered[newIndex]);
             // 滚动内容区到顶部
             elements.modalContentZh.scrollTop = 0;
-            elements.modalContentEn.scrollTop = 0;
         }
     }
 
     // 关闭 Modal
-    function closeModal() {
+    function closeModal(fromPopstate = false) {
+        if (!state.isModalOpen) return;
+
         elements.modal.classList.remove('show');
         document.body.style.overflow = '';
         state.currentArticle = null;
+        state.isModalOpen = false;
+
+        // 如果不是从 popstate 触发的关闭，需要回退历史
+        if (!fromPopstate && history.state && history.state.modal) {
+            history.back();
+        }
     }
 
     // 设置事件监听
@@ -249,7 +272,7 @@
         });
 
         // Modal 关闭
-        elements.modalClose.addEventListener('click', closeModal);
+        elements.modalClose.addEventListener('click', () => closeModal());
         elements.modal.addEventListener('click', (e) => {
             if (e.target === elements.modal) {
                 closeModal();
@@ -274,6 +297,15 @@
                 } else if (e.key === 'ArrowRight') {
                     navigateArticle(1);
                 }
+            }
+        });
+
+        // 监听 popstate 事件（浏览器回退）
+        window.addEventListener('popstate', () => {
+            if (state.isModalOpen) {
+                state.isClosingFromPopstate = true;
+                closeModal(true);
+                state.isClosingFromPopstate = false;
             }
         });
     }

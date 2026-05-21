@@ -568,12 +568,13 @@ yetian.github.io/
 - 卡片网格展示全部 99 条条例
 - Hover 翻转显示英文标题和摘要预览
 - 点击 Modal 放大查看完整内容
-- 中英双语对照显示（移动端上下布局）
+- **段落对齐布局**：每段落一行，左中文右英文，一一对应
 - 底部解读区域（含实务要点）
 - 搜索功能（按编号、标题、关键词）
 - 章节筛选（11 个章节 Tab 切换）
 - 键盘导航（← → 切换条文，ESC 关闭）
-- 移动端优化（独立滚动区域）
+- **浏览器回退关闭**：所有设备支持，打开 Modal 时 pushState，回退时 popstate 触发关闭
+- **响应式布局**：桌面端左右对照，移动端上下堆叠
 
 **数据结构**：
 - 条文编号（1-99）、章节归属（1-11 章）
@@ -589,11 +590,11 @@ yetian.github.io/
 - 卡片 3D 翻转效果（perspective: 1000px）
 - Modal 放大动画（scale: 0.9 → 1）
 - 响应式网格（移动端 2 列 → 桌面端 6 列）
-- 移动端 Modal：内容面板 max-height: 40vh，解读区 max-height: 30vh
+- 段落对齐：`.paragraph-row` 使用 CSS Grid（1fr 1fr）
 
 **文件**：
 - `index.html` - 主页面
-- `style.css` - Liquid Glass 样式（含移动端滚动修复）
+- `style.css` - Liquid Glass 样式
 - `script.js` - 核心逻辑（IIFE 封装）
 - `data/articles.json` - GDPR 条例数据（99 条完整数据）
 
@@ -614,7 +615,8 @@ yetian.github.io/
 - fetch 异步加载 JSON
 - 客户端搜索和筛选
 - 无需后端服务
-- 中文总计 11,275 字符，英文总计 57,182 字符
+- History API：`pushState` 添加历史，`popstate` 监听回退
+- 段落渲染：取中英文最大段落数，按索引配对生成 `.paragraph-row`
 
 ---
 
